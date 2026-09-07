@@ -1,0 +1,322 @@
+[
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Destacados",
+    "name": "Wrapper Chingon + Papas",
+    "description": "1 Wrapper Chingon, 1 papas y 2 salsas. - Imagen referencial",
+    "price": 35,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Exclusivo de la Semana",
+    "name": "Combo 3 Tenders",
+    "description": "3 Tenders, papas, 1 Salsa de 2 Oz y 1 limonada. Imágenes referenciales.",
+    "price": 24,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Exclusivo de la Semana",
+    "name": "3 Tenders + Papas",
+    "description": "3 Tenders, 1 papas  y 1 salsa - imagen referencial",
+    "price": 19,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Tenders",
+    "name": "3 Tenders",
+    "description": "3 tenders y 1 una salsa. Imagen referencial.",
+    "price": 17,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Tenders",
+    "name": "3 Tenders + Papas",
+    "description": "3 Tenders, 1 papas  y 1 salsa - imagen referencial",
+    "price": 23,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Tenders",
+    "name": "4 Tenders",
+    "description": "4 tenders y 1 una salsa. Imagen referencial.",
+    "price": 20,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Tenders",
+    "name": "4 Tenders + Papas",
+    "description": "4 Tenders, 1 papas  y 1 salsa - imagen referencial",
+    "price": 26,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Tenders",
+    "name": "6 Tenders",
+    "description": "6 tenders y 1 una salsa. Imagen referencial.",
+    "price": 26,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Tenders",
+    "name": "6 Tenders + Papas",
+    "description": "6 Tenders, 1 papas y 2 salsa - imagen referencial",
+    "price": 32,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Tenders",
+    "name": "Pack 8 Tenders",
+    "description": "8 Tenders, 2 papas , 2 salsas. imagen referencial.",
+    "price": 45,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Tenders",
+    "name": "Pack 12 Tenders",
+    "description": "12 Tenders, 2 papas , 4 salsas. imagen referencial.",
+    "price": 54,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Tenders",
+    "name": "Pack 18 Tenders",
+    "description": "18 Tenders, 2 papas , 6 salsas. imagen referencial.",
+    "price": 69,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Tenders",
+    "name": "Pack 24 Tenders",
+    "description": "24 Tenders, 2 papas , 8 salsas. imagen referencial.",
+    "price": 85,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Wrappers",
+    "name": "Wrapper Clasico",
+    "description": "3 tenders, queso cheddar, tomate lechuga, mágica y 1 salsa. - imagen referencial.",
+    "price": 26,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Wrappers",
+    "name": "Wrapper Clasico + Papas",
+    "description": "1 Wrapper Clasico, 1 papas y 2 salsas. - Imagen referencial",
+    "price": 32,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Wrappers",
+    "name": "Wrapper BLT (Con doble tocino)",
+    "description": "3 tenders, doble tocino crocante, doble queso cheddar, tomate, lechuga, salsa mágica y 1 salsa. - imagen referencial.",
+    "price": 28,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Wrappers",
+    "name": "Wrapper BLT (Con doble tocino) + Papas",
+    "description": "Wrapper BLT (Con doble tocino) 1 papas y 2 salsas. - imagen referencial.",
+    "price": 34,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Wrappers",
+    "name": "Wrapper Chingon",
+    "description": "3 tenders, queso cheddar, guacamole, trozos de nachos, tocino crocante, salsa mágica, kétchup de jalapeños y 1 salsa. levemente picante. \n - imagen referencial",
+    "price": 29,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Wrappers",
+    "name": "Wrapper Chingon + Papas",
+    "description": "1 Wrapper Chingon, 1 papas y 2 salsas. - Imagen referencial",
+    "price": 35,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Salads",
+    "name": "Mexicana Salad",
+    "description": "3 Tenders, lechuga, pico de gallo, choclo americano, guacamole, queso mozzarella, nachos y 2 salsas",
+    "price": 29,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Salads",
+    "name": "Mexicana Salad  + Papas",
+    "description": "1 Mexicana Salad, 1 papas y 2 salsas",
+    "price": 35,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Salads",
+    "name": "Bacon Mex Salad",
+    "description": "3 tenders, lechuga, pico de gallo, tocino, choclo americano, guacamole y nachos. - Imagen referencial",
+    "price": 30,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Salads",
+    "name": "Bacon Mex + Papas",
+    "description": "1 Bacon Mex, 1 papas y 2 salsas. - Imagen referencial",
+    "price": 36,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Bebidas",
+    "name": "Limonada Pink",
+    "description": "Agua, limón, azúcar y extracto de betarraga. Sin preservantes ni colorantes.",
+    "price": 6,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Bebidas",
+    "name": "Limonada OG",
+    "description": "Agua, limón, azúcar y hierba buena. Sin preservantes ni colorantes.",
+    "price": 6,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Bebidas",
+    "name": "Inca Cola Original",
+    "description": "Inca Cola Original",
+    "price": 6,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Bebidas",
+    "name": "Inca Cola Zero",
+    "description": "Inca Cola Zero",
+    "price": 6,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Bebidas",
+    "name": "Coca Cola Original",
+    "description": "Coca Cola Original",
+    "price": 6,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Bebidas",
+    "name": "Coca Cola Zero",
+    "description": "Coca Cola Zero",
+    "price": 6,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Bebidas",
+    "name": "Sprite",
+    "description": "Sprite",
+    "price": 6,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Papas",
+    "name": "Papas",
+    "description": "Porción de papas. - Imagen refencial",
+    "price": 7,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Salsas",
+    "name": "Honey Mustard",
+    "description": "Honey Mustard - Imagen refencial",
+    "price": 2.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Salsas",
+    "name": "Ranch",
+    "description": "Ranch - Imagen refencial",
+    "price": 2.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Salsas",
+    "name": "Aji Pollero",
+    "description": "Aji Pollero - Imagen refencial",
+    "price": 2.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Salsas",
+    "name": "Magica",
+    "description": "Magica - Imagen refencial",
+    "price": 2.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Salsas",
+    "name": "Mayonesa",
+    "description": "Mayonesa - Imagen refencial",
+    "price": 2.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Salsas",
+    "name": "Vinagreta",
+    "description": "Vinagreta - Imagen refencial",
+    "price": 2.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Salsas",
+    "name": "Ketchup",
+    "description": "Ketchup - Imagen refencial",
+    "price": 2.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Postres",
+    "name": "Helado Cookies & Cream 5 Oz",
+    "description": "Helado Cookies & Cream 5 Oz",
+    "price": 7,
+    "inStock": true
+  },
+  {
+    "restaurant": "Yopo - Comandante Espinar",
+    "category": "Postres",
+    "name": "Helado Cheesecake de Pistacho 5 Oz",
+    "description": "Helado Pistacho 5 Oz",
+    "price": 7,
+    "inStock": true
+  }
+]

@@ -39,6 +39,29 @@ async function scrapePedidosYa(url = DEFAULT_URL, storeId = 'mcd-ovalo-gutierrez
     });
 
     const interceptedResponses = [];
+    let menuJson = null;
+    const seenPartnerIds = new Set();
+
+    // Capture menus as soon as they land (avoids waitForResponse races / body reuse)
+    page.on('response', async (response) => {
+        try {
+            const respUrl = response.url();
+            const m = respUrl.match(/\/v2\/niles\/partners\/(\d+)\/menus/i);
+            if (!m || response.status() !== 200) return;
+            seenPartnerIds.add(m[1]);
+            const ct = response.headers()['content-type'] || '';
+            if (!ct.includes('json')) return;
+            const text = await response.text();
+            if (!text || text.trimStart().startsWith('<')) return;
+            const json = JSON.parse(text);
+            if (json?.sections?.length) {
+                menuJson = json;
+                console.log(`[API] Menú interceptado: ${respUrl.split('?')[0]} · sections=${json.sections.length}`);
+            }
+        } catch (e) {
+            // Body may already be consumed by waitForResponse; that's fine
+        }
+    });
 
     try {
         console.log('[PedidosYa] Calentando sesión...');
@@ -64,14 +87,13 @@ async function scrapePedidosYa(url = DEFAULT_URL, storeId = 'mcd-ovalo-gutierrez
 
         console.log(`[PedidosYa] Navegando al restaurante: ${url}`);
 
-        // Wait for the natural menus API BEFORE navigation (avoid hardcoding partner IDs)
         const menuWait = page.waitForResponse(
             (r) => {
-                if (!/\/v2\/niles\/partners\/\d+\/menus/i.test(r.url())) return false;
+                if (r.status() !== 200 || !/\/v2\/niles\/partners\/\d+\/menus/i.test(r.url())) return false;
                 const ct = r.headers()['content-type'] || '';
-                return r.status() === 200 && ct.includes('json');
+                return ct.includes('json');
             },
-            { timeout: 45000 }
+            { timeout: 50000 }
         ).catch(() => null);
 
         const resp = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 });
@@ -87,23 +109,33 @@ async function scrapePedidosYa(url = DEFAULT_URL, storeId = 'mcd-ovalo-gutierrez
             { timeout: 30000 }
         ).catch(() => {});
 
-        let menuJson = null;
         const menuResp = await menuWait;
-        if (menuResp) {
+        if (!menuJson && menuResp) {
             try {
-                const json = await menuResp.json();
-                if (json?.sections) {
-                    menuJson = json;
-                    console.log(`[API] Menú natural: ${menuResp.url().split('?')[0]} · sections=${json.sections.length}`);
+                const ct = menuResp.headers()['content-type'] || '';
+                if (!ct.includes('json')) {
+                    console.warn(`[API] Menú natural no-JSON (${ct || 'sin content-type'})`);
+                } else {
+                    const json = await menuResp.json();
+                    if (json?.sections) {
+                        menuJson = json;
+                        console.log(`[API] Menú natural: ${menuResp.url().split('?')[0]} · sections=${json.sections.length}`);
+                    }
                 }
             } catch (e) {
                 console.warn(`[API] No se pudo leer menú natural: ${e.message}`);
             }
         }
 
-        // If natural request missed, discover partner id from page and fetch once
+        // Async response listener may still be parsing the body
+        for (let i = 0; i < 10 && !menuJson; i++) {
+            await page.waitForTimeout(500);
+        }
+
+        // If natural request missed / returned HTML, discover partner id and fetch
         if (!menuJson) {
-            const partnerId = await page.evaluate(() => {
+            const partnerFromNetwork = [...seenPartnerIds][0] || null;
+            const partnerId = partnerFromNetwork || await page.evaluate(() => {
                 const html = document.documentElement.innerHTML;
                 const patterns = [
                     /\/v2\/niles\/partners\/(\d+)\/menus/,
@@ -116,31 +148,92 @@ async function scrapePedidosYa(url = DEFAULT_URL, storeId = 'mcd-ovalo-gutierrez
                     const m = html.match(re);
                     if (m) return m[1];
                 }
-                return null;
-            });
-            if (partnerId) {
-                console.log(`[API] partnerId descubierto en página: ${partnerId}`);
-                const result = await page.evaluate(async (pid) => {
-                    const res = await fetch(`/v2/niles/partners/${pid}/menus`, {
-                        credentials: 'include',
-                        headers: { Accept: 'application/json' },
-                    });
-                    if (!res.ok) return { error: `HTTP ${res.status}` };
-                    const ct = res.headers.get('content-type') || '';
-                    if (!ct.includes('json')) {
-                        const text = await res.text();
-                        return { error: `non-json (${ct}): ${text.slice(0, 80)}` };
+                try {
+                    for (const e of performance.getEntriesByType('resource')) {
+                        const m = String(e.name || '').match(/\/v2\/niles\/partners\/(\d+)\/menus/i);
+                        if (m) return m[1];
                     }
-                    return { data: await res.json() };
-                }, partnerId);
-                if (result?.data?.sections) {
-                    menuJson = result.data;
-                    console.log(`[API] OK fetch partner=${partnerId} sections=${menuJson.sections.length}`);
-                } else {
-                    console.warn(`[API] fetch falló: ${result?.error || 'sin sections'}`);
+                } catch {}
+                return null;
+            }).catch(() => null);
+
+            if (partnerId) {
+                console.log(`[API] partnerId descubierto: ${partnerId}`);
+                await page.waitForTimeout(3000);
+                let fetched = null;
+                for (let attempt = 1; attempt <= 2 && !fetched?.sections; attempt++) {
+                    const result = await page.evaluate(async (pid) => {
+                        try {
+                            const res = await fetch(`/v2/niles/partners/${pid}/menus?occasion=DELIVERY`, {
+                                credentials: 'include',
+                                headers: { Accept: 'application/json' },
+                            });
+                            if (!res.ok) return { error: `HTTP ${res.status}` };
+                            const ct = res.headers.get('content-type') || '';
+                            const text = await res.text();
+                            if (!ct.includes('json') || text.trimStart().startsWith('<')) {
+                                return { error: `non-json (${ct}): ${text.slice(0, 80)}` };
+                            }
+                            return { data: JSON.parse(text) };
+                        } catch (e) {
+                            return { error: e.message };
+                        }
+                    }, partnerId).catch((e) => ({ error: e.message }));
+
+                    if (result?.data?.sections) {
+                        fetched = result.data;
+                        console.log(`[API] OK fetch partner=${partnerId} attempt=${attempt} sections=${fetched.sections.length}`);
+                    } else {
+                        console.warn(`[API] fetch attempt ${attempt} falló: ${result?.error || 'sin sections'}`);
+                        await page.waitForTimeout(4000 * attempt);
+                    }
                 }
+                if (fetched?.sections) menuJson = fetched;
             } else {
                 console.warn('[API] No se encontró partnerId en la página');
+            }
+        }
+
+        // Soft reload retry — often clears a one-shot HTML menus block
+        if (!menuJson) {
+            console.log('[API] Reintento con reload + cooldown…');
+            await page.waitForTimeout(12000);
+            await page.goto('https://www.pedidosya.com.pe/', {
+                waitUntil: 'domcontentloaded',
+                timeout: 60000,
+            }).catch(() => {});
+            await page.waitForTimeout(5000);
+            await page.goto(GEO_WARM_URL, {
+                waitUntil: 'domcontentloaded',
+                timeout: 60000,
+            }).catch(() => {});
+            await page.waitForTimeout(4000);
+
+            const menuWait2 = page.waitForResponse(
+                (r) => {
+                    if (r.status() !== 200 || !/\/v2\/niles\/partners\/\d+\/menus/i.test(r.url())) return false;
+                    return (r.headers()['content-type'] || '').includes('json');
+                },
+                { timeout: 55000 }
+            ).catch(() => null);
+
+            const resp2 = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 });
+            console.log(`[HTTP] Retry status: ${resp2?.status()} → ${page.url()}`);
+            await page.waitForTimeout(4000);
+            const menuResp2 = await menuWait2;
+            if (!menuJson && menuResp2) {
+                try {
+                    const json = await menuResp2.json();
+                    if (json?.sections) {
+                        menuJson = json;
+                        console.log(`[API] Menú retry: sections=${json.sections.length}`);
+                    }
+                } catch (e) {
+                    console.warn(`[API] Retry parse falló: ${e.message}`);
+                }
+            }
+            for (let i = 0; i < 12 && !menuJson; i++) {
+                await page.waitForTimeout(500);
             }
         }
 
@@ -148,10 +241,16 @@ async function scrapePedidosYa(url = DEFAULT_URL, storeId = 'mcd-ovalo-gutierrez
             interceptedResponses.push({ url: `menus:/v2/niles/partners/menus`, data: menuJson });
         }
 
+        // Prefer visible H1 over API "Menú de …" label
+        const pageTitle = cleanRestaurantName(await page.evaluate(() => {
+            const h1 = document.querySelector('h1');
+            return (h1?.textContent || '').trim();
+        }));
+
         await page.waitForTimeout(500);
 
         let products = [];
-        let restaurantName = storeId;
+        let restaurantName = pageTitle || storeId;
 
         // Strategy 1: intercepted menus API (preferred)
         const menuResponses = interceptedResponses.filter(r => /\/menus/.test(r.url) || r.data?.sections);
@@ -161,7 +260,7 @@ async function scrapePedidosYa(url = DEFAULT_URL, storeId = 'mcd-ovalo-gutierrez
                 const result = extractFromApiData(data);
                 if (result.products.length > 0) {
                     products = result.products;
-                    restaurantName = result.restaurantName || restaurantName;
+                    restaurantName = pageTitle || cleanRestaurantName(result.restaurantName) || restaurantName;
                     console.log(`[API] Extraídos ${products.length} productos desde: ${apiUrl.split('?')[0]}`);
                     break;
                 }
@@ -180,7 +279,7 @@ async function scrapePedidosYa(url = DEFAULT_URL, storeId = 'mcd-ovalo-gutierrez
                     const nextData = JSON.parse(nextDataRaw);
                     const result = extractFromNextData(nextData);
                     products = result.products;
-                    restaurantName = result.restaurantName || restaurantName;
+                    restaurantName = pageTitle || cleanRestaurantName(result.restaurantName) || restaurantName;
                     console.log(`[__NEXT_DATA__] Extraídos ${products.length} productos`);
                 } catch (e) {
                     console.warn(`[__NEXT_DATA__] Error parseando: ${e.message}`);
@@ -194,16 +293,25 @@ async function scrapePedidosYa(url = DEFAULT_URL, storeId = 'mcd-ovalo-gutierrez
                 const result = extractFromApiData(data);
                 if (result.products.length > 0) {
                     products = result.products;
-                    restaurantName = result.restaurantName || restaurantName;
+                    restaurantName = pageTitle || cleanRestaurantName(result.restaurantName) || restaurantName;
                     console.log(`[API] Extraídos ${products.length} productos desde: ${apiUrl.split('?')[0]}`);
                     break;
                 }
             }
         }
 
-        // Strategy 4: DOM
+        // Strategy 4: DOM (scroll to hydrate lazy sections)
         if (products.length === 0) {
             console.log('[DOM] Intentando extracción desde DOM...');
+            await page.evaluate(async () => {
+                const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+                for (let y = 0; y <= 8000; y += 900) {
+                    window.scrollTo(0, y);
+                    await sleep(350);
+                }
+                window.scrollTo(0, 0);
+                await sleep(500);
+            }).catch(() => {});
             products = await extractFromDom(page);
             console.log(`[DOM] Extraídos ${products.length} productos`);
         }
@@ -220,7 +328,12 @@ async function scrapePedidosYa(url = DEFAULT_URL, storeId = 'mcd-ovalo-gutierrez
         const withPrice = products.filter(p => p.price > 0);
         if (withPrice.length > 0) products = withPrice;
 
-        products = products.map(p => ({ ...p, restaurant: p.restaurant || restaurantName }));
+        restaurantName = pageTitle || cleanRestaurantName(restaurantName) || restaurantName;
+        products = products.map(p => ({
+            ...p,
+            restaurant: restaurantName,
+            description: (p.description || '').trim(),
+        }));
 
         const catCounts = {};
         products.forEach(p => { catCounts[p.category] = (catCounts[p.category] || 0) + 1; });
@@ -272,10 +385,20 @@ function extractFromNextData(nextData) {
     return { products: [], restaurantName: '' };
 }
 
+function cleanRestaurantName(name) {
+    if (!name) return '';
+    return String(name)
+        .replace(/^men[uú]\s+de\s+/i, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
 function extractFromApiData(data) {
     if (!data || typeof data !== 'object') return { products: [], restaurantName: '' };
 
-    const name = data.name || data.restaurantName || data.restaurant?.name || '';
+    const name = cleanRestaurantName(
+        data.name || data.restaurantName || data.restaurant?.name || ''
+    );
 
     const sections = data.sections || data.menuSections
         || data.data?.sections || data.restaurant?.sections
@@ -325,7 +448,7 @@ function itemsToProducts(items, category, restaurantName) {
             restaurant: restaurantName,
             category,
             name: item.name || item.title || '',
-            description: item.description || item.desc || '',
+            description: (item.description || item.desc || item.detail || '').trim(),
             price: parsePrice(item),
             inStock: true,
         }));
@@ -333,32 +456,114 @@ function itemsToProducts(items, category, restaurantName) {
 
 async function extractFromDom(page) {
     return page.evaluate(() => {
+        const restName = (document.querySelector('h1')?.textContent || '').trim()
+            .replace(/^men[uú]\s+de\s+/i, '');
         const items = [];
-        const nameEl = document.querySelector('h1, [class*="restaurantName"], [data-testid="restaurant-name"]');
-        const restName = nameEl?.textContent?.trim() || "McDonald's Ovalo Gutierrez";
+        const seen = new Set();
 
-        const cardSelectors = [
-            '[data-testid="product-card"]',
-            '[class*="ProductCard"]',
-            '[class*="product-card"]',
-            '[class*="MenuItem"]',
-            '[class*="menu-item"]',
-        ];
-        for (const sel of cardSelectors) {
-            const els = document.querySelectorAll(sel);
-            if (els.length === 0) continue;
-            els.forEach(el => {
-                const nameEl2 = el.querySelector('[data-testid="product-name"], [class*="productName"], [class*="ProductName"], h3, h4');
-                const descEl = el.querySelector('[data-testid="product-description"], [class*="description"]');
-                const priceEl = el.querySelector('[data-testid="product-price"], [class*="price"], [class*="Price"]');
-                const name = nameEl2?.textContent?.trim() || '';
-                const description = descEl?.textContent?.trim() || '';
-                const priceText = priceEl?.textContent?.trim() || '0';
-                const price = parseFloat(priceText.replace(/[^\d.]/g, '')) || 0;
-                if (name) items.push({ restaurant: restName, category: 'General', name, description, price, inStock: true });
+        const parsePrice = (text) => {
+            const m = String(text || '').match(/S\/\s*(\d+(?:[.,]\d+)?)/);
+            if (!m) return 0;
+            return parseFloat(m[1].replace(',', '.')) || 0;
+        };
+
+        const categoryFor = (el) => {
+            let node = el;
+            for (let i = 0; i < 8 && node; i++) {
+                let sib = node.previousElementSibling;
+                while (sib) {
+                    const t = (sib.textContent || '').trim().replace(/\s+/g, ' ');
+                    if (t && t.length < 60 && !/S\/\s*\d/.test(t) && !/leer m[aá]s/i.test(t)) {
+                        const tag = sib.tagName;
+                        if (/^H[1-6]$/.test(tag) || sib.getAttribute('role') === 'heading') {
+                            return t;
+                        }
+                    }
+                    sib = sib.previousElementSibling;
+                }
+                node = node.parentElement;
+            }
+            return 'General';
+        };
+
+        const descNodes = [...document.querySelectorAll('[data-testid="read-more-container"]')];
+        for (const descEl of descNodes) {
+            let card = descEl.parentElement;
+            let best = null;
+            for (let depth = 0; depth < 6 && card; depth++) {
+                const text = (card.innerText || '').trim();
+                if (/S\/\s*\d/.test(text) && text.length < 500) {
+                    best = card;
+                    break;
+                }
+                card = card.parentElement;
+            }
+            if (!best) continue;
+
+            const lines = (best.innerText || '')
+                .split('\n')
+                .map(s => s.trim())
+                .filter(Boolean)
+                .filter(s => !/^m[aá]s vendido$/i.test(s) && !/%\s*off$/i.test(s));
+
+            const priceLine = [...lines].reverse().find(l => /S\/\s*\d/.test(l));
+            if (!priceLine) continue;
+            const price = parsePrice(priceLine);
+            if (!price) continue;
+
+            const name = lines.find(l => l !== priceLine && !/leer m[aá]s/i.test(l) && l.length > 1) || '';
+            if (!name) continue;
+
+            let description = (descEl.textContent || '').trim()
+                .replace(/\s*leer m[aá]s\s*$/i, '')
+                .replace(/\s+/g, ' ')
+                .trim();
+            const fullAttr = descEl.getAttribute('title') || descEl.getAttribute('aria-label') || '';
+            if (fullAttr && fullAttr.length > description.length) description = fullAttr.trim();
+
+            const key = `${name}||${price}`;
+            if (seen.has(key)) continue;
+            seen.add(key);
+
+            items.push({
+                restaurant: restName,
+                category: categoryFor(best),
+                name,
+                description,
+                price,
+                inStock: true,
             });
-            if (items.length > 0) break;
         }
+
+        if (items.length === 0) {
+            const cards = [...document.querySelectorAll('div')].filter(el => {
+                if (el.children.length < 2 || el.children.length > 5) return false;
+                const t = (el.innerText || '').trim();
+                if (t.length < 12 || t.length > 420) return false;
+                return /S\/\s*\d/.test(t);
+            });
+            for (const el of cards) {
+                const lines = el.innerText.split('\n').map(s => s.trim()).filter(Boolean);
+                const priceLine = [...lines].reverse().find(l => /S\/\s*\d/.test(l));
+                if (!priceLine) continue;
+                const price = parsePrice(priceLine);
+                const name = lines[0];
+                const description = lines.slice(1).find(l => l !== priceLine && !/S\/\s*\d/.test(l)) || '';
+                if (!name || !price) continue;
+                const key = `${name}||${price}`;
+                if (seen.has(key)) continue;
+                seen.add(key);
+                items.push({
+                    restaurant: restName,
+                    category: categoryFor(el),
+                    name,
+                    description,
+                    price,
+                    inStock: true,
+                });
+            }
+        }
+
         return items;
     });
 }

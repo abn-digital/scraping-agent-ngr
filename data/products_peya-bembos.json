@@ -1,0 +1,546 @@
+[
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Bombazos 💣",
+    "name": "Bomba Cheese",
+    "description": "1 Cheese regular, 1 papa regular. Foto referencial",
+    "price": 12.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Almuerza con SIP",
+    "name": "Promo Extrema SIP",
+    "description": "1 extrema regular + 1 papa regular + 1 gaseosa 500ml",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Promos Yaperas",
+    "name": "Doble Queso Tocino Yape",
+    "description": "1 Doble Queso Tocino regular, 1 papa regular, 1 gaseosa personal. Foto referencial",
+    "price": 21.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Promos Yaperas",
+    "name": "Dúo Bembona Yape",
+    "description": "1  A lo pobre regular + 1 Churrita regular + 2 papas regulares + 2 gaseosas personales",
+    "price": 35.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Combo PeYa Plus",
+    "name": "Combo Plus Royal Power",
+    "description": "1 Royal regular + 1 salchipapa tradicional + 1 gaseosa personal",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Combo PeYa",
+    "name": "Combo PeYa Royal & Nuggets",
+    "description": "1 Royal regular + 1 papa regular + nuggetsx4",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Bembos para mí",
+    "name": "Promo Royal",
+    "description": "1 Royal regular, 1 papa regular.",
+    "price": 13.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Bembos para mí",
+    "name": "Promo Personal Clásico",
+    "description": "1 Clásica regular, 1 papa mediana.",
+    "price": 13.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Bembos para mí",
+    "name": "Promo Churrita",
+    "description": "1 Churrita regular, 1 papa mediana, 1 gaseosa personal.",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Duplas Bembásticas",
+    "name": "Dúo Cheese Power",
+    "description": "2 Cheese regulares, 2 papas regulares, Nuggets x6.",
+    "price": 35.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Duplas Bembásticas",
+    "name": "Dúo Royal",
+    "description": "2 Royal mediana, 2 papas regulares.",
+    "price": 34.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Duplas Bembásticas",
+    "name": "Dúo Queso Tocino",
+    "description": "2 Queso Tocino regulares, 2 papas regulares.",
+    "price": 22.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Duplas Bembásticas",
+    "name": "Dúo Perfecto",
+    "description": "1 Clásica regular, 1 Cheese regular, 2 papas regulares, Nuggets x4, 2 Gaseosas. Foto referencial.",
+    "price": 32.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Duplas Bembásticas",
+    "name": "Dúo Peruanazo",
+    "description": "2 A lo pobre regulares, 2 papas regulares. Foto referencial",
+    "price": 35.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Duplas Bembásticas",
+    "name": "Dúo Bicolor",
+    "description": "1 A lo Pobre regular, 1 Queso Tocino regular, 2 papas regulares y 2 gaseosas. Stock mínimo 500 unidades. *Foto referencial*. Bembos S.A.C RUC 20101087647",
+    "price": 31.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Promos para Compartir",
+    "name": "Familiar Cheese",
+    "description": "4 Cheese regular, 4 papas regulares, Nuggets x6. Promoción válida hasta agotar stock. Stock mínimo disponible: 500 unidades. *Papa peruana solo en provincia*.Foto referencial. BEMBOS S.A.C RUC 20101087647",
+    "price": 53.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Promos para Compartir",
+    "name": "Familiar Ideal",
+    "description": "4 Clásicas regulares, 4 papas regulares. Foto referencial",
+    "price": 46.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Promos para Compartir",
+    "name": "Trío Golazo",
+    "description": "3 Churritas regulares, 3 papas regulares, nuggets x4. Foto referencial",
+    "price": 52.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Clásicas",
+    "name": "Cheese",
+    "description": "Hamburguesa de carne de res a la parrilla, queso edam, mayonesa, tomate y lechuga. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 17.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Clásicas",
+    "name": "Clasica",
+    "description": "Hamburguesa a la parrilla, lechuga, tomate y mayonesa. Foto referencial. BEMBOS S.A.C RUC 20101087647. BEMBOS S.A.C RUC 20101087647.",
+    "price": 17.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Clásicas",
+    "name": "Queso Tocino",
+    "description": "Hamburguesa a la parrilla, doble tocino, queso edam, tomate, lechuga y mayonesa. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Clásicas",
+    "name": "Royal",
+    "description": "Hamburguesa a la parrilla, huevo, queso edam, tomate, lechuga y mayonesa. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Clásicas",
+    "name": "Combo Cheese",
+    "description": "Hamburguesa de carne de res a la parrilla, queso edam, mayonesa, tomate y lechuga, papa mediana y gaseosa personal. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 23.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Clásicas",
+    "name": "Combo Clasica",
+    "description": "Hamburguesa a la parrilla, lechuga, tomate y mayonesa. Puedes elegir entre mediana o grande. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 23.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Clásicas",
+    "name": "Combo Queso Tocino",
+    "description": "Hamburguesa a la parrilla, doble tocino, queso edam, tomate, lechuga y mayonesa. Puedes elegir entre mediana o grande.  Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 25.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Clásicas",
+    "name": "Combo Royal",
+    "description": "Hamburguesa a la parrilla, huevo, queso edam, tomate, lechuga y mayonesa. Puedes elegir entre mediana o grande. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 25.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bembonas",
+    "name": "Bembroster Clasica",
+    "description": "Pollo crocante, mayonesa, lechuga y tomate. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 16.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bembonas",
+    "name": "Chicken Grill",
+    "description": "Pechuga de pollo marinada a la parrilla, lechuga, tomate y mayonesa. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bembonas",
+    "name": "Mexicana",
+    "description": "Hamburguesa a la parrilla, queso, salsa guacamole, doritos, tomate, y mayonesa.",
+    "price": 21,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bembonas",
+    "name": "La Tumbay",
+    "description": "Hamburguesa a la parrilla, huevo frito, tocino, papas tumbay, salsa de chimichurri y lechuga. Foto referencial.",
+    "price": 21.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bembonas",
+    "name": "A lo Pobre",
+    "description": "Hamburguesa a la parrilla, huevo frito, platano frito, cebolla blanca, tomate y mayonesa. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 23.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bembonas",
+    "name": "Churrita",
+    "description": "Hamburguesa, tocino, papas al hilo y mayonesa de chimichurri. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 23.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bembonas",
+    "name": "Hawaiana",
+    "description": "Hamburguesa a la parrilla, queso, jamón inglés, piña en almíbar y mayonesa. Foto referencial. Bembos s.a.c ruc 20101087647",
+    "price": 23.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bembonas",
+    "name": "Combo Bembroster Clasica",
+    "description": "Sandwich de pollo crocante, papas y bebida a elección. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 21.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bembonas",
+    "name": "Combo Chicken Grill",
+    "description": "Pechuga de pollo marinada a la parrilla, lechuga, tomate y mayonesa. Puedes elegir entre mediana o grande. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 24.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bembonas",
+    "name": "Combo La Tumbay",
+    "description": "Hamburguesa a la parrilla, huevo frito, tocino, papas tumbay, salsa de chimichurri y lechuga; papa mediana y gaseosa 500ml.  Foto referencial.",
+    "price": 27.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bembonas",
+    "name": "Combo Mexicana",
+    "description": "Hamburguesa a la parrilla, queso, salsa guacamole, doritos, tomate, y mayonesa, papa mediana y gaseosa 500ml.",
+    "price": 27.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bembonas",
+    "name": "Combo Churrita",
+    "description": "Hamburguesa Churrita mediana, papa mediana y gaseosa 450 ml. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 29.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bembonas",
+    "name": "Combo A lo Pobre",
+    "description": "Hamburguesa a la parrilla, huevo frito, plátano frito, cebolla blanca, tomate y mayonesa. Puedes elegir entre mediana o grande. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 29.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bembonas",
+    "name": "Combo Hawaiana",
+    "description": "Hamburguesa Hawaiana mediana, papa mediana, gaseosa de 500ml. Foto referencial. Foto referencial. BEMBOS S.A.C. RUC 20101087647",
+    "price": 29.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bravazas",
+    "name": "Parrillera",
+    "description": "Hamburguesa y chorizo a la parrilla, chimichurri, tomate, mayonesa y mostaza. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 25.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bravazas",
+    "name": "Extrema",
+    "description": "Hamburguesa doble a la parrilla con queso edam, tocino, tomate, lechuga y mayonesa. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 25.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bravazas",
+    "name": "Combo Parrillera",
+    "description": "Hamburguesa y chorizo a la parrilla, chimichurri, tomate, mayonesa y mostaza. Puedes elegir entre mediana o grande. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 31.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Las Bravazas",
+    "name": "Combo Extrema",
+    "description": "Hamburguesa doble a la parrilla con queso edam, tocino, tomate, lechuga y mayonesa. Puedes elegir entre mediana o grande. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 31.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Menú Bembos Lima",
+    "name": "Menú Pechugón",
+    "description": "Delicioso pollo a la parrilla, papas fritas, arroz, lechuga orgánica, tomate, zanahoria y salsa vinagreta.Válido del 29.01.2024 al 31.12.2024. Válido de lunes a viernes. Stock mínimo disponible 500 unidades. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Menú Bembos Lima",
+    "name": "Burger menú",
+    "description": "Deliciosa hamburguesa a la parrilla, papas fritas, huevo frito, arroz, lechuga orgánica, tomate, zanahoria y salsa vinagreta. álido del 29.01.2024 al 31.12.2024. Válido de lunes a viernes. Stock mínimo disponible 500 unidades. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 17.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Menú Bembos Lima",
+    "name": "Menú Taypá",
+    "description": "Deliciosa hamburguesa a la parrilla, chorizo, papas fritas, huevo frito, arroz, lechuga orgánica, tomate, zanahoria y salsa vinagreta. álido del 29.01.2024 al 31.12.2024. Válido de lunes a viernes. Stock mínimo disponible 500 unidades. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 20.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Menú Bembos Lima",
+    "name": "Menú A Lo Pobre",
+    "description": "Deliciosa hamburguesa a la parrilla, papas fritas, huevo frito, plátano frito, arroz, lechuga orgánica, tomate, zanahoria y salsa vinagreta. Válido del 29.01.2024 al 31.12.2024. Válido de lunes a viernes. Stock mínimo disponible 500 unidades. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Complementos",
+    "name": "Papas Fritas",
+    "description": "Papas Fritas. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 6.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Complementos",
+    "name": "Cheese Fingers",
+    "description": "Cheese Fingers. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 14.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Complementos",
+    "name": "Nuggets",
+    "description": "Nuggets. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 13.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Complementos",
+    "name": "Salchipapa",
+    "description": "Porción familiar de papas fritas con Hot dog.",
+    "price": 11.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Complementos",
+    "name": "Salchinuggets",
+    "description": "Porción familiar de papas fritas con Hot dog y Nuggets x4",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Complementos",
+    "name": "Nuggetspapa",
+    "description": "Porción familiar de papas fritas con Nuggets x5",
+    "price": 16.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Helados",
+    "name": "Sundae Chocoteja",
+    "description": "Delicioso helado cremoso con manjar blanco y pecanas, cubierto con chocolate crocante",
+    "price": 8.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Helados",
+    "name": "Sundae Chocolúcuma",
+    "description": "Delicioso helado cremoso con salsa de lúcuma y trocitos de brownie, cubierto con chocolate crocante",
+    "price": 8.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Loncheritas",
+    "name": "Loncherita Hamburguesa Sundae",
+    "description": "1 Hamburguesa básica regular + Papa regular + Frugos + Sundae chocolúcuma",
+    "price": 21.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Loncheritas",
+    "name": "Loncherita Nuggets Sundae",
+    "description": "Nuggets x4 + Papa regular + Frugos + Sundae chocolúcuma",
+    "price": 21.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Loncheritas",
+    "name": "Loncherita Faber Hamburguesa",
+    "description": "1 Básica regular, 1 papa regular, 1 frugos, plumones Faber x6. Foto referencial",
+    "price": 21.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Loncheritas",
+    "name": "Loncherita Faber Nuggets",
+    "description": "Nuggets x4, 1 papa regular, 1 frugos, plumones Faber x6. Foto referencial",
+    "price": 21.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Complementos",
+    "name": "Crema Ocopa 3oz",
+    "description": "Deliciosa crema ocopa.",
+    "price": 5.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Complementos",
+    "name": "Crema Anticuchera 3oz",
+    "description": "Deliciosa crema anticuchera",
+    "price": 5.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Complementos",
+    "name": "Crema Ají Bembos 3oz",
+    "description": "Delicioso ají Bembos",
+    "price": 5.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Bebidas",
+    "name": "Coca-Cola Sabor Original 500 ml",
+    "description": "Gaseosa. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 6.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Bebidas",
+    "name": "Fanta Sabor Original 500 ml",
+    "description": "Gaseosa. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 6.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Bebidas",
+    "name": "Sprite Sabor Original 500 ml",
+    "description": "Gaseosa. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 6.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Bebidas",
+    "name": "Inca Kola Sabor Original 500 ml",
+    "description": "Gaseosa. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 6.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Bembos 50 - Integrado",
+    "category": "Bebidas",
+    "name": "Agua San Luis Sin Gas 750ml",
+    "description": "Agua. Foto referencial. BEMBOS S.A.C RUC 20101087647.",
+    "price": 6.9,
+    "inStock": true
+  }
+]

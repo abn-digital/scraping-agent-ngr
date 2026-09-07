@@ -1,0 +1,602 @@
+[
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Pizza XXL",
+    "name": "Pizza L",
+    "description": "¡La medida exacta! Pide 1 Pizza L que rinde ocho porciones.",
+    "price": 42.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Pizza XXL",
+    "name": "Pizza XXL con gaseosa",
+    "description": "¡No cabe en la mesa! Pizza XXL de veinticuatro porciones y salsas para dipear con gaseosa 1L.",
+    "price": 88.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Pizza XXL",
+    "name": "Pizza L con gaseosa",
+    "description": "¡La medida exacta! Pide 1 Pizza L que rinde ocho porciones con gaseosa de 1L",
+    "price": 48.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Pizza XXL",
+    "name": "Pizza XL",
+    "description": "¡Un monstruo de sabor! 1 Pizza XL con dieciséis porciones para compartir.",
+    "price": 62.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Pizza XXL",
+    "name": "Pizza XL con gaseosa",
+    "description": "¡Un monstruo de sabor! 1 Pizza XL con dieciséis porciones para compartir con gaseosa 1L.",
+    "price": 68.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Pizza XXL",
+    "name": "Pizza XXL",
+    "description": "¡No cabe en la mesa! Pizza XXL de veinticuatro porciones y salsas para dipear.",
+    "price": 82.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Pizza Crown",
+    "name": "Combo Pizza Crown",
+    "description": "Pizza Crown + Salsa mediterránea + Ají de la casa + 1 Bebida de 1L. ¡Sabor que corona tu antojo!",
+    "price": 57.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Cheesy Bites Dip & Crunch",
+    "name": "Nueva Dip & Crunch",
+    "description": "Cheesy Bites con sabor a elección + Salsas + Tocino crocante. ¡Dipea y Crunchea!",
+    "price": 59.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Cheesy Bites Dip & Crunch",
+    "name": "Combo Dip & Crunch",
+    "description": "Cheesy Bites + Salsas + Tocino crunch + 1 Bebida de 1L. ¡El combo perfecto para dipear!",
+    "price": 65.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Promos YA",
+    "name": "52% OFF 2x1 Pizzas",
+    "description": "¡Aprovecha el 2x1! Lleva 2 Pizzas Grandes",
+    "price": 42.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Promos YA",
+    "name": "43% OFF Combo Alitas",
+    "description": "2 Pizzas Medianas, 9 Alitas Hut/Bbq y 1 Gaseosa 1 Litro",
+    "price": 49.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Promos YA",
+    "name": "Combo Familiar",
+    "description": "1 pizza familiar y 8 Hut Breads",
+    "price": 31.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Promos YA",
+    "name": "Promo Ya!",
+    "description": "¡Pizza Hut Promo Ya! 2 Pizzas medianas clásicas, 16 Palitos a la siciliana y 1 Gaseosa 1L. ¡Alcanza para todo el grupo!",
+    "price": 39.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Promos YA",
+    "name": "37%OFF Personal Hut",
+    "description": "Nuevo combo personal para compartir en verano",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Promos YA",
+    "name": "45% OFF Triple Ya!",
+    "description": "¡El trío pizzero! 3 Pizzas Medianas a un precio especial",
+    "price": 45.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Promos YA",
+    "name": "2x1 Familiares",
+    "description": "2 Pizzas familiares para compartir",
+    "price": 55.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Promos YA",
+    "name": "Combo Pizza Grande",
+    "description": "¡Pizza Hut Combo Pizza Grande! 1 Pizza Grande Americana, Pepperoni, Mozzarella o Hawaiana y 1 Bebida de 1 L. ¡Pizza cerca de mí!",
+    "price": 35.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Promos YA",
+    "name": "51%OFF Hut Mediano Papá",
+    "description": "Nuevo combo mediano para compartir",
+    "price": 65.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Combos de Temporada",
+    "name": "Combo Grande: Pizza + Churros",
+    "description": "¡Comparte lo nuevo! 1 Pizza Grande, 8 hut churros y 1 bebida 1L",
+    "price": 41.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Combos de Temporada",
+    "name": "Banquete Irresistible",
+    "description": "¡Comparte lo nuevo! 2 Pizzas Grandes, 6 Pepperoni Rolls, 8 Hut Churros y 1 Bebida 1L",
+    "price": 66.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Combos de Temporada",
+    "name": "Festín del Momento",
+    "description": "¡Comparte lo nuevo! 2 Pizzas Grandes, 6 Pepperoni Rolls y 8 Hut Churros",
+    "price": 61.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Mega Promos",
+    "name": "59% OFF Combo Hut Lovers Fam",
+    "description": "1 Pizza Familiar y 1 Bebida de 1L",
+    "price": 29.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Mega Promos",
+    "name": "57% OFF Triple Familiar",
+    "description": "3 Pizzas Familiares y 2 Bebidas de 1L",
+    "price": 79.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Mega Promos",
+    "name": "60% OFF Triple Grande",
+    "description": "3 Pizzas Grandes y 2 Bebidas de 1L",
+    "price": 65.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Mega Promos",
+    "name": "56% OFF Dupla Familiar Lovers",
+    "description": "2 Pizzas Familiares y 6 Palitos a la siciliana",
+    "price": 55.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Mega Promos",
+    "name": "52% OFF Combo Mediano Ya!",
+    "description": "1 Pizza Mediana y 2 Panes al Ajo",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Mega Promos",
+    "name": "Doble o Nada Familiar",
+    "description": "2 Pizzas Familiares clásicas a precio especial. ¡Para cuando hay mucha hambre!",
+    "price": 75.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Mega Promos",
+    "name": "Doble o Nada Familiar Hut Cheese",
+    "description": "2 Pizzas Familiares en masa Hut Cheese a un precio especial.",
+    "price": 83.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Mega Promos",
+    "name": "Doble o Nada Grande",
+    "description": "2 Pizzas Grandes a un precio especial",
+    "price": 59.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Mega Promos",
+    "name": "Combo Doble o Nada Grande",
+    "description": "2 Pizzas Grandes clásicas + 2 Bebidas de 1L. ¡Doble sabor, doble refresco!",
+    "price": 62.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Mega Promos",
+    "name": "Combo Doble o Nada Familiar",
+    "description": "2 Pizzas Familiares + 2 Bebidas 1L. ¡Disfruta el doble con este combo!",
+    "price": 85.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Mega Promos",
+    "name": "Triple Hut Box",
+    "description": "2 Pizzas Grandes + 16 Palitos a la Siciliana. ¡Un box lleno de sabor!",
+    "price": 67.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Mega Promos",
+    "name": "Combo Triple Hut Box",
+    "description": "2 Pizzas Grandes + 16 Palitos a la Siciliana + 1 Bebida de 1L. ¡Disfruta este combo completo!",
+    "price": 72.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Mega Promos",
+    "name": "Tripack Grande",
+    "description": "3 Pizzas Grandes + 6 Palitos a la Siciliana. ¡Una promo triplemente buena!",
+    "price": 82.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Mega Promos",
+    "name": "Combo Semi Full Familiar",
+    "description": "¡Banquete para todos! 2 Pizzas Familiares y 10 Palitos a la Siciliana",
+    "price": 82.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Salsas",
+    "name": "Salsa MayoHut",
+    "description": "1 Salsa a base de mostaza y mayonesa (Presentación 1 oz).",
+    "price": 1.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Salsas",
+    "name": "Salsa Mediterranea",
+    "description": "1 Salsa de tomate con hierbas y toque picante (Presentación 1 oz).",
+    "price": 1.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Salsas",
+    "name": "Salsa Honey BBQ",
+    "description": "1 Salsa BBQ con toque de miel (Presentación 1 oz).",
+    "price": 1.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Salsas",
+    "name": "Salsa Chili Thai",
+    "description": "1 Salsa dulce y picante (Presentación 1 oz).",
+    "price": 1.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Salsas",
+    "name": "Salsa Aji de la Casa (1oz)",
+    "description": "1 Onza de Salsa Aji de la Casa",
+    "price": 1.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Para Mí",
+    "name": "My Box Clásico",
+    "description": "1 Pizza Personal + 3 Palitos a la Siciliana + 1 Pebida Personal.",
+    "price": 17.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Para Mí",
+    "name": "Combo Mediano",
+    "description": "1 Pizza Mediana + 1 Bebida Personal.",
+    "price": 24.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Para Mí",
+    "name": "Hut Combo Mediano",
+    "description": "1 Pizza Mediana + 4 Palitos a la Siciliana + 1 Bebida Personal.",
+    "price": 27.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Para Mí",
+    "name": "Dúo Lasagna Bolognesa",
+    "description": "1 Lasagna Bolognesa +  1 Bebida Personal. ¡Tu favorita de siempre!",
+    "price": 27.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Para Mí",
+    "name": "My Box Supremo",
+    "description": "1 Pizza Personal + 3 Alitas BBQ + 1 Bebida Personal",
+    "price": 22.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Pizzas",
+    "name": "Pizza Grande Pan Pizza",
+    "description": "Nuestra Pizza Hut favorita, masa esponjosa suave por dentro y crujiente por fuera, increíblemente deliciosa en tamaño grande.",
+    "price": 45.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Pizzas",
+    "name": "Pizza Mediana Pan Pizza",
+    "description": "Nuestra Pizza Hut favorita de todos los tiempos, masa esponjosa suave por dentro, crujiente por fuera y deliciosa en tamaño mediana.",
+    "price": 27.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Pizzas",
+    "name": "Pizza Grande Hut Cheese",
+    "description": "Pizza Hut nuestra especialidad Pizza Grande Hut Cheese es la única pizza con borde relleno de delicioso queso ¡Suave por dentro, crujiente por fuera!",
+    "price": 53.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Pizzas",
+    "name": "Pizza Familiar Artesanal",
+    "description": "¡Nueva masa familiar artesanal en Pizza Hut! Suave, ligera y con mantequilla de ajo en el borde en tamaño familiar.",
+    "price": 55.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Pizzas",
+    "name": "Pizza Familiar Hut Cheese",
+    "description": "Nuestra Pizza Hut de especialidad Familiar Hut Cheese, la única Pizza Hut con borde relleno de delicioso queso. Perfecto para almuerzos o cenas en grupo.",
+    "price": 56.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Pizzas",
+    "name": "Pizza Mediana Artesanal",
+    "description": "Pizza Hut nueva masa artesanal, suave, ligera y con mantequilla de ajo en el borde en tamaño mediana. ¡Pizza Hut cerca de mi!",
+    "price": 27.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Pizzas",
+    "name": "Pizza Grande Artesanal",
+    "description": "Nueva Pizza Hut masa artesanal, suave, ligera y con mantequilla de ajo en el borde en tamaño grande.  ¡Pizza Hut cerca de mí!",
+    "price": 45.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Pizzas",
+    "name": "Pizza Familiar Pan Pizza",
+    "description": "Pizza Pan en tamaño familiar. Masa suave y esponjosa por dentro, dorada y crujiente por fuera. Lista para disfrutar en cualquier ocasión. Escoge el sabor que más te guste.",
+    "price": 55.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Pizzas",
+    "name": "Pizza Mediana Hut Cheese",
+    "description": "Pizza Hut nuestra especialidad Pizza Mediana Hut Cheese es la única pizza con borde relleno de delicioso queso ¡Pizza Hut cerca de mi!",
+    "price": 35.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Antojitos Salados",
+    "name": "Pan al Ajo Especial (4 un)",
+    "description": "¡Agrégale queso!\n4 Panes al Ajo con delicoso queso y orégano",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Antojitos Salados",
+    "name": "Alitas (6 un)",
+    "description": "Pack de alitas bañadas en BBQ o Hut.",
+    "price": 17.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Antojitos Salados",
+    "name": "Pan al Ajo (4 un)",
+    "description": "¡Súper crocantes!\n4 Panes al Ajo con el toque perfecto de orégano",
+    "price": 12.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Antojitos Salados",
+    "name": "Hut Bread (8 un)",
+    "description": "Pack de 8 palitos rellenos de queso. Disponible en 3 sabores.",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Antojitos Salados",
+    "name": "Alitas (9 un)",
+    "description": "9 Alitas bañadas en Salsa Hut dulce picante o Salsa BBQ con un toque de miel",
+    "price": 22.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Antojitos Salados",
+    "name": "Rolls de Jamón & Queso",
+    "description": "6 Rolls rellenos de Jamón y Queso.",
+    "price": 11.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Antojitos Salados",
+    "name": "Palitos a la Siciliana (6 un)",
+    "description": "Pack de palitos a la siciliana acompañados con salsa mediterránea.",
+    "price": 10.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Antojitos Dulces",
+    "name": "Rolls de Manjar",
+    "description": "Pack de 6 rolls rellenos de manjar blanco.",
+    "price": 6.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Antojitos Dulces",
+    "name": "Hut Churros",
+    "description": "¡Postre del día! 4 Hut Churros rellenos de dulce de leche y decorados con azúcar impalpable y canela",
+    "price": 8.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Bebidas",
+    "name": "Fanta personal",
+    "description": "1 Fanta Personal 500ml",
+    "price": 4.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Bebidas",
+    "name": "Coca-Cola Personal S/Azúcar",
+    "description": "1 Coca-Cola Personal Sin Azúcar 500 ml",
+    "price": 4.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Bebidas",
+    "name": "Sprite personal",
+    "description": "1 Sprite Personal 500ml",
+    "price": 4.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Bebidas",
+    "name": "Agua San Luis S/Gas Personal",
+    "description": "1 Agua San Luis Personal Sin Gas 650 ml",
+    "price": 4.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Bebidas",
+    "name": "Coca-Cola Mediana S/Azúcar",
+    "description": "1 Coca-Cola Mediana Sin Azúcar 1L.",
+    "price": 11.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Bebidas",
+    "name": "Inca Kola Personal S/Azúcar",
+    "description": "1 Inca Kola Personal Sin Azúcar 500 ml",
+    "price": 4.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Bebidas",
+    "name": "Inca Kola Mediana S/Azúcar",
+    "description": "1 Inca Kola Mediana Sin Azúcar 1L.",
+    "price": 11.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Para Compartir",
+    "name": "Banquete Familiar",
+    "description": "1 Pizza Familiar + 6 Palitos a la Siciliana + 1 Bebida de 1L. ¡Ideal para reunir a todos!",
+    "price": 52.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Para Compartir",
+    "name": "Banquete Grande",
+    "description": "1 Pizza Grande + 6 Palitos a la Siciliana + 1 Bebida de 1L. ¡Un banquete para compartir!",
+    "price": 42.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Para Compartir",
+    "name": "Hut Completo Mediano",
+    "description": "2 Pizzas Medianas clásicas + 6 Palitos a la Siciliana + 1 Bebibda de 1L. ¡No te faltará nada!",
+    "price": 45.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Para Compartir",
+    "name": "Banquete Grande Hut Cheese",
+    "description": "1 Pizza Grande Hut Cheese + 6 Palitos a la Siciliana + 1 Bebida de 1L. ¡Para los amantes del queso!",
+    "price": 50.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pizza Hut - Espinar",
+    "category": "Para Compartir",
+    "name": "Combo Pizza Grande Hut Cheese",
+    "description": "1 Pizza Grande Hut Cheese + 1 Bebida de 1L. ¡Full queso, full sabor¡",
+    "price": 42.9,
+    "inStock": true
+  }
+]

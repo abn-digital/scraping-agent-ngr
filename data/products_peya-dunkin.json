@@ -1,0 +1,242 @@
+[
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Pituficombos 💙",
+    "name": "Pitufos x6 Premium",
+    "description": "Comparte la magia de los Pitufos con una selección de 6 deliciosas donas premium, ideales para disfrutar en familia o con amigos.",
+    "price": 34.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Pituficombos 💙",
+    "name": "Pitufos x6 CyP",
+    "description": "Disfruta una deliciosa combinación de 4 donas clásicas y 2 donas premium inspiradas en los Pitufos. Perfectas para compartir y vivir una dulce aventura.",
+    "price": 30.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Pituficombos 💙",
+    "name": "Pitufos x12 Premium",
+    "description": "Haz que la diversión sea aún más grande con 12 deliciosas donas premium inspiradas en los Pitufos, ideales para compartir en cualquier ocasión.",
+    "price": 56.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Pituficombos 💙",
+    "name": "Pitufos x12 CyP",
+    "description": "Comparte una deliciosa selección de 8 donas clásicas y 4 donas premium inspiradas en los Pitufos. La combinación perfecta para disfrutar más variedad y mucha diversión.",
+    "price": 48.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Pack de Donas🤙🏼",
+    "name": "Big deal 18",
+    "description": "Disfruta de 18 donuts clásicas a elección. Producto sujeto a disponibilidad de tienda. Imágenes referenciales. Ruc: 20144215649  razón social: nutra s.a.c.",
+    "price": 64.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Pack de Donas🤙🏼",
+    "name": "8 Donuts Sorpresa",
+    "description": "Disfruta de 8 donuts clásicas aleatorias (mínimo 3 variedades diferentes).",
+    "price": 24.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Celebra con Dunkin 🥳",
+    "name": "Torta Peya x12",
+    "description": "¡La forma más deliciosa de celebrar! Elige tu Torta Peya de 12 donas y comparte tus favoritas con quien más quieras.",
+    "price": 62.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Celebra con Dunkin 🥳",
+    "name": "Torta Peya x24",
+    "description": "¡La forma más deliciosa de celebrar! Elige tu Torta Peya de 24 donas y comparte tus favoritas con quien más quieras.",
+    "price": 94.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Celebra con Dunkin 🥳",
+    "name": "Pack Cumpleañero",
+    "description": "!Regalo perfecto! Caja con motivo Happy Birthday con 6 donuts clásicas a elección + Medias Dunkin'",
+    "price": 68.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Donuts unitarias 🍩",
+    "name": "Chocolate arcoiris",
+    "description": "Clásica anillo con cobertura de chocolate y grageas de colores. Producto sujeto a disponibilidad de tienda. Imagen referencial. Ruc: 20144215649  razón social: nutra s.a.c.",
+    "price": 6.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Donuts unitarias 🍩",
+    "name": "Glaseada",
+    "description": "Donut clásica anillo con glaseado de azúcar. Producto sujeto a disponibilidad de tienda. Imagen referencial. Ruc: 20144215649  razón social: nutra s.a.c.",
+    "price": 6.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Donuts unitarias 🍩",
+    "name": "Vainilla arcoiris",
+    "description": "Donut clásica anillo con cobertura de vainilla y grageas de colores. Producto sujeto a disponibilidad de tienda. Imagen referencial. Ruc: 20144215649  razón social: nutra s.a.c.",
+    "price": 6.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Donuts unitarias 🍩",
+    "name": "Carita feliz",
+    "description": "Clásica de carita feliz rellena de crema pastelera. Producto sujeto a disponibilidad de tienda. Imagen referencial. Ruc: 20144215649  razón social: nutra s.a.c.",
+    "price": 6.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Donuts unitarias 🍩",
+    "name": "Bavaria",
+    "description": "Clásica espolvoreada con azúcar, rellena de crema pastelera. Producto sujeto a disponibilidad de tienda. Imagen referencial. Ruc: 20144215649  razón social: nutra s.a.c.",
+    "price": 6.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Donuts unitarias 🍩",
+    "name": "Boston cream",
+    "description": "Clásica cubierta de chocolate rellena de crema pastelera. Producto sujeto a disponibilidad de tienda. Imagen referencial. Ruc: 20144215649  razón social: nutra s.a.c.",
+    "price": 6.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Donuts unitarias 🍩",
+    "name": "Manzana",
+    "description": "Donut espolvoreada con azúcar, rellena de manzana.",
+    "price": 6.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Donuts unitarias 🍩",
+    "name": "Pitufo",
+    "description": "Esponjosa dona decorada con un divertido diseño inspirado en los Pitufos, perfecta para disfrutar una dulce aventura llena de sabor.",
+    "price": 7.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Donuts unitarias 🍩",
+    "name": "Pitufina",
+    "description": "Deliciosa dona inspirada en Pitufina, decorada con un diseño encantador que la convierte en el complemento perfecto para celebrar junto a los Pitufos.",
+    "price": 7.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Donuts unitarias 🍩",
+    "name": "Azrael",
+    "description": "Irresistible dona inspirada en Azrael, con una divertida decoración que hará de cada bocado una experiencia llena de sabor.",
+    "price": 7.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Dunkin Sandwich 🥪",
+    "name": "Empanada de carne",
+    "description": "Clásica empanada de carne",
+    "price": 8.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Dunkin Sandwich 🥪",
+    "name": "Empanada de pollo",
+    "description": "Clásica empanada de pollo",
+    "price": 8.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Dunkin Sandwich 🥪",
+    "name": "Dunwich Mixto",
+    "description": "Deliciosa donut glaseada con jamón y queso.",
+    "price": 10.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Dunkin Sandwich 🥪",
+    "name": "Dunwich Bacon",
+    "description": "Deliciosa donut glaseada con tocino cocido.",
+    "price": 10.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Dunkin Sandwich 🥪",
+    "name": "Croissant de Jamón Inglés y Queso",
+    "description": "Delicioso Croissant relleno de jamón ingles y queso",
+    "price": 13.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Dunkin Sandwich 🥪",
+    "name": "Ciabatta de pollo y apio",
+    "description": "Delicioso ciabatta relleno de pollo y apio",
+    "price": 13.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Dunkin Sandwich 🥪",
+    "name": "Panini Jamón Inglés y Queso",
+    "description": "Delicioso panini relleno de jamón inglés y queso",
+    "price": 13.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Dunkin Sandwich 🥪",
+    "name": "Panini Jamón ahumado y queso",
+    "description": "Delicioso panini relleno de jamón ahumado y queso",
+    "price": 13.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Dunkin Sandwich 🥪",
+    "name": "Croissant de pollo",
+    "description": "Un croissant doradito y súper suave, relleno con jugoso pollo sazonado y una combinación deliciosa que lo convierte en el match perfecto para cualquier momento del día. Ideal para acompañarlo con tu bebida favorita de Dunkin’",
+    "price": 13.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Merch 🥤",
+    "name": "Tomatodo metálico dunkin naranja",
+    "description": "Botella metálica de doble pared con capacidad de 600ml. ruc: 20144215649 razón social: nutra s.a.c.",
+    "price": 59.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Dunkin Donuts - Plaza Vea Dasso",
+    "category": "Merch 🥤",
+    "name": "Tomatodo metálico dunkin blanco",
+    "description": "Botella metálica de doble pared con capacidad de 600ml. ruc: 20144215649 razón social: nutra s.a.c.",
+    "price": 59.9,
+    "inStock": true
+  }
+]

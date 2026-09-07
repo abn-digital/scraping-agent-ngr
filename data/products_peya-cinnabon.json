@@ -1,0 +1,354 @@
+[
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Hot plate",
+    "name": "Cinnabon clásico",
+    "description": "Clásico rollo de canela + frosting glaseado.",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Hot plate",
+    "name": "Caramel pecanbon",
+    "description": "Cinnamon roll clásico + frosting + caramelo + pecanas.",
+    "price": 18.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Hot plate",
+    "name": "Dúo cinnabon",
+    "description": "2 Cinnamon rolls clásicos cubiertos con glaseado frosting",
+    "price": 29.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Hot plate",
+    "name": "Dúo minibon + Minipecanbon",
+    "description": "1 cinnamon roll cubierto con glaseado frosting + un cinnamon roll cubierto con frosting, caramelo + pecanas.",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Hot plate",
+    "name": "Roll on the go",
+    "description": "Bocaditos trozados de nuestros clásicos rollos, bañados de salsa y frosting en tres alterativas de sabores (canela, chocolate o dulce de leche).",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Hot plate",
+    "name": "Cupcake de chocolate",
+    "description": "Keke de chocolate + chispas de chocololate + un delicioso glacé de vainilla.",
+    "price": 9.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Hot plate",
+    "name": "Cupcake de red velvet",
+    "description": "Keke de red velvet + chispas de chocololate + un delicioso glacé de vainilla.",
+    "price": 9.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Hot plate",
+    "name": "Cupcake vainilla",
+    "description": "Keke de vainilla + chispas de chocololate + un delicioso glacé de vainilla.",
+    "price": 9.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Hot plate",
+    "name": "Dúo minibon",
+    "description": "Cinnabon rolls clásicos + frosting glaseado.",
+    "price": 16.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Hot plate",
+    "name": "Dúo minichocobon",
+    "description": "2 rolls rellenos de chocolate con. Frosting y lineas de chocolate en tamaño minibon.",
+    "price": 17.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Hot plate",
+    "name": "Dúo minibon + Minichocobon",
+    "description": "1 cinnamon roll clasico cubierto con frosting + 1 cinnamon roll relleno de chocolate, + chocolate + frosting.",
+    "price": 19,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Hot plate",
+    "name": "Cinnabon choco cookies",
+    "description": "Cinnabon clásico de canela cubierto con galleta oreo",
+    "price": 16.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Hot plate",
+    "name": "Cinnabon caramel cookies",
+    "description": "Cinnabon clásico cubierto con caramelo y trocitos de galleta oreo",
+    "price": 16.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Hot plate",
+    "name": "Cinnabon strawberry cookies",
+    "description": "Cinnabon clásico cubierto con jalea de fresa y trocitos de gallera oreo",
+    "price": 16.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Hot plate",
+    "name": "Dúo Cinnabon y Pecanbon",
+    "description": "Cinnamon roll clásico cubierto con frosting 1 ud. cinnamon roll clásico cubierto con frosting, caramelo pecanas, 1 ud",
+    "price": 32.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Hot plate",
+    "name": "Chocobon Classic",
+    "description": "Rollo relleno de chocolate cubierto con frosting y chocolate en tamaño clásico.",
+    "price": 16.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Chillatas",
+    "name": "Chillatta mango 12 oz",
+    "description": "Bebida frappé en el sabor de mago con leche acompañado de crema chantilly",
+    "price": 14.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Chillatas",
+    "name": "Chillatta fresa 12 oz",
+    "description": "Bebida frappé en el sabor de fresa con leche acompañado de crema chantilly",
+    "price": 14.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Chillatas",
+    "name": "Chillatta tropical 12oz",
+    "description": "Bebida frappé en el sabor de mango, maracuyá y naranja con crema chantilly",
+    "price": 14.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Chillatas",
+    "name": "Chillatta oreo 12 oz",
+    "description": "Bebida frappé en el sabor de vainilla y galleta de oreo con crema chantilly",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Chillatas",
+    "name": "Chillatta lúcuma 12 oz",
+    "description": "Bebida frappé en el sabor de lúcuma con leche acompañado de crema chantilly.",
+    "price": 14.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Chillatas",
+    "name": "Chillatta capuccino 12 oz",
+    "description": "Bebida frappé sabor café con crema chantilly",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Chillatas",
+    "name": "Chillatta Mocha 12oz",
+    "description": "Bebida Frappé sabor chocolate y café.",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Chillatas",
+    "name": "Chillatta strawberry cookies",
+    "description": "Chillatta oreo con jalea de fresa 12oz",
+    "price": 16.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Cinnapacks",
+    "name": "Pack de 4 Cupcakes",
+    "description": "Cupcakes en sabores variados (vainilla, chocolate y red velvet)",
+    "price": 35.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Cinnapacks",
+    "name": "2 minibons + 2 mini chocobon",
+    "description": "Dos minibons + dos chocobons.",
+    "price": 30.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Cinnapacks",
+    "name": "Pack 3 Minibon + 3 Chocobon",
+    "description": "Cinnamon rolls medianos llamados minibon con frosting 3 uds, minichocobon rellenos de chocolate, cubiertos de chocolate, frosting, 3 uds",
+    "price": 42.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Cinnapacks",
+    "name": "Cinapack de 6 Minichocobon",
+    "description": "6 minichocobon.",
+    "price": 60,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Cinnapacks",
+    "name": "24 choco bonbites",
+    "description": "24 choco bonbites de chocolate cubiertos con frosting",
+    "price": 42.8,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Bebidas frias",
+    "name": "Agua sin gas",
+    "description": "Agua embotellada sin gas.",
+    "price": 3.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Promos para compartir",
+    "name": "Promo - Pack para compartir",
+    "description": "2 Chillattas de 12oz + Pack 12 bonbites",
+    "price": 44.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Promos para compartir",
+    "name": "Cinnapack x 6 Minibon",
+    "description": "Cajas listas para llevar cubiertos de frosting.",
+    "price": 41.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Promos para compartir",
+    "name": "Cinnapack x 9 Minibon",
+    "description": "Cajas listas para llevar con 9 Minibon cubiertos de frosting.",
+    "price": 55.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Promos para compartir",
+    "name": "Promo - 24 bonbites clásicos",
+    "description": "Llévate 24 bonbites con glaseado de queso crema a un super precio",
+    "price": 41.8,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Favoritos",
+    "name": "Cinnapack x 4 Minibon",
+    "description": "Cajas listas para llevar con 4 Minibon cubiertos de frosting.",
+    "price": 36,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Favoritos",
+    "name": "Pack 12 Bonbites",
+    "description": "Rollos de canela llamados bonbites clásicos cubiertos con glaseado de queso crema (12 unidades).",
+    "price": 27.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Favoritos",
+    "name": "Duo Cinnabon Clásico",
+    "description": "Rollos de canela clasico cubierto con glaseado frosting (2 unidades).\n* Este producto está limitado a 3 unidades por compra",
+    "price": 31.8,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Favoritos",
+    "name": "Cinnapack x 6 Minibon",
+    "description": "Cajas listas para llevar con 6 minibon cubiertos de frosting.",
+    "price": 41.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Favoritos",
+    "name": "Pk 2 minibon + 2 minichocobon",
+    "description": "Rollos de canela medianos llamados minibon con frosting (2 unid) + rollos rellenos de chocolate y cubiertos con frosting y chocolate (2 unid).",
+    "price": 30.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Favoritos",
+    "name": "Cinnapack 12 Choco Bonbites",
+    "description": "12 choco bonbites rellenos de chocolate cubiertos con frosting y chocolate.",
+    "price": 28.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Favoritos",
+    "name": "Cinnapack 12 Bonbites Mixtos",
+    "description": "12 bonbites en los sabores variados - 4 de manjar - 4 chocolate- 4 Caramelo con Pecanas.",
+    "price": 36.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Favoritos",
+    "name": "24 bonbites clásicos",
+    "description": "24 rollos de canela llamados bonbites clásicos cubiertos con glaseado de queso crema (12 unidades por pack)",
+    "price": 59.8,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Favoritos",
+    "name": "Pack Para Compartir",
+    "description": "Cinnapack 12 Bonbites + 2 Chillattas en los sabores de Fresa, Mango, explosión tropical o lúcuma.",
+    "price": 59.7,
+    "inStock": true
+  },
+  {
+    "restaurant": "Cinnabon - Larcomar",
+    "category": "Favoritos",
+    "name": "Cinnapack x 9 Minibon",
+    "description": "9 minibon cubiertos de frosting listos para calentar y disfrutar",
+    "price": 57.9,
+    "inStock": true
+  }
+]

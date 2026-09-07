@@ -1,0 +1,298 @@
+[
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Promos Yaperas",
+    "name": "Bomba Menú Clásico",
+    "description": "1/4 de pollo + papas fritas menú + salsas.",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Promos del día",
+    "name": "Bomba Duo Mostrito",
+    "description": "2/4 mostrito + 2 bot. gaseosas + 2 salsas.",
+    "price": 39.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Promos de Locura",
+    "name": "2/4 Clasico",
+    "description": "2/4 de pollo + 2 papas fritas menú + 2 salsas.",
+    "price": 59.8,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Promos de Locura",
+    "name": "2/4 Mostrito",
+    "description": "2/4 mostrito + 2 salsas.",
+    "price": 39.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Promos de Locura",
+    "name": "2/4 Mostrito +Gas",
+    "description": "2/4 mostrito + 2 bot. gaseosas + 2 salsas.",
+    "price": 45.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Promos de Locura",
+    "name": "1 Pollo Clasico",
+    "description": "1 pollo + papas fritas fam. + 3 salsas.",
+    "price": 59.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Promos de Locura",
+    "name": "1 Pollo Clasico +Gas",
+    "description": "1 pollo + papas fritas fam. + 1 bot. gaseosa 1L + 3 salsas.",
+    "price": 65.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Promos de Locura",
+    "name": "1 Pollo Clasico y Ensalda",
+    "description": "1 pollo + papas fritas fam. + ensalada fresca fam. + 3 salsas.",
+    "price": 69.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Promos de Locura",
+    "name": "1 Pollo Clasico +Ens + Gas",
+    "description": "1 pollo + papas fritas fam. + ensalada fresca fam. + 1 bot. gaseosa 1L + 3 salsas.",
+    "price": 75.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Promos de Locura",
+    "name": "2/4 Clasico +Gas",
+    "description": "2/4 de pollo + 2 papas fritas menú + 2 bot. gaseosas + 2 salsas.",
+    "price": 43.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Promo futbolera",
+    "name": "1/4 Futbolero",
+    "description": "1/4 pollo + papas per + bot. 500ml + 1S",
+    "price": 35.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Promo futbolera",
+    "name": "Duo Futbolero",
+    "description": "1/2 pollo + papas med + 2 bot. 500ml + 2S",
+    "price": 45.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Promo futbolera",
+    "name": "Clásico Futbolero",
+    "description": "1 pollo + papas fam + bot. 1L + 3S",
+    "price": 79.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Promo futbolera",
+    "name": "Combo Futbolero",
+    "description": "1 pollo + papas fam + ens fam + bot. 1L + 3S",
+    "price": 89.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Promo futbolera",
+    "name": "Banquete Futbolero",
+    "description": "1 pollo + 2 papas per + 1 camote per + 1 chaufa per + ens fam + bot. 1L + 3S",
+    "price": 99.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Parrilleros",
+    "name": "Pierna Parrillera",
+    "description": "Aprovecha esta super promo de: 1 Filete de pierna marinada con salsa parrillera + guarnición personal a elección + ensalada fresca personal + salsas.  Razón social: EP DE RESTAURANTES S.A.C. RUC:20545699550",
+    "price": 35.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Parrilleros",
+    "name": "Pechuga Parrillera",
+    "description": "Aprovecha esta super promo de: 1 Filete de pechuga marinada con salsa parrillera + guarnición personal a elección + ensalada fresca personal + salsas.  Razón social: EP DE RESTAURANTES S.A.C.-RUC:20545699550",
+    "price": 36.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Piqueos",
+    "name": "Alitas Don Beli",
+    "description": "Alitas x5 (BBQ o de la casa). Razón social: EP DE RESTAURANTES S.A.C.-RUC:20545699550",
+    "price": 22.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Piqueos",
+    "name": "Tequeños de pollo a la Brasa x8",
+    "description": "8 tequeños rellenos de pollo a la brasa. Imágenes referenciales.",
+    "price": 22.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Piqueos",
+    "name": "Anticuchos Doble",
+    "description": "2 palitos de anticucho, 2 rodajas de choclo, papas crocantitas personal y salsas. Imágenes referenciales.",
+    "price": 35.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Guarniciones y Mas",
+    "name": "Papas Crocantitas Personal",
+    "description": "Papas crocantitas personales.",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Guarniciones y Mas",
+    "name": "Arroz Chaufa Personal",
+    "description": "Arroz chaufa personal al estilo Don Beli.",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Guarniciones y Mas",
+    "name": "Arroz Con Choclo Personal",
+    "description": "Arroz blanco estilo casero con choclito desgranado en presentación personal.",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Guarniciones y Mas",
+    "name": "Camotitos de la Abuelita Personal",
+    "description": "Tiras de camote frito con un secreto de antaño en presentación personal.",
+    "price": 17.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Guarniciones y Mas",
+    "name": "Papas del Caporal Personal",
+    "description": "Papas nativas gratidas con queso mozarella y chimichurri. Imágenes referenciales.",
+    "price": 17.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Guarniciones y Mas",
+    "name": "Ensalada Cocida Familiar",
+    "description": "Ensalada Cocida Familiar. Imágenes referenciales",
+    "price": 22.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Guarniciones y Mas",
+    "name": "Ensalada Fresca Familiar",
+    "description": "Ensalada de lechuga, tomate y zanahoria rallada con vinagreta de la casa en presentación familiar.",
+    "price": 22.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Bebidas",
+    "name": "Fanta Naranja 500ml",
+    "description": "Gaseosa.",
+    "price": 5.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Bebidas",
+    "name": "Inca Kola Sin Azúcar 500 ml",
+    "description": "Gaseosa.",
+    "price": 5.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Bebidas",
+    "name": "Inca Kola Sabor Original 500ml",
+    "description": "Gaseosa.",
+    "price": 5.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Bebidas",
+    "name": "San Luis 750ml",
+    "description": "Agua.",
+    "price": 5.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Bebidas",
+    "name": "Coca Cola Sin Azúcar 500 ml",
+    "description": "Gaseosa.",
+    "price": 5.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Bebidas",
+    "name": "Coca-Cola Sabor Original 500ml",
+    "description": "Gaseosa.",
+    "price": 5.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Bebidas",
+    "name": "Coca Cola Sabor Original 1.5 L",
+    "description": "Gaseosa.",
+    "price": 12.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Bebidas",
+    "name": "Inca Kola Sin Azúcar 1.5 L",
+    "description": "Gaseosa.",
+    "price": 12.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Bebidas",
+    "name": "Coca Cola Sin Azúcar 1.5 L",
+    "description": "Gaseosa.",
+    "price": 12.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Don Belisario Larco",
+    "category": "Bebidas",
+    "name": "Inca Kola Sabor Original 1.5 L",
+    "description": "Gaseosa.",
+    "price": 12.9,
+    "inStock": true
+  }
+]

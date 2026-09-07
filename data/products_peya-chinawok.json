@@ -1,0 +1,482 @@
+[
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Bombazos 💣",
+    "name": "Trio Encajate",
+    "description": "3 encájate a elección",
+    "price": 30.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Bombazos 💣",
+    "name": "Promo Familiar Encajate",
+    "description": "4 encájates a elección",
+    "price": 42.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Bombazos 💣",
+    "name": "Bomba Duo Encajate",
+    "description": "",
+    "price": 16.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Almuerzos SIP",
+    "name": "Menu SIP Full",
+    "description": "1 Arroz Chaufa de Pollo + 1 Gaseosa 500ml + 1 Sopa wantan personal",
+    "price": 16.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Promos Yaperas",
+    "name": "Duo Yapero",
+    "description": "2 Encajates a elección + 2 Gaseosas 500ml",
+    "price": 26.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Promos Yaperas",
+    "name": "Trio Encajate Yape",
+    "description": "3 encájate a elección",
+    "price": 30.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Combo PeYa Plus",
+    "name": "Combo Plus Mostrazo Ultra",
+    "description": "1 pieza de pollo broaster con un toque oriental + arroz chaufa + papas fritas + 1 salsa a elección + 1 gaseosa 500ml. imagenes referenciales. piezas a disponibilidad de tienda.",
+    "price": 20.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Combo PeYa",
+    "name": "Combo PeYa Mostrazo Broaster Personal",
+    "description": "1 Mostrazo Personal (1 Pz de Pollo + Arroz Chaufa + Papas Fritas)",
+    "price": 16.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Semana Chinawok",
+    "name": "Promo Flash Encajate",
+    "description": "1 Encajate a elección + 1 Gaseosas 500ml",
+    "price": 16.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Semana Chinawok",
+    "name": "Combo Mostrazo",
+    "description": "1 Mostrazo chicharron + 1 Gaseosa 500ml",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Semana Chinawok",
+    "name": "Duo Power",
+    "description": "2 Platos a elección (Mostrazo Chicharron o Chijaukay A lo Pobre)",
+    "price": 30.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Semana Chinawok",
+    "name": "Trio Encajate Peya",
+    "description": "3 Encajates a elección + 1 Gaseosa de 1Lt",
+    "price": 30.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Semana Chinawok",
+    "name": "Banquetazo Familiar",
+    "description": "2 Arroz Chaufa de Pollo + 2 Medios Potaje a elección (Chijaukay, Tipakay, Mandarin o Honey) + 1 Gaseosa de 1Lt",
+    "price": 54.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Promos Encajate",
+    "name": "Bomba Encajate Personal",
+    "description": "1 Encajate a elección (Chijaukay, Tipakay, Mandarin o Honey) + 1 Wantan",
+    "price": 12.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Promos Encajate",
+    "name": "Menú Encajate Wantan",
+    "description": "",
+    "price": 17.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Promos Encajate",
+    "name": "Menú Encajate Sopa",
+    "description": "1 Encajate a elección (Chijaukay, Tipakay, Mandarin o Honey) + 1 Sopa wantan personal + 1 Gaseosa de 500ml",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Peya Promos",
+    "name": "Promo Combinado",
+    "description": "1 Combinado Taypa + 1 Gaseosa 500ml",
+    "price": 16.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Peya Promos",
+    "name": "Promo sabor al wok chijaukay",
+    "description": "1 Sabor al Wok Chijaukay + 1 Gaseosa 500ml",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Peya Promos",
+    "name": "2x1 Arma tu duo",
+    "description": "2 Arroz Chaufa de Pollo + 4 Wantanes",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Peya Promos",
+    "name": "Duo Mostrazo Chicharron",
+    "description": "2 Mostrazo chicharron",
+    "price": 29.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Peya Promos",
+    "name": "Sabor al Wok para 2",
+    "description": "2 Sabor al wok a elección (Chijaukay, Tipakay, Mandarin o Honey)",
+    "price": 32.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Peya Promos",
+    "name": "Promo Sopa",
+    "description": "1 Sopa Wantan de 1Lt o 1 Sopa Womin de 1Lt",
+    "price": 16.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Peya Promos",
+    "name": "Promo Sabor al wok Tipakay",
+    "description": "1 Sabor al Wok Tipakay + 1 Gaseosa 500ml",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Chinabox",
+    "name": "Chinabox para 4",
+    "description": "1 chinabox (4 encajates a elección) + 6 wantanes",
+    "price": 54.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Chinabox",
+    "name": "Chinabox Familiar",
+    "description": "1 Chinabox (6 Encajates a elección)",
+    "price": 64.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Chinabox",
+    "name": "Chinabox Super Familiar",
+    "description": "1 Chinabox (6 Encajates a elección) + 1 Gaseosa 1Lt",
+    "price": 74.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Combos Personales",
+    "name": "Combo Chaufa",
+    "description": "1 Arroz Chaufa de Pollo + 1 Gaseosa 500ml",
+    "price": 17.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Combos Personales",
+    "name": "Combo Tallarin Taypa",
+    "description": "1 Tallarin Taypa + 1 Gaseosa 500ml",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Combos Personales",
+    "name": "Combo Tallarin Saltado",
+    "description": "1 Tallarin Saltado + 1 Gaseosa 500ml",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Combos Personales",
+    "name": "Combo Sabor al Wok",
+    "description": "1 Sabor al Wok a elección (Chijaukay, Tipakay, Mandarin o Honey) + 1 Gaseosa 500ml",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Combos Personales",
+    "name": "Combo Mostrazo",
+    "description": "1 Mostrazo a elección + 1 Gaseosa 500ml",
+    "price": 25.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Combos Personales",
+    "name": "Combo A lo Pobre",
+    "description": "1 Sabor a lo Pobre + 1 Gaseosa 500ml",
+    "price": 26.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Duos",
+    "name": "Dúos Clásicos",
+    "description": "2 Arroz Chaufa de Pollo + 4 Wantanes + 2 Gaseosas de 500ml",
+    "price": 29.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Duos",
+    "name": "Clásicos para 2",
+    "description": "2 Clásicos + 2 Gaseosas de 500ml",
+    "price": 32.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Duos",
+    "name": "Dúo Sabor al Wok",
+    "description": "2 Sabor al wok a elección (Chijaukay, Tipakay, Mandarin o Honey) + 2 Gaseosas de 500ml",
+    "price": 39.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Duos",
+    "name": "Duo Contundente",
+    "description": "2 Platos elección + 2 Gaseosas de 500ml",
+    "price": 73.6,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Banquetazos",
+    "name": "Banquete para 4",
+    "description": "2 Arroz Chaufa de Pollo + 2 Medios Potaje a elección (Chijaukay, Tipakay, Mandarin o Honey) + 1 Tallarin Taypa + 1 Gaseosa de 1Lt",
+    "price": 64.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Banquetazos",
+    "name": "Super Banquete para 4",
+    "description": "1 Arroz Chaufa de Pollo Familiar + 3 Medios Potajes a elección (Chijaukay, Tipakay, Mandarin o Honey) + 6 Wantanes + 1 Gaseosa de 1Lt",
+    "price": 74.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Banquetazos",
+    "name": "Banquete para 5",
+    "description": "1 Arroz Chaufa de Pollo Familiar + 1 Tallarin taypa Familiar + 1 Potaje Familiar (Chijaukay, Tipakay, Mandarin o Honey) + 8 Wantanes + 1 Gaseosa 1Lt",
+    "price": 84.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Banquetazos",
+    "name": "Banquete para 6",
+    "description": "2 Arroz Chaufa de Pollo Familiar + 1 Tallarin taypa Familiar + 1 Potaje Familiar (Chijaukay, Tipakay, Mandarin o Honey) + 12 Wantanes",
+    "price": 94.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Banquetazos",
+    "name": "Super Banquete para 6",
+    "description": "2 Arroz Chaufa de Pollo Familiar + 2 Potaje Familiar (Chijaukay, Tipakay, Mandarin o Honey) + 12 Wantanes + 1 Gaseosa de 1Lt",
+    "price": 104.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Banquetazos",
+    "name": "Banquete para 7",
+    "description": "2 Arroz Chaufa de Pollo Familiares + 2 Potajes Familiares a elección + 1 Tallarín Taypa Familiar + 12 Wantanes",
+    "price": 109.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "A la Carta",
+    "name": "Arroz Chaufa de Pollo",
+    "description": "1 Arroz Chaufa de Pollo",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "A la Carta",
+    "name": "Tallarin Taypa",
+    "description": "1 Tallarin Taypa",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "A la Carta",
+    "name": "Tallarin Saltado",
+    "description": "1 Tallarin Saltado",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "A la Carta",
+    "name": "Pollo Honey Chicken",
+    "description": "1 Medio Honey",
+    "price": 21.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "A la Carta",
+    "name": "Pollo Mandarin",
+    "description": "1 Medio Mandarin",
+    "price": 21.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "A la Carta",
+    "name": "Pollo Chijaukay",
+    "description": "1 Medio Chijaukay",
+    "price": 21.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "A la Carta",
+    "name": "Pollo Tipakay",
+    "description": "1 Medio Tipakay",
+    "price": 21.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Complementos",
+    "name": "Wantan x6",
+    "description": "Wantan x6",
+    "price": 9.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Complementos",
+    "name": "Wantan x12",
+    "description": "Wantan x12",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Complementos",
+    "name": "Inca Kola Original 1Lt",
+    "description": "Inca Kola Original 1Lt",
+    "price": 10.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Complementos",
+    "name": "Inca Zero 1Lt",
+    "description": "Inca Zero 1Lt",
+    "price": 10.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Complementos",
+    "name": "Coca Cola Original 1Lt",
+    "description": "Coca Cola Original 1Lt",
+    "price": 10.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Complementos",
+    "name": "Coca Zero 1Lt",
+    "description": "Coca Zero 1Lt",
+    "price": 10.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Complementos",
+    "name": "Inca Zero 1.5Lt",
+    "description": "Inca Zero 1.5Lt",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Complementos",
+    "name": "Inca Kola Original 500ml",
+    "description": "Inca Kola Original 500ml",
+    "price": 5.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Complementos",
+    "name": "Inca Zero 500ml",
+    "description": "Inca Zero 500ml",
+    "price": 5.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Complementos",
+    "name": "Coca Cola Original 500ml",
+    "description": "Coca Cola Original 500ml",
+    "price": 5.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chinawok - Patio Larco",
+    "category": "Complementos",
+    "name": "Coca Zero 500ml",
+    "description": "Coca Zero 500ml",
+    "price": 5.9,
+    "inStock": true
+  }
+]

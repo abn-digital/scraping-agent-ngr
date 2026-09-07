@@ -1,0 +1,330 @@
+[
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "¡Solo en PedidosYa 🍕! ",
+    "name": "Pizzas Familiares 2x1",
+    "description": "2 Pizzas familiares clásicas (pepperoni, jamón o queso, extra extra)",
+    "price": 45.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "¡Solo en PedidosYa 🍕! ",
+    "name": "Tripack Familiar",
+    "description": "3 pizzas familiares clásicas a elección (pepperoni , extra extra o queso) + canelitas combo o crazy breads combo x4",
+    "price": 69.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "¡Solo en PedidosYa 🍕! ",
+    "name": "Especialidad 2x1",
+    "description": "2 pizzas familiares Especialidad (hula, 3 meat, cuatro sabores, veggie y ultimate supreme)",
+    "price": 54.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "¡Solo en PedidosYa 🍕! ",
+    "name": "Dúo Pack",
+    "description": "2 pizzas familiares seleccionadas (pepperoni, queso, jamón, extra extra, cuatro sabores) + 4 crazy breads o canelitas.",
+    "price": 49.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "¡Solo en PedidosYa 🍕! ",
+    "name": "Combo Mediano",
+    "description": "1 crazy cheese bread mediano (pepperoni, bacon o queso) + crazy combo  o canelitas combo x4 + 1 gaseosa 600ml",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "¡Solo en PedidosYa 🍕! ",
+    "name": "Combo perfecto",
+    "description": "1 pizza clásica familiar (pepperoni, jamón, queso, extra extra) + crazy combo  o canelitas combo x4",
+    "price": 26.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "¡Solo en PedidosYa 🍕! ",
+    "name": "Duo para compartir",
+    "description": "2 crazy cheese bread a elección (pepperoni, bacon o queso) + 2 crazy breads combo o canelitas combo x4 + 1 pepsi 1l",
+    "price": 39.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "¡Solo en PedidosYa 🍕! ",
+    "name": "Super Duo",
+    "description": "1 pizza familiar clásica (pepperoni, queso, jamon, extra extra )+ 2 gaseosas personales 600ml",
+    "price": 54.7,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "¡Solo en PedidosYa 🍕! ",
+    "name": "Combo full",
+    "description": "1 pizza clásica familiar (pepperoni, jamon, queso, extra extra) + crazy combo  o canelitas combo x4+ 1 gaseosa 1 LT",
+    "price": 35.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "¡Solo en PedidosYa 🍕! ",
+    "name": "Especialidad + Extra Extra Fam",
+    "description": "Pizza de especialidad (hula hawaiian, 3 meat treat, ultimate supreme o veggie) familiar + pizza extra extra familiar",
+    "price": 59.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "¡Solo en PedidosYa 🍕! ",
+    "name": "Pizza Pepperoni",
+    "description": "Pizza familiar 36 cm., salsa de tomates, cubierta de queso 100 mozzarella, pepperoni.",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Nuevos Combos 🍕",
+    "name": "Combo Borde Queso + Complemento",
+    "description": "Pizza familiar a elección (pepperoni o queso) con borde relleno de abundante queso mozarella + canelitas combo o crazy combo x4.",
+    "price": 35.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "🍕 ¡Novedades! 🍕",
+    "name": "Crazy Pops Pepperoni",
+    "description": "4 deliciosas porciones rellenas de pepperoni y queso",
+    "price": 14.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "🍕 ¡Novedades! 🍕",
+    "name": "Pizza Extra Extra",
+    "description": "Pizza familiar mitad extra pepperoni / mitad extra queso",
+    "price": 32.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "HOT-N-READY 🔥 🔥",
+    "name": "Pizza Queso",
+    "description": "Pizza familiar queso con borde de abundante queso parmesano y mantequilla de ajo.",
+    "price": 29.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "HOT-N-READY 🔥 🔥",
+    "name": "Pizza Cu4tro",
+    "description": "Pizza familiar cu4tro con borde de abundante queso parmesano y mantequilla de ajo.",
+    "price": 34.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "HOT-N-READY 🔥 🔥",
+    "name": "Super Cheese Pepperoni",
+    "description": "Pizza familiar pepperoni con borde relleno de abundante queso mozarella, bañado en queso parmesano y mantequilla de ajo.",
+    "price": 39.8,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "HOT-N-READY 🔥 🔥",
+    "name": "Super Chesse-Cu4tro",
+    "description": "Pizza familiar cu4tro con borde relleno de abundante queso mozarella, bañado en queso parmesano y mantequilla de ajo.",
+    "price": 46.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "HOT-N-READY 🔥 🔥",
+    "name": "Pizza Jamon",
+    "description": "Pizza familiar 36 cm, salsa de tomates, cubierta de queso 100% mozzarella, cortes de jamón",
+    "price": 33.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Especialidades 👀",
+    "name": "Pizza 3 Meat Treat",
+    "description": "Pizza familiar, salsa de tomate, queso mozzarella, pepperoni, salchicha italiana y tocino.",
+    "price": 42.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Especialidades 👀",
+    "name": "Pizza Veggie",
+    "description": "Pizza familiar 36cm, salsa de tomate, cubierta de queso mozzarella, champiñones, pimientos verdes, cebolla blanca y aceitunas negras.",
+    "price": 42.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Especialidades 👀",
+    "name": "Super Chesse-Hula Hawaiian",
+    "description": "Pizza familiar hula hawaiiancon borde relleno de abundante queso mozarella, bañado en queso parmesano y mantequilla de ajo.",
+    "price": 54.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Especialidades 👀",
+    "name": "Super Chesse 3 Meat Treat",
+    "description": "Pizza familiar 3 meat treat con borde relleno de abundante queso mozarella, bañado en queso parmesano y mantequilla de ajo.",
+    "price": 54.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Especialidades 👀",
+    "name": "Super Chesse-Ultimate Supreme ",
+    "description": "Pizza familiar ultimate supreme con borde relleno de abundante queso mozarella, bañado en queso parmesano y mantequilla de ajo.",
+    "price": 54.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Especialidades 👀",
+    "name": "Pizza Hula Hawaiian",
+    "description": "Pizza familiar 36 cm, salsa de tomates, cubierta de queso 100% mozzarella, jamón y piña.",
+    "price": 42.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Complementos",
+    "name": "Dips Ranch",
+    "description": "Dips Ranch",
+    "price": 5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Complementos",
+    "name": "Crazy Cheese Bread Peppe",
+    "description": "12 Palitos de pan cubiertos con queso y pepperoni",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Complementos",
+    "name": "Dips Buffalo Ranch",
+    "description": "Dips Buffalo Ranch",
+    "price": 5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Complementos",
+    "name": "Crazy Combo",
+    "description": "8 Crazy Breads y Crazy Sauce.",
+    "price": 12.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Complementos",
+    "name": "Canelitas Combo",
+    "description": "El combo incluye 8 unidades de Canelitas y 1 dip Dulce de Leche",
+    "price": 12.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Complementos",
+    "name": "Dips Cheezy Japaleño",
+    "description": "Dips Cheezy Japaleño",
+    "price": 5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Complementos",
+    "name": "Salsa Crazy",
+    "description": "Salsa de tomate mezclada con especias",
+    "price": 5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Complementos",
+    "name": "Crazy Cheese Bread",
+    "description": "12 Palitos de pan cubiertos con 3 quesos",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Complementos",
+    "name": "Crazy Cheese Bread Bacon",
+    "description": "12 Palitos de pan cubiertos con queso y tocino",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Complementos",
+    "name": "Hazlo Combo",
+    "description": "8 Crazy Breads o Canelitas, Dip a elección, Bebida 1.5lt a elección",
+    "price": 17.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Bebidas",
+    "name": "Agua San Carlos  sin Gas 500 ml",
+    "description": "Agua San Carlos 500 ml",
+    "price": 4.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Bebidas",
+    "name": "7UP Lima Limón Original 1.5L",
+    "description": "7UP Lima Limón Original 1.5L",
+    "price": 7.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Bebidas",
+    "name": "Pepsi Sabor Original 1.5L",
+    "description": "Pepsi Sabor Original 1.5L",
+    "price": 7.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Bebidas",
+    "name": "Concordia Piña 1.5L",
+    "description": "Concordia Piña 1.5L",
+    "price": 7.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Bebidas",
+    "name": "Concordia Piña 500 ml",
+    "description": "Concordia Piña 500 ml",
+    "price": 4.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Little Caesars' Pizza - Miraflores",
+    "category": "Bebidas",
+    "name": "Pepsi Sabor Original 2L",
+    "description": "Pepsi Sabor Original 2L",
+    "price": 10,
+    "inStock": true
+  }
+]

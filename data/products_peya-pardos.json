@@ -1,0 +1,506 @@
+[
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Sanguche Pardos",
+    "name": "SANGUCHE BRASA CON PAPAS Y BEBIDA 500ml",
+    "description": "Sánguche Brasa, pan brioche, lechuga, papas al hilo, mayonesa,papas fritas y 1bebida personal",
+    "price": 32.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Sanguche Pardos",
+    "name": "SANGUCHE BRASA CON PAPAS FRITAS",
+    "description": "Sánguche de Pardos Brasa, pan brioche, lechuga, papas al hilo, mayonesa y papas fritas",
+    "price": 28.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Promociones",
+    "name": "PROMOCION PARA DOS",
+    "description": "1/2 Brasa con papas, ensalada regular y 2 bebidas personales (incluye salsas)",
+    "price": 58.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Promociones",
+    "name": "TU CHICHA 1.5 LT.",
+    "description": "1 Pardos Brasa+papas fritas+complemento a elección+ botella de Chicha 1.5L (Incluye salsas)",
+    "price": 96.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Promociones",
+    "name": "PARDOS PARRILLERO HOT PARA MI",
+    "description": "1/4Parrillero HOT ,papas ,ensalada y bebida personal (Incluye 1ají,1mayonesa y 1vinagreta)",
+    "price": 40.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Promociones",
+    "name": "Tú Eliges con Gaseosa de 1.5 LT.",
+    "description": "1 Pardos Brasa+papas fritas+complemento a elección+ gaseosa de 1.5L (Incluye salsas)",
+    "price": 91.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Promociones",
+    "name": "PARDOS BRASA PARA MI",
+    "description": "1/4 Brasa, papas y ensalada, y bebida personal, incluye 1ají,1mayonesa y 1vinagreta",
+    "price": 36.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Promociones",
+    "name": "PARDOS PARRILLERO BBQ PARA MI",
+    "description": "1/4Parrillero BBQ ,papas ,ensalada y bebida personal (Incluye 1ají,1mayonesa y 1vinagreta)",
+    "price": 40.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Promociones",
+    "name": "CHICHARRON PARA MI",
+    "description": "Chicharron , papas y ensalada,y bebida personal, incluye 1ají,1mayonesa y 1vinagreta",
+    "price": 39.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Promociones",
+    "name": "SANGUCHE BRASA CON PAPAS Y BEBIDA 500ml",
+    "description": "Sánguche Brasa, pan brioche, lechuga, papas al hilo, mayonesa,papas fritas y 1bebida personal",
+    "price": 32.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Promociones",
+    "name": "Tú Eliges con Gaseosa 2.25 LT",
+    "description": "1 Pardos Brasa+papas fritas+complemento a elección+ gaseosa de 2.25L (Incluye salsas)",
+    "price": 96.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Promociones",
+    "name": "PARDOS PARRILLERO PARA MI",
+    "description": "1/4Parrillero Original,papas ,ensalada y bebida personal (Incluye 1ají,1mayonesa y 1vinagreta)",
+    "price": 39.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Premium Arrocero",
+    "name": "1/2 PARDOS PARRILLERO ORIGINAL ARROCERO",
+    "description": "1/2 Pardos Parrillero ORIGINAL con papas fritas, arroz de la casa y ensalada rusa con palta",
+    "price": 53.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Premium Arrocero",
+    "name": "1/4 PARRILLEROS ORIGINAL ARROCERO",
+    "description": "1/4 Pardos Parrillero ORIGINAL con papas fritas, arroz de la casa y ensalada rusa con palta",
+    "price": 38.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Premium Arrocero",
+    "name": "1/2 PARDOS BRASA ARROCERO",
+    "description": "1/2 Pardos Brasa con papas fritas, arroz de la casa y ensalada rusa con palta",
+    "price": 52.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Premium Arrocero",
+    "name": "1/4 PARDOS BRASA ARROCERO",
+    "description": "1/4 Pardos Brasa con papas fritas, arroz de la casa y ensalada rusa con palta",
+    "price": 37.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Premium Encamotado",
+    "name": "1/2 PARRILLERO ORIGINAL MIX",
+    "description": "1/2 Parrillero ORIGINAL con papas fritas +rejillas de camote y ensalada a eleccion",
+    "price": 53.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Premium Encamotado",
+    "name": "1/4 PARDOS BRASA MIX",
+    "description": "1/4 Brasa con papas fritas,rejillas de camote y ensalada a eleccion",
+    "price": 37.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Premium Encamotado",
+    "name": "1/2 PARDOS BRASA MIX",
+    "description": "1/2 Brasa con papas fritas +rejillas de camote y ensalada a elecccion",
+    "price": 52.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Premium Encamotado",
+    "name": "1/4 PARRILLERO ORIGINAL  MIX",
+    "description": "1/4 PARRILLERO ORIGINAL con papas fritas,rejillas de camote y ensalada a eleccion",
+    "price": 38.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Pardos Brasa",
+    "name": "1/2 BRASA ANTICUCHO PAPAS Y ENSALADA",
+    "description": "1/2 Pardos Brasa  +1 Palo de Anticucho + Papas Fritas y Ensalada a elección",
+    "price": 59.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Pardos Brasa",
+    "name": "1 PARDOS BRASA PAPAS Y ENSALADA  REGULAR",
+    "description": "1 PARDOS BRASA + PAPAS + ENSALADA REGULAR",
+    "price": 88.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Pardos Brasa",
+    "name": "1/2 PARDOS BRASA PAPAS Y ENSALADA",
+    "description": "1/2 Pardos Brasa + Papas Fritas y Ensalada a elección",
+    "price": 50.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Pardos Brasa",
+    "name": "1/4 PARDOS BRASA PAPAS Y ENSALADA",
+    "description": "1/4 Pardos Brasa + Papas Fritas y Ensalada a elección",
+    "price": 32.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Pardos Brasa",
+    "name": "1 PARDOS BRASA PAPAS Y ENSALADA GRANDE",
+    "description": "1 Pardos Brasa con Papas Fritas + Ensalada Grande",
+    "price": 91.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Pardos Brasa",
+    "name": "1/4 Pardos Brasa Solo con Ensalada",
+    "description": "1/4 Pardos Brasa solo con Ensalada (No incluye papas)",
+    "price": 32.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Pardos Brasa",
+    "name": "1 PARDOS BRASA PAPAS FRITAS ó ENSALADA",
+    "description": "1 Pardos Brasa con Papas Fritas ó Papas Doradas ó Ensalada (Elegir solo 1 opcion)",
+    "price": 76.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Pardos Brasa",
+    "name": "1 Pardos Brasa",
+    "description": "1 Pardos Brasa, incluye Aji y Mayonesa (No incluye papas ni ensalada)",
+    "price": 60.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Pardos Brasa",
+    "name": "1/2 Pardos Brasa Solo con Ensalada",
+    "description": "1/2 Pardos Brasa solo con Ensalada (No incluye papas)",
+    "price": 50.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Pardos Parrillero",
+    "name": "1/2 PARRILLERO ORIGINAL PAPAS Y ENSALADA",
+    "description": "1/2 Pardos Parrillero + Papas Fritas y Ensalada a elección",
+    "price": 51.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Pardos Parrillero",
+    "name": "1/4 PARDOS PARRILLERO ORIGINAL",
+    "description": "1/4 PARDOS PARRILLERO ORIGINAL + Papas Fritas y Ensalada a elección",
+    "price": 36.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Pardos Parrillero",
+    "name": "1/4 Parrillero Solo con Ensalada",
+    "description": "1/4 Pardos Parrillero con Ensalada a elección (No incluye papas)",
+    "price": 36.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Pardos Parrillero",
+    "name": "1/2 Parrillero Solo con Ensalada",
+    "description": "1/2 Pardos Parrillero con Ensalada a elección (No incluye papas)",
+    "price": 51.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Anticucho y Mollejas",
+    "name": "Carretillero (Fondo)",
+    "description": "Combinacion de anticuchos y mollejitas",
+    "price": 31.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Anticucho y Mollejas",
+    "name": "Anticucho de Corazón (Fondo)",
+    "description": "Anticuchos de corazón con rodajas de choclo y papas doradas o papas fritas y ensalada",
+    "price": 34.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Anticucho y Mollejas",
+    "name": "Mollejitas a la Parrilla (Fondo)",
+    "description": "Mollejitas a la parrilla con rodajas de choclo y papas doradas o papas fritas y ensalada",
+    "price": 33.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Anticucho y Mollejas",
+    "name": "Piqueo Mollejitas",
+    "description": "Con 1 rodaja de choclo y 1 rodaja de papa dorada",
+    "price": 21.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Anticucho y Mollejas",
+    "name": "Piqueo Anticucho",
+    "description": "1 Palo de Anticucho, 1 rodaja de choclo y 1 rodaja de papa dorada",
+    "price": 21.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Ensaladas",
+    "name": "Cocida Grande",
+    "description": "Beterraga, zanahoria, vainita y palta",
+    "price": 25.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Ensaladas",
+    "name": "Ensalada Delicia",
+    "description": "Lechuga, espinaca, tomate choclo, queso fresco y palta",
+    "price": 25.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Ensaladas",
+    "name": "Fresca Grande",
+    "description": "Lechuga, tomate, rabanito y palta",
+    "price": 25.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Ensaladas",
+    "name": "Porcion Palta",
+    "description": "Porcion de Palta",
+    "price": 11.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Postres",
+    "name": "CHEESECAKE de FRESA",
+    "description": "Postre",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Guarniciones",
+    "name": "Pack x3 Mayonesa",
+    "description": "3 unidades de sachet de Mayonesa",
+    "price": 3.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Guarniciones",
+    "name": "Pack x3 Ají",
+    "description": "3 unidades de sachet de Ají",
+    "price": 3.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Guarniciones",
+    "name": "PAPAS DORADAS",
+    "description": "Porción de Papas Doradas",
+    "price": 17.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Guarniciones",
+    "name": "6 Tequeños Brasa",
+    "description": "6 unidades de tequeños",
+    "price": 20.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Guarniciones",
+    "name": "3 Tequeños Brasa",
+    "description": "3 unidades de tequeños",
+    "price": 13.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Guarniciones",
+    "name": "Pack x3 Vinagreta",
+    "description": "3 unidades de sachet de Vinagreta",
+    "price": 3.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Guarniciones",
+    "name": "Porcion de Choclo",
+    "description": "Porción de Choclo",
+    "price": 11.8,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Guarniciones",
+    "name": "Papas Fritas",
+    "description": "Porción de Papas Fritas",
+    "price": 17.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Guarniciones",
+    "name": "Porcion de Arroz",
+    "description": "Porc. Arroz Blanco (200gr)",
+    "price": 8.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Guarniciones",
+    "name": "Porcion Palta",
+    "description": "Porcion de Palta",
+    "price": 11.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Bebidas",
+    "name": "Inca Kola Zero Personal",
+    "description": "Botella Inca Kola Zero Personal",
+    "price": 8.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Bebidas",
+    "name": "Inca Kola 1.5 lt",
+    "description": "Gaseosa",
+    "price": 13.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Bebidas",
+    "name": "Coca Cola 1.5 lt",
+    "description": "Gaseosa",
+    "price": 13.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Bebidas",
+    "name": "Chicha Pardos 500ml",
+    "description": "Botella de Chicha de 500ml",
+    "price": 9.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Bebidas",
+    "name": "Coca Cola Zero    1.5 lt",
+    "description": "Gaseosa",
+    "price": 13.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Bebidas",
+    "name": "Coca Cola Personal",
+    "description": "Gaseosa",
+    "price": 8.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Bebidas",
+    "name": "Chicha Pardos 1.5 L",
+    "description": "Botella de Chicha de 1.5 LT",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Bebidas",
+    "name": "Inca Kola Zero 1.5 lt",
+    "description": "Gaseosa",
+    "price": 13.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Bebidas",
+    "name": "Inca Kola Personal",
+    "description": "Gaseosa",
+    "price": 8.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Pardos Chicken - Santa Cruz",
+    "category": "Bebidas",
+    "name": "Coca Cola Zero Personal",
+    "description": "Gaseosa",
+    "price": 8.5,
+    "inStock": true
+  }
+]

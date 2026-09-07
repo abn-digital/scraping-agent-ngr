@@ -1,0 +1,546 @@
+[
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "PROMOCIONES UNICAS",
+    "name": "Familia Mágica",
+    "description": "1 Pollo a la brasa + papas fritas familiares + ensalada clásica familiar + 1 gaseosa 1.5L + cajita mágica brasa (incluye juguete a elección)",
+    "price": 118.09,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "PROMOCIONES UNICAS",
+    "name": "DUO MONSTRITO - ROKYS!!!",
+    "description": "2 (1/8 pollo a la brasa) + papas fritas + arroz oriental + 2 gaseosas 500ml.",
+    "price": 56.6,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "TENDER",
+    "name": "Tender X 3Und + Salsa x 40Ml",
+    "description": "Tender X 3Und + Salsa x 40Ml",
+    "price": 11.7,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "TENDER",
+    "name": "Tender X 6Und + Salsa x 80Ml + Papas",
+    "description": "Tender X 6Und + Salsa x 80Ml + Papas",
+    "price": 33,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "TENDER",
+    "name": "Tender X 12Und + Salsa x 160Ml + Papas",
+    "description": "Tender X 12Und + Salsa x 160Ml + Papas",
+    "price": 64.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Promociones",
+    "name": "Combo Mostriqueño Personal",
+    "description": "1 Mostrito + 3 Tequeños + 1 Gaseosa Personal",
+    "price": 54.46,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Promociones",
+    "name": "Promo 1/4 Brasa",
+    "description": "1/4 Pollo a la Brasa + papas",
+    "price": 28.92,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Promociones",
+    "name": "Promo Mostrito",
+    "description": "1/4 Pollo A La Brasa + Papas + Arroz Chaufa",
+    "price": 39.85,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Promociones",
+    "name": "2 Wrap a Elección + 2 Gaseosas",
+    "description": "2 Rokywrap a elección (Crispy o pollo a la brasa) + 2 gaseosas 500ml.",
+    "price": 58.15,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Promociones",
+    "name": "Promo 1/4 Brasa + Gaseosa",
+    "description": "1/4 Pollo A La Brasa + Gaseosa Personal",
+    "price": 32.62,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Promociones",
+    "name": "Oferta 1",
+    "description": "1 Pollo + Papas + Ensalada + 1 Gaseosa 1.5L",
+    "price": 93.2,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Promociones",
+    "name": "Promo Personal",
+    "description": "1/4 De Pollo + Papas Personales + Ensalada Personal + Gaseosa",
+    "price": 43.54,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Promociones",
+    "name": "Promo Mostrito Brasa + Gaseosa",
+    "description": "1/4 Pollo A La Brasa + Papas + Arroz Chaufa + Gaseosa",
+    "price": 43.54,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Promociones",
+    "name": "2 Wrap a Elección",
+    "description": "2 Rokywrap a elección (Crispy o pollo a la brasa)",
+    "price": 50.92,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Promociones",
+    "name": "Promo Para Compartir",
+    "description": "1/2 Pollo + Papas + Ensalada + 2 Gaseosas Personales",
+    "price": 44.79,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Promociones",
+    "name": "Megarokyto",
+    "description": "1 Pollo + 1/4 De Pollo + Papas + Ensalada + 1 Gaseosa 1.5L",
+    "price": 95.6,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Wraps",
+    "name": "Wrap Crispy de Pollo + Gaseosa",
+    "description": "1 Rokywrap Crispy + gaseosa 500ml.",
+    "price": 21.2,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Wraps",
+    "name": "Wrap de Pollo a la Brasa + Gaseosa",
+    "description": "1 Rokywrap Pollo a la Brasa + gaseosa 500ml.",
+    "price": 21.2,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Wraps",
+    "name": "Wrap Crispy de Pollo",
+    "description": "1 Rokywrap Crispy",
+    "price": 17.6,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Wraps",
+    "name": "Wrap de Pollo a la Brasa",
+    "description": "1 Rokywrap Pollo a la Brasa",
+    "price": 17.6,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Combos",
+    "name": "Mega Banquete Broaster",
+    "description": "Balde Broaster x16 + Papas Familiares + Arroz Oriental + Ensalada de Col + gaseosa 1.5 LT",
+    "price": 116.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Combos",
+    "name": "Combo Limonada",
+    "description": "1 Pollo A La Brasa + Papas Fritas + Ensalada Clásica + Limonada 2L + Salsas",
+    "price": 93.2,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Combos",
+    "name": "Combo Broaster X 10",
+    "description": "10 Piezas broaster + porción de papas + ensalada de col",
+    "price": 81.4,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Combos",
+    "name": "Mega Banquete",
+    "description": "1 Pollo + 1/2 pollo + papas + ensalada + gaseosa 1.5l.",
+    "price": 112.1,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Combos",
+    "name": "Combo Broaster X6",
+    "description": "6 Piezas broaster, papas medianas, ensalada de col",
+    "price": 55.4,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Combos",
+    "name": "Pack Refréscate",
+    "description": "1 Pollo + Papas Fritas + Ensalada Clásica + Salsa + Chicha Morada 2L",
+    "price": 102.7,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Parrillas",
+    "name": "Parrilla Para Dos",
+    "description": "1/2 Pollo A La Brasa + 2 Palitos De Anticucho + 1 Frankfurter + 1 Chorizo + Pancita O Mollejita + Papas Fritas + Ensalada Parrillera Mediana + Ensalada Alemana Mediana",
+    "price": 85,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Parrillas",
+    "name": "1/2 Parrilla Clasica",
+    "description": "1 Bife 250g + 1 chuleta 200g + 1 pechuga de pollo 250g + 1 chorizo + 1 frankfurter + 1 palito de anticucho + papas fritas + ensalada parrillera mediana + alemana mediana",
+    "price": 115.7,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Parrillas",
+    "name": "Rokyllero Pachamanquero",
+    "description": "Filete De Pierna Pachamanquero + Papas Doradas + Choclo + Ensalada + Vaso De Chicha",
+    "price": 34.2,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Parrillas",
+    "name": "Parrilla Clasica",
+    "description": "2 Bife 250g + 2 frankfurter + 2 chuleta 200g + 2 chorizo + 1 pechuga de pollo 250g + pancita o mollejita + 2 palito de anticucho + papas fritas + ensalada parrillera mediana + ensalada alemana mediana",
+    "price": 180.7,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Parrillas",
+    "name": "Rokyllero Anticuchero",
+    "description": "Filete De Pierna Anticuchero + Papas Doradas + Choclo + Ensalada + Vaso De Chicha",
+    "price": 34.2,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Parrillas",
+    "name": "1/2 Parrilla Brasa",
+    "description": "1 Bife 250g + 1 chuleta 200g + 1/2 pollo a la brasa + 1 chorizo + 1 frankfurter + 1 palito de anticucho + papas fritas + ensalada parrillera mediana + ensalada alemana mediana",
+    "price": 112.1,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Fusión Criolla",
+    "name": "Tallarin De Carne",
+    "description": "Tallarin De Carne",
+    "price": 38.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Fusión Criolla",
+    "name": "Pollo Saltado",
+    "description": "Pollo saltado - papa amarilla",
+    "price": 35.4,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Fusión Criolla",
+    "name": "Caldo De Gallina Sin Presa",
+    "description": "Caldo De Gallina Sin Presa",
+    "price": 15.3,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Fusión Criolla",
+    "name": "Caldo De Gallina Con Presa",
+    "description": "Caldo De Gallina Con Presa",
+    "price": 21.2,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Fusión Criolla",
+    "name": "Chaufa De Pollo",
+    "description": "Arroz chaufa de pollo",
+    "price": 35.4,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Hamburguesas",
+    "name": "Hamburguesa Extrema",
+    "description": "Doble hamburguesa + doble queso cheddar + tocino + lechuga orgánica+ rodaja de tomate + papas onduladas",
+    "price": 27.1,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Hamburguesas",
+    "name": "Hamburguesa Parrillera",
+    "description": "Hamburguesa + Papas Onduladas + Chorizo + Lechuga Orgánica + Tomate + Salsa Chimi Churri",
+    "price": 23.6,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Hamburguesas",
+    "name": "Hamburguesa Suprema + Papas",
+    "description": "Hamburguesa + tocino + lechuga orgánica + rodaja de tomate + salsa honey mustard + papas onduladas",
+    "price": 22.4,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Wings",
+    "name": "Alitas Hot BBQ x12 + Gaseosa",
+    "description": "12 Alitas Hot BBQ + papas + 2 gaseosas",
+    "price": 50.7,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Wings",
+    "name": "6 Rokys Wings + Papas Fritas",
+    "description": "6 Alitas Picantes + Papas Fritas",
+    "price": 21.2,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Wings",
+    "name": "6 Rokys Wings + 6 Alitas Hot Bbq + Gaseosa",
+    "description": "6 Rokys Wings + 6 Alitas Hot BBQ + papas + 2 gaseosas",
+    "price": 50.7,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Wings",
+    "name": "6 Rokys Wings + 6X Alitas Hot Bbq",
+    "description": "6 Rokys Wings + 6 Alitas Hot BBQ + papas",
+    "price": 46,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Wings",
+    "name": "12 Alitas Hot Bbq",
+    "description": "12 Alitas Hot BBQ + papas",
+    "price": 46,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Wings",
+    "name": "3 Rokys Wings + 3 Alitas Hot Bbq",
+    "description": "3 Rokys Wings + 3 Alitas Hot BBQ + papas",
+    "price": 24.7,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Piqueos",
+    "name": "Tequeños X3",
+    "description": "3 tequeños brasa",
+    "price": 7,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Piqueos",
+    "name": "Wantanes Hot Brasa X6",
+    "description": "6 wantanes hot brasa",
+    "price": 17.2,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Piqueos",
+    "name": "Crocante Mixto Doble",
+    "description": "2 Piezas broaster + arroz chaufa personal + porción de papas personal + salsas.",
+    "price": 28.3,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Piqueos",
+    "name": "Salchipapa Especial",
+    "description": "Papas fritas + salchicha + 2 huevos",
+    "price": 22.4,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Piqueos",
+    "name": "2 Piezas Broaster",
+    "description": "2 Piezas broaster + papas",
+    "price": 18.8,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Piqueos",
+    "name": "Wantanes Hot Brasa X3",
+    "description": "3 wantanes hot brasa",
+    "price": 8.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Piqueos",
+    "name": "Tequeño X12",
+    "description": "12 tequeños brasa",
+    "price": 23.6,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Piqueos",
+    "name": "Tequeños X6",
+    "description": "6 tequeños brasa",
+    "price": 12.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Piqueos",
+    "name": "Salchipapa Clásica",
+    "description": "Papas fritas + salchicha",
+    "price": 20,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Acompañamientos",
+    "name": "Ensalada Delicia De Palta",
+    "description": "Ensalada Delicia De Palta",
+    "price": 24.7,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Acompañamientos",
+    "name": "Ensalada Clasica",
+    "description": "Ensalada Clasica",
+    "price": 16.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Bebidas",
+    "name": "Inca Kola Personal",
+    "description": "Gaseosa Inca Kola De 500Ml",
+    "price": 7,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Bebidas",
+    "name": "Coca Cola 1.5L",
+    "description": "Coca cola 1.5 l regular",
+    "price": 16.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Bebidas",
+    "name": "Chicha Morada 3Lt",
+    "description": "Chicha Morada 3Lt a base de maiz morado",
+    "price": 53.1,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Bebidas",
+    "name": "Maracuyá 1L",
+    "description": "Maracuyá 1L",
+    "price": 24.7,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Bebidas",
+    "name": "Coca Cola Personal",
+    "description": "Gaseosa Coca Cola De 500Ml",
+    "price": 7,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Bebidas",
+    "name": "Inca Kola 1.5L",
+    "description": "Inca kola 1.5 l regular",
+    "price": 16.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Bebidas",
+    "name": "Chicha Morada 1Lt",
+    "description": "Chicha Morada 1Lt a base de maiz morado",
+    "price": 24.4,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Bebidas",
+    "name": "Coca Cola 3L",
+    "description": "Gaseosa Coca Cola De 3L",
+    "price": 21.2,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Bebidas",
+    "name": "Limonada 1L",
+    "description": "Limonada 1L",
+    "price": 23.6,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Bebidas",
+    "name": "Chicha Morada 1.9Lt",
+    "description": "Chicha Morada 1.9Lt a base de maiz morado",
+    "price": 41.3,
+    "inStock": true
+  },
+  {
+    "restaurant": "Roky's - Angamos Este",
+    "category": "Bebidas",
+    "name": "Inca Kola 3L",
+    "description": "Gaseosa Inca Kola De 3L",
+    "price": 21.2,
+    "inStock": true
+  }
+]

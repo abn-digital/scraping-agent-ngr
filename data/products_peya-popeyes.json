@@ -1,0 +1,690 @@
+[
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Bombazos 💣",
+    "name": "Bomba Box Max Salsatón",
+    "description": "3 piezas de pollo o 4 tenders + 3 nuggets + 1 papa cajun regular + 1 gaseosa de 500 ml + 1 salsa de 3 oz. Prueba nuestra nueva salsa Honey Mustard.",
+    "price": 25.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Promos Yaperas",
+    "name": "Promo Peya Yape 3 pz",
+    "description": "3 piezas de pollo crujiente + 1 papa cajun regular + 1 gaseosa de 500 ml",
+    "price": 22.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Promos Yaperas",
+    "name": "Dúo Yape Tenders",
+    "description": "8 tenders de pechuga crispy + 2 papas cajun regular + 1 salsa familiar de 3 oz",
+    "price": 36.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Combo PeYa Plus",
+    "name": "Combo Plus Cajún Power XL",
+    "description": "4 Alitas + 2 Piezas + 1 Papa grande + 1 Gaseosa 500 ml",
+    "price": 20.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Combo PeYa",
+    "name": "Combo PeYa Cajún Mix",
+    "description": "4 Alitas picantes + 1 Pieza + 1 Papa Regular + 1 Gaseosa 500 ml",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Break Popeyes",
+    "name": "Break 1 pieza",
+    "description": "1 pieza + 3 nuggets + 1 papa regular",
+    "price": 9.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Break Popeyes",
+    "name": "Break 2 Tenders",
+    "description": "2 tenders + 2 nuggets + 1 papa regular.",
+    "price": 9.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Break Popeyes",
+    "name": "Break 4 Alitas",
+    "description": "4 alitas + 1 papa regular",
+    "price": 9.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Break Popeyes",
+    "name": "Break 7 Nuggets",
+    "description": "7 nuggets + 1 papa regular",
+    "price": 9.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Promos de Locura",
+    "name": "Box 3 Piezas + 1 Sandwich",
+    "description": "3 Piezas + 1 Sandwich + 2 Papas regulares",
+    "price": 35.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Promos de Locura",
+    "name": "Promo Duo Alitas & Nuggets",
+    "description": "10 Alitas + 10 Nuggets + 2 Papas regulares",
+    "price": 39.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Promos de Locura",
+    "name": "2x1 Salsatón Cajún Power",
+    "description": "4 piezas de pollo + 4 nuggets + 2 papas cajun regulares + 1 salsa a elección de 3oz",
+    "price": 39.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Promos de Locura",
+    "name": "2x1 Cajún Full",
+    "description": "2 Combos de: 2 Piezas y 1 Papa Cajún Regular",
+    "price": 29.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Promos de Locura",
+    "name": "Salsatón Divino 2 pz",
+    "description": "2 pieza pollo + 6 nuggets + 2  papa cajún regular + 1 salsa a eleccion familiar",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Promos de Locura",
+    "name": "Banquete 8 Pz + 10 Alitas",
+    "description": "8 Piezas + 10 Alitas + 1 Papa familiar",
+    "price": 69.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Todo Es Delicioso",
+    "name": "Box Max Salsatón",
+    "description": "3 piezas de pollo o 4 tenders + 3 nuggets + 1 papa cajun regular + 1 gaseosa de 500 ml + 1 salsa de 3 oz. Prueba nuestra nueva salsa Honey Mustard.",
+    "price": 24.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Todo Es Delicioso",
+    "name": "Duo Salsatón",
+    "description": "4 piezas de pollo crujiente + 2 papas cajun regular + 2 gaseosas 500 ml + 1 salsa de 3 oz. Prueba nuestra salsa Honey Mustard.",
+    "price": 39.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Todo Es Delicioso",
+    "name": "Festi Salsatón 6pz",
+    "description": "6 piezas de pollo + 6 nuggets + 1 papa cajun familiar +1 salsa de 3 oz. Prueba nuestra nueva salsa Honey Mustard.",
+    "price": 49.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Todo Es Delicioso",
+    "name": "Festi Salsatón 8pz",
+    "description": "8 piezas de pollo +  1 papa cajun familiar +1 salsa de 3 oz. Prueba nuestra nueva salsa Honey Mustard.",
+    "price": 59.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Full Box",
+    "name": "Full Box",
+    "description": "Crea tu box eligiendo entre estas 3 diferentes opciones: 7 nuggets y/o 5 alitas y/o 4 tenders. Como parte de la experiencia podras elegir 2 salsas de 2oz en el sabor que desees y papas para compartir",
+    "price": 39.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Pollo Frito",
+    "name": "Pieza de Pollo x2",
+    "description": "2 piezas de pollo crujiente crispy, elige entre tradicional o picante.",
+    "price": 14.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Pollo Frito",
+    "name": "Personal 2 piezas combo",
+    "description": "2 piezas de pollo crujiente + 1 papa cajun regular +1 gaseosa de 500 ml",
+    "price": 21.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Pollo Frito",
+    "name": "Personal 3 piezas Combo",
+    "description": "3 piezas de pollo crujiente + 1 papa cajun regular +1 gaseosa de 500 ml",
+    "price": 27.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Pollo Frito",
+    "name": "Duo 4 piezas combo",
+    "description": "4 piezas + 2 papa cajun regular + 2 gaseosa de 500 ml",
+    "price": 39.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Pollo Frito",
+    "name": "Festi 6 Piezas",
+    "description": "6 Piezas y 1 Papa Cajún Familiar.  Salsas: 3 Aji, 3 Mayonesa.",
+    "price": 35.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Pollo Frito",
+    "name": "Festi 7 Piezas",
+    "description": "7 Piezas y 1 Papa Cajún Familiar.",
+    "price": 39.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Pollo Frito",
+    "name": "Festi 8 Piezas",
+    "description": "8 Piezas y 1 Papa Cajún Familiar. Salsas: 4 Aji, 4 Mayonesa.",
+    "price": 52.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Pollo Frito",
+    "name": "Festi 10 Piezas",
+    "description": "10 Piezas y 1 Papa Cajún Familiar. Salsas: 5 Aji, 5 Mayonesa .",
+    "price": 66.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Pollo Frito",
+    "name": "Festi 12 Piezas",
+    "description": "12 Piezas y 1 Papa Cajún Super Familiar. Salsas: 6 Aji, 6 Mayonesa.",
+    "price": 72.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Pollo Frito",
+    "name": "Festi 6 Piezas combo",
+    "description": "6 piezas de pollo crujiente + 1 papa cajun familiar + 1 gaseosa de 1 litro",
+    "price": 49.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Pollo Frito",
+    "name": "Festi 8 Piezas combo",
+    "description": "8 piezas de pollo crujiente + 1 papa cajun familiar + 1 gaseosa de 1 litro",
+    "price": 59.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Pollo Frito",
+    "name": "Festi 10 piezas combo",
+    "description": "10 piezas de pollo crujiente + 1 papa cajun familiar + 1 gaseosa de 1 litro",
+    "price": 69.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Pollo Frito",
+    "name": "Festi 12 piezas combo",
+    "description": "12 piezas de pollo crujiente + 1 papa familiar + 1 gaseosa de 1 litro",
+    "price": 79.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Pollo Frito",
+    "name": "Festi 6 Piezas cajún",
+    "description": "6 Piezas, 6 Nuggets y 1 Papa Cajún Familiar.  Salsas: 3 Ajies, 3 Mayonesas.",
+    "price": 51.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Pollo Frito",
+    "name": "Festi 8 Piezas Power",
+    "description": "8 Piezas, 6 Nuggets, 1 Papa Cajún Familiar y 1 Gaseosa 1 L.",
+    "price": 71.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Pollo Frito",
+    "name": "Festi 10 Piezas Power",
+    "description": "10 Piezas, 6 Nuggets, 1 Papa Cajún Familiar y 1 Gaseosa 1.5 L. Stock mínimo 500 unidades. Salsas: 5 Aji, 5 Mayonesa . EP DE FRANQUICIAS SAC RUC: 20545699126",
+    "price": 82.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Pollo Frito",
+    "name": "Festi 12 Piezas Power",
+    "description": "12 Piezas, 8 Nuggets, 1 Papa Cajún Familiar y 1 Gaseosa 1.5 L. Salsas: 6 Aji, 6 Mayonesa",
+    "price": 92.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Tenders",
+    "name": "Tenders x3",
+    "description": "3 tiras de pechuga crispy",
+    "price": 14.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Tenders",
+    "name": "Tenders x4",
+    "description": "4 tiras de pechuga crispy",
+    "price": 17.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Tenders",
+    "name": "Tenders x6",
+    "description": "6 tiras de pechuga crispy",
+    "price": 23.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Tenders",
+    "name": "Tenders x8",
+    "description": "8 tiras de pechuga crispy",
+    "price": 29.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Tenders",
+    "name": "Personal 3 tenders salsaton",
+    "description": "3 tenders de pechuga crispy + 1 papa cajun regular + 1 salsa familiar 3 oz",
+    "price": 17.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Tenders",
+    "name": "Personal 6 Tenders Salsatón",
+    "description": "6 tenders de pechuga crispy + 1 papa cajún regular  + 1 salsa familiar 3 oz",
+    "price": 22.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Tenders",
+    "name": "Duo 6 tenders salsaton",
+    "description": "6 tenders de pechuga crispy + 2 papas cajun regular + 1 salsa familiar de 3 oz",
+    "price": 34.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Tenders",
+    "name": "Duo 8 tenders salsaton",
+    "description": "8 tenders de pechuga crispy + 2 papas cajun regular + 1 salsa familiar de 3 oz",
+    "price": 39.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Tenders",
+    "name": "Duo 12 tenders salsaton",
+    "description": "12 tenders de pechuga crispy + 2 papa cajún regular  + 1 salsa familiar 3 oz",
+    "price": 44.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Alitas",
+    "name": "Alitas x4",
+    "description": "4 alitas picantes en receta cajun.",
+    "price": 11.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Alitas",
+    "name": "Alitas x8",
+    "description": "8 alitas picantes en receta cajun.",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Alitas",
+    "name": "Locura 10 Alitas",
+    "description": "10 Alitas y 1 Papa Cajún Regular. Promoción válida hasta agotar stock. Stock mínimo 500 unidades. Salsas: 1 Aji, 1 Mayonesa. EP DE FRANQUICIAS SAC RUC: 20545699126",
+    "price": 23.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Alitas",
+    "name": "Locura 6 Alitas",
+    "description": "6 Alitas Picantes y 1 Papa Cajún Regular. Salsas: 1 Aji, 1 Mayonesa.",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Alitas",
+    "name": "Locura 12 Alitas",
+    "description": "12 alitas picantes y 2 Papas Cajún Regulares. Salsas: 2 Aji, 2 Mayonesa.",
+    "price": 31.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Alitas",
+    "name": "Personal 8 alitas combo",
+    "description": "8 alitas picantes en receta cajun + 1 papa cajun regular +1 gaseosa 500ml. Agrega +2 soles una salsa familiar 3oz",
+    "price": 21.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Alitas",
+    "name": "Duo 16 alitas combo",
+    "description": "16 alitas  picantes en receta cajun + 2 papa cajun regular +2 gaseosa 500ml. Agrega +2 soles una salsa familiar 3oz",
+    "price": 44.6,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Nuggets",
+    "name": "Nuggets x4",
+    "description": "4 nuggets",
+    "price": 11.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Nuggets",
+    "name": "Nuggets x8",
+    "description": "8 nuggets",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Nuggets",
+    "name": "Personal 8 nuggets combo",
+    "description": "8 nuggets + 1 papa cajun regular +1 gaseosa 500ml. Agrega +2 soles una salsa familiar 3oz.",
+    "price": 23.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Nuggets",
+    "name": "Duo 16 nuggets combo",
+    "description": "16 nuggets + 2 papa cajun regular + 2 gaseosa 500ml. Agrega +2 soles una salsa familiar 3oz.",
+    "price": 44.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Chicharrón Pop",
+    "name": "Chicharrón Pop",
+    "description": "1 Chicharron Pop de pollo + 1 salsa de 2 oz",
+    "price": 9.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Chicharrón Pop",
+    "name": "Chicharrón Pop XL",
+    "description": "1 Chicharron Pop XL de pollo + 1 salsa de 2 oz",
+    "price": 14.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Chicharrón Pop",
+    "name": "Personal Chicharron Pop XL Combo",
+    "description": "Chicharron Pop de pollo XL + 1 salsa 2oz + 1 papa cajun regular + 1 gaseosa 500 ml",
+    "price": 22.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Wraps",
+    "name": "Mini Chicken Wrap x1",
+    "description": "Tortilla pequeña con 1 tender, papas al hilo, tomate y mayonesa",
+    "price": 14.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Wraps",
+    "name": "Personal Mini Chicken Wrap",
+    "description": "1 chicken roll (Tortilla pequeña con 1 tender, papas al hilo, tomate y mayonesa) + 1 papa cajun regular",
+    "price": 15.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Wraps",
+    "name": "Tosty x1",
+    "description": "Elige tu Tosty  favorito: Tosty  Crunch (contiene 1  tender y 1 nugget crujiente, papas al hilo, queso cheddar, salsa de tocino ahumado, tomate y lechuga); o el Tosty tradicional (contiene 1 tender y 1 nugget crujiente, queso cheddar, mayonesa, tomate y l",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Wraps",
+    "name": "Personal Tosty",
+    "description": "Elige tu tosty favorito ente tradicional y Crunch + 1 papa cajun regular.",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Wraps",
+    "name": "Personal Tosty combo",
+    "description": "Elige tu tosty favorito ente tradicional y Crunch + 1 papa cajun regular + 1 gaseosa de 500 ml",
+    "price": 22.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Wraps",
+    "name": "Personal Tosty Salsaton",
+    "description": "Elige tu tosty favorito ente tradicional y Crunch + 1 papa cajun regular + 1 salsa familiar 3oz",
+    "price": 20.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Sandwich",
+    "name": "Sandwich x1",
+    "description": "Disfruta nuestro Sándwich de pechuga de pollo crujiente en pan brioche, disponible en tres versiones: Tártara Golf con papas al hilo, lechuga y salsa tártara golf; Mayo Especial con tomate, lechuga y mayonesa especial; y Ají Mix con tomate, lechuga.",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Sandwich",
+    "name": "Personal Sandwich Combo",
+    "description": "Elige tu chicken sandwich favorito (disponible en tres versiones: Tártara Golf, Mayo Especial o Ají Mix) + 1 papa cajun regular + 1 gaseosa de 500 ml",
+    "price": 19.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Sandwich",
+    "name": "Personal Sandwich Salsaton",
+    "description": "Elige tu chicken sandwich favorito (disponible en tres versiones: Tártara Golf, Mayo Especial o Ají Mix) + 1 papa regular + 1 salsa familiar 3 oz",
+    "price": 21.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Complementos",
+    "name": "Papa Cajun Regular",
+    "description": "Papas fritas doradas con mezcla de especias cajún tamaño regular",
+    "price": 7.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Complementos",
+    "name": "Papa Cajun Grande",
+    "description": "Papas fritas doradas con mezcla de especias cajún tamaño grande",
+    "price": 9.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Complementos",
+    "name": "Papa Cajun Familiar",
+    "description": "Papas fritas doradas con mezcla de especias cajún tamaño familiar",
+    "price": 13.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Complementos",
+    "name": "Papa Cajun Súper Familiar",
+    "description": "Papas fritas doradas con mezcla de especias cajún tamaño super familiar",
+    "price": 17.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Complementos",
+    "name": "Camote Cajun Regular",
+    "description": "Camotes fritos doradas con mezcla de especias cajún tamaño regular",
+    "price": 8.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Complementos",
+    "name": "Camote Cajun Familiar",
+    "description": "Camotes fritos doradas con mezcla de especias cajún tamaño familiar",
+    "price": 17.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Complementos",
+    "name": "Ensalada de Col Regular",
+    "description": "Col + zanahoria + salsa agridulce",
+    "price": 6.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Complementos",
+    "name": "Ensalada de Col Familiar",
+    "description": "Col + zanahoria + salsa agridulce",
+    "price": 11.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Complementos",
+    "name": "Salsa Familiar 3 oz",
+    "description": "Salsa Salsatón familiar 3 oz (elige sabor)",
+    "price": 3.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Complementos",
+    "name": "Vasote Salsatón",
+    "description": "¡Vive la experiencia Salsatón con lo más viral del momento: nuestro Vasote de 12 oz! Elige tu sabor favorito.",
+    "price": 9.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Bebidas",
+    "name": "Inca Kola Sabor Original 500 ml",
+    "description": "Gaseosa    Razón Social EP DE FRANQUICIAS S.A.C.      RUC: 20545699126",
+    "price": 6.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Bebidas",
+    "name": "Coca Cola Sabor Original 500 ml",
+    "description": "Gaseosa    Razón Social EP DE FRANQUICIAS S.A.C.      RUC: 20545699126",
+    "price": 6.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Bebidas",
+    "name": "Inca Kola Sin Azúcar 500 ml",
+    "description": "Gaseosa    Razón Social EP DE FRANQUICIAS S.A.C.      RUC: 20545699126",
+    "price": 6.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Bebidas",
+    "name": "Coca Cola Sin Azúcar  500 ml",
+    "description": "Gaseosa    Razón Social EP DE FRANQUICIAS S.A.C.      RUC: 20545699126",
+    "price": 6.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Bebidas",
+    "name": "Inca Kola Sin  Azúcar 1.5 L",
+    "description": "Gaseosa    Razón Social EP DE FRANQUICIAS S.A.C.      RUC: 20545699126",
+    "price": 13.4,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Bebidas",
+    "name": "Coca Cola Sin Azúcar 1.5 L",
+    "description": "Gaseosa    Razón Social EP DE FRANQUICIAS S.A.C.      RUC: 20545699126",
+    "price": 13.4,
+    "inStock": true
+  },
+  {
+    "restaurant": "Popeyes Larco",
+    "category": "Bebidas",
+    "name": "San Luis sin Gas 750ml.",
+    "description": "San Luis sin Gas 750ml.. EP DE FRANQUICIAS SAC RUC: 20545699126",
+    "price": 3.9,
+    "inStock": true
+  }
+]

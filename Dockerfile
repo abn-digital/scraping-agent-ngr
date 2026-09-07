@@ -37,6 +37,8 @@ RUN npx playwright install chromium
 COPY rappi_scraper.js ./
 COPY mcdonalds_scraper.js ./
 COPY pedidosya_scraper.js ./
+COPY scrape_pedidosya_session.js ./
+COPY scrape_pedidosya_batch.js ./
 COPY pizzahut_scraper.js ./
 COPY burgerking_scraper.js ./
 COPY kfc_scraper.js ./

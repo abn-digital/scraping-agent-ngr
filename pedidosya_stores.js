@@ -9,7 +9,7 @@ module.exports = {
   STORES: [
     // Marcas NGR
     { id: 'peya-bembos', name: 'Bembos', group: 'own',
-      url: 'https://www.pedidosya.com.pe/restaurantes/lima/bembos-ovalo-gutierrez-menu' },
+      url: 'https://www.pedidosya.com.pe/restaurantes/lima/bembos-ovalo-gutierrez-699066be-2b00-4117-b698-60200ae31ecc-menu' },
     { id: 'peya-popeyes', name: 'Popeyes', group: 'own',
       url: 'https://www.pedidosya.com.pe/restaurantes/lima/popeyes-larco-menu' },
     { id: 'peya-dunkin', name: "Dunkin'", group: 'own',
@@ -19,7 +19,7 @@ module.exports = {
     { id: 'peya-donbelisario', name: 'Don Belisario', group: 'own',
       url: 'https://www.pedidosya.com.pe/restaurantes/lima/don-belisario-larco-93da4fb3-c49b-4607-ae33-4733f1343acc-menu' },
     { id: 'peya-chinawok', name: 'Chinawok', group: 'own',
-      url: 'https://www.pedidosya.com.pe/restaurantes/lima/chinawok-patio-larco-menu' },
+      url: 'https://www.pedidosya.com.pe/restaurantes/lima/chinawok-patio-larco-8bd1f1e5-a9c1-451f-a635-97b27066f0f8-menu' },
 
     // vs Bembos
     { id: 'peya-mcdonalds', name: "McDonald's", group: 'bembos',

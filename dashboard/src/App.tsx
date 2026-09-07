@@ -78,12 +78,12 @@ const NGR_OWN_RAPPI = [
 
 // PedidosYa — same brand set (Miraflores / Óvalo Gutiérrez area)
 const NGR_OWN_PEYA = [
-  { name: "Bembos",        url: "https://www.pedidosya.com.pe/restaurantes/lima/bembos-ovalo-gutierrez-menu", id: 'peya-bembos', platform: 'PedidosYa' },
+  { name: "Bembos",        url: "https://www.pedidosya.com.pe/restaurantes/lima/bembos-ovalo-gutierrez-699066be-2b00-4117-b698-60200ae31ecc-menu", id: 'peya-bembos', platform: 'PedidosYa' },
   { name: "Popeyes",       url: "https://www.pedidosya.com.pe/restaurantes/lima/popeyes-larco-menu", id: 'peya-popeyes', platform: 'PedidosYa' },
   { name: "Dunkin'",       url: "https://www.pedidosya.com.pe/restaurantes/lima/dunkin-donuts--plaza-vea-dasso-94678500-43d1-416f-952b-3324db81f862-menu", id: 'peya-dunkin', platform: 'PedidosYa' },
   { name: "Papa Johns",    url: "https://www.pedidosya.com.pe/restaurantes/lima/papa-johns-comandante-espinar-menu", id: 'peya-papajohns', platform: 'PedidosYa' },
   { name: "Don Belisario", url: "https://www.pedidosya.com.pe/restaurantes/lima/don-belisario-larco-93da4fb3-c49b-4607-ae33-4733f1343acc-menu", id: 'peya-donbelisario', platform: 'PedidosYa' },
-  { name: "Chinawok",      url: "https://www.pedidosya.com.pe/restaurantes/lima/chinawok-patio-larco-menu", id: 'peya-chinawok', platform: 'PedidosYa' },
+  { name: "Chinawok",      url: "https://www.pedidosya.com.pe/restaurantes/lima/chinawok-patio-larco-8bd1f1e5-a9c1-451f-a635-97b27066f0f8-menu", id: 'peya-chinawok', platform: 'PedidosYa' },
 ];
 
 const NGR_GROUPS_PEYA = [
@@ -425,7 +425,7 @@ export default function App() {
                 </div>
                 <div>
                   <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Local / Sucursal</p>
-                  <p className="text-sm font-bold text-slate-900 truncate max-w-[200px]" title={currentCompData?.local}>{currentCompData?.local || 'Sin datos'}</p>
+                  <p className="text-sm font-bold text-slate-900 break-words" title={currentCompData?.local}>{currentCompData?.local || 'Sin datos'}</p>
                 </div>
               </div>
 
@@ -486,12 +486,12 @@ export default function App() {
             </div>
 
             <div className="flex-1 overflow-auto max-h-[500px] border-t border-slate-50 pr-2 custom-scrollbar">
-              <table className="w-full text-left border-separate border-spacing-0">
+              <table className="w-full text-left border-separate border-spacing-0 table-fixed">
                 <thead className="sticky top-0 bg-white z-10">
                   <tr>
-                    <th className="py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100">Producto</th>
-                    <th className="py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100">Categoría</th>
-                    <th className="py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 text-right">Precio Actual</th>
+                    <th className="w-[46%] py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100">Producto</th>
+                    <th className="w-[34%] py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100">Categoría</th>
+                    <th className="w-[20%] py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 text-right">Precio Actual</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -506,19 +506,22 @@ export default function App() {
                     </td></tr>
                   ) : filteredProducts.map((p, idx) => (
                     <tr key={idx} className="hover:bg-slate-50/50 transition-colors group">
-                      <td className="py-4 border-b border-slate-50">
+                      <td className="py-4 pr-3 border-b border-slate-50 align-top">
                         <p className="font-bold text-slate-900 group-hover:text-slate-700 transition-colors">{p.name}</p>
-                        <p className="text-[11px] text-slate-400 mt-0.5 line-clamp-1 truncate max-w-sm" title={p.description}>
+                        <p className="text-[11px] text-slate-400 mt-0.5 line-clamp-2" title={p.description}>
                           {p.description || 'N/A'}
                         </p>
                       </td>
-                      <td className="py-4 border-b border-slate-50">
-                        <span className="px-2 py-0.5 bg-slate-100 text-slate-500 rounded text-[9px] font-black uppercase tracking-wider">
+                      <td className="py-4 pr-3 border-b border-slate-50 align-top">
+                        <span
+                          className="inline-block max-w-full px-2 py-0.5 bg-slate-100 text-slate-500 rounded text-[9px] font-black uppercase tracking-wider truncate"
+                          title={p.category}
+                        >
                           {p.category}
                         </span>
                       </td>
-                      <td className="py-4 border-b border-slate-50 text-right">
-                        <p className="font-black text-slate-900 text-base">S/ {p.price.toFixed(2)}</p>
+                      <td className="py-4 border-b border-slate-50 text-right align-top whitespace-nowrap">
+                        <p className="font-black text-slate-900 text-base">S/&nbsp;{p.price.toFixed(2)}</p>
                       </td>
                     </tr>
                   ))}

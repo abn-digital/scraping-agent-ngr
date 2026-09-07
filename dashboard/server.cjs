@@ -619,6 +619,25 @@ app.get('/api/download/:file', (req, res) => {
 
 
 // ──────────────────────────────────────────────
+// Internal: re-pull products_* from GCS (used after PedidosYa cron)
+// ──────────────────────────────────────────────
+app.post('/api/internal/resync', async (req, res) => {
+    const secret = String(process.env.CRON_SECRET || '').trim();
+    const header = String(req.get('X-Cron-Secret') || '').trim();
+    if (!secret || header !== secret) {
+        return res.status(401).json({ error: 'unauthorized' });
+    }
+    try {
+        console.log('[resync] syncFromGCS requested', req.body?.source || '');
+        await syncFromGCS();
+        res.json({ ok: true, syncedAt: new Date().toISOString() });
+    } catch (err) {
+        console.error('[resync] failed:', err.message);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// ──────────────────────────────────────────────
 // SPA fallback – serve index.html for all other routes
 // ──────────────────────────────────────────────
 if (fs.existsSync(DIST_DIR)) {

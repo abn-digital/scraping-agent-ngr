@@ -1,0 +1,546 @@
+[
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Promociones",
+    "name": "Menú express wantán",
+    "description": "Aeropuerto o chaufa de pollo + 3 Wantanes + Bebida 300ml",
+    "price": 34.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Promociones",
+    "name": "2 Sopas a la Carta",
+    "description": "Escoge tus sopas favoritas: fuchifu, wantan de pollo o especial.",
+    "price": 37.8,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Promociones",
+    "name": "Combo Clásico Express",
+    "description": "Chaufa de pollo o aeropuerto + sopa wantan a la carta o 6 wantanes.",
+    "price": 27.42,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Promociones",
+    "name": "Combinado Express",
+    "description": "Combinado a Elección + 3 Wantanes + Bebida 300ml",
+    "price": 25.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Promociones",
+    "name": "Chaufa + montado + 2 gaseosas 300ml",
+    "description": "Chaufa + montado + 2 gaseosas 300ml",
+    "price": 50.75,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Promociones",
+    "name": "Combo aeropuerto express",
+    "description": "Disfruta de nuestro aeropuerto + 3 spring roll + 1 bebida 300ml (a elección)",
+    "price": 27.42,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Promociones",
+    "name": "2 Combinados",
+    "description": "2 Combinados",
+    "price": 47.26,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Combos Express",
+    "name": "Combo Express 1",
+    "description": "6 wantanes + 1 Chaufa de Pollo Familiar + 1 Plato de Pollo a elección + 2 bebidas a elección.",
+    "price": 49.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Combos Express",
+    "name": "Combo Express 2",
+    "description": "6 wantanes + chaufa de pollo familiar + 2 platos a elección + 2 bebidas",
+    "price": 64.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Combos Express",
+    "name": "Combo Express 3",
+    "description": "2 Sopas wantán, Chaufa de pollo familiar, Tallarin de Pollo + (1 pollo a elección) + 2 gaseosas personales",
+    "price": 69.89,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Combos Express",
+    "name": "Combo Express 4",
+    "description": "12 Wantanes, 2 Chaufa de pollo Familiar + (2 pollos a elección ) + Gaseosa 1.5lt",
+    "price": 94.89,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Combos Express",
+    "name": "MaxiCombo Express",
+    "description": "12 Wantanes, 2 Chaufas de pollo familiar + 3 platos a elección + Gaseosa 1.5lt",
+    "price": 105,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Combinados",
+    "name": "Combinado Chijaukay",
+    "description": "Arroz chaufa de pollo con pollo chijaukay y tiras de wantán frito.",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Combinados",
+    "name": "Combinado Tipakay",
+    "description": "Arroz chaufa de pollo con pollo tipakay y tiras de wantán frito .",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Combinados",
+    "name": "Combinado de pollo con verduras",
+    "description": "Arroz chaufa de pollo con verduras y tiras de wantán frito.",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Combinados",
+    "name": "Combinado Latkay",
+    "description": "Arroz chaufa de pollo, pollo picante  y tiras de wantán frito.",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Combinados",
+    "name": "Combinado de pollo con piña",
+    "description": "Arroz chaufa de pollo, pollo con piña y tiras de wantán frito.",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Combinados",
+    "name": "Combinado Clásico",
+    "description": "Arroz chaufa de pollo y tallarín salteado de pollo con verduras.",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Montados",
+    "name": "Montado de lomo saltado",
+    "description": "Arroz chaufa de pollo, lomo saltado, plátano maduro frito, huevo frito montado.",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Montados",
+    "name": "Montado parrillero",
+    "description": "Arroz chaufa de hot dog ahumado, chorizo parrillero, plátano maduro frito, huevo frito montado.",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Montados",
+    "name": "Montado pollo saltado",
+    "description": "Arroz chaufa de pollo, pollo saltado, plátano maduro frito, huevo frito montado.",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Montados",
+    "name": "Montado Charapa",
+    "description": "Arroz chaufa con cecina y chorizo selvático, plátano maduro frito, huevo frito montado.",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Sopas",
+    "name": "Sopa Especial",
+    "description": "Caldo de pollo con laminas de pechuga de pollo, cerdo, langostino, huevo de codorniz, col china, wantán relleno de cerdo y fideo chino.",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Sopas",
+    "name": "Sopa Wantan de Pollo",
+    "description": "Caldo de pollo con laminas de pechuga de pollo, col china, wantan relleno de cerdo y fideo chino.",
+    "price": 16.89,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Sopas",
+    "name": "Sopa Fuchifu",
+    "description": "Fondo de pollo con pequeños cortes de pierna de pollo, col china y holantao acompañado de fideo de arroz.",
+    "price": 16.89,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Tallarines",
+    "name": "Tallarin Especial",
+    "description": "Fideo chino salteado con trozos de pierna de pollo, cerdo, langostino y verduras orientales en salsa ostión.",
+    "price": 26.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Tallarines",
+    "name": "Tallarin pollo en trozos",
+    "description": "Fideo chino salteado con trozos de pollo empanizado y verduras orientales en salsa ostión.",
+    "price": 24.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Entradas",
+    "name": "Wantan Frito",
+    "description": "Masa wantán frita rellena de chancho.",
+    "price": 9.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Entradas",
+    "name": "Siumai",
+    "description": "Clásico bocadito chino al vapor relleno de carne de cerdo con forma de saco.",
+    "price": 8.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Entradas",
+    "name": "Spring Rolls",
+    "description": "Pasta rellena de verduras en salsa oriental, acompañado de salsa de limón y canela china, 3 unidades.",
+    "price": 8.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Entradas",
+    "name": "Piernitas al limón",
+    "description": "Carne de pollo y cerdo, finamente molidas, mezcladas y empanizadas acompañadas de salsa de limón y canela china. 3 unidades.",
+    "price": 9.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Entradas",
+    "name": "Chicharron De Pollo",
+    "description": "Trozos de pura pechuga de pollo fritas, 3 unidades.",
+    "price": 8.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Entradas",
+    "name": "Minpao",
+    "description": "Bolillo de masa de trigo relleno de cerdo asado.",
+    "price": 7.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Entradas",
+    "name": "Alitas De Ostión",
+    "description": "Alitas de pollo fritas, bañadas en salsa de ostión y rociadas con semillas de ajonjoli blanco tostado.",
+    "price": 16.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Entradas",
+    "name": "Alitas De Tamarindo",
+    "description": "Alitas de pollo fritas, bañadas en salsa de tamarindo y rociadas con semillas de ajonjoli blanco tostado.",
+    "price": 16.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Entradas",
+    "name": "Piqueo Express 1",
+    "description": "Piqueo express 1 (para 2): 4 siumai + 1 minpau + 3 spring rolls",
+    "price": 32.72,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Entradas",
+    "name": "Piqueo Express 2",
+    "description": "Piqueo express 2 (para 4): 8 siumai + 4 chicharrones de pollo + 3 spring roll",
+    "price": 42.72,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Entradas",
+    "name": "Wantan De Langostino",
+    "description": "Masa wantán frita rellena de langostino.",
+    "price": 10.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Arroces",
+    "name": "Chaufa De Pollo",
+    "description": "Arroz frito con pollo, huevo y cebolla china.",
+    "price": 16.89,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Arroces",
+    "name": "Chaufa De Carne",
+    "description": "Arroz frito con trozos de carne, huevo, pimentón, holantao y cebolla china.",
+    "price": 17.89,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Arroces",
+    "name": "Chaufa Especial",
+    "description": "Arroz frito con pequeños trozos de pollo, cerdo, langostino, huevo y cebolla china.",
+    "price": 17.89,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Arroces",
+    "name": "Chaufa De Chancho",
+    "description": "Arroz frito con pequeños trozos de cerdo huevo y cebolla china.",
+    "price": 17.89,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Arroces",
+    "name": "Chaufa De Langostinos",
+    "description": "Arroz frito con langostino, huevo y cebolla china.",
+    "price": 18.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Arroces",
+    "name": "Chaufa Mixto",
+    "description": "Arroz chaufa con trozos de pollo y chancho",
+    "price": 17.89,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Arroces",
+    "name": "Aeropuerto",
+    "description": "Arroz frito con trozos de pechuga de pollo, huevo, fideo tallarín, frejol chino, huevo y cebolla china.",
+    "price": 17.89,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Pollos",
+    "name": "Pollo con verduras",
+    "description": "Pierna de pollo en trozos acompañado de verduras salteadas en salsa ostión y tausi de sabor salado.",
+    "price": 24.89,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Pollos",
+    "name": "Pollo Tipakay",
+    "description": "Trozos de pierna de pollo crujientes y bañadas en salsa tamarindo dulce.",
+    "price": 24.89,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Pollos",
+    "name": "Pollo Limonkay",
+    "description": "Abundante trozos de pierna de pollo crujientes, bañadas en salsa de limón dulce.",
+    "price": 24.89,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Pollos",
+    "name": "Pollo con Piña",
+    "description": "Pierna de pollo en trozos acompañado de verduras salteadas con piña y salsa tamarindo dulce",
+    "price": 24.89,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Pollos",
+    "name": "Pollo Chikaukay",
+    "description": "Trozos de pierna de pollo crujientes y bañadas en salsa ostión salada.",
+    "price": 24.89,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Carnes",
+    "name": "Chancho con Tamarindo",
+    "description": "Chancho salteado con verduras y salsa tamarindo.",
+    "price": 25.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Carnes",
+    "name": "Chancho con Verduras",
+    "description": "Chancho en láminas salteadas con verduras orientales.",
+    "price": 25.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Carnes",
+    "name": "Chancho al Ajo",
+    "description": "Chancho salteado salteado al ajo con verduras.",
+    "price": 25.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Carnes",
+    "name": "Carne con Verduras",
+    "description": "Laminas de bola de lomo salteadas con una variedad de verduras orientales de sabor salado.",
+    "price": 24.89,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Carnes",
+    "name": "Carne al estilo mongol",
+    "description": "Laminas de bola de lomo salteadas con variedad de verduras orientales en salsa barbecue.",
+    "price": 19.53,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Platos Especiales",
+    "name": "Kam Lu Wantan",
+    "description": "Plato dulce con variedad de carnes, pollo, chancho y pato, con verduras salteadas con piña y huevo de codorniz acompañado de wantan frito.",
+    "price": 32.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Platos Especiales",
+    "name": "Taypa",
+    "description": "Plato salado con variedad de carnes, pollo, chancho, carne y langostino, acompañado de verduras salteadas y huevo de codorniz.",
+    "price": 32.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Platos Especiales",
+    "name": "Langostino Dinamita",
+    "description": "Langostinos salteados con ajo y ají picante.",
+    "price": 32.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Platos Especiales",
+    "name": "Langostino con Verduras",
+    "description": "Langostinos salteados con verduras orientales.",
+    "price": 32.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Bebidas",
+    "name": "Agua San Luis sin gas",
+    "description": "Agua",
+    "price": 4.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Bebidas",
+    "name": "Agua San Luis con gas",
+    "description": "Agua",
+    "price": 4.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Bebidas",
+    "name": "Gaseosa Fanta",
+    "description": "",
+    "price": 4.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Bebidas",
+    "name": "Gaseosa Sprite",
+    "description": "",
+    "price": 4.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Bebidas",
+    "name": "Gaseosa Inca Kola Zero",
+    "description": "",
+    "price": 4.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Bebidas",
+    "name": "Gaseosa Inca Kola",
+    "description": "",
+    "price": 4.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Bebidas",
+    "name": "Gaseosa Coca-Cola zero",
+    "description": "",
+    "price": 4.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Bebidas",
+    "name": "Gaseosa Coca-Cola",
+    "description": "",
+    "price": 4.9,
+    "inStock": true
+  },
+  {
+    "restaurant": "Chifa Express - Comandante Espinar",
+    "category": "Bebidas",
+    "name": "Inca Kola 1.5 LT",
+    "description": "Gaseosa",
+    "price": 10.9,
+    "inStock": true
+  }
+]

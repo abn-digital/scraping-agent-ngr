@@ -1,46 +1,46 @@
 [
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Días Bomba",
     "name": "2 Big Mac y 2 papas",
-    "description": "",
+    "description": "Dos hamburguesas Big Mac y 2 papas regulares. Válido hoy. Stock: 3,000 unds. Imagenes referenciales.",
     "price": 51.6,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Antojos Mc",
     "name": "2do McFlurry Oreo a S/1",
-    "description": "",
+    "description": "2 helados McFlurry Oreo base vainilla y topping chocolate. Válido solo de 2 p.m. a 6 p.m. de lunes a viernes del mes. Imágenes referenciales. Stock: 3,000 unds. Válido durante el mes.",
     "price": 9.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Antojos Mc",
     "name": "2 Pie de manzana",
-    "description": "",
+    "description": "2 pie de manzana. Válido solo de 2 p.m. a 6 p.m. de lunes a viernes del mes. Imágenes referenciales. Stock: 3,000 unds. Válido durante el mes.",
     "price": 9.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombo del Día",
     "name": "McCombo grande Clásica",
-    "description": "",
+    "description": "Hamburguesa doble carne de res, 2 tocinos en tiras, doble queso cheddar, pepinillos, mostaza, ketchup, cebolla fresca en pan con ajonjolí; con 1 papas grandes y 1 gaseosa grande 21 oz, a elección. Imagen referencial.",
     "price": 18.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombo del Día",
     "name": "McCombo mediano Clásica",
-    "description": "",
+    "description": "Hamburguesa de carne de res, doble queso cheddar, pepinillos, mostaza, ketchup, cebolla fresca en pan con ajonjolí; con 1 papas medianas y 1 gaseosa mediana 16 oz, a elección. Imagen referencial.",
     "price": 16.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombo del Día",
     "name": "McCombo regular Clásica",
     "description": "",
@@ -48,1306 +48,1306 @@
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombo del Día",
     "name": "Clásica",
-    "description": "",
+    "description": "Contiene: 2 carnes 10:1, lechuga, tomate, papas al hilo y salsa sabor a palta en pan con ajonjolí. Imagen referencial.",
     "price": 11.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Combo PeYa PLUS",
     "name": "Combo Plus Big Power",
-    "description": "",
+    "description": "1 hamburguesa Big Mac, 1 papa mediana, 1 gaseosa regular y 1 McFlurry mini M&M, helado de base de vainilla y topping manjar. Válido solo hoy. Stock: 2,000 unds. Los toppings extras se colocan en la base del producto. La gaseosa incluye hielo. Imagenes referenciales. Ver detalle producto en \"Sándwiches\"",
     "price": 43.8,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Combo PeYa PLUS",
     "name": "Combo Plus M&M y Nuggets",
-    "description": "",
+    "description": "10 McNuggets, 1 papa mediana, 1 gaseosa regular, 1 McFlurry mini M&M, helado de base de vainilla y topping manjar. Válido solo hoy. Stock: 2,000 unds. Los toppings extras se colocan en la base del producto. La gaseosa incluye hielo. Imagenes referenciales. Ver detalle producto en \"Sándwiches\"",
     "price": 43.8,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Combo PeYa",
     "name": "Combo PeYa Doble Burger",
-    "description": "",
+    "description": "1 Doble Hamburguesa, 1 papa regular, 1 gaseosa regular, 1 sundae de helado vainilla con topping sabor a elección entre: fresa, chocolate o manjar.  Válida hoy. Stock: 2,000 unds. La gaseosa incluye hielo. Imagenes referenciales. Ver detalle producto en \"Sándwiches\"",
     "price": 19.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Combo PeYa",
     "name": "Combo PeYa Nuggets Pack",
-    "description": "",
+    "description": "6 McNuggets, 01 papa regular, 01 gaseosa regular de 12 oz y un helado McFlurry Oreo base vainilla y topping chocolate. Válida solo hoy. Stock: 2,000 unds total país. Ver detalle de producto en \"Hamburguesas\". Imágenes referenciales.",
     "price": 19.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Combos Compartir - Weekdays",
     "name": "BigMac + McPollo + papas",
-    "description": "",
+    "description": "Una hamburguesa BigMac, un sandwich McPollo y 2 papas regulares. Válido durante el mes. Stock: 3,000 unds. Imagenes referenciales.",
     "price": 18.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Combos Compartir - Weekdays",
     "name": "2 Combos Hamburguesa con queso",
-    "description": "",
+    "description": "2 sándwiches \"Hamburguesa con queso\", 2 papas regulares, 2 gaseosas regulares con hielo. Imágenes referenciales. Stock: 3,000 unds. Válido hoy.",
     "price": 25.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Combos Compartir - Weekdays",
     "name": "Dupla Doble Hamburguesa",
-    "description": "",
+    "description": "2 sándwiches \"Doble Hamburguesa con queso\" y 2 papas regulares.  Imágenes referenciales. Stock: 3,000 unds. Válido hoy.",
     "price": 25.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Combos Compartir - Weekdays",
     "name": "2 McBacon, 2 Doble Hamburguesa y 4 papas",
-    "description": "",
+    "description": "2 Hamburguesas McBacon, 2 Doble Hamburguesa con queso y 4 papas regulares.",
     "price": 38.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Combos Compartir - Weekdays",
     "name": "Combo Bigmac y combo Doble Hamburguesa",
-    "description": "",
+    "description": "1 Hamburguesa BigMac, 1 Doble Hamburguesa con queso, 2 papas regulares y 2 gaseosas medianas. Válido durante el mes o hasta agotar stock de 3,000 unds. Imagenes referenciales.",
     "price": 29.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Combos Compartir - Weekdays",
     "name": "McLovers Duo",
-    "description": "",
+    "description": "Una hamburguesa BigMac, una Doble Hamburguesa con Queso y 2 papas regulares. Stock: 3,000 unds. Válido del 12 al 14 de febrero del 2025. Imagenes referenciales.",
     "price": 21.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Combos Compartir - Weekdays",
     "name": "2 Hamburguesas con queso y 2 papas",
-    "description": "",
+    "description": "2 Hamburguesas con queso y 2 papas regulares. Válido durante el mes o hasta agotar stock de 3,000 unds. Imagenes referenciales.",
     "price": 18.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Combos Compartir - Weekdays",
     "name": "2 Big Mac y 2 papas",
-    "description": "",
+    "description": "Dos hamburguesas Big Mac y 2 papas regulares. Válido hoy. Stock: 3,000 unds. Imagenes referenciales.",
     "price": 28.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Combos Compartir - Weekdays",
     "name": "Cuarto de libra, 10 McNuggets y 2 papas",
-    "description": "",
+    "description": "01 hamburguesa Cuarto de Libra con queso, 10 McNuggets de pollo y 02 papas regulares. Válido solo hoy. Sujeto a stock de local. Imágenes referenciales.",
     "price": 29.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Combos Compartir - Weekdays",
     "name": "2 Big Mac, 2 papas y 2 sundaes",
-    "description": "",
+    "description": "2 sándwiches BigMac, 2 papas regulares y 2 sundaes de helado vainilla con topping sabor a elección entre: fresa, chocolate o manjar.  Válida hoy. Stock: 2,000 unds. Imagenes referenciales.",
     "price": 34.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Combos Compartir - Weekdays",
     "name": "Box Chicken McNuggets",
-    "description": "",
+    "description": "04 piezas de pollo crispy, 06 McNuggets de pollo y 02 papas regulares. Válido solo hoy. Sujeto a stock de local. Imágenes referenciales.",
     "price": 29.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "2 McFlurry Tres Leches Vainilla",
-    "description": "",
+    "description": "2 McFlurry Tres Leches base vainilla. Cada McFlurry es de: helado de vainilla, keke de vainilla triturado, cobertura líquida sabor a leche condensada, cobertura líquida sabor a manjar y canela en polvo.Tamaño personal. Válido hoy. Sujeto a stock: 5mil uds país. Imagen referencial.",
     "price": 19,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "McCombo Big Mac y McFlurry Tres Leches",
-    "description": "",
+    "description": "01 McCombo mediano Big Mac y 01 McFlurry Tres Leches base vainilla. McFlurry es de: helado de vainilla, keke de vainilla triturado, cobertura líquida sabor a leche condensada, cobertura líquida sabor a manjar y canela en polvo.Tamaño personal. Válido hoy. Sujeto a stock: 5mil uds país. Las gaseosas vienen con hielo. Imagen referencial.",
     "price": 25.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "Dupla Cuarto",
-    "description": "",
+    "description": "2 Hamburguesas Cuarto de libra y 2 papas medianas.  Imágenes referenciales. Stock: 3,000 unds. Válido durante el mes.",
     "price": 31.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "10 McNuggets con papas",
-    "description": "",
+    "description": "10 Chicken McNuggets con 1 papa mediana. Imágenes referenciales. Stock: 3,000 unds. Válido durante el mes.",
     "price": 18.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "2 piezas de pollo con papas",
-    "description": "",
+    "description": "2 piezas de pollo crujiente con 1 papa regular. Piezas de pollo aleatorias. Imágenes referenciales. Stock: 3,000 unds. Válido durante el mes.",
     "price": 15.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "Duo Shakes Oreo y Fresa",
-    "description": "",
+    "description": "01 shake de sabor Oreo y 01 shake sabor de Fresa. Detalle en sección \"Postres\". Imagen referencial.",
     "price": 24.8,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "Super combo BigMac",
-    "description": "",
+    "description": "2 hamburguesas BigMac, 2 papas regulares y 2 gaseosas medianas. Imágenes referenciales. Stock: 3,000 unds. Válido durante el mes.",
     "price": 36.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "Banquete Mix 6 piezas",
-    "description": "",
+    "description": "6 piezas de pollo crujiente y 3 papas regulares. Piezas de pollo son aleatorias. Válido durante el mes. Stock: 3,000 unds. Imágenes referenciales.",
     "price": 58.5,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "4 McCombos y 4 Juguetes Sorpresa",
-    "description": "",
+    "description": "4 hamburguesas a elección entre Big Mac o Cuarto de Libra, 4 papas medianas, 4 gaseosas medianas de 16 oz y 4 juguetes sorpresas de colecciones pasadas. Los juguetes son aleatorios y sujeto a stock de local. Los juguetes no son de licencia actual y no incluyen los productos de la Cajita Feliz. Las gaseosas incluyen hielo. Válida hoy. Stock: 2,000 unds total país. Imágenes referenciales.",
     "price": 79.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "3 McCombos y 3 Juguetes Sorpresa",
-    "description": "",
+    "description": "3 hamburguesas a elección entre Big Mac o Cuarto de Libra, 3 papas medianas, 3 gaseosas medianas de 16 oz y 3 juguetes sorpresas de colecciones pasadas. Los juguetes son aleatorios y sujeto a stock de local. Los juguetes no son de licencia actual y no incluyen los productos de la Cajita Feliz. Las gaseosas incluyen hielo. Válida hoy. Stock: 2,000 unds total país. Imágenes referenciales.",
     "price": 59.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "2 McCombos y 2 Juguetes Sorpresa",
-    "description": "",
+    "description": "2 hamburguesas a elección entre Big Mac o Cuarto de Libra, 2 papas medianas, 2 gaseosas medianas de 16 oz y 2 juguetes sorpresas de colecciones pasadas. Los juguetes son aleatorios y sujeto a stock de local. Los juguetes no son de licencia actual y no incluyen los productos de la Cajita Feliz. Las gaseosas incluyen hielo. Válida hoy. Stock: 2,000 unds total país. Imágenes referenciales.",
     "price": 42.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "Banquete 6 piezas y 3 Juguetes Sorpresa",
-    "description": "",
+    "description": "06 piezas de pollo crujiente, 3 papas regulares, 3 gaseosas regulares de 12 oz y 3 juguetes sorpresas de colecciones pasadas. Los juguetes son aleatorios y sujeto a stock de local. Los juguetes no son de licencia actual y no incluyen los productos de la Cajita Feliz. Las gaseosas incluyen hielo. Piezas de pollo aleatorias. Válida hoy. Stock: 2,000 unds total país. Imágenes referenciales.",
     "price": 59.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "Banquete 9 piezas y 4 Juguetes Sorpresa",
-    "description": "",
+    "description": "09 piezas de pollo crujiente, 4 papas regulares, 4 gaseosas regulares de 12 oz y 4 juguetes sorpresas de colecciones pasadas. Los juguetes son aleatorios y sujeto a stock de local. Los juguetes no son de licencia actual y no incluyen los productos de la Cajita Feliz. Las gaseosas incluyen hielo. Piezas de pollo aleatorias. Válida hoy. Stock: 2,000 unds total país. Imágenes referenciales.",
     "price": 78.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "Banquete con 2 Cajitas Feliz",
-    "description": "",
+    "description": "6 piezas de pollo crujiente, 6 chicken McNuggets, 3 papas regulares y 2 Cajitas Feliz a elección cada una entre: hamburguesa, 4 nuggets, 1 pieza de pollo o McFiesta Jr. Sujeto a stock disponible en tienda. Las piezas de pollo y los juguetes son aleatorios y sujetos a stock. Válido durante el mes. Ver composición de productos en sección \"Cajita Feliz\".",
     "price": 79.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "Banquete x 6 piezas con 1 Cajita Feliz",
-    "description": "",
+    "description": "6 piezas de pollo crujiente, 6 chicken McNuggets, 3 papas regulares y 1 Cajita Feliz a elección entre: hamburguesa, 4 nuggets, 1 pieza de pollo o McFiesta Jr. Sujeto a stock disponible en tienda. Las piezas de pollo y los juguetes son aleatorios y sujetos a stock. Válido durante el mes. Ver composición de productos en sección \"Cajita Feliz\".",
     "price": 65.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "Banquete Power x6 pzas con gaseosas",
-    "description": "",
+    "description": "6 piezas de pollo crujiente, 3 papas regulares, 6 chicken McNuggets y 3 gaseosas regulares. Las gaseosas vienen con hielo. Piezas de pollo aleatorias. Sujeto a stock en local. Imágenes referenciales.",
     "price": 49.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "Banquete Power x6 pzas",
-    "description": "",
+    "description": "6 piezas de pollo crujiente, 3 papas regulares, 6 chicken McNuggets. Piezas de pollo aleatorias. Sujeto a stock en local. Imágenes referenciales.",
     "price": 39.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "McLover Doble para 2",
-    "description": "",
+    "description": "1 Hamburguesa doble cuarto de libra, 1  hamburguesa cuarto de libra y 2 papas medianas.  Imágenes referenciales. Stock: 3,000 unds. Válido durante el mes.",
     "price": 60.6,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "Banquete Mix 8 piezas",
-    "description": "",
+    "description": "8 piezas de pollo crujiente, 6 Chicken McNuggets y 4 papas regulares. Piezas de pollo son aleatorias. Válido durante el mes. Stock: 3,000 unds. Imágenes referenciales.",
     "price": 45.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "McBacon, papas y sundae",
-    "description": "",
+    "description": "1 hamburguesa McBacon, 1 papa mediana y 1 helado sundae, sabor a elección, base vainilla. Imágenes referenciales. Stock: 3,000 unds. Válido durante el mes.",
     "price": 20.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "McPollo con papas",
-    "description": "",
+    "description": "1 hamburguesa McPollo con 1 papa mediana. Imágenes referenciales. Stock: 3,000 unds. Válido durante el mes.",
     "price": 15.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "3 Pie de manzana",
-    "description": "",
+    "description": "3 pie rellenos de manzana. Stock: 3,000 unds. Detalle de producto en sección \"Postres\". Imagenes referenciales.",
     "price": 11.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "2 McFlurry Biscolata chocolate",
-    "description": "",
+    "description": "2 Helados McFlurry Biscolata chocolate. Stock: 3 mil uds. Válido todo el mes. Tamaño personal. Imagen referencial.",
     "price": 14.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "McFlurry Tres Leches chocolate y papas",
-    "description": "",
+    "description": "01 papas fritas medianas y 01 helado de chocolate, keke de vainilla triturado, cobertura líquida sabor a leche condensada, cobertura líquida sabor a chocolate y canela en polvo.Tamaño personal. Imagen referencial.",
     "price": 17.4,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Promos Top",
     "name": "McFlurry Tres Leches Vainilla y papas",
-    "description": "",
+    "description": "ya está subida la actualización de QA con las modificaciones que pediste",
     "price": 17.4,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande Bacon Cheddar McMelt Doble",
-    "description": "",
+    "description": "Hamburguesa Grand Bacon Cheddar McMelt de dos carnes, 1 gaseosa grande 21 oz sabor a elección y 1 papas grandes. Imagen referencial.",
     "price": 32.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande Bacon Cheddar McMelt 1 Carne",
-    "description": "",
+    "description": "Hamburguesa Grand Bacon Cheddar McMelt de una carne, 1 gaseosa grande 21 oz sabor a elección y 1 papas grandes. Imagen referencial.",
     "price": 29.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande Bacon Cheddar McMelt Triple",
-    "description": "",
+    "description": "Hamburguesa Grand Bacon Cheddar McMelt de tres carnes, 1 gaseosa grande 21 oz sabor a elección y 1 papas grandes. Imagen referencial.",
     "price": 35.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande Argentina doble",
-    "description": "",
+    "description": "01 hamburguesa \"Argentina\", 01 papa grande y 01 gaseosa grande de 21oz. Sujeto a stock de local. Las gaseosas incluyen hielo. Detalle del sándwich en \"Hamburguesas\". Imágenes referenciales.",
     "price": 32.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande USA doble",
-    "description": "",
+    "description": "01 hamburguesa \"Usa\", 01 papa grande y 01 gaseosa grande de 21oz. Sujeto a stock de local. Las gaseosas incluyen hielo. Detalle del sándwich en \"Hamburguesas\". Imágenes referenciales.",
     "price": 32.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande Argentina simple",
-    "description": "",
+    "description": "01 hamburguesa \"Argentina\" de 1 carne, 01 papa grande , 01 gaseosa grande de 21oz. Sujeto a stock de local. Las gaseosas incluyen hielo. Detalle del sándwich en \"Hamburguesas\". Imágenes referenciales.",
     "price": 29.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande USA 1 simple",
-    "description": "",
+    "description": "01 hamburguesa \"Usa\" de 1 carne, 01 papa grande , 01 gaseosa grande de 21oz. Sujeto a stock de local. Las gaseosas incluyen hielo. Detalle del sándwich en \"Hamburguesas\". Imágenes referenciales.",
     "price": 29.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano Argentina doble",
-    "description": "",
+    "description": "01 hamburguesa \"Argentina\", 01 papa mediana y 01 gaseosa mediana de 16oz. Sujeto a stock de local. Las gaseosas incluyen hielo. Detalle del sándwich en \"Hamburguesas\". Imágenes referenciales.",
     "price": 30.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano USA doble",
-    "description": "",
+    "description": "01 hamburguesa \"Usa\", 01 papa mediana y 01 gaseosa mediana de 16oz. Sujeto a stock de local. Las gaseosas incluyen hielo. Detalle del sándwich en \"Hamburguesas\". Imágenes referenciales.",
     "price": 30.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano Argentina simple",
-    "description": "",
+    "description": "01 hamburguesa \"Argentina\" de 1 carne, 01 papa mediana, 01 gaseosa mediana de 16oz. Sujeto a stock de local. Las gaseosas incluyen hielo. Detalle del sándwich en \"Hamburguesas\". Imágenes referenciales.",
     "price": 27.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano USA simple",
-    "description": "",
+    "description": "01 hamburguesa \"Usa\" de 1 carne, 01 papa mediana, 01 gaseosa mediana de 16oz. Sujeto a stock de local. Las gaseosas incluyen hielo. Detalle del sándwich en \"Hamburguesas\". Imágenes referenciales.",
     "price": 27.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande BBQ",
-    "description": "",
+    "description": "01 hamburguesa BBQ, 01 papa grande y 01 gaseosa grande de 21oz. Sujeto a stock de local. Las gaseosas incluyen hielo. Válido solo hoy. Imágenes referenciales.",
     "price": 23.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano BBQ",
-    "description": "",
+    "description": "01 hamburguesa BBQ, 01 papa mediana y 01 gaseosa mediana de 16oz. Sujeto a stock de local. Las gaseosas incluyen hielo. Válido solo hoy. Detalle del sándwich en \"Hamburguesas\". Imágenes referenciales.",
     "price": 21.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande Cuarto de Libra con Queso",
-    "description": "",
+    "description": "Hamburguesa de carne de res, doble queso cheddar, pepinillos, mostaza, ketchup, cebolla fresca en pan con ajonjolí; con 1 papas grandes y 1 gaseosa grande 21 oz, a elección. Imagen referencial.",
     "price": 27.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande Big Mac",
-    "description": "",
+    "description": "Hamburguesa doble carne de res, queso cheddar, pepinillos, lechuga, pan en centro, salsa Big Mac en pan con ajonjolí; con 1 papas grandes y 1 gaseosa grande de 21 oz, a elección. Imagen referencial.",
     "price": 26.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo Grande McNifica",
-    "description": "",
+    "description": "Hamburguesa de res, un queso cheddar, mayonesa, ketchup, mostaza, tomate, lechuga y cebolla fresca en pan con ajonjolí; con 1 papas grandes y 1 gaseosa grande 21 oz, a elección. Imagen referencial.",
     "price": 27.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande McBacon",
-    "description": "",
+    "description": "Hamburguesa de doble carne de res, 2 tocinos en tiras, ketchup, mostaza, cebolla, queso cheddar en pan con ajonjolí; con 1 papas grandes y 1 gaseosa grande 21 oz, a elección. Imagen referencial.",
     "price": 25.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande Doble Hamburguesa con queso",
-    "description": "",
+    "description": "Hamburguesa doble carne de res, queso cheddar, pepinillos, lechuga, pan en centro, salsa Big Mac en pan con ajonjolí; con 1 papas grandes y 1 gaseosa grande 21 oz, a elección. Imagen referencial.",
     "price": 23.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande Doble Cuarto de Libra Bacon",
-    "description": "",
+    "description": "Hamburguesa doble carne de res, 2 tocinos en tiras, doble queso cheddar, pepinillos, mostaza, ketchup, cebolla fresca en pan con ajonjolí; con 1 papas grandes y 1 gaseosa grande 21 oz, a elección. Imagen referencial.",
     "price": 33.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande Doble Cuarto de Libra con Queso",
-    "description": "",
+    "description": "Hamburguesa doble carne de res, doble queso cheddar, pepinillos, mostaza, ketchup, cebolla fresca en pan con ajonjolí; con 1 papas grandes y 1 gaseosa grande 21 oz, a elección. Imagen referencial.",
     "price": 32.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande Chicken McNuggets 10 unidades",
-    "description": "",
+    "description": "10 nuggets de pechuga de pollo con 1 papas grandes y 1 gaseosa grande 21 oz, a elección. Incluye 2 salsas barbacue de 28.3 Grs cada una. Imagen referencial.",
     "price": 26.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande Chicken McNuggets 6 unidades",
-    "description": "",
+    "description": "6 nuggets de pechuga de pollo con 1 papas grandes y 1 gaseosa grande 21 oz, a elección. Incluye 1 salsa barbacue de 28.3 Grs cada una. Imagen referencial.",
     "price": 21.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande McPollo Bacon",
-    "description": "",
+    "description": "Hamburguesa de pollo apanado, 2 tocinos en tiras, queso cheddar, mayonesa, lechuga en pan con ajonjolí; con 1 papas grandes y 1 gaseosa grande 21 oz, a elección. Imagen referencial.",
     "price": 26.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande McPollo con queso",
-    "description": "",
+    "description": "Hamburguesa de pollo apanado, queso cheddar, mayonesa, lechuga en pan con ajonjolí; con 1 papas grandes y 1 gaseosa grande 21 oz, a elección. Imagen referencial.",
     "price": 25.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande McPollo Deluxe",
-    "description": "",
+    "description": "Hamburguesa de pollo apanado, mayonesa, tomate y lechuga en pan con ajonjolí; con 1 papas grandes y 1 gaseosa grande 21 oz, a elección. Imagen referencial.",
     "price": 25.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo grande Clásica carne",
-    "description": "",
+    "description": "01 hamburguesa Clásica, 01 papa grande y 01 gaseosa grande de 21oz. Sujeto a stock de local. Las gaseosas incluyen hielo. Válido solo hoy. Detalle del sándwich en \"Hamburguesas\". Imágenes referenciales.",
     "price": 23.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano Clásica carne",
-    "description": "",
+    "description": "01 hamburguesa Clásica, 01 papa mediana y 01 gaseosa mediana de 16oz. Sujeto a stock de local. Las gaseosas incluyen hielo. Válido solo hoy. Detalle del sándwich en \"Hamburguesas\". Imágenes referenciales.",
     "price": 21.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano Bacon Cheddar McMelt Doble",
-    "description": "",
+    "description": "Hamburguesa Grand Bacon Cheddar McMelt de dos carnes, 1 gaseosa mediana 16 oz sabor a elección y 1 papas medianas. Imagen referencial.",
     "price": 30.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano Bacon Cheddar McMelt 1 carne",
-    "description": "",
+    "description": "Hamburguesa Grand Bacon Cheddar McMelt de una carne, 1 gaseosa mediana 16 oz sabor a elección y 1 papas medianas. Imagen referencial.",
     "price": 27.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano Bacon Cheddar McMelt Triple",
-    "description": "",
+    "description": "Hamburguesa Grand Bacon Cheddar McMelt de tres carnes, 1 gaseosa mediana 16 oz sabor a elección y 1 papas medianas. Imagen referencial.",
     "price": 33.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano Cuarto de Libra con Queso",
-    "description": "",
+    "description": "Hamburguesa de carne de res, doble queso cheddar, pepinillos, mostaza, ketchup, cebolla fresca en pan con ajonjolí; con 1 papas medianas y 1 gaseosa mediana 16 oz, a elección. Imagen referencial.",
     "price": 25.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano Big Mac",
-    "description": "",
+    "description": "Hamburguesa doble carne de res, queso cheddar, pepinillos, lechuga, pan en centro, salsa Big Mac en pan con ajonjolí; con 1 papas medianas y 1 gaseosa mediana de 16 oz, a elección. Imagen referencial.",
     "price": 24.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano McBacon",
-    "description": "",
+    "description": "Hamburguesa de doble carne de res, 2 tocinos en tiras, ketchup, mostaza, cebolla, queso cheddar en pan con ajonjolí; con 1 papas medianas y 1 gaseosa mediana 16 oz, a elección. Imagen referencial.",
     "price": 23.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano Doble Hamburguesa con Queso",
-    "description": "",
+    "description": "Hamburguesa doble carne de res, queso cheddar, pepinillos, lechuga, pan en centro, salsa Big Mac en pan con ajonjolí; con 1 papas medianas y 1 gaseosa mediana 16 oz, a elección. Imagen referencial.",
     "price": 21.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano Doble Cuarto de Libra con Queso",
-    "description": "",
+    "description": "Hamburguesa doble carne de res, doble queso cheddar, pepinillos, mostaza, ketchup, cebolla fresca en pan con ajonjolí; con 1 papas medianas y 1 gaseosa mediana 16 oz, a elección. Imagen referencial.",
     "price": 30.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano Doble Cuarto Libra Bacon",
-    "description": "",
+    "description": "Hamburguesa doble carne de res, 2 tocinos en tiras, doble queso cheddar, pepinillos, mostaza, ketchup, cebolla fresca en pan con ajonjolí; con 1 papas medianas y 1 gaseosa mediana 16 oz, a elección. Imagen referencial.",
     "price": 31.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano Chicken McNuggets 10 unidades",
-    "description": "",
+    "description": "10 nuggets de pechuga de pollo con 1 papas medianas y 1 gaseosa mediana 16 oz, a elección. Incluye 2 salsas barbacue de 28.3 Grs cada una. Imagen referencial.",
     "price": 24.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano Chicken McNuggets 6 unidades",
-    "description": "",
+    "description": "6 nuggets de pechuga de pollo con 1 papas medianas y 1 gaseosa mediana 16 oz, a elección. Incluye 1 salsa barbacue de 28.3 Grs cada una. Imagen referencial.",
     "price": 19.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano Doble McPollo Bacon",
-    "description": "",
+    "description": "Doble hamburguesa de pollo apanado, 2 tocinos en tiras, doble queso cheddar, mayonesa, lechuga en pan con ajonjolí; con 1 papas medianas y 1 gaseosa mediana 16 oz, a elección. Imagen referencial.",
     "price": 29.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano McPollo Bacon",
-    "description": "",
+    "description": "Hamburguesa de pollo apanado, 2 tocinos en tiras, queso cheddar, mayonesa, lechuga en pan con ajonjolí; con 1 papas medianas y 1 gaseosa mediana 16 oz, a elección. Imagen referencial.",
     "price": 24.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano McPollo con queso",
-    "description": "",
+    "description": "Hamburguesa de pollo apanado, queso cheddar, mayonesa, lechuga en pan con ajonjolí; con 1 papas medianas y 1 gaseosa mediana 16 oz, a elección. Imagen referencial.",
     "price": 23.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano  McPollo",
-    "description": "",
+    "description": "Hamburguesa de pollo apanado, mayonesa, lechuga en pan con ajonjolí; con 1 papas medianas y 1 gaseosa mediana 16 oz, a elección. Imagen referencial.",
     "price": 22.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "McCombos",
     "name": "McCombo mediano McPollo Deluxe",
-    "description": "",
+    "description": "Hamburguesa de pollo apanado, mayonesa, tomate y lechuga en pan con ajonjolí; con 1 papas medianas y 1 gaseosa mediana 16 oz, a elección. Imagen referencial.",
     "price": 23.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Cajita Feliz",
     "name": "Cajita Feliz Hamburguesa",
-    "description": "",
+    "description": "Cajita Feliz™ hamburguesa, pepinillos, mostaza, ketchup, cebolla fresca. Papa kids, 1agua, 1yogurt, 1juguete.©2026McDonald’s ©2026 Crocs, Inc. ©2026 CPII & TSG. ©2025/2026 ROBERTO GÓMEZ FERNÁNDEZ all rights reserved. Del 11.08 al 14.09.26 y/o hasta agotar stock de 189 mil unds y/o lo que ocurra primero. Juguete sujeto a stock y sin posibilidad de cambio. Yogurt refrigerado. Imagen referencial.",
     "price": 20.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Cajita Feliz",
     "name": "Cajita Feliz Chicken McNuggets 4 unidades",
-    "description": "",
+    "description": "Cajita Feliz™:4 nuggets de pechuga de pollo, 1papa kids, 1agua, 1yogurt, 1juguete.©2026McDonald’s ©2026 Crocs, Inc. ©2026 CPII & TSG. ©2025/2026 ROBERTO GÓMEZ FERNÁNDEZ all rights reserved. Del 11.08 al 14.09.26 y/o hasta agotar stock de 189 mil unds y/o lo que ocurra primero. Juguete sujeto a stock y sin posibilidad de cambio. Yogurt refrigerado. Imagen referencial.",
     "price": 20.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Cajita Feliz",
     "name": "Cajita Feliz 1 pieza de pollo",
-    "description": "",
+    "description": "Cajita Feliz™: 1 pieza de pollo crispy (enharinado y frito), 1papa kids, 1agua, 1yogurt, 1juguete.©2026McDonald’s ©2026 Crocs, Inc. ©2026 CPII & TSG. ©2025/2026 ROBERTO GÓMEZ FERNÁNDEZ all rights reserved. Del 11.08 al 14.09.26 y/o hasta agotar stock de 189 mil unds y/o lo que ocurra primero. Juguete sujeto a stock y sin posibilidad de cambio. Yogurt refrigerado. Imagen referencial.",
     "price": 20.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Cajita Feliz",
     "name": "Cajita Feliz McFiesta Jr.",
-    "description": "",
+    "description": "Cajita Feliz™ con hamburguesa de res,tomate,lechuga en pan sin ajonjolí; 1papa kids, 1agua, 1yogurt, 1juguete.©2026McDonald’s ©2026 Crocs, Inc. ©2026 CPII & TSG. ©2025/2026 ROBERTO GÓMEZ FERNÁNDEZ all rights reserved. Del 11.08 al 14.09.26 y/o hasta agotar stock de 189 mil unds y/o lo que ocurra primero. Juguete sujeto a stock y sin posibilidad de cambio. Yogurt refrigerado. Imagen referencial.",
     "price": 20.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Cajita Feliz",
     "name": "Cajita Feliz Hamburguesa con Queso",
-    "description": "",
+    "description": "Cajita Feliz™ hamburguesa,queso,pepinillos,mostaza,ketchup,cebolla fresca. Papa kids, 1agua, 1yogurt,1juguete.©2026McDonald’s ©2026 Crocs, Inc. ©2026 CPII & TSG. ©2025/2026 ROBERTO GÓMEZ FERNÁNDEZ all rights reserved. Del 11.08 al 14.09.26 y/o hasta agotar stock de 189 mil unds y/o lo que ocurra primero. Juguete sujeto a stock y sin posibilidad de cambio. Yogurt refrigerado. Imagen referencial.",
     "price": 20.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "McCombo mediano Contundente",
-    "description": "",
+    "description": "4 piezas de pollo crujiente, 2 papas medianas y 2 gaseosas medianas. Piezas de pollo aleatorias. Imágenes referenciales.",
     "price": 37.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "McCombo grande Contundente",
-    "description": "",
+    "description": "4 piezas de pollo crujiente, 2 papas grandes y 2 gaseosas grandes. Piezas de pollo aleatorias. Imágenes referenciales.",
     "price": 39.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "Banquete Full (x8 piezas)",
-    "description": "",
+    "description": "8 piezas de pollo y 4 papas regulares. Piezas de pollo aleatorias. Imagen referencial.",
     "price": 81.3,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "Banquete Extremo (x10 piezas)",
-    "description": "",
+    "description": "10 piezas de pollo y 4 papas regulares. Piezas de pollo aleatorias. Imagen referencial.",
     "price": 94.2,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "Banquete Supremo (x12 piezas)",
-    "description": "",
+    "description": "12 piezas de pollo y 4 papas regulares. Piezas de pollo aleatorias. Imagenes referenciales.",
     "price": 103.2,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "Banquete Full (x8 piezas) con gaseosas",
-    "description": "",
+    "description": "8 piezas de Pollo, 4 Papas Regulares, 4 gaseosas medianas. Piezas de pollo aleatorias. Stock de 5,000 uds. Imagen referencial.",
     "price": 115.3,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "Banquete Extremo (x10 piezas) con gaseosas",
-    "description": "",
+    "description": "10 piezas de Pollo, 4 Papas Regulares, 4 gaseosas medianas. Piezas de pollo aleatorias. Stock de 5,000 uds. Imagen referencial.",
     "price": 128.2,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "Banquete Supremo (x12 piezas) con gaseosas",
-    "description": "",
+    "description": "12 piezas de Pollo, 4 Papas Regulares, 4 gaseosas medianas. Piezas de pollo aleatorias. Stock de 5,000 uds. Imagen referencial.",
     "price": 137.2,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "Combo grande 3 piezas de pollo crispy",
-    "description": "",
+    "description": "3 piezas de pollo crispy (enharinado y frito) con 1 papas grandes y 1 gaseosa grande 21 oz, a elección. Imagen referencial.",
     "price": 28.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "McCombo grande Sorprendente",
-    "description": "",
+    "description": "3 piezas de pollo crujiente, 1 papa grande, 1 gaseosa grande de 21oz y 4 Mcnuggets. Válido todo el mes. Piezas de pollo aleatorias.Ver composición de productos en la sección \"Sándwiches y piezas de pollo\". Imagen referencial.",
     "price": 33.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "McCombo grande Imponente",
-    "description": "",
+    "description": "2 piezas de pollo crispy, 4 McNuggets, 1 papa grande, 1 gaseosa grande",
     "price": 30.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "Combo mediano 3 piezas de pollo crispy",
-    "description": "",
+    "description": "3 piezas de pollo crispy (enharinado y frito) con 1 papas medianas y 1 gaseosa mediana 16 oz, a elección. Imagen referencial.",
     "price": 26.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "McCombo mediano Sorprendente",
-    "description": "",
+    "description": "3 piezas de pollo crispy, 4 McNuggets, 1 papa grande, 1 gaseosa grande. Imágenes referenciales.",
     "price": 31.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "McCombo mediano Imponente",
-    "description": "",
+    "description": "2 piezas de pollo crispy, 4 McNuggets, 1 papa mediana y 1 gaseosa mediana. Imágenes referenciales.",
     "price": 28.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "2 Piezas de Pollo Crispy",
-    "description": "",
+    "description": "2 piezas de pollo enharinado y frito. Imagen referencial.",
     "price": 15.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "3 Piezas de pollo crispy",
-    "description": "",
+    "description": "3 piezas de pollo enharinado y frito. Imagen referencial.",
     "price": 18.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "Chicken McNuggets 10 unidades",
-    "description": "",
+    "description": "10 nuggets de pechuga de pollo. Incluye 2 salsas barbacue de 28.3 Grs cada una. Imagen referencial.",
     "price": 18.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Pollo Crujiente y McNuggets",
     "name": "Chicken McNuggets 6 unidades",
-    "description": "",
+    "description": "6 nuggets de pechuga de pollo. Incluye 1 salsa barbacue de 28.3 Grs cada una. Imagen referencial.",
     "price": 13.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "Grand Bacon Cheddar McMelt Doble",
-    "description": "",
+    "description": "Hamburguesa de dos carnes de res, salsa cheddar, dos tiras de tocino, dos quesos cheddar, cebolla grillada en pan 4.5\" con ajonjolí. Imagen referencial.",
     "price": 30.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "Grand Bacon Cheddar McMelt 1 carne",
-    "description": "",
+    "description": "Hamburguesa de una carne de res, salsa cheddar, dos tiras de tocino, un queso cheddar, cebolla grillada en pan 4.5\" con ajonjolí. Imagen referencial.",
     "price": 24.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "Grand Bacon Cheddar McMelt Triple",
-    "description": "",
+    "description": "Hamburguesa de tres carnes de res, salsa cheddar, dos tiras de tocino, tres quesos cheddar, cebolla grillada en pan 4.5\" con ajonjolí. Imagen referencial.",
     "price": 36.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "Argentina doble",
-    "description": "",
+    "description": "Doble carne de res en pan con ajonjolí, mayonesa chimichurri, cebolla, lechuga, tomate, tiras de tocino, queso. Imagen referencial.",
     "price": 30.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "USA doble",
-    "description": "",
+    "description": "Doble carne de res en pan con ajonjolí, salsa BBQ, pepinillos, tiras de tocino, queso, cebolla grillada y mayonesa. Imagen referencial.",
     "price": 30.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "Argentina simple",
-    "description": "",
+    "description": "Una carne de res en pan con ajonjolí, mayonesa chimichurri, cebolla, lechuga, tomate, tiras de tocino, queso. Imagen referencial.",
     "price": 24.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "USA simple",
-    "description": "",
+    "description": "Una carne de res en pan con ajonjolí, salsa BBQ, pepinillos, tiras de tocino, queso, cebolla grillada y mayonesa. Imagen referencial.",
     "price": 24.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "Hamburguesa BBQ",
-    "description": "",
+    "description": "Hamburguesa con doble carne de res, un queso cheddar, papitas al hilo, salsa BBQ en pan con ajonjolí. Imagen referencial.",
     "price": 16.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "Hamburguesa clásica",
-    "description": "",
+    "description": "Hamburguesa con doble carne de res, lechuga, tomate, papitas al hilo, salsa mayonesa en pan con ajonjolí. Imagen referencial.",
     "price": 16.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "Big Mac",
-    "description": "",
+    "description": "Hamburguesa de doble carne de res, queso cheddar, pepinillos, lechuga, pan en el centro, salsa Big Mac en pan con ajonjolí. Imagen referencial.",
     "price": 18.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "Cuarto de Libra con Queso",
-    "description": "",
+    "description": "Hamburguesa de carne de res, queso cheddar, pepinillos, mostaza, ketchup, cebolla fresca en pan con ajonjolí. Imagen referencial.",
     "price": 19.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "Doble Cuarto de Libra con Queso",
-    "description": "",
+    "description": "Hamburguesa de doble carne de res, doble queso cheddar, pepinillos, mostaza, ketchup, cebolla fresca en pan con ajonjolí. Imagen referencial.",
     "price": 24.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "Doble Cuarto de Libra Bacon",
-    "description": "",
+    "description": "Hamburguesa de  doble carne de res, 2 tocinos en tiras, doble queso cheddar, pepinillos, mostaza, ketchup, cebolla fresca en pan con ajonjolí. Imagen referencial.",
     "price": 25.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "Doble Hamburguesa con queso",
-    "description": "",
+    "description": "Hamburguesa de doble carne de res, doble queso cheddar, pepinillos, mostaza, ketchup, cebolla fresca en pan*. Imagen referencial. IMPORTANTE: El pan podría tener semillas de ajonjolí",
     "price": 16.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "McNifica",
-    "description": "",
+    "description": "Hamburguesa de res, un queso cheddar, mayonesa, ketchup, mostaza, tomate, lechuga y cebolla fresca en pan con ajonjolí. Imagen referencial.",
     "price": 19.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "McBacon",
-    "description": "",
+    "description": "Hamburguesa de doble carne de res, 2 tocinos en tiras, ketchup, mostaza, cebolla, queso cheddar en pan con ajonjolí. Imagen referencial.",
     "price": 17.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "McPollo Deluxe",
-    "description": "",
+    "description": "Hamburguesa de pollo apanado, mayonesa, tomate y lechuga en pan con ajonjolí. Imagen referencial.",
     "price": 17.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "McPollo",
-    "description": "",
+    "description": "Hamburguesa de pollo apanado, mayonesa, lechuga en pan con ajonjol. Imagen referencial.",
     "price": 16.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "McPollo con queso",
-    "description": "",
+    "description": "Hamburguesa de pollo apanado, queso cheddar, mayonesa, lechuga en pan con ajonjolí. Imagen referencial.",
     "price": 17.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "Doble McPollo Bacon",
-    "description": "",
+    "description": "Doble hamburguesa de pollo apanado, 2 tocinos en tiras, doble queso cheddar, mayonesa, lechuga en pan con ajonjolí. Imagen referencial.",
     "price": 24.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Hamburguesas",
     "name": "Hamburguesa con Queso",
-    "description": "",
+    "description": "Sándwich de hamburguesa de res, un queso cheddar amarillo, pepinillos, mostaza, ketchup, cebolla fresca en pan sin ajonjolí. Imagen referencial.",
     "price": 11.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Para acompañar",
     "name": "Papas grandes",
-    "description": "",
+    "description": "Papas fritas en tamaño grande.",
     "price": 8.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Para acompañar",
     "name": "Papas medianas",
-    "description": "",
+    "description": "Papas fritas en tamaño mediano.",
     "price": 7.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "McFlurry Tres Leches Manjar",
-    "description": "",
+    "description": "Helado de vainilla, keke de vainilla triturado, cobertura líquida sabor a leche condensada, cobertura líquida sabor a manjar y canela en polvo.Tamaño personal. Imagen referencial.",
     "price": 9.5,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "McFlurry Tres Leches Chocolate",
-    "description": "",
+    "description": "Helado de chocolate, keke de vainilla triturado, cobertura líquida sabor a leche condensada, cobertura líquida sabor a chocolate y canela en polvo. Tamaño personal. Imagen referencial.",
     "price": 9.5,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "McShake Oreo",
-    "description": "",
+    "description": "Helado de vainilla, trocitos de Oreo y topping de chocolate. Tamaño personal. Imagen referencial.",
     "price": 12.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "McShake Fresa",
-    "description": "",
+    "description": "Helado de vainilla y topping líquido de fresa. Tamaño personal. Imagen referencial.",
     "price": 11.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "McShake Manjar",
-    "description": "",
+    "description": "Helado de vainilla y topping líquido de manjar. Tamaño personal. Imagen referencial.",
     "price": 11.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "McShake Chocolate",
-    "description": "",
+    "description": "Helado de vainilla y topping líquido de chocolate. Tamaño personal. Imagen referencial.",
     "price": 11.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "McFlurry Biscolata Chocolate",
-    "description": "",
+    "description": "Helado de vainilla, galletas Biscolata rellenas con chocolate y crema de avellanas, con cobertura líquida de chocolate. Tamaño personal. Imagen referencial.",
     "price": 9.5,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "McFlurry Biscolata Manjar",
-    "description": "",
+    "description": "Helado de vainilla, galletas Biscolata rellenas con chocolate y crema de avellanas, con cobertura líquida de manjar. Tamaño personal. Imagen referencial.",
     "price": 9.5,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "McFlurry Oreo",
-    "description": "",
+    "description": "Helado de vainilla, trozos de galleta oreo y cobertura líquida de chocolate. tamaño personal. Los extras se agregan en el fondo del envase. Imagen referencial.",
     "price": 8.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "McFlurry Mini M&M's Manjar",
-    "description": "",
+    "description": "Helado de vainilla, chocolate mini m&m y cobertura líquida de manjar. Tamaño personal. Los extras se agregan en el fondo del envase. Imagen referencial.",
     "price": 9.5,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "McFlurry mini M&M's Chocolate",
-    "description": "",
+    "description": "Helado de vainilla, chocolate mini m&m y cobertura líquida de chocolate en delivery. Tamaño personal. Los extras se agregan en el fondo del envase. Imagen referencial.",
     "price": 9.5,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "McFlurry Sublime",
-    "description": "",
+    "description": "Helado de vainilla, trozos de chocolate sublime y cobertura líquida de chocolate. tamaño personal. Los extras se agregan en el fondo del envase. Imagen referencial.",
     "price": 9.5,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "Sundae Doble Chocolate",
-    "description": "",
+    "description": "Helado de vainilla con doble cobertura líquida de chocolate. Tamaño personal. Los extras se agregan en el fondo del envase. Imagen referencial.",
     "price": 7.5,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "Sundae Doble Fresa",
-    "description": "",
+    "description": "Helado de vainilla con doble cobertura líquida de fresa. Tamaño personal. Los extras se agregan en el fondo del envase. Imagen referencial.",
     "price": 7.5,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "Sundae Doble Manjar",
-    "description": "",
+    "description": "Helado de vainilla con doble cobertura líquida de manjar. Tamaño personal. Los extras se agregan en el fondo del envase. Imagen referencial.",
     "price": 7.5,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "Sundae Chocolate",
-    "description": "",
+    "description": "Helado de vainilla con cobertura líquida de chocolate. tamaño personal. Los extras se agregan en el fondo del envase. Imagen referencial.",
     "price": 6.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "Sundae Fresa",
-    "description": "",
+    "description": "Helado de vainilla con cobertura líquida de fresa. tamaño personal. Los extras se agregan en el fondo del envase. Imagen referencial.",
     "price": 6.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Postres",
     "name": "Sundae Manjar",
-    "description": "",
+    "description": "Helado de vainilla con cobertura líquida de manjar. tamaño personal. Los extras se agregan en el fondo del envase. Imagen referencial.",
     "price": 6.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Bebidas",
     "name": "Splash x Sprite",
-    "description": "",
+    "description": "16oz.Bebida gasificada con sprite y jaraba de frutos rojos. La bebida incluye hielo. Imagen referencial.",
     "price": 7.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Bebidas",
     "name": "Coca-Cola grande",
-    "description": "",
+    "description": "21 oz. La bebida incluye hielo. Imágenes referenciales.",
     "price": 7.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Bebidas",
     "name": "Inca Kola grande",
-    "description": "",
+    "description": "21 oz. La bebida incluye hielo. Imágenes referenciales.",
     "price": 7.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Bebidas",
     "name": "Coca-Cola Zero Azúcar grande",
-    "description": "",
+    "description": "21 oz. La bebida incluye hielo. Imágenes referenciales.",
     "price": 7.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Bebidas",
     "name": "Inca Kola Zero Azúcar grande",
-    "description": "",
+    "description": "21 oz. La bebida incluye hielo. Imágenes referenciales.",
     "price": 7.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Bebidas",
     "name": "Sprite grande",
-    "description": "",
+    "description": "21 oz. La bebida incluye hielo. Imágenes referenciales.",
     "price": 7.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Bebidas",
     "name": "Fanta grande",
-    "description": "",
+    "description": "21 oz. La bebida incluye hielo. Imágenes referenciales.",
     "price": 7.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Bebidas",
     "name": "Coca-Cola mediana",
-    "description": "",
+    "description": "16 oz. La bebida incluye hielo. Imágenes referenciales.",
     "price": 6.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Bebidas",
     "name": "Coca-Cola Zero Azúcar mediana",
-    "description": "",
+    "description": "16 oz. La bebida incluye hielo. Imágenes referenciales.",
     "price": 6.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Bebidas",
     "name": "Inca Kola mediana",
-    "description": "",
+    "description": "16 oz. La bebida incluye hielo. Imágenes referenciales.",
     "price": 6.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Bebidas",
     "name": "Inca Kola Zero Azúcar mediana",
-    "description": "",
+    "description": "16 oz. La bebida incluye hielo. Imágenes referenciales.",
     "price": 6.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Bebidas",
     "name": "Sprite mediana",
-    "description": "",
+    "description": "16 oz. La bebida incluye hielo. Imágenes referenciales.",
     "price": 6.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Bebidas",
     "name": "Fanta mediana",
-    "description": "",
+    "description": "16 oz. Imagen referencial.",
     "price": 6.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Bebidas",
     "name": "Agua San Luis",
-    "description": "",
+    "description": "500 ml.",
     "price": 5.9,
     "inStock": true
   },
   {
-    "restaurant": "Menú de McDonald´s Ovalo Gutierrez",
+    "restaurant": "McDonald's Ovalo Gutierrez",
     "category": "Bebidas",
     "name": "Café Pasado",
-    "description": "",
+    "description": "Café pasado de 12 oz. Sujeto a stock en local. Imagen referencial.",
     "price": 5.9,
     "inStock": true
   }

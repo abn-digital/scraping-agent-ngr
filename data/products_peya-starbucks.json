@@ -1,0 +1,866 @@
+[
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Bebidas Proteicas",
+    "name": "Protein Matcha ​",
+    "description": "Matcha caliente con leche proteica, suavemente vaporizada y un toque de jarabe classic. Un boost delicioso y reconfortante.",
+    "price": 22,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Bebidas Proteicas",
+    "name": "Iced Protein Matcha",
+    "description": "Todo el sabor del matcha batido en frío con leche protéica, helado y con el boost que necesitas.",
+    "price": 22,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Bebidas Proteicas",
+    "name": "Iced Sugar Free Vainilla Protein Latte​",
+    "description": "Bebida proteica con  Sugarfree Vainilla Latte helado, con espresso intenso y un toque dulce irresistible.",
+    "price": 22,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Bebidas Proteicas",
+    "name": "Sugar Free Vanilla Protein Latte​",
+    "description": "Bebida proteica con  Sugarfree Vainilla Latte, con espresso intenso y un toque dulce irresistible.",
+    "price": 22,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Promos PedidosYa",
+    "name": "Desayuno Para 2",
+    "description": "¡Inicia tu mañana con un desayuno para dos! Elige dos de tus bebidas favoritas + dos sándwiches y comparte un momento especial. Imagen referencial.",
+    "price": 33,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Promos PedidosYa",
+    "name": "Dúo tardes winter",
+    "description": "Llévate una bebida y un alimento a un precio especial.",
+    "price": 12.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Promos PedidosYa",
+    "name": "Duo Desayuno winter",
+    "description": "Llévate una bebida y un alimento a un precio especial",
+    "price": 12.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Promos PedidosYa",
+    "name": "Momentos dulces",
+    "description": "¡Es momento de engreírnos! Arma tu Dúo, elige tu bebida favorita entre 1 Vainilla Latte, Chocolate, Mocha Frappuccino o Chocolate Creme Frappuccino o Algarrobina Frappuccino y combínalo con 1 galleta, keke o muffin. Imágenes referenciales.",
+    "price": 15,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Promos PedidosYa",
+    "name": "Desayuno Ligero",
+    "description": "Llévate una bebida y un alimento a un precio especial",
+    "price": 15.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Promos PedidosYa",
+    "name": "Dúo proteico",
+    "description": "Más proteína para ti: llévate una bebida y un alimento proteico a un precio especial",
+    "price": 25,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Shaken Espresso",
+    "name": "Brown Sugar Shaken Espresso Frio",
+    "description": "Brown Sugar Shaken Espresso Frio con Bebida de Avena",
+    "price": 18.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Shaken Espresso",
+    "name": "Choco Shaken Espresso Frío",
+    "description": "Bebida intensa de café espresso con salsa mocha y cubos de hielo con bebida de avena.",
+    "price": 18.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Shaken Espresso",
+    "name": "Mocha Blanco Shaken Espresso Frío",
+    "description": "Bebida intensa de café espresso con salsa de mocha blanco y cubos de hielo con bebida de avena",
+    "price": 18.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Ultimate Caramel Frappuccino®",
+    "description": "Versión renovada de nuestro clásico Caramel Frappuccino, con doble crema batida y extra de caramelo",
+    "price": 18,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Triple Mocha Frappuccino®",
+    "description": "Delicioso Frappuccino de café mezclado con leche, jarabe de mocha y decorado con crema batida y topping de mocha. Sin endulzantes.",
+    "price": 18.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Mocha Blanco Frappuccino®",
+    "description": "Frappuccino de café mezclado con leche, mocha blanco y decorado con crema batida. Sin endulzantes.",
+    "price": 17,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Chocolúcuma Creme Frappuccino®",
+    "description": "Nuestro Frappuccino peruano. Deliciosa lúcuma mezclada con mocha, jarabe de azucar y chispas sabor chocolate, decorado con crema batida y extra chispas sabor chocolate.",
+    "price": 19,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Algarrobina Frappuccino®",
+    "description": "Nuestro frappuccino peruano. Delicioso jarabe de algarrobina mezclada con café, leche y mocha; decorado con crema batida y topping de algarrobina. Sin endulzantes.",
+    "price": 17.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Lúcuma Creme Frappuccino®",
+    "description": "Clásico frappuccino de lúcuma mezclado con leche, jarabe de azucar y decorado con crema batida.",
+    "price": 18.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Chocochip Frappuccino®",
+    "description": "Clásico frappuccino de leche batido con galletas de cookies & creme, jarabe de azucar y decorado con crema batida.",
+    "price": 17.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Caramel Frappuccino®",
+    "description": "Frappuccino de café mezclado con leche y endulzado con caramelo, decorado con crema batida y topping de caramelo",
+    "price": 17,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Fresa Creme Frappuccino®",
+    "description": "Refrescante frappuccino con  salsa de fresa mezclada con leche y jarabe de azucar, decorado con crema batida.",
+    "price": 17,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Ultra Fresa Creme Frappuccino®",
+    "description": "Frappuccino de leche batida con hielo, jarabe de azucar y jarabe de fresa, decorado con crema batida.",
+    "price": 18,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Vainilla Creme Frappuccino®",
+    "description": "Clásico frappuccino de vainilla mezclado con leche, jarabe de azucar y decorado con crema batida.",
+    "price": 17,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Black & White Mocha Frappuccino®",
+    "description": "Frappuccino de café con capas de mocha y mocha blanco combinadas leche y decorado con crema batida y chispas sabor chocolate. Sin endulzantes.",
+    "price": 18.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Caramel Macchiato Creme Frappuccino®",
+    "description": "Frappuccino de leche batida con hielo y vainilla, coronado con shot de café espresso y decorado con topping de caramelo. Sin endulzantes.",
+    "price": 15,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Cookies & Cream Frappuccino®",
+    "description": "Clásico frappuccino de leche batido con galletas de cookies & creme, jarabe de azucar y decorado con crema batida.",
+    "price": 18.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Café Frappuccino®",
+    "description": "Clásico frappuccino con base de café, mezclado con leche y hielo. Sin endulzantes.",
+    "price": 14.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Mocha Frappuccino®",
+    "description": "Frappuccino de café mezclado con leche y jarabe de mocha, decorado con crema batida. Sin endulzantes.",
+    "price": 17,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Chocolate Creme Frappuccino®",
+    "description": "Clásico frappuccino de chocolate mezclado con leche y jarabe de azucar, decorado con crema batida.",
+    "price": 17,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Frappuccinos®",
+    "name": "Algarrobina Creme Frappuccino®",
+    "description": "Nuestro frappuccino peruano. Delicioso jarabe de algarrobina mezclada con leche y mocha; decorado con crema batida y topping de algarrobina. Sin endulzantes.",
+    "price": 16.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Refreshers®",
+    "name": "Mango Dragon Fruit Lemonade Refresher®",
+    "description": "Bebida elaborada con extracto de grano verde de café, mezclado con limonada y pitahaya. Sin endulzantes.",
+    "price": 16.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Refreshers®",
+    "name": "Pink Drink Refresher®",
+    "description": "Bebida elaborada con concentrado de café verde sabor a Fresa, mezclado con bebida vegetal de coco y acaí deshidratado. Sin endulzante",
+    "price": 17.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Refreshers®",
+    "name": "Mango Dragon Fruit Refresher®",
+    "description": "Bebida elaborada con concentrado de café verde sabor a mango, mezclado con pitahaya deshidratada. Sin endulzantes.",
+    "price": 15.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Refreshers®",
+    "name": "Strawberry Acaí­ Lemonade Refresher®",
+    "description": "Bebida elaborada con extracto de grano verde de café, mezclado con limonada, jugo de fresa y acaí. Sin endulzantes.",
+    "price": 16.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Refreshers®",
+    "name": "Dragon Drink Refresher®",
+    "description": "Refrescante bebida hecha a base de Pitahaya, mango, bebida vegetal de coco y cubos de hielo. Imágenes referenciales",
+    "price": 17.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Refreshers®",
+    "name": "Strawberry Acaí Refresher®",
+    "description": "Bebida elaborada con extracto de grano verde de café, mezclado con jugo de fresa y acaí. Sin endulzantes.",
+    "price": 15.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso",
+    "name": "Algarrobina Latte",
+    "description": "Deliciosa algarrobina mezclada con café Esspreso, leche vaporizada y mocha; decorado con topping de algarrobina. Sin endulzantes.",
+    "price": 17,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso",
+    "name": "Americano",
+    "description": "Café Espresso de cuerpo completo con agua caliente (La bebida será entregada en un vaso de una medida mayor al solicitado para evitar derrames.)",
+    "price": 12,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso",
+    "name": "Black & White Mocha",
+    "description": "Café Espresso con capas de mocha y mocha blanco combinadas en leche vaporizada, decorado con crema batida y chispas sabor chocolate. Sin endulzantes.",
+    "price": 16.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso",
+    "name": "Black & White Mocha Helado",
+    "description": "Café Espresso con capas de mocha y mocha blanco combinadas en leche fría, cubos de hielo y decorado con crema batida y chispas sabor chocolate. Sin endulzantes.",
+    "price": 16.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso",
+    "name": "Caramel Macchiato",
+    "description": "Leche vaporizada con vainilla, coronado con shot de café Espresso y decorado con una rejilla de caramelo. Sin endulzantes.",
+    "price": 16.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso",
+    "name": "Chocolate Caliente",
+    "description": "Clásico chocolate caliente con leche vaporizada y salsa de chocolate. Sin endulzantes.",
+    "price": 15,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso",
+    "name": "Flat White",
+    "description": "Intenso café ristretto mezclado con leche vaporizada y decorado con un punto de espuma",
+    "price": 16,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso",
+    "name": "Latte",
+    "description": "Café Espresso de cuerpo completo mezclado con leche vaporizada",
+    "price": 14,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso",
+    "name": "Latte Macchiato",
+    "description": "Leche vaporizada coronada con shots de intenso café espresso",
+    "price": 16,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso",
+    "name": "Mocha Café",
+    "description": "Café Espresso mezclado con mocha y leche vaporizada. Sin endulzantes.",
+    "price": 16.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso",
+    "name": "Mocha Blanco Café",
+    "description": "Café Espresso mezclado con mocha blanco y leche vaporizada. Sin endulzantes.",
+    "price": 16.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso",
+    "name": "Vainilla Latte",
+    "description": "Delicioso café Espresso mezclado con vainilla y leche vaporizada. Sin endulzantes.",
+    "price": 15.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Otras Bebidas",
+    "name": "Iced Matcha Latte",
+    "description": "Iced Matcha Latte",
+    "price": 15,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Otras Bebidas",
+    "name": "Matcha Latte",
+    "description": "Matcha Latte",
+    "price": 15,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Otras Bebidas",
+    "name": "Té Chai Latte",
+    "description": "Té negro con canela, clavo y otras especias calientes se combina con leche vaporizada y espuma, logrando un equilibrio perfecto. Sin endulzantes.",
+    "price": 14.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Otras Bebidas",
+    "name": "Té Chai Latte Helado",
+    "description": "Té negro con canela, clavo y otras especias calientes se combina con leche fría, logrando un equilibrio perfecto. Sin endulzantes",
+    "price": 14,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Otras Bebidas",
+    "name": "Té Chai Teavana",
+    "description": "Té filtrante con especies como té negro, jengibre, pimienta, canela que ofrecen un sabor ligeramente picante. Sin endulzantes. (La bebida será entregada en un vaso de una medida mayor al solicitado para evitar derrames.)",
+    "price": 11,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Otras Bebidas",
+    "name": "Te Chai Teavana Helado",
+    "description": "Té filtrante frío con especies como té negro, jengibre, pimienta, canela que ofrecen un sabor ligeramente picante. Sin endulzantes.",
+    "price": 11,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Otras Bebidas",
+    "name": "Té Chamomile Teavana",
+    "description": "Té Chamoline de la línea de Starbucks Teavana (La bebida será entregada en un vaso de una medida mayor al solicitado para evitar derrames.)",
+    "price": 11,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Otras Bebidas",
+    "name": "Té Chamomile Teavana Helado",
+    "description": "Té Chamoline de la línea de Starbucks Teavana",
+    "price": 11,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Otras Bebidas",
+    "name": "Té Hibiscus Teavana",
+    "description": "Té filtrante con escencia de flores, canela, manzana, azucar de papaya y mango, ojas de blackberry y pétalos de rosas. Sin endulzantes. (La bebida será entregada en un vaso de una medida mayor al solicitado para evitar derrames.)",
+    "price": 11,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Otras Bebidas",
+    "name": "Té Hibiscus Teavana Helado",
+    "description": "Té filtrante frío con escencia de flores, canela, manzana, azucar de papaya y mango, ojas de blackberry y pétalos de rosas. Sin endulzantes.",
+    "price": 11,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Otras Bebidas",
+    "name": "Té Mint Citrus Teavana",
+    "description": "Té verde filtrante con limón, verbena y menta. Sin endulzantes. (La bebida será entregada en un vaso de una medida mayor al solicitado para evitar derrames.)",
+    "price": 11,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Otras Bebidas",
+    "name": "Té Mint Citrus Teavana Helado",
+    "description": "Té verde filtrante frío con limón, verbena y menta.Sin endulzantes.",
+    "price": 11,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Recién Horneados",
+    "name": "Croissant de Mantequilla",
+    "description": "Croissant de mantequilla. Porción individual.Imágenes referenciales.",
+    "price": 8,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Sándwiches",
+    "name": "Sandwich Croissant Jamón Inglés & Queso",
+    "description": "Croissant francés con Jamón inglés y queso andino",
+    "price": 17.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Sándwiches",
+    "name": "Sándwich Panino vesubio",
+    "description": "Sándwich elaborado con pan panini, jamón de cerdo y queso gouda. Porción individual. Imágenes referenciales.",
+    "price": 14.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Sándwiches",
+    "name": "Sandwich Croissant Jamón del País & Queso",
+    "description": "Croissant francés con jamón del país y queso andino",
+    "price": 17.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Sándwiches",
+    "name": "Sándwich Triple",
+    "description": "Sándwich triple elaborado con pan marmoleado, relleno de queso, jamón de cerdo y pollo deshilachado con mayonesa. Porción individual. Imágenes referenciales.",
+    "price": 17,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Sándwiches",
+    "name": "Sándwich Eggmont",
+    "description": "Croissant de mantequilla relleno de huevos escalfados, mayonesa y trozos de tocino. Porción individual.  Imágenes referenciales.",
+    "price": 14.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Sándwiches",
+    "name": "Sándwich Pavita & Queso",
+    "description": "Sándwich elaborado con pan tipo avena, jamón de pavita y queso cheddar. Porción individual. Imágenes referenciales.",
+    "price": 15.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Sándwiches",
+    "name": "Sándwich Pavita, Queso & Espinaca",
+    "description": "Sándwich elaborado con pan de semillas, relleno con jamón de pavita, queso gouda y espinaca. Porción individual. Imágenes referenciales.",
+    "price": 16,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Sándwiches",
+    "name": "Sándwich Finas Hierbas",
+    "description": "Sándwich de pan finas hierbas con mantequilla, queso Edam y mezcla de pollo con salsa pizza.",
+    "price": 18.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Sándwiches",
+    "name": "Sándwich Chicken panino",
+    "description": "Sándwich elaborado en pan panini integral, con pollo deshilachado, apio picado, jamón de cerdo y queso. Porción individual. Imágenes referenciales.",
+    "price": 15.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Sándwiches",
+    "name": "Sándwich Chicken Ciabatta",
+    "description": "Sándwich elaborado con pan ciabatta, pollo deshilachado y mezclado con mayonesa y apio picado. Porción individual. Imágenes referenciales.",
+    "price": 15.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Sándwiches",
+    "name": "Sandwich Salame",
+    "description": "Sándwich a base de pan panini, untado con mayonesa, relleno de queso Edam, prosciutto y salame.",
+    "price": 17.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Postres",
+    "name": "Galleta de Avena & Cranberry",
+    "description": "Galleta elaborada con avena, harina de trigo, manteca, huevos, escencia de vainilla y cranberry. Porción individual. Imágenes referenciales.",
+    "price": 8,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Postres",
+    "name": "Muffin de Naranja & Chocochips",
+    "description": "Muffin realizado con harina de trigo, aceite vegetal, huevos, jugo de naranja, ralladura de naranja, cobertura bitter, margarina, azucar, escencia de vainilla y naranja.  Porción individual. Imágenes referenciales.",
+    "price": 11,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Postres",
+    "name": "Keke de naranja con Pistacho",
+    "description": "Queque a base de harina blanca, pistacho, cáscara de naranja, mantequilla, aceite vegetal, azúcar blanca, sal y huevo.",
+    "price": 11,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Postres",
+    "name": "Cuchareable de Tres Leches",
+    "description": "Cuchareable de Tres Leches.",
+    "price": 18.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Postres",
+    "name": "Brownie Cookies & Creme",
+    "description": "Clásico brownie sabor chocolate, relleno de fudgecon trozos de galletas  cookies & creme. Porción individual. Imágenes referenciales.",
+    "price": 10,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Postres",
+    "name": "Keke de Limón",
+    "description": "Keke elaborado con harina, azucar, manteca, escencia de limón y con frostry zona superior. Porción individual. Imágenes referenciales.",
+    "price": 11,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Postres",
+    "name": "Galleta de Chocochips",
+    "description": "Galleta elaborada con harina de trigo, azucar blanca y rubia, margarina, cobertura de chocolate, huevos, leche, sal, jengibre y escencia de vainilla. Porción invididual. Imágenes referenciales.",
+    "price": 8,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Postres",
+    "name": "Keke de Zanahoria",
+    "description": "Keke elaborado con harina, azucar, manteca, ralladura de zanahoria, trozos de pecanas y con frostry zona superior. Porción individual. Imágenes referenciales.",
+    "price": 11,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Postres",
+    "name": "Cheesecake de Arándanos",
+    "description": "Cheesecake con base de galleta y couliz de fresa y arándanos. Porción individual. Imágenes referenciales.",
+    "price": 16.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Postres",
+    "name": "Torta de Chocolate",
+    "description": "Torta de chocolate, con fudge superior y trozos pequeños de chocolate. Porción individual. Imágenes referenciales.",
+    "price": 14.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Postres",
+    "name": "Cuchareable chocolúcuma con brownie",
+    "description": "Cuchareable chocolúcuma con brownie",
+    "price": 19,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Postres",
+    "name": "Cuchareable de Torta de Chocolate",
+    "description": "Cuchareable de Torta de Chocolate.",
+    "price": 18.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Otros Alimentos",
+    "name": "Crocantinis Pimienta & Parmesano",
+    "description": "Galletas delgadas y crocantes de queso parmesano y pimienta",
+    "price": 8,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Otros Alimentos",
+    "name": "Palito Integral Salvado & Linaza",
+    "description": "Galletas en forma de palitos con linaza y salvado",
+    "price": 8,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Otros Alimentos",
+    "name": "Egg Bites (2 un)",
+    "description": "Pack de 2 batidos de huevos al vapor. Podrás elegir dentro de nuestras opciones de eggbites una opción con trozos de tocino y espinada o eggbites de jamón de cerdo y queso. Porción individual. Imágenes referenciales.",
+    "price": 11,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Café en Grano",
+    "name": "Colombia 250 gr.",
+    "description": "Bolsa de café en grano de 250 gr. Café balanceado con aromas floral. Tostado medio, cuerpo medio y acidez alta.",
+    "price": 41,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Café en Grano",
+    "name": "Sumatra 250 gr.",
+    "description": "Bolsa de café en grano de 250 gr. Café con aroma herbal. Tostado Dark, cuerpo completo y acidez baja.",
+    "price": 41,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Café en Grano",
+    "name": "Espresso 250 gr.",
+    "description": "Bolsa de café en grano de 250 gr.Café con pronunciado sabor a naranja, lima y cítricos; con tostado medio, acidez alta y cuerpo medio.",
+    "price": 41,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Café en Grano",
+    "name": "Bolsa de café Sunsera blend  250 gr",
+    "description": "Sunsera Blend 250g WB (roasted coffee)",
+    "price": 41,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Café en Grano",
+    "name": "Verona 250 gr.",
+    "description": "Bolsa de café en grano de 250 gr. Café balanceado con notas a chocolate dark o cocoa; con tostado alto, acidez baja y cuerpo completo.",
+    "price": 41,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Café en Grano",
+    "name": "Kenya 250 gr.",
+    "description": "Bolsa de café en grano de 250 gr. Notas acarameladas, un perfecto complemento a la leche; con tostado alto, acidez baja y cuerpo completo.",
+    "price": 41,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Cajas de Té",
+    "name": "Caja Teavana Hibiscus",
+    "description": "Caja de 12 filtrantes de té Hibiscus. Filtrante con escencia de flores, canela, manzana, azucar de papaya y mango, ojas de blackberry y pétalos de rosas. Cada filtrante contiene 3 gr.",
+    "price": 30,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Cajas de Té",
+    "name": "Caja Teavana Mint Citrus",
+    "description": "Caja de 12 filtrantes de té Mint Citrus. Filtrante con té verde, limón, verbena y menta. Cada filtrante contiene 3 gr.",
+    "price": 30,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Cajas de Té",
+    "name": "Caja Teavana Chai",
+    "description": "Caja de 12 filtrantes de té Chai. Filtrante con especies como té negro, jengibre, pimienta, canela que ofrecen un sabor ligeramente picante. Cada filtrante contiene 3 gr.",
+    "price": 30,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Cajas de Té",
+    "name": "Caja Teavana Youthberry",
+    "description": "Caja de 12 filtrantes de té Youthberry. Cada filtrante contiene 3 gr.",
+    "price": 30,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso Frío",
+    "name": "Chocolate Helado",
+    "description": "Clásico chocolate caliente con leche fría, cubos de hielo y salsa de chocolate. Sin endulzantes.",
+    "price": 15,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso Frío",
+    "name": "Algarrobina Latte Helado",
+    "description": "Deliciosa algarrobina mezclada con café Espresso, leche fría, mocha y cubos de hielo; decorado con topping de algarrobina. Sin endulzantes.",
+    "price": 17,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso Frío",
+    "name": "Americano Helado",
+    "description": "Café Espresso de cuerpo completo con agua y hielo",
+    "price": 12,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso Frío",
+    "name": "Mocha Café Helado",
+    "description": "Café Espresso mezclado con mocha, leche dría y cubos de hielo. Sin endulzantes.",
+    "price": 16.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso Frío",
+    "name": "Vainilla Latte Helado",
+    "description": "Delicioso café Espresso mezclado con vainilla, leche fría y cubos de hielo. Sin endulzantes.",
+    "price": 15.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso Frío",
+    "name": "Caramel Macchiato Helado",
+    "description": "Leche fría mezclada con cubos de hielo, vainilla, coronado con shot de café Espresso y decorado con una rejilla de caramelo. Sin endulzantes.",
+    "price": 16.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso Frío",
+    "name": "Latte Macchiato Helado",
+    "description": "Leche fría coronada con shots de intenso café espresso",
+    "price": 16,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso Frío",
+    "name": "Mocha Blanco Café Helado",
+    "description": "Café Espresso mezclado con mocha blanco, leche fría y cubos de hielo. Sin endulzantes.",
+    "price": 16.5,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso Frío",
+    "name": "Latte Helado",
+    "description": "Café Espresso de cuerpo completo mezclado con leche fría y cubos de hielo",
+    "price": 14,
+    "inStock": true
+  },
+  {
+    "restaurant": "Starbucks - Dasso",
+    "category": "Espresso Frío",
+    "name": "Flat White Helado",
+    "description": "Intenso café ristretto mezclado con leche. Sin endulzantes. Imágenes referenciales.",
+    "price": 16,
+    "inStock": true
+  }
+]
