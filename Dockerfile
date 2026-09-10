@@ -39,6 +39,8 @@ COPY mcdonalds_scraper.js ./
 COPY pedidosya_scraper.js ./
 COPY scrape_pedidosya_session.js ./
 COPY scrape_pedidosya_batch.js ./
+COPY scrape_scheduled_batch.js ./
+COPY scheduled_stores.js ./
 COPY pizzahut_scraper.js ./
 COPY burgerking_scraper.js ./
 COPY kfc_scraper.js ./
