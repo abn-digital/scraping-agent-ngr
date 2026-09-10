@@ -13,6 +13,7 @@ const fs = require('fs');
 const path = require('path');
 const { STORES } = require('./pedidosya_stores');
 const { stamp } = require('./scrape_meta');
+const historyStore = require('./history_store');
 
 const PAUSE_MS = Number(process.env.PEYA_PAUSE_MS || 90000); // 90s between stores
 const onlyArg = process.argv.find(a => a.startsWith('--only='));
@@ -26,11 +27,12 @@ function sleep(ms) {
     return new Promise(r => setTimeout(r, ms));
 }
 
-function uploadSuccess(storeId) {
+async function uploadSuccess(storeId) {
     const local = path.join(__dirname, 'data', `products_${storeId}.json`);
     if (!fs.existsSync(local)) return;
+    const scrapedAt = new Date().toISOString();
     try {
-        stamp(storeId);
+        stamp(storeId, scrapedAt);
         execSync(`gcloud storage cp "${local}" "gs://ngr-scraping-data/products_${storeId}.json"`, {
             stdio: 'inherit',
         });
@@ -41,6 +43,12 @@ function uploadSuccess(storeId) {
             });
         }
         console.log(`[GCS] uploaded products_${storeId}.json`);
+        try {
+            const products = JSON.parse(fs.readFileSync(local, 'utf8'));
+            await historyStore.appendRun({ storeId, scrapedAt, products });
+        } catch (histErr) {
+            console.warn(`[history] append failed for ${storeId}: ${histErr.message}`);
+        }
     } catch (e) {
         console.warn(`[GCS] upload failed for ${storeId}: ${e.message}`);
     }
@@ -58,14 +66,14 @@ function runOne(store) {
         let out = '';
         child.stdout.on('data', d => { const s = d.toString(); out += s; process.stdout.write(s); });
         child.stderr.on('data', d => { const s = d.toString(); out += s; process.stderr.write(s); });
-        child.on('close', (code) => {
+        child.on('close', async (code) => {
             const rootFile = path.join(__dirname, `products_${store.id}.json`);
             const ok = code === 0 && fs.existsSync(rootFile);
             if (ok) {
                 try {
                     fs.copyFileSync(rootFile, path.join(__dirname, 'data', `products_${store.id}.json`));
                 } catch (_) {}
-                uploadSuccess(store.id);
+                await uploadSuccess(store.id);
             }
             resolve({ id: store.id, ok, code, out: out.slice(-500) });
         });

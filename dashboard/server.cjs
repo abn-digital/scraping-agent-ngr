@@ -9,6 +9,7 @@ const { Storage } = require('@google-cloud/storage');
 const { matchBrand } = require('../product_matcher');
 const { BRANDS, CHANNELS, getChannelConfig } = require('../brand_config');
 const scrapeMeta = require('../scrape_meta');
+const historyStore = require('../history_store');
 const { STORES: PEYA_STORES } = require('../pedidosya_stores');
 
 const app = express();
@@ -41,6 +42,7 @@ const gcs = new Storage();
 async function syncFromGCS() {
     // products_* land in data/ (baseline). matches_*/overrides_* land in ROOT_DIR
     // where the matcher writes and reads them.
+    // Intentionally excludes history/ — snapshots are loaded on demand via /api/history.
     const prefixes = [
         { prefix: 'products_',  dir: DATA_DIR },
         { prefix: 'matches_',   dir: ROOT_DIR },
@@ -53,6 +55,8 @@ async function syncFromGCS() {
             let synced = 0;
             for (const file of files) {
                 if (!file.name.endsWith('.json')) continue;
+                // Guard: never pull nested history objects into the container disk
+                if (file.name.startsWith('history/')) continue;
                 await file.download({ destination: path.join(dir, file.name) });
                 synced++;
             }
@@ -354,12 +358,21 @@ app.post('/api/update', (req, res) => {
                 const localPath = fs.existsSync(rootPath) ? rootPath : dataPath;
 
                 if (fs.existsSync(localPath)) {
-                    const stat = fs.statSync(localPath);
-                    const scrapedAt = new Date(stat.mtimeMs).toISOString();
+                    const scrapedAt = new Date().toISOString();
                     await uploadToGCS(localPath);
                     const metaPath = scrapeMeta.stamp(targetStoreId, scrapedAt);
                     if (metaPath) await uploadToGCS(metaPath);
                     console.log(`[scrape_meta] stamped ${targetStoreId} @ ${scrapedAt}`);
+                    try {
+                        const products = JSON.parse(fs.readFileSync(localPath, 'utf8'));
+                        await historyStore.appendRun({
+                            storeId: targetStoreId,
+                            scrapedAt,
+                            products,
+                        });
+                    } catch (histErr) {
+                        console.warn(`[history] append failed: ${histErr.message}`);
+                    }
                 } else {
                     console.warn(`[scrape_meta] Archivo no encontrado tras scrape: ${jsonName}`);
                 }
@@ -617,6 +630,37 @@ app.get('/api/download/:file', (req, res) => {
     }
 });
 
+
+// ──────────────────────────────────────────────
+// History – per-store scrape runs (GCS, on-demand)
+// ──────────────────────────────────────────────
+app.get('/api/history/:storeId', async (req, res) => {
+    try {
+        const storeId = req.params.storeId;
+        if (!storeId) return res.status(400).json({ error: 'storeId required' });
+        const index = await historyStore.getIndex(storeId);
+        res.json(index);
+    } catch (err) {
+        console.error('[history] index failed:', err.message);
+        res.status(500).json({ error: 'Failed to load history index' });
+    }
+});
+
+app.get('/api/history/:storeId/run', async (req, res) => {
+    try {
+        const storeId = req.params.storeId;
+        const at = req.query.at;
+        if (!storeId || !at) {
+            return res.status(400).json({ error: 'storeId and at query param required' });
+        }
+        const run = await historyStore.getRun(storeId, String(at));
+        if (!run) return res.status(404).json({ error: 'Run not found' });
+        res.json(run);
+    } catch (err) {
+        console.error('[history] run failed:', err.message);
+        res.status(500).json({ error: 'Failed to load history run' });
+    }
+});
 
 // ──────────────────────────────────────────────
 // Internal: re-pull products_* from GCS (used after PedidosYa cron)

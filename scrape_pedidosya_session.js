@@ -17,6 +17,7 @@ const { Storage } = require('@google-cloud/storage');
 const { createKernelBrowser, closeKernelBrowser } = require('./kernel_browser');
 const { STORES, GEO_WARM_URL } = require('./pedidosya_stores');
 const { stamp } = require('./scrape_meta');
+const historyStore = require('./history_store');
 
 const PAUSE_MS = Number(process.env.PEYA_PAUSE_MS || 60000);
 const GCS_BUCKET = process.env.GCS_BUCKET || 'ngr-scraping-data';
@@ -110,6 +111,7 @@ async function mergeStampFromGcs(storeId) {
 }
 
 async function saveProducts(products, storeId) {
+    const scrapedAt = new Date().toISOString();
     const root = path.join(__dirname, `products_${storeId}.json`);
     const dataFile = path.join(__dirname, 'data', `products_${storeId}.json`);
     fs.writeFileSync(root, JSON.stringify(products, null, 2));
@@ -118,11 +120,18 @@ async function saveProducts(products, storeId) {
         fs.copyFileSync(root, dataFile);
     } catch (_) {}
     await mergeStampFromGcs(storeId);
+    // Re-stamp with the exact scrapedAt we use for history so meta ↔ run align
+    stamp(storeId, scrapedAt);
     try {
         await uploadLocal(dataFile);
         await uploadLocal(path.join(__dirname, 'scrape_meta.json'));
     } catch (e) {
         console.warn(`[GCS] ${e.message}`);
+    }
+    try {
+        await historyStore.appendRun({ storeId, scrapedAt, products });
+    } catch (e) {
+        console.warn(`[history] ${e.message}`);
     }
 }
 

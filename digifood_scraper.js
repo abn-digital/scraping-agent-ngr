@@ -27,18 +27,22 @@ async function scrapeDigifood(url, restaurantName, storeId) {
         await page.waitForTimeout(2000);
         await dismissModals(page);
         await handleStoreModal(page);
-        await page.waitForSelector('article, .product-card, a[href*="/pedir/"], h3.categoryTitle', { timeout: 25000 }).catch(() => {});
+        await page.waitForSelector(
+            'article, .product-card, a[href*="/pedir/"], h2.categoryTitle, h3.categoryTitle',
+            { timeout: 25000 }
+        ).catch(() => {});
         await page.waitForTimeout(1500);
 
-        // Discover /carta/<slug> or /pedir/<slug> category routes
+        // Discover Digifood /carta/<slug> routes (not Justo /pedir/categoria/…).
         const categories = await page.evaluate(() => {
             const seen = new Map();
             for (const a of document.querySelectorAll('a[href]')) {
                 const href = a.getAttribute('href') || '';
-                const m = href.match(/^\/(carta|pedir|categorias)\/([a-z0-9-]+)\/?$/i);
+                // Digifood carta pages only — Justo uses /pedir/categoria/<slug>/<id>
+                const m = href.match(/^\/(carta|categorias)\/([a-z0-9-]+)\/?$/i);
                 if (!m) continue;
                 const slug = m[2].toLowerCase();
-                if (slug === 'ver-todo' || slug === 'todas') continue;
+                if (slug === 'ver-todo' || slug === 'todas' || slug === 'categoria') continue;
                 let text = (a.textContent || '').trim();
                 const half = text.slice(0, text.length / 2);
                 if (text.length % 2 === 0 && half === text.slice(text.length / 2)) text = half;
@@ -196,40 +200,89 @@ async function extractProducts(page, restaurantName) {
         const seen = new Set();
         let currentCategory = 'General';
 
+        // Matches "S/ 21.90", "S/.21.90", "S/21,90" — digit must follow optional dot after S/
+        const PRICE_RE = /S\/\.?\s*(\d+(?:[.,]\d{1,2})?)/gi;
+
+        function toPrice(raw) {
+            const n = parseFloat(String(raw).replace(',', '.'));
+            return Number.isFinite(n) && n > 0 ? n : NaN;
+        }
+
         function parsePrice(el) {
-            const strikeEls = el.querySelectorAll('del, s, [class*="line-through"], [class*="old-price"], [class*="original"], [class*="tachado"], [class*="before"]');
+            const strikeEls = el.querySelectorAll(
+                'del, s, [class*="line-through"], [class*="old-price"], [class*="original"], [class*="tachado"], [class*="before"]'
+            );
             const striked = new Set();
             strikeEls.forEach(se => {
-                const m = se.textContent.match(/([\d.,]+)/);
-                if (m) striked.add(parseFloat(m[0].replace(',', '.')));
+                for (const m of (se.textContent || '').matchAll(PRICE_RE)) {
+                    const n = toPrice(m[1]);
+                    if (!isNaN(n)) striked.add(n);
+                }
+                // Fallback for bare numbers inside strike nodes
+                const bare = (se.textContent || '').match(/(\d+[.,]\d{2}|\d+)/);
+                if (bare) {
+                    const n = toPrice(bare[1]);
+                    if (!isNaN(n)) striked.add(n);
+                }
             });
-            const priceMatches = [...(el.textContent || '').matchAll(/S\/?\s*([\d.,]+)/g)];
-            const valid = priceMatches
-                .map(m => parseFloat(m[1].replace(',', '.')))
-                .filter(p => !isNaN(p) && p > 0 && !striked.has(p));
-            if (valid.length === 0) return 0;
-            // Promo cards often show regular + promo → take lowest current price
-            return Math.min(...valid);
+
+            // Prefer dedicated price row; fall back to card text (then description for
+            // promo-only cards like "a solo S/15.9" with no price row).
+            const priceRow = el.querySelector('.flex.gap-x-2, [class*="price"], .orderProductPrice');
+            const priceSources = [];
+            if (priceRow) priceSources.push(priceRow.textContent || '');
+            const clone = el.cloneNode(true);
+            clone.querySelectorAll('p, .line-clamp-3').forEach(p => p.remove());
+            priceSources.push(clone.textContent || '');
+            priceSources.push(el.textContent || '');
+
+            function collect(src) {
+                const found = [];
+                for (const m of src.matchAll(PRICE_RE)) {
+                    // Skip add-ons like "+S/2" / "+ S/3"
+                    const idx = m.index || 0;
+                    if (idx > 0 && /\+/.test(src.slice(Math.max(0, idx - 2), idx))) continue;
+                    const n = toPrice(m[1]);
+                    if (!isNaN(n) && !striked.has(n)) found.push(n);
+                }
+                return found;
+            }
+
+            for (const src of priceSources) {
+                const valid = collect(src);
+                if (valid.length) return Math.min(...valid);
+            }
+            return 0;
         }
 
         // Path A: Justo /pedir product-cards (Chifa Express, Cinnabon)
         const justoCards = document.querySelectorAll(
-            '.product-card a[href*="/pedir/"], a[href*="/pedir/"][class*="card"], a.rounded-lg[href*="/pedir/"]'
+            '.product-card a[href*="/pedir/"], a.rounded-lg.bg-card[href*="/pedir/"]'
         );
         if (justoCards.length > 0) {
             const docY = el => el.getBoundingClientRect().top + window.scrollY;
-            const headers = [...document.querySelectorAll('h3.categoryTitle, h3[class*="categoryTitle"]')]
-                .map(h => ({ name: h.textContent?.trim(), y: docY(h) }))
+            // Justo moved section titles from h3 → h2.categoryTitle
+            const headers = [...document.querySelectorAll(
+                'h2.categoryTitle, h3.categoryTitle, h2[class*="categoryTitle"], h3[class*="categoryTitle"]'
+            )]
+                .map(h => ({ name: (h.textContent || '').trim(), y: docY(h) }))
                 .filter(h => h.name && h.name.length < 80)
                 .sort((a, b) => a.y - b.y);
 
             for (const a of justoCards) {
-                if (!/\/pedir\/[A-Za-z0-9]+\//.test(a.getAttribute('href') || '')) continue;
+                const href = a.getAttribute('href') || '';
+                // Product: /pedir/<id>/<slug> — skip /pedir/categoria/...
+                if (/\/pedir\/categoria\//i.test(href)) continue;
+                if (!/\/pedir\/[A-Za-z0-9]+\/[a-z0-9-]+/i.test(href)) continue;
+
                 // Prefer img title/alt as clean product name
                 const img = a.querySelector('img[title], img[alt]');
                 let productName = (img?.getAttribute('title') || img?.getAttribute('alt') || '').trim();
                 if (!productName) {
-                    // First substantial text line that isn't a discount badge
+                    const nameEl = a.querySelector('h3.orderProductName, h3.line-clamp-2, h3');
+                    productName = (nameEl?.textContent || '').trim();
+                }
+                if (!productName) {
                     const lines = (a.innerText || '').split('\n').map(l => l.trim()).filter(Boolean);
                     productName = lines.find(l => l.length > 3 && !/^-?\d+%$/.test(l) && !/^S\//.test(l)) || '';
                 }
@@ -302,10 +355,19 @@ function saveUnique(results, storeId, restaurantName) {
 
     console.log(`\nTotal de productos únicos extraídos (${restaurantName}): ${unique.length}`);
     if (unique.length > 0) {
-        fs.writeFileSync(path.join(__dirname, `products_${storeId}.json`), JSON.stringify(unique, null, 2));
+        const jsonPath = path.join(__dirname, `products_${storeId}.json`);
+        fs.writeFileSync(jsonPath, JSON.stringify(unique, null, 2));
+        const dataDir = path.join(__dirname, 'data');
+        if (fs.existsSync(dataDir)) {
+            fs.writeFileSync(path.join(dataDir, `products_${storeId}.json`), JSON.stringify(unique, null, 2));
+        }
         const header = 'Restaurant,Category,Product Name,Description,Price';
         const rows = unique.map(p => [esc(p.restaurant), esc(p.category), esc(p.name), esc(p.description), p.price].join(','));
         fs.writeFileSync(path.join(__dirname, `products_${storeId}.csv`), [header, ...rows].join('\n'));
+        try {
+            const { stamp } = require('./scrape_meta');
+            stamp(storeId);
+        } catch (_) {}
         console.log(`Guardado: products_${storeId}.json / .csv`);
     } else {
         console.error('No se extrajo ningún producto.');

@@ -12,7 +12,7 @@ import {
 import axios from 'axios';
 import logoNgr from './assets/Logo-ngr.png';
 import Comparativa from './Comparativa';
-import { formatPeruDateTime } from './formatDate';
+import { formatPeruDateTime, peruDateKey, peruTimeLabel } from './formatDate';
 
 // In production the frontend is served by the same Express server,
 // so relative paths work. In dev, Vite proxies /api to localhost:3001.
@@ -211,6 +211,11 @@ interface CompetitorData {
   csvFile: string;
 }
 
+interface HistoryRun {
+  at: string;
+  productCount: number;
+}
+
 export default function App() {
   const [data, setData] = useState<CompetitorData[]>([]);
   const [selectedCompId, setSelectedCompId] = useState<string>('');
@@ -219,6 +224,13 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState<'competitors' | 'own' | 'comparativa'>('competitors');
   const [aggregator, setAggregator] = useState<'Rappi' | 'PedidosYa'>('Rappi');
+
+  // History: calendar day (YYYY-MM-DD Lima) + selected run ISO
+  const [historyRuns, setHistoryRuns] = useState<HistoryRun[]>([]);
+  const [historyDate, setHistoryDate] = useState('');
+  const [historyAt, setHistoryAt] = useState('');
+  const [historyProducts, setHistoryProducts] = useState<Product[] | null>(null);
+  const [historyLoading, setHistoryLoading] = useState(false);
 
   const fetchData = async () => {
     setLoading(true);
@@ -251,6 +263,114 @@ export default function App() {
     }
   }, [activeTab, aggregator, data]);
 
+  // Load history index when store changes; default to latest
+  useEffect(() => {
+    if (!selectedCompId) {
+      setHistoryRuns([]);
+      setHistoryDate('');
+      setHistoryAt('');
+      setHistoryProducts(null);
+      return;
+    }
+    let cancelled = false;
+    (async () => {
+      setHistoryLoading(true);
+      setHistoryProducts(null);
+      try {
+        const resp = await axios.get(`${API_BASE}/history/${encodeURIComponent(selectedCompId)}`);
+        if (cancelled) return;
+        const runs: HistoryRun[] = Array.isArray(resp.data?.runs) ? resp.data.runs : [];
+        setHistoryRuns(runs);
+        const latest = data.find(d => d.id === selectedCompId);
+        const defaultAt = runs[0]?.at || latest?.lastUpdated || '';
+        setHistoryAt(defaultAt);
+        setHistoryDate(defaultAt ? peruDateKey(defaultAt) : '');
+        // Viewing latest → use live products from /api/results
+        setHistoryProducts(null);
+      } catch (err) {
+        console.error('Error fetching history:', err);
+        if (!cancelled) {
+          setHistoryRuns([]);
+          const latest = data.find(d => d.id === selectedCompId);
+          const defaultAt = latest?.lastUpdated || '';
+          setHistoryAt(defaultAt);
+          setHistoryDate(defaultAt ? peruDateKey(defaultAt) : '');
+          setHistoryProducts(null);
+        }
+      } finally {
+        if (!cancelled) setHistoryLoading(false);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [selectedCompId]);
+
+  const availableDates = Array.from(
+    new Set(historyRuns.map(r => peruDateKey(r.at)))
+  ).sort();
+
+  // If no history yet, still allow selecting the latest stamp day
+  const currentCompData = data.find(d => d.id === selectedCompId);
+  const dateOptions = availableDates.length > 0
+    ? availableDates
+    : (currentCompData?.lastUpdated ? [peruDateKey(currentCompData.lastUpdated)] : []);
+
+  const runsForDate = historyRuns
+    .filter(r => peruDateKey(r.at) === historyDate)
+    .sort((a, b) => new Date(b.at).getTime() - new Date(a.at).getTime());
+
+  // Fallback hour when index empty: show latest only
+  const hourOptions: HistoryRun[] = runsForDate.length > 0
+    ? runsForDate
+    : (currentCompData?.lastUpdated && historyDate === peruDateKey(currentCompData.lastUpdated)
+      ? [{ at: currentCompData.lastUpdated, productCount: currentCompData.products?.length || 0 }]
+      : []);
+
+  const isViewingLatest = historyProducts === null;
+
+  const loadHistoryRun = async (at: string) => {
+    setHistoryAt(at);
+    if (!selectedCompId || !at) {
+      setHistoryProducts(null);
+      return;
+    }
+    const latestAt = currentCompData?.lastUpdated;
+    // Prefer live catalog when selecting the current stamp (even if also in history)
+    if (latestAt && at === latestAt) {
+      setHistoryProducts(null);
+      return;
+    }
+    setHistoryLoading(true);
+    try {
+      const resp = await axios.get(
+        `${API_BASE}/history/${encodeURIComponent(selectedCompId)}/run`,
+        { params: { at } }
+      );
+      setHistoryProducts(Array.isArray(resp.data?.products) ? resp.data.products : []);
+    } catch (err) {
+      console.error('Error loading history run:', err);
+      // If run missing (e.g. only live stamp), fall back to latest
+      setHistoryProducts(null);
+    } finally {
+      setHistoryLoading(false);
+    }
+  };
+
+  const handleHistoryDateChange = (date: string) => {
+    setHistoryDate(date);
+    const runs = historyRuns
+      .filter(r => peruDateKey(r.at) === date)
+      .sort((a, b) => new Date(b.at).getTime() - new Date(a.at).getTime());
+    const nextAt = runs[0]?.at
+      || (currentCompData?.lastUpdated && peruDateKey(currentCompData.lastUpdated) === date
+        ? currentCompData.lastUpdated
+        : '');
+    if (nextAt) loadHistoryRun(nextAt);
+    else {
+      setHistoryAt('');
+      setHistoryProducts(null);
+    }
+  };
+
   const handleUpdate = async () => {
     const comp = COMPETITORS.find(c => c.id === selectedCompId);
     const url = comp?.url || `https://www.rappi.com.pe/restaurantes/${selectedCompId}`;
@@ -263,6 +383,16 @@ export default function App() {
     try {
       await axios.post(`${API_BASE}/update`, { url });
       await fetchData();
+      // Refresh history index after scrape
+      try {
+        const resp = await axios.get(`${API_BASE}/history/${encodeURIComponent(selectedCompId)}`);
+        const runs: HistoryRun[] = Array.isArray(resp.data?.runs) ? resp.data.runs : [];
+        setHistoryRuns(runs);
+        const defaultAt = runs[0]?.at || '';
+        setHistoryAt(defaultAt);
+        setHistoryDate(defaultAt ? peruDateKey(defaultAt) : '');
+        setHistoryProducts(null);
+      } catch (_) {}
     } catch (err: any) {
       console.error('Error updating:', err);
       const msg = err.response?.data?.error || 'Error al actualizar.';
@@ -279,9 +409,9 @@ export default function App() {
     window.open(`${API_BASE}/download/${currentComp.csvFile}`);
   };
 
-  const currentCompData = data.find(d => d.id === selectedCompId);
+  const displayedProducts = historyProducts ?? (currentCompData?.products || []);
 
-  const filteredProducts = (currentCompData?.products || []).filter(p =>
+  const filteredProducts = displayedProducts.filter(p =>
     p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     p.category.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -457,13 +587,69 @@ export default function App() {
                 </div>
               </div>
 
+              <div className="space-y-3 p-4 bg-slate-50 rounded-xl">
+                <div className="flex items-center justify-between gap-2">
+                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Historial</p>
+                  <span className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded ${
+                    isViewingLatest
+                      ? 'bg-emerald-100 text-emerald-700'
+                      : 'bg-amber-100 text-amber-800'
+                  }`}>
+                    {isViewingLatest ? 'Actual' : 'Histórico'}
+                  </span>
+                </div>
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1.5 tracking-wider">Día</label>
+                  <div className="relative">
+                    <select
+                      value={historyDate}
+                      disabled={dateOptions.length === 0 || historyLoading}
+                      onChange={(e) => handleHistoryDateChange(e.target.value)}
+                      className="w-full pl-3 pr-10 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-semibold text-slate-900 appearance-none disabled:opacity-50 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400"
+                    >
+                      {dateOptions.length === 0 ? (
+                        <option value="">Sin historial</option>
+                      ) : dateOptions.map(d => (
+                        <option key={d} value={d}>{d}</option>
+                      ))}
+                    </select>
+                    <ChevronDownIcon className="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  </div>
+                  {dateOptions.length > 0 && (
+                    <p className="mt-1 text-[10px] text-slate-400">
+                      Solo días con corridas ({dateOptions.length})
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1.5 tracking-wider">Hora (Lima)</label>
+                  <div className="relative">
+                    <select
+                      value={historyAt}
+                      disabled={hourOptions.length === 0 || historyLoading}
+                      onChange={(e) => loadHistoryRun(e.target.value)}
+                      className="w-full pl-3 pr-10 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-semibold text-slate-900 appearance-none disabled:opacity-50 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400"
+                    >
+                      {hourOptions.length === 0 ? (
+                        <option value="">Sin corridas</option>
+                      ) : hourOptions.map(r => (
+                        <option key={r.at} value={r.at}>
+                          {peruTimeLabel(r.at)} · {r.productCount} SKUs
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDownIcon className="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  </div>
+                </div>
+              </div>
+
               <div className="p-4 bg-slate-50 rounded-xl flex items-center gap-4">
                 <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-slate-200">
                   <ShoppingBagIcon className="w-5 h-5 text-slate-400" />
                 </div>
                 <div>
                   <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Sku's Detectados</p>
-                  <p className="text-sm font-bold text-slate-900">{currentCompData?.products.length || 0}</p>
+                  <p className="text-sm font-bold text-slate-900">{displayedProducts.length || 0}</p>
                 </div>
               </div>
             </div>
@@ -472,7 +658,14 @@ export default function App() {
           {/* Product Table Card */}
           <div className="md:col-span-8 bg-white rounded-2xl p-6 border border-slate-100 shadow-sm overflow-hidden flex flex-col">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
-              <h2 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Catalogo de Precios</h2>
+              <div>
+                <h2 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Catalogo de Precios</h2>
+                {!isViewingLatest && historyAt && (
+                  <p className="text-[11px] text-amber-700 font-semibold mt-1">
+                    Vista histórica · {formatPeruDateTime(historyAt)}
+                  </p>
+                )}
+              </div>
               <div className="relative w-full sm:w-64">
                 <MagnifyingGlassIcon className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input

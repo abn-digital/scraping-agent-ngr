@@ -16,3 +16,27 @@ export function formatPeruDateTime(iso: string | Date | null | undefined): strin
     hour12: true,
   });
 }
+
+/** YYYY-MM-DD in America/Lima for an ISO timestamp. */
+export function peruDateKey(iso: string | Date): string {
+  const d = iso instanceof Date ? iso : new Date(iso);
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: PERU_TZ,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(d);
+}
+
+/** HH:mm in America/Lima for an ISO timestamp. */
+export function peruTimeLabel(iso: string | Date): string {
+  const d = iso instanceof Date ? iso : new Date(iso);
+  return new Intl.DateTimeFormat('es-PE', {
+    timeZone: PERU_TZ,
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  }).format(d);
+}
+
+export { PERU_TZ };

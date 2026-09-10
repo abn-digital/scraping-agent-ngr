@@ -4,21 +4,21 @@
     "category": "Promos semana Express",
     "name": "Promo Martes y Jueves - Express Especial",
     "description": "Todos los martes y jueves llévate cualquier plato especial a S/.21.90",
-    "price": 0.21
+    "price": 21.9
   },
   {
     "restaurant": "Chifa Express",
     "category": "Promos semana Express",
     "name": "Promo Viernes - Montados & Combinados",
     "description": "Promoción exclusiva los Viernes.",
-    "price": 3
+    "price": 15.9
   },
   {
     "restaurant": "Chifa Express",
     "category": "Promociones",
     "name": "Combo Clásico Express",
     "description": "1 combinado a elección o chaufa de pollo personal o aeropuerto personal + 3 wantanes o sopa wantán de pollo personal + 1 bebida 300ml. Agranda tus bebidas a 500ml +S/2 c/u.",
-    "price": 2
+    "price": 24.9
   },
   {
     "restaurant": "Chifa Express",
@@ -26,6 +26,13 @@
     "name": "Combo chaufa y alitas express",
     "description": "Arroz chaufa  + 3 alitas de ostión o tamarindo + gaseosa 300ml",
     "price": 22.95
+  },
+  {
+    "restaurant": "Chifa Express",
+    "category": "Promociones",
+    "name": "Dúo Perfecto 💘👩‍👧‍👦",
+    "description": "1 combinado a elección + 1 montado a elección",
+    "price": 29.9
   },
   {
     "restaurant": "Chifa Express",
