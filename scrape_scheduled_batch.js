@@ -7,10 +7,12 @@
  *   KERNEL_API_KEY=... node scrape_scheduled_batch.js --skip=starbucks-pe
  *
  * Env:
- *   SCHED_PAUSE_MS     pause between stores (default 15000)
- *   PEYA_RESYNC_URL    optional POST to refresh Cloud Run disk from GCS
- *   CRON_SECRET        X-Cron-Secret for resync
- *   GCS_BUCKET         default ngr-scraping-data
+ *   SCHED_PAUSE_MS         pause between stores (default 15000)
+ *   SCHED_RETRY_MAX        extra passes for failures after the first (default 2)
+ *   SCHED_RETRY_DELAY_MS   wait before each retry pass (default 300000 = 5 min)
+ *   PEYA_RESYNC_URL        optional POST to refresh Cloud Run disk from GCS
+ *   CRON_SECRET            X-Cron-Secret for resync
+ *   GCS_BUCKET             default ngr-scraping-data
  */
 const { spawn } = require('child_process');
 const fs = require('fs');
@@ -21,6 +23,8 @@ const { stamp } = require('./scrape_meta');
 const historyStore = require('./history_store');
 
 const PAUSE_MS = Number(process.env.SCHED_PAUSE_MS || 15000);
+const RETRY_MAX = Math.max(0, Number(process.env.SCHED_RETRY_MAX || 2));
+const RETRY_DELAY_MS = Number(process.env.SCHED_RETRY_DELAY_MS || 300000);
 const GCS_BUCKET = process.env.GCS_BUCKET || 'ngr-scraping-data';
 const gcs = new Storage();
 
@@ -102,9 +106,10 @@ async function publishSuccess(storeId) {
     return true;
 }
 
-function runOne(store) {
+function runOne(store, { attemptLabel = '' } = {}) {
     return new Promise((resolve) => {
-        console.log(`\n======== ${store.id} · ${store.name} · ${store.platform} ========`);
+        const label = attemptLabel ? ` ${attemptLabel}` : '';
+        console.log(`\n======== ${store.id} · ${store.name} · ${store.platform}${label} ========`);
         console.log(store.script, store.url);
         const child = spawn(
             process.execPath,
@@ -126,9 +131,8 @@ function runOne(store) {
         child.on('close', async (code) => {
             const rootFile = path.join(__dirname, `products_${store.id}.json`);
             const dataFile = path.join(__dirname, 'data', `products_${store.id}.json`);
-            const okFile = fs.existsSync(rootFile) || fs.existsSync(dataFile);
             let published = false;
-            if (code === 0 && okFile) {
+            if (code === 0 && (fs.existsSync(rootFile) || fs.existsSync(dataFile))) {
                 published = await publishSuccess(store.id);
             }
             resolve({
@@ -139,6 +143,18 @@ function runOne(store) {
             });
         });
     });
+}
+
+async function runPass(stores, { passName, pauseMs }) {
+    const results = [];
+    for (let i = 0; i < stores.length; i++) {
+        const store = stores[i];
+        const result = await runOne(store, { attemptLabel: passName });
+        results.push(result);
+        console.log(`[${passName} ${i + 1}/${stores.length}] ${store.id} → ${result.ok ? 'OK' : 'FAIL'} (exit ${result.code})`);
+        if (i < stores.length - 1) await sleep(pauseMs);
+    }
+    return results;
 }
 
 async function resyncDashboard() {
@@ -165,21 +181,35 @@ async function resyncDashboard() {
 }
 
 (async () => {
-    console.log(`Scheduled batch: ${queue.length} stores · pause ${PAUSE_MS / 1000}s`);
+    console.log(`Scheduled batch: ${queue.length} stores · pause ${PAUSE_MS / 1000}s · retries ${RETRY_MAX} × ${RETRY_DELAY_MS / 1000}s`);
     if (skip.size) console.log(`Skipping: ${[...skip].join(', ')}`);
     if (!process.env.KERNEL_API_KEY) {
         console.warn('KERNEL_API_KEY missing — scrapers may fall back to local Chromium');
     }
 
-    const results = [];
-    for (let i = 0; i < queue.length; i++) {
-        const store = queue[i];
-        const result = await runOne(store);
-        results.push(result);
-        console.log(`[${i + 1}/${queue.length}] ${store.id} → ${result.ok ? 'OK' : 'FAIL'} (exit ${result.code})`);
-        if (i < queue.length - 1) await sleep(PAUSE_MS);
+    const byId = new Map(queue.map(s => [s.id, s]));
+    const first = await runPass(queue, { passName: 'pass-1', pauseMs: PAUSE_MS });
+    const outcome = new Map(first.map(r => [r.id, r]));
+
+    let pending = first.filter(r => !r.ok).map(r => r.id);
+    for (let retry = 1; retry <= RETRY_MAX && pending.length > 0; retry++) {
+        console.log(`\n── Retry pass ${retry}/${RETRY_MAX}: ${pending.length} store(s) after ${RETRY_DELAY_MS / 1000}s ──`);
+        await sleep(RETRY_DELAY_MS);
+        const retryStores = pending.map(id => byId.get(id)).filter(Boolean);
+        // Cooler traffic on sites that just failed / blocked us
+        const retryPause = Math.max(PAUSE_MS, 30000);
+        const retryResults = await runPass(retryStores, {
+            passName: `retry-${retry}`,
+            pauseMs: retryPause,
+        });
+        for (const r of retryResults) outcome.set(r.id, r);
+        pending = retryResults.filter(r => !r.ok).map(r => r.id);
+        if (pending.length === 0) {
+            console.log(`All previously failed stores recovered on retry-${retry}.`);
+        }
     }
 
+    const results = [...outcome.values()];
     const ok = results.filter(r => r.ok).length;
     const fail = results.length - ok;
     console.log(`\nDone: ${ok} ok · ${fail} fail · ${results.length} total`);

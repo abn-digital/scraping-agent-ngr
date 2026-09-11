@@ -304,6 +304,51 @@ async function captureMenu(page, state, url) {
                 await sleep(wait);
             }
         }
+
+        // Final delayed retry for stores that still failed
+        const RETRY_MAX = Math.max(0, Number(process.env.PEYA_RETRY_MAX || 1));
+        const RETRY_DELAY_MS = Number(process.env.PEYA_RETRY_DELAY_MS || 300000);
+        for (let retry = 1; retry <= RETRY_MAX && results.failed.length > 0; retry++) {
+            const toRetry = [...results.failed];
+            console.log(`\n── PeYa retry ${retry}/${RETRY_MAX}: ${toRetry.length} store(s) after ${RETRY_DELAY_MS / 1000}s ──`);
+            await sleep(RETRY_DELAY_MS);
+            results.failed = [];
+            for (let i = 0; i < toRetry.length; i++) {
+                const storeId = toRetry[i];
+                const store = queue.find(s => s.id === storeId);
+                if (!store) continue;
+                console.log(`\n======== RETRY ${store.id} · ${store.name} ========`);
+                try {
+                    let menu = await captureMenu(session.page, session.state, store.url);
+                    if (!menu?.sections) throw new Error('No menus JSON');
+                    const pageTitle = cleanRestaurantName(await session.page.evaluate(() =>
+                        (document.querySelector('h1')?.textContent || '').trim()
+                    ).catch(() => ''));
+                    const extracted = extractFromApiData(menu);
+                    let products = extracted.products.filter(p => p.price > 0);
+                    const restaurantName = pageTitle || cleanRestaurantName(extracted.restaurantName) || store.name;
+                    products = products.map(p => ({
+                        ...p,
+                        restaurant: restaurantName,
+                        description: (p.description || '').trim(),
+                    }));
+                    if (!products.length) throw new Error('0 products after parse');
+                    await saveProducts(products, store.id);
+                    console.log(`✓ ${store.id} (retry): ${products.length} SKUs · ${restaurantName}`);
+                    if (!results.ok.includes(store.id)) results.ok.push(store.id);
+                } catch (e) {
+                    console.error(`✗ ${store.id} (retry ${retry}): ${e.message}`);
+                    results.failed.push(store.id);
+                    if (isDeadBrowserError(e)) {
+                        try { await closeKernelBrowser(session); } catch (_) {}
+                        await sleep(20000);
+                        session = await openSession();
+                        await warm(session.page);
+                    }
+                }
+                if (i < toRetry.length - 1) await sleep(Math.max(PAUSE_MS, 90000));
+            }
+        }
     } finally {
         try { await closeKernelBrowser(session); } catch (_) {}
     }
