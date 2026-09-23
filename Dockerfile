@@ -51,6 +51,7 @@ COPY starbucks_scraper.js ./
 COPY rokys_scraper.js ./
 COPY kernel_browser.js ./
 COPY magento_scraper.js ./
+COPY price_utils.js ./
 COPY scrape_meta.js ./
 COPY history_store.js ./
 COPY pedidosya_stores.js ./

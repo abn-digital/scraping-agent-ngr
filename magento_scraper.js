@@ -1,5 +1,6 @@
 const { createKernelBrowser, closeKernelBrowser } = require('./kernel_browser');
 const { stamp } = require('./scrape_meta');
+const { applyOfferPricing, dedupePreferCatalogCategory } = require('./price_utils');
 const fs = require('fs');
 const path = require('path');
 
@@ -12,6 +13,11 @@ const path = require('path');
  *   - Parent sections are /menu/<slug> (Combos, Hamburguesas, Promociones, …)
  *   - Subcategory filters (Personales, Para 2, …) are ignored when a parent exists
  *   - Prefer the general/parent category; never emit "General"
+ *   - Same SKU under Promociones + carta → keep carta only
+ *
+ * Pricing:
+ *   - Magento finalPrice / oldPrice when present
+ *   - Partner offers (Yape/Entel/…) embedded in description → price = offer, originalPrice = list
  */
 
 const BRAND_MAP = {
@@ -79,6 +85,7 @@ function extractMagentoProductsBrowser({ restaurantName, parentCategory }) {
         const finalPriceEl = el.querySelector('[data-price-type="finalPrice"]');
         const oldPriceEl = el.querySelector('[data-price-type="oldPrice"]');
         let price = 0;
+        let originalPrice = null;
         if (finalPriceEl) {
             price = parseFloat(finalPriceEl.getAttribute('data-price-amount')) || 0;
         } else if (oldPriceEl) {
@@ -87,6 +94,10 @@ function extractMagentoProductsBrowser({ restaurantName, parentCategory }) {
             const priceText = el.querySelector('.price')?.textContent || '';
             const match = priceText.match(/S\/\s*([\d.,]+)/);
             if (match) price = parseFloat(match[1].replace(',', '.'));
+        }
+        if (oldPriceEl) {
+            const oldAmt = parseFloat(oldPriceEl.getAttribute('data-price-amount')) || 0;
+            if (oldAmt > price && price > 0) originalPrice = oldAmt;
         }
         if (price === 0) continue;
 
@@ -117,7 +128,9 @@ function extractMagentoProductsBrowser({ restaurantName, parentCategory }) {
         seen.add(key);
 
         const sku = el.querySelector('[data-product-sku]')?.getAttribute('data-product-sku') || '';
-        results.push({ restaurant: restaurantName, category, name, description, price, sku });
+        const row = { restaurant: restaurantName, category, name, description, price, sku };
+        if (originalPrice) row.originalPrice = originalPrice;
+        results.push(row);
     }
 
     return results;
@@ -263,7 +276,7 @@ async function scrapeMagento(url) {
     }
 
     const seen = new Set();
-    const unique = allProducts.filter(p => {
+    let unique = allProducts.filter(p => {
         if (!p.category || p.category === 'General') return false;
         const key = `${p.name}||${p.category}`;
         if (seen.has(key)) return false;
@@ -271,17 +284,25 @@ async function scrapeMagento(url) {
         return true;
     });
 
+    // Partner offers in description (Yape/Entel/…) + drop Promociones mirrors of carta SKUs
+    unique = dedupePreferCatalogCategory(unique.map(p => applyOfferPricing({ ...p })));
+
     console.log(`\nTotal de productos únicos (${brand.name}): ${unique.length}`);
     const catCounts = {};
     unique.forEach(p => { catCounts[p.category] = (catCounts[p.category] || 0) + 1; });
     console.log('Categorías:', Object.entries(catCounts).map(([k, v]) => `${k}(${v})`).join(', '));
+    const withOffer = unique.filter(p => p.originalPrice && p.originalPrice > p.price).length;
+    if (withOffer) console.log(`Ofertas (price < originalPrice): ${withOffer}`);
 
     if (unique.length > 0) {
         const jsonPath = path.join(__dirname, `products_${brand.storeId}.json`);
         fs.writeFileSync(jsonPath, JSON.stringify(unique, null, 2));
-        const header = 'Restaurant,Category,Product Name,Description,Price';
+        const header = 'Restaurant,Category,Product Name,Description,Price,Original Price,Promo Partner';
         const rows = unique.map(p =>
-            [esc(p.restaurant), esc(p.category), esc(p.name), esc(p.description), p.price].join(',')
+            [
+                esc(p.restaurant), esc(p.category), esc(p.name), esc(p.description),
+                p.price, p.originalPrice ?? '', p.promoPartner ?? '',
+            ].join(',')
         );
         fs.writeFileSync(path.join(__dirname, `products_${brand.storeId}.csv`), [header, ...rows].join('\n'));
         stamp(brand.storeId);

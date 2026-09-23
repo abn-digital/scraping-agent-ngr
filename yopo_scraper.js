@@ -71,22 +71,47 @@ async function scrapeYopo(url = 'https://yopo.pe/categorias/') {
 
             for (const titleWidget of titleWidgets) {
                 const nameEl = titleWidget.querySelector('h1, h2, h3, a, .elementor-heading-title') || titleWidget;
-                const name = (nameEl.textContent || '').trim();
+                let name = (nameEl.textContent || '').trim().replace(/_+$/, '');
                 if (!name || name.length < 2 || seen.has(name)) continue;
 
                 // Find price nearby: sibling / parent container
                 const card = titleWidget.closest('.e-con, .elementor-element[data-element_type="container"], li.product, .product') || titleWidget.parentElement;
                 let price = 0;
+                let originalPrice = null;
                 const priceRoot = card || titleWidget.parentElement?.parentElement;
                 if (priceRoot) {
-                    const amount = priceRoot.querySelector('.woocommerce-Price-amount, .price .amount, p.price');
-                    if (amount) {
-                        const m = amount.textContent.match(/([\d.,]+)/);
+                    // WooCommerce sale: <del> regular </del><ins> sale </ins>
+                    const delEl = priceRoot.querySelector('del .woocommerce-Price-amount, del .amount, del');
+                    const insEl = priceRoot.querySelector('ins .woocommerce-Price-amount, ins .amount, ins');
+                    if (insEl) {
+                        const m = insEl.textContent.match(/([\d.,]+)/);
                         if (m) price = parseFloat(m[1].replace(',', '.'));
+                        if (delEl) {
+                            const dm = delEl.textContent.match(/([\d.,]+)/);
+                            if (dm) originalPrice = parseFloat(dm[1].replace(',', '.'));
+                        }
+                    } else {
+                        const amounts = [...priceRoot.querySelectorAll('.woocommerce-Price-amount, .price .amount')];
+                        const nums = amounts.map(a => {
+                            const m = a.textContent.match(/([\d.,]+)/);
+                            return m ? parseFloat(m[1].replace(',', '.')) : 0;
+                        }).filter(n => n > 0);
+                        if (nums.length >= 2) {
+                            // Highest = list, lowest = what the client pays
+                            originalPrice = Math.max(...nums);
+                            price = Math.min(...nums);
+                        } else if (nums.length === 1) {
+                            price = nums[0];
+                        } else {
+                            const amount = priceRoot.querySelector('p.price, .price');
+                            if (amount) {
+                                const m = amount.textContent.match(/([\d.,]+)/);
+                                if (m) price = parseFloat(m[1].replace(',', '.'));
+                            }
+                        }
                     }
                 }
                 if (price === 0) {
-                    // Walk forward siblings for a price widget
                     let sib = titleWidget.parentElement;
                     for (let i = 0; i < 6 && sib; i++) {
                         sib = sib.nextElementSibling || sib.parentElement?.nextElementSibling;
@@ -96,6 +121,7 @@ async function scrapeYopo(url = 'https://yopo.pe/categorias/') {
                     }
                 }
                 if (price === 0) continue;
+                if (originalPrice && originalPrice <= price) originalPrice = null;
 
                 let description = '';
                 if (card) {
@@ -112,7 +138,9 @@ async function scrapeYopo(url = 'https://yopo.pe/categorias/') {
                     else break;
                 }
 
-                results.push({ restaurant: 'Yopo', category, name, description, price });
+                const row = { restaurant: 'Yopo', category, name, description, price };
+                if (originalPrice) row.originalPrice = originalPrice;
+                results.push(row);
                 seen.add(name);
             }
 
@@ -185,9 +213,9 @@ function saveUnique(results, storeId) {
 
     if (unique.length > 0) {
         fs.writeFileSync(path.join(__dirname, `products_${storeId}.json`), JSON.stringify(unique, null, 2));
-        const header = 'Restaurant,Category,Product Name,Description,Price';
+        const header = 'Restaurant,Category,Product Name,Description,Price,Original Price';
         const rows = unique.map(p =>
-            [esc(p.restaurant), esc(p.category), esc(p.name), esc(p.description), p.price].join(',')
+            [esc(p.restaurant), esc(p.category), esc(p.name), esc(p.description), p.price, p.originalPrice ?? ''].join(',')
         );
         fs.writeFileSync(path.join(__dirname, `products_${storeId}.csv`), [header, ...rows].join('\n'));
         console.log(`Guardado: products_${storeId}.json / .csv`);

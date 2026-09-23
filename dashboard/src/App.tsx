@@ -199,6 +199,8 @@ interface Product {
   name: string;
   description: string;
   price: number;
+  originalPrice?: number;
+  promoPartner?: string;
 }
 
 interface CompetitorData {
@@ -482,10 +484,10 @@ export default function App() {
         {activeTab === 'comparativa' ? (
           <Comparativa />
         ) : (
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
 
           {/* Selector Card */}
-          <div className="md:col-span-4 bg-white rounded-2xl p-6 border border-slate-100 shadow-sm space-y-4">
+          <div className="md:col-span-4 bg-white rounded-2xl p-6 border border-slate-100 shadow-sm space-y-4 md:sticky md:top-6">
             <h2 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Selección de Local</h2>
             <div className="space-y-4 pt-2">
               {activeTab === 'competitors' && (
@@ -655,9 +657,9 @@ export default function App() {
             </div>
           </div>
 
-          {/* Product Table Card */}
-          <div className="md:col-span-8 bg-white rounded-2xl p-6 border border-slate-100 shadow-sm overflow-hidden flex flex-col">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+          {/* Product Table Card — grows with SKUs, caps at viewport then scrolls */}
+          <div className="md:col-span-8 bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-4">
               <div>
                 <h2 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Catalogo de Precios</h2>
                 {!isViewingLatest && historyAt && (
@@ -678,13 +680,13 @@ export default function App() {
               </div>
             </div>
 
-            <div className="flex-1 overflow-auto max-h-[500px] border-t border-slate-50 pr-2 custom-scrollbar">
+            <div className="overflow-y-auto max-h-[calc(100dvh-14rem)] border-t border-slate-50 pr-2 custom-scrollbar">
               <table className="w-full text-left border-separate border-spacing-0 table-fixed">
                 <thead className="sticky top-0 bg-white z-10">
                   <tr>
-                    <th className="w-[46%] py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100">Producto</th>
-                    <th className="w-[34%] py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100">Categoría</th>
-                    <th className="w-[20%] py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 text-right">Precio Actual</th>
+                    <th className="w-[42%] py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100">Producto</th>
+                    <th className="w-[28%] py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100">Categoría</th>
+                    <th className="w-[30%] py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 text-right">Precio</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -697,7 +699,9 @@ export default function App() {
                         <p className="text-slate-400 italic text-sm">No se encontraron productos para esta selección.</p>
                       </div>
                     </td></tr>
-                  ) : filteredProducts.map((p, idx) => (
+                  ) : filteredProducts.map((p, idx) => {
+                    const hasOffer = typeof p.originalPrice === 'number' && p.originalPrice > p.price;
+                    return (
                     <tr key={idx} className="hover:bg-slate-50/50 transition-colors group">
                       <td className="py-4 pr-3 border-b border-slate-50 align-top">
                         <p className="font-bold text-slate-900 group-hover:text-slate-700 transition-colors">{p.name}</p>
@@ -715,9 +719,20 @@ export default function App() {
                       </td>
                       <td className="py-4 border-b border-slate-50 text-right align-top whitespace-nowrap">
                         <p className="font-black text-slate-900 text-base">S/&nbsp;{p.price.toFixed(2)}</p>
+                        {hasOffer && (
+                          <p className="text-[11px] text-slate-400 mt-0.5">
+                            <span className="line-through">S/&nbsp;{p.originalPrice!.toFixed(2)}</span>
+                            {p.promoPartner ? (
+                              <span className="ml-1 font-semibold uppercase tracking-wide text-slate-500">
+                                {p.promoPartner}
+                              </span>
+                            ) : null}
+                          </p>
+                        )}
                       </td>
                     </tr>
-                  ))}
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

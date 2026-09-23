@@ -61,32 +61,54 @@ async function scrapeStarbucks(url = 'https://www.starbucks.pe/menu') {
 
 function parseEmbedded(data) {
     const results = [];
+    // Never promote a product name into the category context — that produced
+    // "category = previous product" rows when walking nested menu trees.
+    function looksLikeProduct(obj) {
+        return !!(obj && (obj.name || obj.title) && (
+            obj.price !== undefined || obj.basePrice !== undefined ||
+            obj.defaultPrice !== undefined || obj.sizes
+        ));
+    }
     function walk(obj, category = 'Bebidas') {
         if (!obj || typeof obj !== 'object') return;
         if (Array.isArray(obj)) { obj.forEach(i => walk(i, category)); return; }
-        if ((obj.name || obj.title) && (obj.price !== undefined || obj.basePrice !== undefined || obj.sizes)) {
+        if (looksLikeProduct(obj)) {
             const priceRaw = obj.price ?? obj.basePrice ?? obj.defaultPrice ?? 0;
             let price = typeof priceRaw === 'number'
                 ? (priceRaw > 1000 ? priceRaw / 100 : priceRaw)
                 : parseFloat(priceRaw) || 0;
-            // Some Starbucks entries have sizes array — pick smallest (base) price
             if (obj.sizes && Array.isArray(obj.sizes)) {
                 const prices = obj.sizes.map(s => s.price ?? s.cost ?? 0).filter(p => p > 0);
-                if (prices.length > 0) price = Math.min(...prices) > 1000 ? Math.min(...prices) / 100 : Math.min(...prices);
+                if (prices.length > 0) {
+                    const min = Math.min(...prices);
+                    price = min > 1000 ? min / 100 : min;
+                }
             }
             if (price > 0) {
+                const cat =
+                    (typeof obj.category === 'string' && obj.category) ||
+                    (typeof obj.categoryName === 'string' && obj.categoryName) ||
+                    category;
                 results.push({
                     restaurant: 'Starbucks',
-                    category: obj.category ?? obj.categoryName ?? category,
-                    name: obj.name || obj.title,
+                    category: cat,
+                    name: (obj.name || obj.title || '').replace(/\u200b/g, '').trim(),
                     description: obj.description || obj.shortDescription || '',
                     price,
                 });
             }
+            // Still walk nested children with the same section category
+            Object.values(obj).forEach(v => {
+                if (v && typeof v === 'object') walk(v, category);
+            });
             return;
         }
-        const catName = obj.categoryName ?? obj.category ?? obj.name;
-        Object.values(obj).forEach(v => walk(v, typeof catName === 'string' && catName ? catName : category));
+        // Only explicit category fields may change the walk context — never obj.name
+        const nextCat =
+            (typeof obj.categoryName === 'string' && obj.categoryName) ||
+            (typeof obj.category === 'string' && obj.category) ||
+            category;
+        Object.values(obj).forEach(v => walk(v, nextCat));
     }
     walk(data);
     return results;
@@ -111,29 +133,34 @@ async function extractStarbucksDOM(page) {
     return page.evaluate(() => {
         const results = [];
         let currentCategory = 'Bebidas';
+        const SECTION_RE = /bebidas|alimentos|frappuccino|espresso|caf[eé]|te\b|t[eé]|bakery|comida|merchandise|merch|seasonal|protein|refreshers/i;
 
-        // Starbucks typically uses [class*="menu"] or [class*="product"] wrappers
         const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT);
         while (walker.nextNode()) {
             const el = walker.currentNode;
 
-            if ((el.tagName === 'H2' || el.tagName === 'H3') && !el.closest('[class*="product"]') && !el.closest('[class*="item"]')) {
+            // Only treat headings as sections when they look like menu groups —
+            // product titles (H3/H4) must not become the next item's category.
+            if ((el.tagName === 'H1' || el.tagName === 'H2') &&
+                !el.closest('[class*="product"]') &&
+                !el.closest('[class*="item"]') &&
+                !el.closest('article')) {
                 const txt = el.textContent?.trim();
-                if (txt && txt.length > 0 && txt.length < 80) currentCategory = txt;
+                if (txt && txt.length > 1 && txt.length < 60 && SECTION_RE.test(txt)) {
+                    currentCategory = txt;
+                }
             }
 
             const isProductCard = (
                 el.matches('[class*="product"], [class*="menu-item"], [class*="food-item"], article') &&
-                !el.matches('[class*="product"] [class*="product"]') // avoid nested
+                !el.matches('[class*="product"] [class*="product"]')
             );
-
             if (!isProductCard) continue;
 
             const nameEl = el.querySelector('h3, h4, h5, [class*="name"], [class*="title"]');
-            const name = nameEl?.textContent?.trim() || '';
+            const name = nameEl?.textContent?.replace(/\u200b/g, '').trim() || '';
             if (!name || name.length < 2) continue;
 
-            // Strikethrough prices
             const strikeEls = el.querySelectorAll('del, s, [class*="line-through"], [class*="old"], [class*="was"]');
             const striked = new Set();
             strikeEls.forEach(se => {

@@ -393,7 +393,7 @@
   },
   {
     "restaurant": "Dunkin'",
-    "category": "Desayunos",
+    "category": "Combos y Boxes",
     "name": "Protein Morning Box",
     "description": "Balance pero con antojo. Protein Latte y Dunwichs para sentirte fit… pero feliz.",
     "price": 31,
@@ -401,7 +401,7 @@
   },
   {
     "restaurant": "Dunkin'",
-    "category": "Desayunos",
+    "category": "Combos y Boxes",
     "name": "Study & Work Box",
     "description": "Tu break productivo acaba de subir de nivel. 2 Iced Protein Latte + 2 sandwiches para sobrevivir calls, pendientes y reuniones eternas sin perder el mood.",
     "price": 39.9,
@@ -409,7 +409,7 @@
   },
   {
     "restaurant": "Dunkin'",
-    "category": "Desayunos",
+    "category": "Combos y Boxes",
     "name": "Coffee & Dunwich Box",
     "description": "El desayuno que sí te deja feliz. Cafecito, dunwich y donuts para arrancar el día con full energía y cero decisiones difíciles.",
     "price": 44.9,
@@ -417,7 +417,7 @@
   },
   {
     "restaurant": "Dunkin'",
-    "category": "Desayunos",
+    "category": "Combos y Boxes",
     "name": "Morning Boost Box",
     "description": "Tu upgrade mañanero llegó. El combo perfecto para sobrevivir clases, oficina o juntas eternas con café, sandwiches y donuts para compartir.",
     "price": 59.9,
@@ -425,7 +425,7 @@
   },
   {
     "restaurant": "Dunkin'",
-    "category": "Desayunos",
+    "category": "Combos y Boxes",
     "name": "Dunkin Breakfast Club",
     "description": "El desayuno oficial del team. Café, sandwiches y donuts para compartir porque las mejores mañanas siempre empiezan en grupo.",
     "price": 89.9,
@@ -914,46 +914,6 @@
   {
     "restaurant": "Dunkin'",
     "category": "Combos y Boxes",
-    "name": "Dunkin Breakfast Club",
-    "description": "El desayuno oficial del team. Café, sandwiches y donuts para compartir porque las mejores mañanas siempre empiezan en grupo.",
-    "price": 89.9,
-    "sku": "14078"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Combos y Boxes",
-    "name": "Coffee & Dunwich Box",
-    "description": "El desayuno que sí te deja feliz. Cafecito, dunwich y donuts para arrancar el día con full energía y cero decisiones difíciles.",
-    "price": 44.9,
-    "sku": "14076"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Combos y Boxes",
-    "name": "Morning Boost Box",
-    "description": "Tu upgrade mañanero llegó. El combo perfecto para sobrevivir clases, oficina o juntas eternas con café, sandwiches y donuts para compartir.",
-    "price": 59.9,
-    "sku": "14077"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Combos y Boxes",
-    "name": "Study & Work Box",
-    "description": "Tu break productivo acaba de subir de nivel. 2 Iced Protein Latte + 2 sandwiches para sobrevivir calls, pendientes y reuniones eternas sin perder el mood.",
-    "price": 39.9,
-    "sku": "14075"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Combos y Boxes",
-    "name": "Protein Morning Box",
-    "description": "Balance pero con antojo. Protein Latte y Dunwichs para sentirte fit… pero feliz.",
-    "price": 31,
-    "sku": "14079"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Combos y Boxes",
     "name": "Tiempo Extra Combo",
     "description": "3 bebidas Dunkin y 3 Dunwichs para acompañar cada momento del partido.",
     "price": 41.9,
@@ -1161,7 +1121,7 @@
   },
   {
     "restaurant": "Dunkin'",
-    "category": "Sandwiches",
+    "category": "Novedades",
     "name": "Dunwich Bacon",
     "description": "Deliciosa donut glaseada con tocino cocido.",
     "price": 9.9,
@@ -1169,7 +1129,7 @@
   },
   {
     "restaurant": "Dunkin'",
-    "category": "Sandwiches",
+    "category": "Novedades",
     "name": "Dunwich Mixto",
     "description": "Deliciosa donut glaseada con jamón y queso.",
     "price": 8.9,
@@ -1177,7 +1137,7 @@
   },
   {
     "restaurant": "Dunkin'",
-    "category": "Sandwiches",
+    "category": "Novedades",
     "name": "Combo Dunwich Bacon",
     "description": "Disfruta de un deliciosa Dunwchi Bacon + 1 bebida Dunkin' 12 oz.",
     "price": 11.9,
@@ -1185,7 +1145,7 @@
   },
   {
     "restaurant": "Dunkin'",
-    "category": "Sandwiches",
+    "category": "Novedades",
     "name": "Combo Dunwich Mixto",
     "description": "Disfruta de un deliciosa Dunwchi Mixto + 1 bebida Dunkin' 12 oz.",
     "price": 10.9,
@@ -1298,178 +1258,10 @@
   {
     "restaurant": "Dunkin'",
     "category": "Promociones",
-    "name": "Semana Dunkin Promo Comparte",
-    "description": "¡Semana Dunkin! ¡8 Donuts Clásicas a solo S/24.90! Exclusivo en Web del 17 al 23 de Agosto.",
-    "price": 24.9,
-    "sku": "12788"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Promociones",
-    "name": "Jueves de Dulzura",
-    "description": "Disfruta la promo jueves de 12 donuts clásicas a elección.",
-    "price": 36.9,
-    "sku": "9474"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Promociones",
-    "name": "Donuts Clásicas x6",
-    "description": "Disfruta de 6 deliciosas donuts clásicas a elección.",
-    "price": 27.9,
-    "sku": "5511"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Promociones",
-    "name": "Cuatroferta Clásica",
-    "description": "Disfruta de 4 deliciosas donuts clásicas a elección.",
-    "price": 19.9,
-    "sku": "6932"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Promociones",
-    "name": "Donuts Clásicas x36",
-    "description": "Disfruta de 36 donuts clásicas a elección",
-    "price": 119.9,
-    "sku": "9838"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Promociones",
-    "name": "Donuts Clásicas x54",
-    "description": "Disfruta de 54 deliciosas donuts clásicas a elección.",
-    "price": 174.9,
-    "sku": "5517"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Promociones",
-    "name": "Donuts Clásicas x24",
-    "description": "Disfruta de 24 donuts clásicas a elección.",
-    "price": 82.9,
-    "sku": "8201"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Promociones",
-    "name": "Big Deal 18",
-    "description": "Disfruta de 18 deliciosas donuts clásicas a elección.",
-    "price": 62.9,
-    "sku": "5515"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Promociones",
-    "name": "8 Donuts Sorpresa",
-    "description": "Disfruta de 8 donuts clásicas aleatorias (mínimo 3 variedades diferentes). Exclusivo Delivery",
-    "price": 25.9,
-    "sku": "11600"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Promociones",
-    "name": "Donuts Clásicas x12",
-    "description": "Disfruta de 12 deliciosas donuts clásicas a elección.",
-    "price": 44.9,
-    "sku": "5514"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Promociones",
-    "name": "Dunkin N Share",
-    "description": "6 donuts clásicas y 2 bebidas Dunkin' 12 oz a elección.",
-    "price": 29.9,
-    "sku": "11596"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Promociones",
-    "name": "Dunkin N Party",
-    "description": "12 donuts clásicas y 4 bebidas Dunkin' 12 oz a elección.",
-    "price": 49.9,
-    "sku": "11597"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Promociones",
-    "name": "Dulce Combinación",
-    "description": "4 donuts clásicas y 2 bebidas Dunkin' 12 oz a elección.",
-    "price": 24.9,
-    "sku": "11598"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Promociones",
     "name": "Café Blend + 1 Café + 1 Dona",
     "description": "Café Blend 435 g para preparar en casa + 1 Café Dunkin’ + 1 Dona. Disfruta tu café favorito hoy y lleva el sabor Dunkin’ para seguir disfrutándolo en casa.",
     "price": 49.9,
     "sku": "14930"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Novedades",
-    "name": "Duo Dunkster",
-    "description": "Energízate con 2 Cool Monster Sandía o Mora Azul de 16 oz a solo S/19.90",
-    "price": 19.9,
-    "sku": "12831"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Novedades",
-    "name": "Cool Monster Sandía",
-    "description": "Refrescante bebida energizante sabor a Sandia, servida sobre hielo.",
-    "price": 13.9,
-    "sku": "12829"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Novedades",
-    "name": "Cool Monster Mora Azul",
-    "description": "Refrescante bebida energizante sabor a Mora Azul, servida sobre hielo.",
-    "price": 13.9,
-    "sku": "12830"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Novedades",
-    "name": "Combo Dunwich Mixto",
-    "description": "Disfruta de un deliciosa Dunwchi Mixto + 1 bebida Dunkin' 12 oz.",
-    "price": 10.9,
-    "sku": "12397"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Novedades",
-    "name": "Combo Dunwich Bacon",
-    "description": "Disfruta de un deliciosa Dunwchi Bacon + 1 bebida Dunkin' 12 oz.",
-    "price": 11.9,
-    "sku": "12398"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Novedades",
-    "name": "Manzana",
-    "description": "Donut espolvoreada con azúcar, rellena de manzana.",
-    "price": 5.9,
-    "sku": "12531"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Novedades",
-    "name": "Dunwich Bacon",
-    "description": "Deliciosa donut glaseada con tocino cocido.",
-    "price": 9.9,
-    "sku": "12396"
-  },
-  {
-    "restaurant": "Dunkin'",
-    "category": "Novedades",
-    "name": "Dunwich Mixto",
-    "description": "Deliciosa donut glaseada con jamón y queso.",
-    "price": 8.9,
-    "sku": "12395"
   },
   {
     "restaurant": "Dunkin'",

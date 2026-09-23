@@ -1,7 +1,7 @@
 [
   {
     "restaurant": "Papa Johns",
-    "category": "Promociones",
+    "category": "Promos Signature",
     "name": "Dúo Power Signature",
     "description": "Disfruta de 2 pizzas grandes signature",
     "price": 59.9,
@@ -97,7 +97,7 @@
   },
   {
     "restaurant": "Papa Johns",
-    "category": "Promociones",
+    "category": "Promos Signature",
     "name": "Dúo Power Signature Familiar",
     "description": "2 pizzas familiares signature.",
     "price": 79.9,
@@ -105,7 +105,7 @@
   },
   {
     "restaurant": "Papa Johns",
-    "category": "Promociones",
+    "category": "Combos",
     "name": "Combo 2 Pizzas Familiares",
     "description": "2 Pizza familiares clásicas con complemento  y gaseosa 1.5LT.",
     "price": 85.9,
@@ -161,7 +161,7 @@
   },
   {
     "restaurant": "Papa Johns",
-    "category": "Promociones",
+    "category": "Combos",
     "name": "Combo Pizza Grande",
     "description": "1 Pizza grande clásica con complemento y gaseosa 1LT",
     "price": 45.9,
@@ -370,22 +370,6 @@
   {
     "restaurant": "Papa Johns",
     "category": "Combos",
-    "name": "Combo Pizza Grande",
-    "description": "1 Pizza grande clásica con complemento y gaseosa 1LT",
-    "price": 45.9,
-    "sku": "PJ11286"
-  },
-  {
-    "restaurant": "Papa Johns",
-    "category": "Combos",
-    "name": "Combo 2 Pizzas Familiares",
-    "description": "2 Pizza familiares clásicas con complemento  y gaseosa 1.5LT.",
-    "price": 85.9,
-    "sku": "PJ11298"
-  },
-  {
-    "restaurant": "Papa Johns",
-    "category": "Combos",
     "name": "Combo Pizza Familiar",
     "description": "1 Pizza familiar clásica con complemento y gaseosa 1LT",
     "price": 55.9,
@@ -398,22 +382,6 @@
     "description": "2 Pizzas grandes clásicas con complemento y 1 gaseosa de 1.5LT",
     "price": 75.9,
     "sku": "PJ11287"
-  },
-  {
-    "restaurant": "Papa Johns",
-    "category": "Promos Signature",
-    "name": "Dúo Power Signature",
-    "description": "Disfruta de 2 pizzas grandes signature",
-    "price": 59.9,
-    "sku": "PJ11278"
-  },
-  {
-    "restaurant": "Papa Johns",
-    "category": "Promos Signature",
-    "name": "Dúo Power Signature Familiar",
-    "description": "2 pizzas familiares signature.",
-    "price": 79.9,
-    "sku": "PJ11294"
   },
   {
     "restaurant": "Papa Johns",

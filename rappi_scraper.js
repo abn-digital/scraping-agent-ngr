@@ -100,20 +100,18 @@ async function scrapeRappi(url) {
         await page.waitForTimeout(2000);
 
         // Extract rendered prices from DOM — these include promo/discount prices
+        // Key by productId so same-name variants keep distinct prices (Dunkin Green Obsession, etc.)
         const domPrices = await page.evaluate(() => {
             const priceMap = {};
-            // Each product card has data-qa="product-item-{id}" or data-qa="product-info-{id}"
             document.querySelectorAll('[data-qa^="product-info-"]').forEach(card => {
                 const qa = card.getAttribute('data-qa');
                 const productId = qa?.replace('product-info-', '');
                 if (!productId) return;
 
-                // Get the product name
                 const nameEl = card.querySelector('h4');
                 const name = nameEl?.textContent?.trim();
                 if (!name) return;
 
-                // Get all S/ prices in this card
                 const priceTexts = [];
                 card.querySelectorAll('span').forEach(span => {
                     const text = span.textContent?.trim();
@@ -123,28 +121,34 @@ async function scrapeRappi(url) {
                     }
                 });
 
-                // Check for discount indicator (percentage badge, strikethrough, etc.)
-                const hasDiscount = card.closest('[class*="cxew8w"]')?.querySelector('[class*="line-through"], del, s, [data-qa*="discount"]') !== null;
-
-                // The first price shown is usually the CURRENT price (promo if applicable)
-                // If there are two prices, the first is the promo and the second is the original
                 if (priceTexts.length > 0) {
-                    priceMap[name] = {
+                    const entry = {
+                        name,
                         renderedPrice: priceTexts[0],
                         allPrices: priceTexts,
-                        productId
+                        productId,
                     };
+                    priceMap[productId] = entry;
+                    // Fallback by name only when this name is unique in the map
+                    if (!priceMap[`name:${name}`]) {
+                        priceMap[`name:${name}`] = entry;
+                    } else {
+                        // Ambiguous name → drop name fallback so we don't overwrite siblings
+                        priceMap[`name:${name}`] = null;
+                    }
                 }
             });
             return priceMap;
         });
 
-        // Override __NEXT_DATA__ prices with DOM-rendered prices
+        // Override __NEXT_DATA__ prices with DOM-rendered prices (prefer productId)
         let updatedCount = 0;
         results.forEach(product => {
-            const domData = domPrices[product.name];
+            const domData =
+                (product.productId && domPrices[String(product.productId)]) ||
+                domPrices[`name:${product.name}`];
             if (domData && domData.renderedPrice && domData.renderedPrice !== product.price) {
-                console.log(`  💰 ${product.name}: S/${product.price} → S/${domData.renderedPrice} (promo)`);
+                console.log(`  💰 ${product.name} [${product.productId}]: S/${product.price} → S/${domData.renderedPrice} (promo)`);
                 product.originalPrice = product.price;
                 product.price = domData.renderedPrice;
                 updatedCount++;
