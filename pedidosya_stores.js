@@ -15,7 +15,7 @@ module.exports = {
     { id: 'peya-dunkin', name: "Dunkin'", group: 'own',
       url: 'https://www.pedidosya.com.pe/restaurantes/lima/dunkin-donuts--plaza-vea-dasso-94678500-43d1-416f-952b-3324db81f862-menu' },
     { id: 'peya-papajohns', name: 'Papa Johns', group: 'own',
-      url: 'https://www.pedidosya.com.pe/restaurantes/lima/papa-johns-comandante-espinar-menu' },
+      url: 'https://www.pedidosya.com.pe/restaurantes/lima/papa-johns-comandante-espinar-2edda678-595b-46cd-bf38-009fea1e31b8-menu' },
     { id: 'peya-donbelisario', name: 'Don Belisario', group: 'own',
       url: 'https://www.pedidosya.com.pe/restaurantes/lima/don-belisario-larco-93da4fb3-c49b-4607-ae33-4733f1343acc-menu' },
     { id: 'peya-chinawok', name: 'Chinawok', group: 'own',

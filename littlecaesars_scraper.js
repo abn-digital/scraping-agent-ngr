@@ -62,12 +62,21 @@ async function scrapeLittleCaesars(url = 'https://pe.littlecaesars.com/es-pe/men
             }
         }
 
-        // 3) DOM extraction — LC menu is a single scrollable page with category labels
-        if (results.length < 3) {
-            console.log('Extrayendo desde DOM...');
-            await autoScroll(page);
-            results = await extractLCProducts(page, null);
-            console.log(`DOM: ${results.length} productos`);
+        // Prefer DOM for LC — API/__NEXT_DATA__ are sparse; menu is client-rendered cards
+        console.log('Extrayendo desde DOM...');
+        await autoScroll(page);
+        await page.waitForTimeout(1500);
+        const domProducts = await extractLCProducts(page, null);
+        console.log(`DOM: ${domProducts.length} productos`);
+        if (domProducts.length > results.length) results = domProducts;
+
+        // If still thin, try walking category anchors / hash links
+        if (results.length < 5) {
+            const links = await page.$$eval('a[href*="menu"], nav a', as =>
+                as.map(a => ({ href: a.href, text: (a.textContent || '').trim() }))
+                    .filter(l => l.href && l.text && l.text.length < 40)
+            );
+            console.log(`Links menú: ${links.length}`);
         }
 
     } catch (err) {
@@ -147,65 +156,78 @@ async function extractLCProducts(page, forcedCategory) {
         const results = [];
         const seen = new Set();
 
-        // LC uses Emotion hashed classes. Compact cards look like:
-        //   "S/9.90Hot-N-Ready®CRAZY PUFFS4 Piezas"
-        // Prefer mid-level cards (contained in a larger priced parent) — they have
-        // cleaner name text without long descriptions.
-        const candidates = [...document.querySelectorAll('div')].filter(el => {
-            if (el.children.length < 1 || el.children.length > 4) return false;
+        // Prefer leaf-ish cards that include BOTH a price and a product name.
+        // Price-only child divs ("S/ 26.90") used to win the mid-level filter and
+        // drop siblings like DÚO!DÚO! / SUPER CHEESE.
+        const cards = [...document.querySelectorAll('div, a, article')].filter(el => {
             const t = (el.textContent || '').replace(/\s+/g, ' ').trim();
-            if (t.length < 8 || t.length > 160) return false;
-            return /S\/\s*[\d.,]+/.test(t);
+            if (t.length < 12 || t.length > 280) return false;
+            if (!/S\/\s*[\d.,]+/.test(t)) return false;
+            // Must have more than just the price
+            const withoutPrice = t.replace(/S\/\s*[\d.,]+/g, '').trim();
+            if (withoutPrice.length < 3) return false;
+            // Prefer compact cards: no nested card that also has price+name
+            const nested = [...el.querySelectorAll('div, a, article')].some(child => {
+                if (child === el) return false;
+                const ct = (child.textContent || '').replace(/\s+/g, ' ').trim();
+                if (ct.length < 12 || ct.length > 280) return false;
+                if (!/S\/\s*[\d.,]+/.test(ct)) return false;
+                return ct.replace(/S\/\s*[\d.,]+/g, '').trim().length >= 3;
+            });
+            return !nested;
         });
 
-        for (const el of candidates) {
-            // Keep only mid-level: must be nested inside another candidate
-            const hasParentCandidate = candidates.some(o => o !== el && o.contains(el));
-            const hasChildCandidate = candidates.some(o => o !== el && el.contains(o));
-            if (!hasParentCandidate || hasChildCandidate) continue;
-
+        for (const el of cards) {
             const raw = (el.textContent || '').replace(/\s+/g, ' ').trim();
-            const priceMatch = raw.match(/^S\/\s*([\d.,]+)/);
+            const priceMatch = raw.match(/S\/\s*([\d.,]+)/);
             if (!priceMatch) continue;
             const price = parseFloat(priceMatch[1].replace(',', '.'));
             if (!price || price <= 0) continue;
 
-            let rest = raw.slice(priceMatch[0].length).trim();
-            let category = forcedCat || 'Pizzas';
-            if (/^Hot-N-Ready®?/i.test(rest)) {
-                category = 'Hot-N-Ready';
-                rest = rest.replace(/^Hot-N-Ready®?\s*/i, '');
-            }
-
-            // Strip trailing "N Piezas" / glued description starting with lowercase
-            let productName = rest
-                .replace(/\d+\s*Piezas.*$/i, '')
-                .replace(/(?<=[a-záéíóúñ])(?=[A-ZÁÉÍÓÚÑ])/g, '\n') // split CamelGlue
-                .split('\n')[0]
+            let rest = raw
+                .replace(priceMatch[0], ' ')
+                .replace(/\s+/g, ' ')
                 .trim();
 
-            // "Familiar PepperoniPepperoni" → after camel split first part may still
-            // be "Familiar Pepperoni" if we split on a-z→A-Z boundary
-            if (!productName) productName = rest.slice(0, 40).trim();
-
-            // Final cleanup: drop duplicated trailing word ("Familiar Pepperoni Pepperoni")
-            const words = productName.split(/\s+/);
-            if (words.length >= 2 && words[words.length - 1].toLowerCase() === words[words.length - 2].toLowerCase()) {
-                words.pop();
-                productName = words.join(' ');
+            let category = forcedCat || 'Pizzas';
+            if (/Hot-N-Ready®?/i.test(rest)) {
+                category = 'Hot-N-Ready';
+                rest = rest.replace(/Hot-N-Ready®?\s*/i, '').trim();
             }
 
-            if (!productName || productName.length < 2 || seen.has(productName)) continue;
-            if (/^(INICIO|MENÚ|MENU|ORDENA|START|S\/)/i.test(productName)) continue;
+            // Cut description: glued lowercase OR Capital description after bang-titles
+            let productName = rest;
+            const bang = rest.match(/^(D[UÚ]O!\s*D[UÚ]O!|EXTRA!\s*EXTRA!)/i);
+            if (bang) {
+                productName = bang[1].replace(/\s+/g, ' ').trim();
+            } else {
+                productName = rest
+                    .replace(/\d+\s*Piezas.*$/i, '')
+                    // Only split camelGlue on letter→Letter (never after !)
+                    .replace(/(?<=[a-záéíóúñ])(?=[A-ZÁÉÍÓÚÑ])/g, '\n')
+                    .split('\n')[0]
+                    .trim();
+            }
+
+            if (!productName || productName.length < 2) continue;
+            if (/^S\//i.test(productName)) continue;
+
+            const key = productName.toLowerCase();
+            if (seen.has(key)) continue;
+
+            // Description = leftover after name when present
+            let description = '';
+            const after = rest.slice(rest.toLowerCase().indexOf(productName.toLowerCase()) + productName.length).trim();
+            if (after && after.length > 3 && after.length < 200) description = after;
 
             results.push({
                 restaurant: 'Little Caesars',
                 category,
                 name: productName,
-                description: '',
+                description,
                 price,
             });
-            seen.add(productName);
+            seen.add(key);
         }
 
         return results;

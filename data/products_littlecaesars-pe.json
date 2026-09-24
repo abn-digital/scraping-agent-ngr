@@ -2,8 +2,15 @@
   {
     "restaurant": "Little Caesars",
     "category": "Hot-N-Ready",
-    "name": "CRAZY PUFFS",
+    "name": "DÚO!DÚO!",
     "description": "",
+    "price": 26.9
+  },
+  {
+    "restaurant": "Little Caesars",
+    "category": "Hot-N-Ready",
+    "name": "CRAZY PUFFS",
+    "description": "4 Piezas",
     "price": 9.9
   },
   {
@@ -23,7 +30,7 @@
   {
     "restaurant": "Little Caesars",
     "category": "Hot-N-Ready",
-    "name": "EXTRA!",
+    "name": "EXTRA! EXTRA!",
     "description": "",
     "price": 22.9
   },
@@ -40,6 +47,13 @@
     "name": "Familiar Jamón",
     "description": "",
     "price": 25.9
+  },
+  {
+    "restaurant": "Little Caesars",
+    "category": "Pizzas",
+    "name": "SUPER CHEESE",
+    "description": "",
+    "price": 29.8
   },
   {
     "restaurant": "Little Caesars",
@@ -73,7 +87,7 @@
     "restaurant": "Little Caesars",
     "category": "Hot-N-Ready",
     "name": "Crazy Combo",
-    "description": "",
+    "description": "4 Piezas",
     "price": 5
   },
   {

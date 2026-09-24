@@ -81,7 +81,7 @@ const NGR_OWN_PEYA = [
   { name: "Bembos",        url: "https://www.pedidosya.com.pe/restaurantes/lima/bembos-ovalo-gutierrez-699066be-2b00-4117-b698-60200ae31ecc-menu", id: 'peya-bembos', platform: 'PedidosYa' },
   { name: "Popeyes",       url: "https://www.pedidosya.com.pe/restaurantes/lima/popeyes-larco-menu", id: 'peya-popeyes', platform: 'PedidosYa' },
   { name: "Dunkin'",       url: "https://www.pedidosya.com.pe/restaurantes/lima/dunkin-donuts--plaza-vea-dasso-94678500-43d1-416f-952b-3324db81f862-menu", id: 'peya-dunkin', platform: 'PedidosYa' },
-  { name: "Papa Johns",    url: "https://www.pedidosya.com.pe/restaurantes/lima/papa-johns-comandante-espinar-menu", id: 'peya-papajohns', platform: 'PedidosYa' },
+  { name: "Papa Johns",    url: "https://www.pedidosya.com.pe/restaurantes/lima/papa-johns-comandante-espinar-2edda678-595b-46cd-bf38-009fea1e31b8-menu", id: 'peya-papajohns', platform: 'PedidosYa' },
   { name: "Don Belisario", url: "https://www.pedidosya.com.pe/restaurantes/lima/don-belisario-larco-93da4fb3-c49b-4607-ae33-4733f1343acc-menu", id: 'peya-donbelisario', platform: 'PedidosYa' },
   { name: "Chinawok",      url: "https://www.pedidosya.com.pe/restaurantes/lima/chinawok-patio-larco-8bd1f1e5-a9c1-451f-a635-97b27066f0f8-menu", id: 'peya-chinawok', platform: 'PedidosYa' },
 ];
