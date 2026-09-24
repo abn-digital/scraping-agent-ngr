@@ -80,6 +80,22 @@ function isPromoCategory(category) {
 }
 
 /**
+ * Identity for Magento rows that share a display name but are different SKUs
+ * (e.g. Popeyes "Full Box" Yape vs "Full Box" promo).
+ * Prefer sku; else name + category + list/current price.
+ */
+function productIdentityKey(p) {
+  if (!p?.name) return '';
+  const sku = String(p.sku || '').trim();
+  if (sku) return `sku:${sku}`;
+  const list = (typeof p.originalPrice === 'number' && p.originalPrice > 0)
+    ? p.originalPrice
+    : p.price;
+  const pricePart = Number.isFinite(Number(list)) ? Number(list).toFixed(2) : '';
+  return `${String(p.name).trim().toLowerCase()}||${String(p.category || '').trim().toLowerCase()}||${pricePart}`;
+}
+
+/**
  * Collapse Magento duplicates that appear once in carta and again under Promociones.
  * Prefers the non-promo category; keeps distinct prices as separate rows.
  *
@@ -129,5 +145,6 @@ module.exports = {
   parsePartnerOfferFromDescription,
   applyOfferPricing,
   isPromoCategory,
+  productIdentityKey,
   dedupePreferCatalogCategory,
 };

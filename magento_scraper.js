@@ -1,6 +1,6 @@
 const { createKernelBrowser, closeKernelBrowser } = require('./kernel_browser');
 const { stamp } = require('./scrape_meta');
-const { applyOfferPricing, dedupePreferCatalogCategory } = require('./price_utils');
+const { applyOfferPricing, dedupePreferCatalogCategory, productIdentityKey } = require('./price_utils');
 const fs = require('fs');
 const path = require('path');
 
@@ -123,11 +123,15 @@ function extractMagentoProductsBrowser({ restaurantName, parentCategory }) {
         const category = parent || subcategory || null;
         if (!category) continue;
 
-        const key = `${name}||${category}`;
+        const sku = el.querySelector('[data-product-sku]')?.getAttribute('data-product-sku') || '';
+        // Same display name can be two SKUs (e.g. Full Box Yape vs Full Box promo)
+        const listForKey = originalPrice || price;
+        const key = sku
+            ? `sku:${sku}`
+            : `${name}||${category}||${Number(listForKey).toFixed(2)}`;
         if (seen.has(key)) continue;
         seen.add(key);
 
-        const sku = el.querySelector('[data-product-sku]')?.getAttribute('data-product-sku') || '';
         const row = { restaurant: restaurantName, category, name, description, price, sku };
         if (originalPrice) row.originalPrice = originalPrice;
         results.push(row);
@@ -232,12 +236,13 @@ async function scrapeMagento(url) {
             parentCategory: null,
         });
         console.log(`  → menú completo: ${mainProducts.length} productos`);
-        // Prefer already-tagged products from per-category passes; add only new names
-        const seenNames = new Set(allProducts.map(p => p.name));
+        // Prefer already-tagged products from per-category passes; add only new identities
+        const seenIds = new Set(allProducts.map(productIdentityKey));
         for (const p of mainProducts) {
-            if (!seenNames.has(p.name)) {
+            const id = productIdentityKey(p);
+            if (!seenIds.has(id)) {
                 allProducts.push(p);
-                seenNames.add(p.name);
+                seenIds.add(id);
             }
         }
 
@@ -259,9 +264,10 @@ async function scrapeMagento(url) {
                     parentCategory: null,
                 });
                 for (const p of pageProducts) {
-                    if (!seenNames.has(p.name)) {
+                    const id = productIdentityKey(p);
+                    if (!seenIds.has(id)) {
                         allProducts.push(p);
-                        seenNames.add(p.name);
+                        seenIds.add(id);
                     }
                 }
             } catch (err) {
@@ -278,8 +284,8 @@ async function scrapeMagento(url) {
     const seen = new Set();
     let unique = allProducts.filter(p => {
         if (!p.category || p.category === 'General') return false;
-        const key = `${p.name}||${p.category}`;
-        if (seen.has(key)) return false;
+        const key = productIdentityKey(p);
+        if (!key || seen.has(key)) return false;
         seen.add(key);
         return true;
     });

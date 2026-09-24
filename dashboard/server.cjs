@@ -58,6 +58,13 @@ async function syncFromGCS() {
                 // Guard: never pull nested history objects into the container disk
                 if (file.name.startsWith('history/')) continue;
                 await file.download({ destination: path.join(dir, file.name) });
+                // Drop stale root copies so resynced products in data/ are visible
+                if (prefix === 'products_') {
+                    const rootCopy = path.join(ROOT_DIR, file.name);
+                    if (fs.existsSync(rootCopy)) {
+                        try { fs.unlinkSync(rootCopy); } catch (_) {}
+                    }
+                }
                 synced++;
             }
             console.log(`[GCS] Sincronizados ${synced} archivos '${prefix}*' desde gs://${GCS_BUCKET}`);
@@ -198,28 +205,31 @@ function resolveStoreIdFromUrl(url) {
 
 /**
  * Find all products_*.json files, merging data/ (base) with root-level fresh scrapes.
- * Root-level files take priority over data/ when both exist.
+ * When both exist, keep the newer mtime so a GCS resync into data/ is not
+ * shadowed by a stale root copy from an earlier /api/update in this instance.
  */
 function findProductFiles() {
-    const seen = new Map(); // storeId -> { filePath, mtime }
+    const seen = new Map(); // filename -> { filePath, mtime }
 
-    // 1. Load baseline from data/
+    const consider = (fp) => {
+        if (!fs.existsSync(fp)) return;
+        const f = path.basename(fp);
+        const mtime = fs.statSync(fp).mtimeMs;
+        const prev = seen.get(f);
+        if (!prev || mtime >= prev.mtime) {
+            seen.set(f, { filePath: fp, mtime });
+        }
+    };
+
     if (fs.existsSync(DATA_DIR)) {
         fs.readdirSync(DATA_DIR)
             .filter(f => f.startsWith('products_') && f.endsWith('.json'))
-            .forEach(f => {
-                const fp = path.join(DATA_DIR, f);
-                seen.set(f, { filePath: fp, mtime: fs.statSync(fp).mtime });
-            });
+            .forEach(f => consider(path.join(DATA_DIR, f)));
     }
 
-    // 2. Fresh scrapes in ROOT_DIR override baseline
     fs.readdirSync(SCRAPERS_DIR)
         .filter(f => f.startsWith('products_') && f.endsWith('.json'))
-        .forEach(f => {
-            const fp = path.join(SCRAPERS_DIR, f);
-            seen.set(f, { filePath: fp, mtime: fs.statSync(fp).mtime });
-        });
+        .forEach(f => consider(path.join(SCRAPERS_DIR, f)));
 
     return seen;
 }
@@ -487,17 +497,19 @@ function buildComparison(brand, channel) {
 app.get('/api/catalog', (req, res) => {
     const { id } = req.query;
     if (!id) return res.status(400).json({ error: 'id requerido' });
-    const inRoot = path.join(SCRAPERS_DIR, `products_${id}.json`);
-    const inData = path.join(DATA_DIR, `products_${id}.json`);
-    const fp = fs.existsSync(inRoot) ? inRoot : fs.existsSync(inData) ? inData : null;
-    if (!fp) return res.status(404).json({ error: `Sin datos para ${id}` });
+    const files = findProductFiles();
+    const hit = files.get(`products_${id}.json`);
+    if (!hit) return res.status(404).json({ error: `Sin datos para ${id}` });
     try {
-        const products = JSON.parse(fs.readFileSync(fp, 'utf8'));
+        const products = JSON.parse(fs.readFileSync(hit.filePath, 'utf8'));
         res.json(products.map(p => ({
             name: p.name,
             category: p.category || '',
             price: p.price,
             description: p.description || '',
+            ...(typeof p.originalPrice === 'number' ? { originalPrice: p.originalPrice } : {}),
+            ...(p.promoPartner ? { promoPartner: p.promoPartner } : {}),
+            ...(p.sku ? { sku: p.sku } : {}),
         })));
     } catch (err) {
         res.status(500).json({ error: err.message });
