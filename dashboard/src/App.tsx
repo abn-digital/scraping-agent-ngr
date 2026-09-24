@@ -284,7 +284,8 @@ export default function App() {
         const runs: HistoryRun[] = Array.isArray(resp.data?.runs) ? resp.data.runs : [];
         setHistoryRuns(runs);
         const latest = data.find(d => d.id === selectedCompId);
-        const defaultAt = runs[0]?.at || latest?.lastUpdated || '';
+        // Prefer live stamp so "Actual" day matches Última extracción (history may lag)
+        const defaultAt = latest?.lastUpdated || runs[0]?.at || '';
         setHistoryAt(defaultAt);
         setHistoryDate(defaultAt ? peruDateKey(defaultAt) : '');
         // Viewing latest → use live products from /api/results
@@ -310,11 +311,12 @@ export default function App() {
     new Set(historyRuns.map(r => peruDateKey(r.at)))
   ).sort();
 
-  // If no history yet, still allow selecting the latest stamp day
+  // Always include the live stamp day even if history upload lagged
   const currentCompData = data.find(d => d.id === selectedCompId);
-  const dateOptions = availableDates.length > 0
-    ? availableDates
-    : (currentCompData?.lastUpdated ? [peruDateKey(currentCompData.lastUpdated)] : []);
+  const dateOptions = Array.from(new Set([
+    ...availableDates,
+    ...(currentCompData?.lastUpdated ? [peruDateKey(currentCompData.lastUpdated)] : []),
+  ])).sort();
 
   const runsForDate = historyRuns
     .filter(r => peruDateKey(r.at) === historyDate)

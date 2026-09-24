@@ -58,10 +58,32 @@ async function readJson(objectPath) {
 
 async function writeJson(objectPath, data) {
     const file = bucket().file(objectPath);
-    await file.save(JSON.stringify(data, null, 2), {
-        contentType: 'application/json',
-        resumable: false,
-    });
+    try {
+        await file.save(JSON.stringify(data, null, 2), {
+            contentType: 'application/json',
+            resumable: false,
+        });
+        return;
+    } catch (err) {
+        // Local scrapes often use ADC without bucket write; fall back to gcloud CLI
+        // when the active gcloud account (e.g. darts@) can upload.
+        const msg = String(err.message || '');
+        if (!/Permission|denied|403|forbidden/i.test(msg)) throw err;
+        const { execSync } = require('child_process');
+        const fs = require('fs');
+        const os = require('os');
+        const path = require('path');
+        const tmp = path.join(os.tmpdir(), `ngr-hist-${Date.now()}.json`);
+        fs.writeFileSync(tmp, JSON.stringify(data, null, 2));
+        try {
+            execSync(`gcloud storage cp "${tmp}" "gs://${GCS_BUCKET}/${objectPath}"`, {
+                stdio: ['ignore', 'pipe', 'pipe'],
+            });
+            console.warn(`[history] wrote via gcloud CLI: gs://${GCS_BUCKET}/${objectPath}`);
+        } finally {
+            try { fs.unlinkSync(tmp); } catch (_) {}
+        }
+    }
 }
 
 /**
