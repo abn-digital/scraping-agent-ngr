@@ -1,0 +1,455 @@
+/* El CSS que sonner inyecta (ver components/layout/Avisos.tsx) va entre el
+   reset y las utilidades: le gana al reset, como en creativos, y pierde contra
+   cualquier clase. El orden lo fija la primera vez que se nombran las capas,
+   por eso va antes del import. */
+@layer theme, base, sonner, components, utilities;
+@import "tailwindcss";
+
+/* El sistema es la unidad, no los defaults de Tailwind: cada escala que el
+   sistema define se vacía primero, así una clase que no es del sistema
+   (bg-blue-500, rounded-lg, text-sm, shadow-md) no compila. Las que quedan
+   abiertas —espaciado, interlineado, blur— son las que el sistema usa tal cual.
+
+   `static` publica todas las variables aunque ninguna clase las use: el SVG de
+   la marca y algunos estilos inline las leen con var(). */
+@theme static {
+  --color-*: initial;
+  --color-white: #fff;
+  --color-black: #000;
+
+  /* Registro papel: la navegación, las listas, los metadatos. Hueso cálido,
+     no blanco: el blanco puro compite con lo que se muestra encima. */
+  --color-paper: rgb(242 239 233);
+  --color-paper-raised: rgb(251 250 247);
+  --color-paper-sunken: rgb(231 227 218);
+  --color-paper-sunken-hover: rgb(222 217 207);
+  /* El bloque de un esqueleto: entre el papel hundido y la regla. */
+  --color-paper-shade: rgb(226 222 213);
+
+  --color-ink: rgb(22 21 15);
+  --color-ink-hover: rgb(42 40 32);
+  --color-ink-press: rgb(12 11 7);
+  --color-ink-2: rgb(69 66 58);
+  --color-ink-3: rgb(125 120 105);
+  --color-ink-4: rgb(164 158 143);
+
+  --color-rule: rgb(220 215 203);
+  --color-rule-strong: rgb(194 187 170);
+
+  /* Registro escenario: grafito frío, para que el color de lo que se muestra
+     sea lo único cálido de la pantalla. */
+  --color-stage: rgb(19 19 22);
+  --color-stage-raised: rgb(28 28 33);
+  --color-stage-rule: rgb(44 44 51);
+  --color-stage-ink: rgb(238 236 231);
+  --color-stage-3: rgb(130 129 139);
+  --color-stage-scroll: rgb(58 58 66);
+  /* El fondo de una lámina mientras su imagen no llega: más hondo que el
+     escenario, para que el hueco se lea como objeto y no como agujero. */
+  --color-stage-deep: rgb(11 11 13);
+
+  /* La actividad. Es el único color de marca y solo aparece cuando algo está
+     pasando o está seleccionado. */
+  --color-ember: rgb(232 85 47);
+  --color-ember-deep: rgb(185 60 28);
+  --color-ember-soft: rgb(248 229 221);
+  --color-ember-light: rgb(255 154 120);
+
+  --color-pass: rgb(31 107 74);
+  --color-pass-rule: rgb(185 211 198);
+  --color-pass-wash: rgb(238 245 241);
+  --color-pass-soft: rgb(143 217 180);
+
+  --color-fail: rgb(140 29 24);
+  --color-fail-rule: rgb(217 179 175);
+  --color-fail-wash: rgb(251 240 239);
+  --color-fail-wash-hover: rgb(247 228 226);
+  /* El mismo rojo sobre el escenario. `fail` es ilegible ahí: nace de un fondo
+     claro y contra el grafito se apaga hasta parecer marrón. */
+  --color-fail-soft: rgb(255 157 148);
+
+  --color-warn: rgb(138 100 16);
+  --color-warn-rule: rgb(223 201 160);
+  --color-warn-wash: rgb(250 243 230);
+  --color-warn-soft: rgb(229 194 116);
+
+  /* Los datos. Seis series con identidad propia para los gráficos, validadas
+     con el método de la skill dataviz: banda de luminosidad, croma mínimo,
+     separación bajo protanopía y deuteranopía (ΔE ≥ 9,3 entre vecinas) y
+     contraste de 3:1 contra el papel levantado, que es donde se apoyan los
+     gráficos (sobre el papel crudo tres quedan apenas debajo: ahí van con
+     etiqueta). Se asignan en este orden y nunca se reciclan: la séptima serie
+     se suma a "Otras" en ink-4.
+
+     Ember no es una serie. En un gráfico marca lo elegido o lo que está
+     pasando, como en el resto de la app. Y pass/fail/warn son estados: un
+     gráfico de sentimiento los usa, uno de marcas no. */
+  --color-dato-1: #438de8;
+  --color-dato-2: #b5811c;
+  --color-dato-3: #1aa291;
+  --color-dato-4: #695ca3;
+  --color-dato-5: #659006;
+  --color-dato-6: #b96bb7;
+  /* Las mismas series sobre el escenario, validadas contra el grafito. */
+  --color-dato-1-soft: #3475c4;
+  --color-dato-2-soft: #c48800;
+  --color-dato-3-soft: #1aa291;
+  --color-dato-4-soft: #8c78e3;
+  --color-dato-5-soft: #6d8c40;
+  --color-dato-6-soft: #b073ae;
+
+  --font-*: initial;
+  --font-display: "Bricolage Grotesque", Archivo, system-ui, sans-serif;
+  --font-sans: "Instrument Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --text-*: initial;
+  /* Las cifras mínimas: la tecla de un atajo, la cuenta de un segmentado, la
+     etiqueta de la barra inferior. Sin interlineado propio: hereda el del
+     renglón donde cae. */
+  --text-nano: 0.625rem;
+  --text-micro: 0.6875rem;
+  --text-micro--line-height: 1rem;
+  --text-micro--letter-spacing: 0.06em;
+  --text-meta: 0.8125rem;
+  --text-meta--line-height: 1.25rem;
+  --text-base: 0.9375rem;
+  --text-base--line-height: 1.55rem;
+  --text-lede: 1.125rem;
+  --text-lede--line-height: 1.7rem;
+  --text-h3: 1.25rem;
+  --text-h3--line-height: 1.6rem;
+  --text-h3--letter-spacing: -0.015em;
+  --text-h2: 1.75rem;
+  --text-h2--line-height: 2rem;
+  --text-h2--letter-spacing: -0.022em;
+  --text-h1: 2.5rem;
+  --text-h1--line-height: 2.6rem;
+  --text-h1--letter-spacing: -0.03em;
+  --text-display: 4rem;
+  --text-display--line-height: 0.94;
+  --text-display--letter-spacing: -0.04em;
+
+  /* Lenguaje de forma: el marco se redondea, el contenido no. Radios moderados
+     a propósito —lo suficiente para ablandar, no tanto como para volverse la
+     personalidad— y lo que se muestra queda en cero, porque un lienzo tiene
+     esquinas. */
+  --radius-*: initial;
+  --radius-chip: 6px;
+  --radius-control: 10px;
+  /* Radio interior de un control con 2px de padding: 10 - 2. */
+  --radius-control-inner: 8px;
+  --radius-panel: 14px;
+  --radius-sheet: 20px;
+
+  --shadow-*: initial;
+  --shadow-hair: 0 0 0 1px var(--color-rule);
+  /* Una tarjeta no necesita borde: la separa del papel una sombra corta y muy
+     baja. Es lo que reemplaza a las reglas de 1px. */
+  --shadow-card:
+    0 1px 2px rgba(20, 19, 15, 0.06), 0 2px 6px -1px rgba(20, 19, 15, 0.05),
+    0 12px 26px -18px rgba(20, 19, 15, 0.22);
+  --shadow-card-lift:
+    0 2px 4px rgba(20, 19, 15, 0.08), 0 6px 12px -2px rgba(20, 19, 15, 0.08),
+    0 22px 40px -20px rgba(20, 19, 15, 0.28);
+  --shadow-lift: 0 1px 2px rgba(20, 19, 15, 0.06), 0 8px 24px -12px rgba(20, 19, 15, 0.18);
+  --shadow-sheet: 0 24px 64px -24px rgba(20, 19, 15, 0.45);
+  /* El filo de luz de un botón oscuro: se lee como relieve, no como borde. */
+  --shadow-bevel: 0 1px 0 rgba(255, 255, 255, 0.12) inset;
+  /* Lo que se muestra flota: un contacto casi pegado al borde, una capa media y
+     una ambiente corta. El spread negativo la mantiene concentrada en vez de
+     derramarse a los costados. Tinte cálido, no negro puro: el papel es hueso
+     y una sombra neutra se ve sucia encima. */
+  --shadow-piece:
+    0 1px 2px rgba(28, 24, 16, 0.16), 0 6px 12px -2px rgba(28, 24, 16, 0.17),
+    0 18px 28px -14px rgba(28, 24, 16, 0.32);
+  --shadow-piece-lift:
+    0 2px 4px rgba(28, 24, 16, 0.18), 0 12px 22px -4px rgba(28, 24, 16, 0.22),
+    0 34px 48px -22px rgba(28, 24, 16, 0.38);
+  --shadow-rail: 2px 0 10px 1px rgba(20, 19, 15, 0.06);
+  /* El escenario es una mesa oscura apoyada sobre el papel. Con pocos píxeles
+     de margen alrededor una sombra difusa no se ve: lo que la separa es el
+     contacto pegado al borde, y la ambiente queda corta a propósito para no
+     ensuciar el papel que la rodea. */
+  --shadow-studio:
+    0 0 0 1px rgba(28, 24, 16, 0.1), 0 2px 4px rgba(28, 24, 16, 0.14),
+    0 10px 20px -6px rgba(28, 24, 16, 0.22), 0 28px 44px -28px rgba(28, 24, 16, 0.5);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Las animaciones que mueven algo animan `translate`, no `transform`. En
+     Tailwind 4 las clases translate-* escriben la propiedad `translate`: si la
+     animación escribiera `transform`, las dos se sumarían y un modal centrado
+     con -translate-1/2 terminaría corrido medio ancho. */
+  --animate-scan: scan 2.1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  --animate-pulse-dot: pulseDot 1.1s ease-in-out infinite;
+  --animate-rise: rise 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-sheet-in: sheetIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
+  /* Un brillo que cruza el bloque gris. Dice "esto está viniendo" sin
+     parpadear, que a pantalla completa marea. */
+  --animate-brillo: brillo 1.25s ease-in-out infinite;
+  --animate-fade: fade 0.18s ease-out both;
+  /* Radix mantiene el nodo montado mientras dura la animación de salida, así
+     que sin estas el modal desaparece de golpe y el de entrada parece un
+     parpadeo. Más cortas que las de entrada: abrir se anuncia, cerrar no se
+     espera. */
+  --animate-sheet-out: sheetOut 0.16s cubic-bezier(0.4, 0, 1, 1) both;
+  --animate-fade-out: fadeOut 0.14s ease-in both;
+  --animate-barrido: barrido 1.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+
+  @keyframes scan {
+    from {
+      translate: 0 -100%;
+    }
+    to {
+      translate: 0 1100%;
+    }
+  }
+  @keyframes pulseDot {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.25;
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      translate: 0 6px;
+    }
+    to {
+      opacity: 1;
+      translate: none;
+    }
+  }
+  @keyframes brillo {
+    from {
+      translate: -100% 0;
+    }
+    to {
+      translate: 100% 0;
+    }
+  }
+  /* El sheet está centrado con translate(-50%,-50%): su animación tiene que
+     conservarlo, o al terminar se corre al borde de la pantalla. */
+  @keyframes sheetIn {
+    from {
+      opacity: 0;
+      translate: -50% calc(-50% + 8px);
+    }
+    to {
+      opacity: 1;
+      translate: -50% -50%;
+    }
+  }
+  @keyframes sheetOut {
+    from {
+      opacity: 1;
+      translate: -50% -50%;
+    }
+    to {
+      opacity: 0;
+      translate: -50% calc(-50% + 6px);
+    }
+  }
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes barrido {
+    from {
+      translate: -100% 0;
+    }
+    to {
+      translate: 300% 0;
+    }
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-rule);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  /* Tailwind 4 dejó de ponerle la mano a los botones. Todo lo que se aprieta la
+     muestra; lo deshabilitado, no. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  ::placeholder {
+    opacity: 1;
+    color: var(--color-ink-4);
+  }
+
+  /* Foco visible y consistente en los dos registros. Nunca outline: none. */
+  :focus-visible {
+    outline: 2px solid var(--color-ember);
+    outline-offset: 2px;
+    border-radius: 5px;
+  }
+
+  ::selection {
+    background: var(--color-ember);
+    color: #fff;
+  }
+}
+
+/* Etiqueta de un dato. En minúscula y en la sans: las versalitas en mono se
+   reservan para nada, porque cuando todo grita nada tiene jerarquía. El mono
+   queda para el VALOR cuando es una cifra, una medida o un id. */
+@utility label {
+  font-size: var(--text-meta);
+  line-height: var(--text-meta--line-height);
+  font-weight: 500;
+  color: var(--color-ink-3);
+}
+
+/* Números tabulares en todo lo que sea metadato o métrica: las columnas tienen
+   que alinearse solas. */
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* La textura del papel. Un grano casi imperceptible que evita el plano digital
+   muerto. */
+@utility paper-grain {
+  &::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* La grilla de la mesa de luz. Solo en el escenario, detrás de lo que se
+   muestra, para dar escala. */
+@utility stage-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 255, 255, 0.055) 1px,
+    transparent 0
+  );
+  background-size: 22px 22px;
+}
+
+@utility rule-t {
+  border-top: 1px solid var(--color-rule);
+}
+
+@utility rule-b {
+  border-bottom: 1px solid var(--color-rule);
+}
+
+/* "Aparece al pasar por encima" no existe sin puntero: en un teléfono la acción
+   queda inalcanzable. Donde no hay hover, se ve siempre.
+
+   Va con !important porque convive con `opacity-0 group-hover:opacity-100` en
+   el mismo elemento y tiene que ganarles sin depender del orden en que Tailwind
+   emita las utilidades. En creativos perdía contra opacity-0 y en el teléfono la
+   acción seguía invisible. */
+@utility al-pasar {
+  @media (hover: none) {
+    opacity: 1 !important;
+  }
+}
+
+/* Su compañero: lo que le cede el lugar a un control que ahora está fijo. */
+@utility cede-el-lugar {
+  @media (hover: none) {
+    opacity: 0 !important;
+  }
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-rule-strong) transparent;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-rule-strong);
+    border-radius: 99px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+}
+
+@utility scrollbar-dark {
+  scrollbar-color: var(--color-stage-rule) transparent;
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-stage-scroll);
+    background-clip: content-box;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    /* Sin esto, una entrada escalonada del sitio queda invisible hasta 240 ms
+       esperando su demora, aunque después no se mueva. */
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* La barra de abajo del celular tapa los últimos 56 px: sin reservarlos, un
+   Tab puede dejar el foco escondido detrás de ella. */
+@media (width < 48rem) {
+  html {
+    scroll-padding-bottom: 3.5rem;
+  }
+}
