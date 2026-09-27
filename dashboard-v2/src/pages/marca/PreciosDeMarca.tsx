@@ -28,6 +28,8 @@ import {
   conDatos,
   distribucion,
   fraseDePromedio,
+  ejeDeVariacion,
+  sujetoDe,
   modoDe,
   posicionDePromedio,
   posicionDeProducto,
@@ -89,6 +91,15 @@ export function PreciosDeMarca({
   // La evolución sale de los cruces guardados por día (hasta los últimos 30).
   const dias = [...fechas].slice(0, 30).reverse();
   const snaps = useComparaciones(dias.map((d) => ({ marca: marca.key, canal, fecha: d })));
+
+  const evolucion = visibles.map((x) => ({
+    id: x.id,
+    etiqueta: x.name,
+    color: colores.get(x.id) ?? colorDeSerie(0),
+    valores: snaps.map((s) =>
+      s.data ? resumir(filtrarFilas(s.data.rows, { q, categorias: cats }), x.id).promedio : null,
+    ),
+  }));
 
   const abierta = producto ? c.rows.find((f) => f.ngr.name === producto) : undefined;
 
@@ -200,19 +211,11 @@ export function PreciosDeMarca({
             <Esqueleto className="h-[240px] w-full" />
           ) : (
             <Lineas
+              {...ejeDeVariacion(evolucion.flatMap((e) => e.valores))}
               titulo="Diferencia promedio por cruce diario"
               etiquetasX={dias.map(fechaDeDia)}
               formato={(n) => variacion(Math.abs(n) < 1e-9 ? 0 : n)}
-              series={visibles.map((x) => ({
-                id: x.id,
-                etiqueta: x.name,
-                color: colores.get(x.id) ?? colorDeSerie(0),
-                valores: snaps.map((s) =>
-                  s.data
-                    ? resumir(filtrarFilas(s.data.rows, { q, categorias: cats }), x.id).promedio
-                    : null,
-                ),
-              }))}
+              series={evolucion}
             />
           )}
         </Panel>
@@ -280,7 +283,9 @@ function BloqueDeCompetidor({
   const colores =
     modo === "competencia"
       ? ["var(--color-pass-soft)", "var(--color-stage-3)", "var(--color-fail-soft)"]
-      : [colorDeSerie(0, true), "var(--color-stage-3)", colorDeSerie(1, true)];
+      : // Entre canales no hay bueno ni malo, y las series 1 y 2 ya son
+        // Rappi y PedidosYa en los gráficos: el reparto va en la 3 y la 4.
+        [colorDeSerie(2, true), "var(--color-stage-3)", colorDeSerie(3, true)];
   return (
     <div className="flex flex-col gap-5 rounded-panel bg-white/[.04] p-4 md:p-5">
       <div className="flex items-baseline justify-between gap-3">
@@ -296,7 +301,7 @@ function BloqueDeCompetidor({
         tamano="lg"
         etiqueta="Diferencia promedio"
         valor={<span className={tonoDeTexto(tono)}>{variacion(r.promedio)}</span>}
-        detalle={fraseDePromedio(r.promedio, propio, competidor.name)}
+        detalle={fraseDePromedio(r.promedio, sujetoDe(propio, modo), competidor.name)}
       />
       <Proporcion
         oscuro
@@ -441,7 +446,7 @@ function TablaComparativa({
   return (
     <Panel
       titulo="Tabla comparativa"
-      bajada={`Precios en S/ · la diferencia es ${propio} contra cada ${modo === "canales" ? "canal" : "competidor"} · ${plural(filas.length, "producto")}. Abrí un producto para ver su detalle y su evolución.`}
+      bajada={`Precios en S/ · la diferencia es ${sujetoDe(propio, modo)} contra cada ${modo === "canales" ? "canal" : "competidor"} · ${plural(filas.length, "producto")}. Abrí un producto para ver su detalle y su evolución.`}
       plano
       cuerpo="pt-3"
     >

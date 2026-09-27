@@ -84,19 +84,21 @@ export function EvolucionDeProducto({
     >
       {producto && (
         <div className="space-y-7">
-          <div className="flex flex-wrap items-center gap-2 text-meta text-ink-3">
-            {oferta && (
-              <>
-                <span>
-                  Precio de lista{" "}
-                  <span className="tnum line-through">{soles(producto.originalPrice)}</span>
-                </span>
-                {producto.promoPartner && <Chip tone="neutral">{producto.promoPartner}</Chip>}
-              </>
-            )}
-            {producto.inStock === false && <Chip tone="warn">Sin stock</Chip>}
-            {producto.sku && <span className="font-mono">SKU {producto.sku}</span>}
-          </div>
+          {(oferta || producto.inStock === false || producto.sku) && (
+            <div className="flex flex-wrap items-center gap-2 text-meta text-ink-3">
+              {oferta && (
+                <>
+                  <span>
+                    Precio de lista{" "}
+                    <span className="tnum line-through">{soles(producto.originalPrice)}</span>
+                  </span>
+                  {producto.promoPartner && <Chip tone="neutral">{producto.promoPartner}</Chip>}
+                </>
+              )}
+              {producto.inStock === false && <Chip tone="warn">Sin stock</Chip>}
+              {producto.sku && <span className="font-mono">SKU {producto.sku}</span>}
+            </div>
+          )}
           {producto.description?.trim() && (
             <p className="max-w-[70ch] text-base leading-relaxed text-ink-2">
               {producto.description}

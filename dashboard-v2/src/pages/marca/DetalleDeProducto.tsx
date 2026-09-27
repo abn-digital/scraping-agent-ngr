@@ -12,6 +12,7 @@ import {
   estadoVisible,
   modoDe,
   posicionDeProducto,
+  sujetoDe,
   tonoDe,
   variacionDe,
   soles,
@@ -68,7 +69,7 @@ export function DetalleDeProducto({
       title={nombre || "Producto"}
       description={
         fila
-          ? `${categoriaDe(fila.ngr.category)} · ${soles(fila.ngr.price)} en ${propio}`
+          ? `${categoriaDe(fila.ngr.category)} · ${soles(fila.ngr.price)} en ${sujetoDe(propio, modo)}`
           : undefined
       }
       width="lg"

@@ -124,12 +124,32 @@ export const pendientes = (c: Comparacion) =>
     0,
   );
 
-/** "En promedio, Bembos está 12 % más caro que McDonald's." */
+const conMayuscula = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
+
+/**
+ * "En promedio, Bembos está 12 % más caro que McDonald's." `propio` va como se
+ * lee adentro de una oración: "Bembos", o "el sitio propio" entre canales.
+ */
 export function fraseDePromedio(x: number | null, propio: string, otro: string): string {
   const p = posicionDePromedio(x);
   if (p == null) return `Sin productos cruzados con ${otro}.`;
-  if (p === "similar") return `${propio} tiene precios similares a ${otro}.`;
+  if (p === "similar") return conMayuscula(`${propio} tiene precios similares a ${otro}.`);
   return `En promedio, ${propio} está ${porcentaje(Math.abs(x!))} más ${p === "caro" ? "caro" : "barato"} que ${otro}.`;
+}
+
+/** Lo propio adentro de una oración: "Bembos", o "el sitio propio" entre canales. */
+export const sujetoDe = (propio: string, modo: Modo) =>
+  modo === "canales" ? `el ${propio.toLowerCase()}` : propio;
+
+/**
+ * El eje de un gráfico de variación: simétrico alrededor de cero y con topes
+ * que dan marcas redondas (±10 %, ±20 %, ±40 %…). Sin esto el eje arrancaba en
+ * el mínimo de los datos y las marcas caían en −13 %, −23 %.
+ */
+export function ejeDeVariacion(valores: (number | null)[]): { minY: number; maxY: number } {
+  const mayor = Math.max(0, ...valores.filter((v): v is number => v != null).map(Math.abs));
+  const tope = [0.05, 0.1, 0.2, 0.4, 0.5, 1, 2, 4].find((m) => m >= mayor) ?? Math.ceil(mayor);
+  return { minY: -tope, maxY: tope };
 }
 
 export const CATEGORIA_VACIA = "Sin categoría";

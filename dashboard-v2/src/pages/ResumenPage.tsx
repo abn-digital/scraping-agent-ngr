@@ -130,7 +130,9 @@ export default function ResumenPage() {
   const colores =
     modo === "competencia"
       ? ["var(--color-pass-soft)", "var(--color-stage-3)", "var(--color-fail-soft)"]
-      : [colorDeSerie(0, true), "var(--color-stage-3)", colorDeSerie(1, true)];
+      : // Entre canales no hay bueno ni malo, y las series 1 y 2 ya son
+        // Rappi y PedidosYa en los gráficos: el reparto va en la 3 y la 4.
+        [colorDeSerie(2, true), "var(--color-stage-3)", colorDeSerie(3, true)];
 
   return (
     <>
