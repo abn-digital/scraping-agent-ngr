@@ -27,7 +27,7 @@ export function PageHeader({
 
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-10">
           <div className={cn("min-w-0", !wide && "max-w-[52ch]")}>
-            <h1 className="[overflow-wrap:anywhere] font-display text-h1 font-semibold leading-[1.02] tracking-[-.03em] text-ink md:text-display md:leading-(--text-display--line-height) md:tracking-(--text-display--letter-spacing)">
+            <h1 className="[overflow-wrap:anywhere] hyphens-auto font-display text-h1 font-semibold leading-[1.02] tracking-[-.03em] text-ink md:text-display md:leading-(--text-display--line-height) md:tracking-(--text-display--letter-spacing)">
               {title}
             </h1>
             {lede && <p className="mt-4 text-lede text-ink-2">{lede}</p>}
