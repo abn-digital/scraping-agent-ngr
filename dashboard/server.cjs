@@ -766,6 +766,18 @@ app.post('/api/internal/resync', async (req, res) => {
 });
 
 // ──────────────────────────────────────────────
+// v2 (dashboard-v2) en /v2, con su propio fallback SPA. Va antes del fallback
+// de la v1 para que /v2/… no caiga en el index.html de la raíz.
+// ──────────────────────────────────────────────
+const DIST_V2_DIR = path.join(ROOT_DIR, 'dashboard-v2', 'dist');
+if (fs.existsSync(DIST_V2_DIR)) {
+    app.use('/v2', express.static(DIST_V2_DIR));
+    app.get(['/v2', '/v2/{*path}'], (_req, res) => {
+        res.sendFile(path.join(DIST_V2_DIR, 'index.html'));
+    });
+}
+
+// ──────────────────────────────────────────────
 // SPA fallback – serve index.html for all other routes
 // ──────────────────────────────────────────────
 if (fs.existsSync(DIST_DIR)) {

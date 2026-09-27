@@ -12,6 +12,21 @@ COPY dashboard/ ./
 RUN npm run build   # outputs to /app/dashboard/dist
 
 # ──────────────────────────────────────────────
+# Stage 1b: Build the v2 dashboard (dashboard-v2, served at /v2)
+# Its own stage because its toolchain (react-router 8, jsdom) needs
+# Node >= 22.22; the v1 build and the runtime image stay on Node 20.
+# ──────────────────────────────────────────────
+FROM node:24-slim AS builder-v2
+
+WORKDIR /app/dashboard-v2
+
+COPY dashboard-v2/package.json dashboard-v2/package-lock.json dashboard-v2/.npmrc ./
+RUN npm ci
+
+COPY dashboard-v2/ ./
+RUN npm run build   # outputs to /app/dashboard-v2/dist
+
+# ──────────────────────────────────────────────
 # Stage 2: Production server with Playwright
 # ──────────────────────────────────────────────
 FROM node:20-slim
@@ -83,6 +98,9 @@ COPY dashboard/server.cjs ./dashboard/server.cjs
 
 # Copy compiled React app from Stage 1
 COPY --from=builder /app/dashboard/dist ./dashboard/dist
+
+# Copy compiled v2 from Stage 1b (server.cjs serves it at /v2)
+COPY --from=builder-v2 /app/dashboard-v2/dist ./dashboard-v2/dist
 
 # Cloud Run injects PORT (default 8080)
 ENV PORT=8080
