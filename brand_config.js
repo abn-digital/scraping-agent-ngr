@@ -6,9 +6,10 @@
 // ──────────────────────────────────────────────
 
 /**
- * Each brand groups two channels:
- *   - rappi:  anchor + competitors as they appear on Rappi (numeric store IDs)
- *   - propio: anchor + competitors as they appear on their own websites (slug IDs)
+ * Each brand groups channels:
+ *   - rappi:  anchor + competitors on Rappi (numeric store IDs)
+ *   - peya:   PedidosYa (peya-* store IDs)
+ *   - propio: own websites (slug IDs)
  *
  * `anchorId` / `id` map directly to products_<id>.json files.
  */
@@ -22,6 +23,13 @@ const BRANDS = [
         competitors: [
           { id: '742',  name: "McDonald's" },
           { id: '2376', name: 'Burger King' },
+        ],
+      },
+      peya: {
+        anchorId: 'peya-bembos',
+        competitors: [
+          { id: 'peya-mcdonalds',  name: "McDonald's" },
+          { id: 'peya-burgerking', name: 'Burger King' },
         ],
       },
       propio: {
@@ -42,6 +50,13 @@ const BRANDS = [
         competitors: [
           { id: '6337',  name: 'KFC' },
           { id: '58629', name: 'Yopo' },
+        ],
+      },
+      peya: {
+        anchorId: 'peya-popeyes',
+        competitors: [
+          { id: 'peya-kfc',  name: 'KFC' },
+          { id: 'peya-yopo', name: 'Yopo' },
         ],
       },
       propio: {
@@ -65,6 +80,14 @@ const BRANDS = [
           { id: '4136',  name: 'Little Caesars' },
         ],
       },
+      peya: {
+        anchorId: 'peya-papajohns',
+        competitors: [
+          { id: 'peya-pizzahut',      name: 'Pizza Hut' },
+          { id: 'peya-littlecaesars', name: 'Little Caesars' },
+          // Domino's PeYa URL not configured — omit
+        ],
+      },
       propio: {
         anchorId: 'papajohns-pe',
         competitors: [
@@ -85,10 +108,17 @@ const BRANDS = [
           { id: '13399', name: 'Chifa Express' },
         ],
       },
+      peya: {
+        anchorId: 'peya-chinawok',
+        competitors: [
+          { id: 'peya-wanta',        name: 'Wanta Chifa' },
+          { id: 'peya-chifaexpress', name: 'Chifa Express' },
+        ],
+      },
       propio: {
         anchorId: 'chinawok-pe',
         competitors: [
-          { id: 'wanta-pe',       name: 'Wanta' },
+          { id: 'wanta-pe',        name: 'Wanta' },
           { id: 'chifaexpress-pe', name: 'Chifa Express' },
         ],
       },
@@ -104,6 +134,14 @@ const BRANDS = [
           { id: '38002', name: 'Starbucks' },
           { id: '79108', name: 'Juan Valdez' },
           { id: '66914', name: 'Cinnabon' },
+        ],
+      },
+      peya: {
+        anchorId: 'peya-dunkin',
+        competitors: [
+          { id: 'peya-starbucks',  name: 'Starbucks' },
+          { id: 'peya-juanvaldez', name: 'Juan Valdez' },
+          { id: 'peya-cinnabon',   name: 'Cinnabon' },
         ],
       },
       propio: {
@@ -126,6 +164,13 @@ const BRANDS = [
           { id: '5341', name: 'Rokys' },
         ],
       },
+      peya: {
+        anchorId: 'peya-donbelisario',
+        competitors: [
+          { id: 'peya-pardos', name: 'Pardos Chicken' },
+          { id: 'peya-rokys',  name: 'Rokys' },
+        ],
+      },
       propio: {
         anchorId: 'donbelisario-pe',
         competitors: [
@@ -136,7 +181,17 @@ const BRANDS = [
   },
 ];
 
-const CHANNELS = ['rappi', 'propio'];
+const CHANNELS = ['rappi', 'peya', 'propio'];
+
+/** Pseudo-channel key for same-brand Rappi / PeYa / Propio comparison. */
+const CROSS_CHANNEL = 'cross';
+
+const CHANNEL_LABELS = {
+  rappi: 'Rappi',
+  peya: 'PedidosYa',
+  propio: 'Sitio Propio',
+  cross: 'Entre canales',
+};
 
 function getBrand(key) {
   return BRANDS.find(b => b.key === key) || null;
@@ -148,4 +203,52 @@ function getChannelConfig(key, channel) {
   return brand.channels[channel] || null;
 }
 
-module.exports = { BRANDS, CHANNELS, getBrand, getChannelConfig };
+/**
+ * Same brand across delivery channels (not vs competitors).
+ * Anchor preference: Sitio propio → Rappi → PedidosYa (first with an anchorId).
+ * Other channels become "competitors" columns named by channel label.
+ */
+function getCrossChannelConfig(brandKey) {
+  const brand = getBrand(brandKey);
+  if (!brand) return null;
+
+  const prefer = ['propio', 'rappi', 'peya'];
+  let anchorChannel = null;
+  for (const ch of prefer) {
+    if (brand.channels[ch]?.anchorId) {
+      anchorChannel = ch;
+      break;
+    }
+  }
+  if (!anchorChannel) return null;
+
+  const competitors = [];
+  for (const ch of CHANNELS) {
+    if (ch === anchorChannel) continue;
+    const cfg = brand.channels[ch];
+    if (!cfg?.anchorId) continue;
+    competitors.push({
+      id: cfg.anchorId,
+      name: CHANNEL_LABELS[ch],
+      channel: ch,
+    });
+  }
+  if (competitors.length === 0) return null;
+
+  return {
+    anchorId: brand.channels[anchorChannel].anchorId,
+    anchorChannel,
+    anchorLabel: CHANNEL_LABELS[anchorChannel],
+    competitors,
+  };
+}
+
+module.exports = {
+  BRANDS,
+  CHANNELS,
+  CROSS_CHANNEL,
+  CHANNEL_LABELS,
+  getBrand,
+  getChannelConfig,
+  getCrossChannelConfig,
+};

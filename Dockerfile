@@ -59,6 +59,9 @@ COPY pedidosya_stores.js ./
 # Price comparison / AI matching engine
 COPY brand_config.js ./
 COPY product_matcher.js ./
+COPY match_snapshots.js ./
+COPY match_daily_batch.js ./
+COPY recalculate_all_matches.js ./
 COPY check_mcd.js ./
 COPY dump_mcd.js ./
 COPY extract_nuxt.js ./

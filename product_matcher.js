@@ -21,9 +21,9 @@
 const fs = require('fs');
 const path = require('path');
 const { GoogleGenAI, Type } = require('@google/genai');
-const { getChannelConfig } = require('./brand_config');
+const { getChannelConfig, getCrossChannelConfig, CROSS_CHANNEL } = require('./brand_config');
 
-const PROJECT = process.env.GOOGLE_CLOUD_PROJECT || process.env.GCLOUD_PROJECT || 'hike-fafo';
+const PROJECT = process.env.VERTEX_PROJECT || process.env.GOOGLE_CLOUD_PROJECT || process.env.GCLOUD_PROJECT || 'hike-fafo';
 // Regional endpoint (own quota pool) is more stable than 'global' (dynamic shared
 // quota), which was returning persistent 429 RESOURCE_EXHAUSTED.
 const LOCATION = process.env.VERTEX_LOCATION || 'us-central1';
@@ -369,8 +369,16 @@ const RESPONSE_SCHEMA = {
   required: ['results'],
 };
 
-function buildPrompt(brandLabel, competitorName, anchorItems, competitorItems) {
-  return `Sos analista de pricing de fast-food en Perú. Para cada producto de la marca "${brandLabel}", encontrá SOLO su equivalente directo en "${competitorName}".
+function buildPrompt(brandLabel, competitorName, anchorItems, competitorItems, opts = {}) {
+  const cross = !!opts.cross;
+  const intro = cross
+    ? `Sos analista de pricing de fast-food en Perú. Comparás la misma marca entre canales de venta (web propia, Rappi, PedidosYa). Para cada producto de "${brandLabel}" (canal ancla), encontrá el MISMO producto en el canal "${competitorName}".`
+    : `Sos analista de pricing de fast-food en Perú. Para cada producto de la marca "${brandLabel}", encontrá SOLO su equivalente directo en "${competitorName}".`;
+  const catalogTitle = cross
+    ? `Catálogo de "${brandLabel}" en ${competitorName}`
+    : `Catálogo de "${competitorName}"`;
+
+  return `${intro}
 
 REGLA DE ORO — la descripción manda:
 - Equivalente = mismo rol para el cliente: mismos tipos de ítems en la descripción, cantidades/porciones parecidas, mismo formato.
@@ -394,7 +402,7 @@ Devolvé hasta ${MAX_ALTERNATIVES} alternativas ordenadas por score desc. Usá E
 ## Productos "${brandLabel}"
 ${JSON.stringify(anchorItems)}
 
-## Catálogo de "${competitorName}"
+## ${catalogTitle}
 ${JSON.stringify(competitorItems)}
 
 JSON: { "results": [ {ngrRef, bestRef, bestScore, alternatives:[{ref,score}]} ] } — un elemento por cada producto de "${brandLabel}".`;
@@ -402,7 +410,18 @@ JSON: { "results": [ {ngrRef, bestRef, bestScore, alternatives:[{ref,score}]} ] 
 
 let _ai = null;
 function getAI() {
-  if (!_ai) _ai = new GoogleGenAI({ vertexai: true, project: PROJECT, location: LOCATION });
+  if (!_ai) {
+    // Prefer API key (AI Studio) when set — works on Cloud Run without
+    // cross-project Vertex IAM on hike-fafo.
+    const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || '';
+    if (apiKey) {
+      console.log(`[match] Gemini via API key · model=${MODEL}`);
+      _ai = new GoogleGenAI({ apiKey });
+    } else {
+      console.log(`[match] Gemini via Vertex · project=${PROJECT} location=${LOCATION} model=${MODEL}`);
+      _ai = new GoogleGenAI({ vertexai: true, project: PROJECT, location: LOCATION });
+    }
+  }
   return _ai;
 }
 
@@ -663,10 +682,12 @@ function chunk(arr, size) {
 
 /**
  * Run matching for one brand + channel.
+ * channel = 'cross' → same brand across Rappi / PeYa / Propio (anchor = propio preferred).
  * Returns the full matches object (also written to disk by the caller).
  */
 async function matchBrand(brandKey, channel) {
-  const cfg = getChannelConfig(brandKey, channel);
+  const isCross = channel === CROSS_CHANNEL;
+  const cfg = isCross ? getCrossChannelConfig(brandKey) : getChannelConfig(brandKey, channel);
   if (!cfg) throw new Error(`Marca/canal desconocido: ${brandKey}/${channel}`);
 
   const anchorProducts = loadProducts(cfg.anchorId);
@@ -689,7 +710,11 @@ async function matchBrand(brandKey, channel) {
     competitors.push({ id: comp.id, name: comp.name, items, byRef });
   }
   if (competitors.length === 0) {
-    throw new Error(`Ningún competidor con datos para ${brandKey}/${channel}. Faltan: ${missing.join(', ')}`);
+    throw new Error(
+      isCross
+        ? `Ningún otro canal con datos para ${brandKey}. Faltan: ${missing.join(', ')}`
+        : `Ningún competidor con datos para ${brandKey}/${channel}. Faltan: ${missing.join(', ')}`,
+    );
   }
 
   // Anchor items with stable refs
@@ -716,7 +741,7 @@ async function matchBrand(brandKey, channel) {
   let lastError = '';
   const usage = { prompt: 0, candidates: 0, total: 0, calls: 0, promptChars: 0 };
   await runPool(tasks, async ({ comp, ac }) => {
-    const prompt = buildPrompt(brandKey, comp.name, ac, comp.items);
+    const prompt = buildPrompt(brandKey, comp.name, ac, comp.items, { cross: isCross });
     let result;
     try {
       result = await callGemini(prompt);
@@ -770,6 +795,11 @@ async function matchBrand(brandKey, channel) {
   return {
     brand: brandKey,
     channel,
+    ...(isCross ? {
+      mode: 'cross',
+      anchorChannel: cfg.anchorChannel,
+      anchorLabel: cfg.anchorLabel,
+    } : {}),
     generatedAt: new Date().toISOString(),
     model: MODEL,
     acceptScore: ACCEPT_SCORE,
@@ -778,6 +808,7 @@ async function matchBrand(brandKey, channel) {
     competitors: cfg.competitors.map(c => ({
       id: c.id,
       name: c.name,
+      channel: c.channel || undefined,
       hasData: competitors.some(x => x.id === c.id),
     })),
     missingCompetitors: missing,
@@ -797,6 +828,7 @@ if (require.main === module) {
     const [brandKey, channel] = process.argv.slice(2);
     if (!brandKey || !channel) {
       console.error('Uso: node product_matcher.js <brand> <channel>');
+      console.error('  channel: rappi | peya | propio | cross');
       process.exit(1);
     }
     const t0 = Date.now();
@@ -804,6 +836,13 @@ if (require.main === module) {
       const result = await matchBrand(brandKey, channel);
       const outPath = outputPath(brandKey, channel);
       fs.writeFileSync(outPath, JSON.stringify(result, null, 2));
+      try {
+        const matchSnapshots = require('./match_snapshots');
+        const snap = await matchSnapshots.saveSnapshot(brandKey, channel, result);
+        console.log(`   snapshot ${snap.date} written=${snap.written}${snap.reason ? ` (${snap.reason})` : ''}`);
+      } catch (snapErr) {
+        console.warn(`   snapshot skip: ${snapErr.message}`);
+      }
       const matched = result.rows.filter(r => Object.values(r.matches).some(m => m.best)).length;
       console.log(`✅ ${outPath}  (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
       console.log(`   ${result.rows.length} productos NGR · ${matched} con al menos un match · competidores: ${result.competitors.map(c => c.name + (c.hasData ? '' : ' (sin data)')).join(', ')}`);

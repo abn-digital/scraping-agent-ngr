@@ -265,7 +265,7 @@ export default function App() {
     }
   }, [activeTab, aggregator, data]);
 
-  // Load history index when store changes; default to latest
+  // Load history index when store changes; default to newest run (history or live stamp)
   useEffect(() => {
     if (!selectedCompId) {
       setHistoryRuns([]);
@@ -282,22 +282,39 @@ export default function App() {
         const resp = await axios.get(`${API_BASE}/history/${encodeURIComponent(selectedCompId)}`);
         if (cancelled) return;
         const runs: HistoryRun[] = Array.isArray(resp.data?.runs) ? resp.data.runs : [];
+        // Newest first (defensive — index should already be sorted)
+        runs.sort((a, b) => new Date(b.at).getTime() - new Date(a.at).getTime());
         setHistoryRuns(runs);
-        const latest = data.find(d => d.id === selectedCompId);
-        // Prefer live stamp so "Actual" day matches Última extracción (history may lag)
-        const defaultAt = latest?.lastUpdated || runs[0]?.at || '';
+        const liveAt = data.find(d => d.id === selectedCompId)?.lastUpdated || '';
+        const newestHist = runs[0]?.at || '';
+        const defaultAt = [liveAt, newestHist]
+          .filter(Boolean)
+          .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())[0] || '';
         setHistoryAt(defaultAt);
         setHistoryDate(defaultAt ? peruDateKey(defaultAt) : '');
-        // Viewing latest → use live products from /api/results
-        setHistoryProducts(null);
+        // Live stamp can lag behind history uploads — if history is newer, load that run
+        if (defaultAt && newestHist && defaultAt === newestHist && defaultAt !== liveAt) {
+          try {
+            const runResp = await axios.get(
+              `${API_BASE}/history/${encodeURIComponent(selectedCompId)}/run`,
+              { params: { at: defaultAt } },
+            );
+            if (!cancelled) {
+              setHistoryProducts(Array.isArray(runResp.data?.products) ? runResp.data.products : []);
+            }
+          } catch {
+            if (!cancelled) setHistoryProducts(null);
+          }
+        } else {
+          setHistoryProducts(null);
+        }
       } catch (err) {
         console.error('Error fetching history:', err);
         if (!cancelled) {
           setHistoryRuns([]);
-          const latest = data.find(d => d.id === selectedCompId);
-          const defaultAt = latest?.lastUpdated || '';
-          setHistoryAt(defaultAt);
-          setHistoryDate(defaultAt ? peruDateKey(defaultAt) : '');
+          const liveAt = data.find(d => d.id === selectedCompId)?.lastUpdated || '';
+          setHistoryAt(liveAt);
+          setHistoryDate(liveAt ? peruDateKey(liveAt) : '');
           setHistoryProducts(null);
         }
       } finally {
@@ -309,14 +326,27 @@ export default function App() {
 
   const availableDates = Array.from(
     new Set(historyRuns.map(r => peruDateKey(r.at)))
-  ).sort();
+  );
 
   // Always include the live stamp day even if history upload lagged
   const currentCompData = data.find(d => d.id === selectedCompId);
+  // Newest calendar day first (user expects "Actual" near the top)
   const dateOptions = Array.from(new Set([
     ...availableDates,
     ...(currentCompData?.lastUpdated ? [peruDateKey(currentCompData.lastUpdated)] : []),
-  ])).sort();
+  ])).sort((a, b) => (a < b ? 1 : a > b ? -1 : 0));
+
+  /** Newest timestamp among live stamp + history runs (history uploads can outpace scrape_meta). */
+  const latestAvailableAt = (() => {
+    const times = [
+      ...(currentCompData?.lastUpdated ? [currentCompData.lastUpdated] : []),
+      ...historyRuns.map(r => r.at),
+    ];
+    if (!times.length) return '';
+    return times.reduce((best, t) =>
+      new Date(t).getTime() > new Date(best).getTime() ? t : best
+    );
+  })();
 
   const runsForDate = historyRuns
     .filter(r => peruDateKey(r.at) === historyDate)
@@ -329,7 +359,7 @@ export default function App() {
       ? [{ at: currentCompData.lastUpdated, productCount: currentCompData.products?.length || 0 }]
       : []);
 
-  const isViewingLatest = historyProducts === null;
+  const isViewingLatest = !!latestAvailableAt && historyAt === latestAvailableAt;
 
   const loadHistoryRun = async (at: string) => {
     setHistoryAt(at);
@@ -337,9 +367,12 @@ export default function App() {
       setHistoryProducts(null);
       return;
     }
-    const latestAt = currentCompData?.lastUpdated;
-    // Prefer live catalog when selecting the current stamp (even if also in history)
-    if (latestAt && at === latestAt) {
+    // Live catalog only when its stamp is the newest available
+    if (
+      currentCompData?.lastUpdated &&
+      at === currentCompData.lastUpdated &&
+      at === latestAvailableAt
+    ) {
       setHistoryProducts(null);
       return;
     }
@@ -352,7 +385,6 @@ export default function App() {
       setHistoryProducts(Array.isArray(resp.data?.products) ? resp.data.products : []);
     } catch (err) {
       console.error('Error loading history run:', err);
-      // If run missing (e.g. only live stamp), fall back to latest
       setHistoryProducts(null);
     } finally {
       setHistoryLoading(false);
@@ -586,7 +618,7 @@ export default function App() {
                 <div>
                   <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Última Extracción</p>
                   <p className="text-sm font-bold text-slate-900">
-                    {formatPeruDateTime(currentCompData?.lastUpdated)}
+                    {formatPeruDateTime(latestAvailableAt || currentCompData?.lastUpdated)}
                   </p>
                 </div>
               </div>
