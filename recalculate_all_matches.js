@@ -3,8 +3,9 @@
 const fs = require('fs');
 const path = require('path');
 const { Storage } = require('@google-cloud/storage');
-const { BRANDS, getChannelConfig } = require('./brand_config');
+const { BRANDS, CROSS_CHANNEL, getChannelConfig, getCrossChannelConfig } = require('./brand_config');
 const { matchBrand, outputPath } = require('./product_matcher');
+const matchSnapshots = require('./match_snapshots');
 
 // gemini-2.5-flash standard (Vertex / Google AI) — Aug 2026
 const PRICE_IN_PER_M = 0.30;
@@ -39,8 +40,14 @@ async function main() {
   const jobs = [];
   const skipped = [];
   for (const brand of BRANDS) {
-    for (const channel of Object.keys(brand.channels)) {
-      const cfg = getChannelConfig(brand.key, channel);
+    for (const channel of [...Object.keys(brand.channels), CROSS_CHANNEL]) {
+      const cfg = channel === CROSS_CHANNEL
+        ? getCrossChannelConfig(brand.key)
+        : getChannelConfig(brand.key, channel);
+      if (!cfg) {
+        skipped.push(`${brand.key}/${channel}`);
+        continue;
+      }
       const anchor = load(cfg.anchorId);
       const hasComp = cfg.competitors.some(c => (load(c.id) || []).length > 0);
       if (!anchor?.length || !hasComp) {
@@ -70,6 +77,12 @@ async function main() {
         await uploadToGCS(out);
       } catch (uploadErr) {
         console.warn(`   [GCS] upload falló: ${uploadErr.message}`);
+      }
+      try {
+        const snap = await matchSnapshots.saveSnapshot(brand, channel, result);
+        console.log(`   [snapshot] ${snap.date} written=${snap.written}${snap.reason ? ` (${snap.reason})` : ''}`);
+      } catch (snapErr) {
+        console.warn(`   [snapshot] falló: ${snapErr.message}`);
       }
       const matched = result.rows.filter(r => Object.values(r.matches).some(m => m.best)).length;
       const u = result.usage || { prompt: 0, candidates: 0, total: 0, calls: 0, promptChars: 0 };

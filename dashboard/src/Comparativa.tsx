@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo, Fragment, useRef } from 'react';
 import {
-  ArrowPathIcon,
   CheckCircleIcon,
+  CheckIcon,
+  ChevronDownIcon,
   MagnifyingGlassIcon,
   ExclamationTriangleIcon,
-  Cog6ToothIcon,
   ArrowUpIcon,
   ArrowDownIcon,
   MinusIcon,
@@ -29,15 +29,27 @@ interface Kpi { matched: number; pending: number; cheaper: number; pricier: numb
 interface Competitor { id: string; name: string; hasData?: boolean; }
 interface Comparison {
   brand: string; channel: string; generatedAt: string | null; model: string | null;
+  mode?: 'competition' | 'cross' | string;
+  anchorChannel?: string | null;
+  anchorLabel?: string | null;
+  snapshotDate?: string | null; isHistorical?: boolean;
   competitors: Competitor[]; missingCompetitors: string[]; reviewThreshold: number;
   kpis: Record<string, Kpi>; rows: Row[];
 }
 interface BrandInfo {
   key: string; label: string;
-  channels: { channel: string; competitors: Competitor[]; hasMatches: boolean }[];
+  channels: { channel: string; competitors: Competitor[]; hasMatches: boolean; mode?: string }[];
 }
 
-const CHANNEL_LABEL: Record<string, string> = { rappi: 'Rappi', propio: 'Sitio Propio' };
+const CHANNEL_LABEL: Record<string, string> = {
+  rappi: 'Rappi',
+  peya: 'PedidosYa',
+  propio: 'Sitio Propio',
+  cross: 'Entre canales',
+};
+const CHANNELS = ['rappi', 'peya', 'propio'] as const;
+type Channel = typeof CHANNELS[number];
+type ViewMode = 'competition' | 'cross';
 const money = (n: number | null | undefined) => (typeof n === 'number' ? `S/ ${n.toFixed(2)}` : '—');
 
 const STATUS_BADGE: Record<Status, { label: string; cls: string }> = {
@@ -50,15 +62,17 @@ const STATUS_BADGE: Record<Status, { label: string; cls: string }> = {
 export default function Comparativa() {
   const [brands, setBrands] = useState<BrandInfo[]>([]);
   const [brand, setBrand] = useState('');
-  const [channel, setChannel] = useState<'rappi' | 'propio'>('rappi');
+  const [viewMode, setViewMode] = useState<ViewMode>('competition');
+  const [channel, setChannel] = useState<Channel>('rappi');
+  const [matchDate, setMatchDate] = useState(''); // '' = latest live file
+  const [availableDates, setAvailableDates] = useState<string[]>([]);
   const [data, setData] = useState<Comparison | null>(null);
   const [subTab, setSubTab] = useState<'dashboard' | 'review'>('dashboard');
   const [loading, setLoading] = useState(false);
-  const [recalculating, setRecalculating] = useState(false);
   const [error, setError] = useState('');
   const [onlyPending, setOnlyPending] = useState(false);
-  const [settingsOpen, setSettingsOpen] = useState(false);
-  const settingsRef = useRef<HTMLDivElement>(null);
+
+  const activeChannel = viewMode === 'cross' ? 'cross' : channel;
 
   useEffect(() => {
     axios.get<BrandInfo[]>(`${API_BASE}/brands`).then(r => {
@@ -67,22 +81,25 @@ export default function Comparativa() {
     }).catch(() => setError('No se pudo cargar la lista de marcas.'));
   }, []);
 
-  useEffect(() => {
-    if (!settingsOpen) return;
-    const onDoc = (e: MouseEvent) => {
-      if (settingsRef.current && !settingsRef.current.contains(e.target as Node)) {
-        setSettingsOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', onDoc);
-    return () => document.removeEventListener('mousedown', onDoc);
-  }, [settingsOpen]);
+  const fetchDates = async () => {
+    if (!brand) return;
+    try {
+      const r = await axios.get<{ dates: string[]; today: string }>(`${API_BASE}/matches/dates`, {
+        params: { brand, channel: activeChannel },
+      });
+      setAvailableDates(r.data.dates || []);
+    } catch {
+      setAvailableDates([]);
+    }
+  };
 
   const fetchMatches = async () => {
     if (!brand) return;
     setLoading(true); setError('');
     try {
-      const r = await axios.get<Comparison>(`${API_BASE}/matches`, { params: { brand, channel } });
+      const params: Record<string, string> = { brand, channel: activeChannel };
+      if (matchDate) params.date = matchDate;
+      const r = await axios.get<Comparison>(`${API_BASE}/matches`, { params });
       setData(r.data);
     } catch (err: any) {
       setData(null);
@@ -90,22 +107,22 @@ export default function Comparativa() {
     } finally { setLoading(false); }
   };
 
-  useEffect(() => { fetchMatches(); }, [brand, channel]);
+  useEffect(() => {
+    setMatchDate('');
+    fetchDates();
+  }, [brand, activeChannel]);
 
-  const recalcular = async () => {
-    setSettingsOpen(false);
-    setRecalculating(true); setError('');
-    try {
-      const r = await axios.post(`${API_BASE}/match`, { brand, channel });
-      setData(r.data.data);
-    } catch (err: any) {
-      setError(err.response?.data?.error || 'Error al recalcular. ¿Hay datos scrapeados de esta marca y sus competidores?');
-    } finally { setRecalculating(false); }
-  };
+  useEffect(() => { fetchMatches(); }, [brand, activeChannel, matchDate]);
 
   const applyOverride = async (ngrName: string, competitorId: string, action: string, product?: Product) => {
+    if (data?.isHistorical) {
+      setError('Las decisiones de curación solo aplican sobre el matching actual, no sobre snapshots históricos.');
+      return;
+    }
     try {
-      const r = await axios.post(`${API_BASE}/matches/override`, { brand, channel, ngrName, competitorId, action, product });
+      const r = await axios.post(`${API_BASE}/matches/override`, {
+        brand, channel: activeChannel, ngrName, competitorId, action, product,
+      });
       setData(r.data.data);
     } catch (err: any) {
       setError(err.response?.data?.error || 'Error al guardar la decisión.');
@@ -115,12 +132,33 @@ export default function Comparativa() {
 
   const currentBrand = brands.find(b => b.key === brand);
   const competitors = data?.competitors || [];
+  const isHistorical = !!data?.isHistorical;
+  const isCross = viewMode === 'cross';
+  const anchorLabel = data?.anchorLabel || 'Sitio Propio';
 
   return (
     <div className="space-y-6">
       {/* Controls */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
         <div className="flex flex-wrap items-center gap-3">
+          <div>
+            <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1 tracking-wider">Vista</label>
+            <div className="flex bg-slate-100 rounded-xl p-1">
+              {([
+                { id: 'competition' as const, label: 'Vs competencia' },
+                { id: 'cross' as const, label: 'Entre canales' },
+              ]).map(m => (
+                <button
+                  key={m.id}
+                  type="button"
+                  onClick={() => setViewMode(m.id)}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-all cursor-pointer ${viewMode === m.id ? 'bg-white shadow-sm text-slate-900' : 'text-slate-400 hover:text-slate-600'}`}
+                >
+                  {m.label}
+                </button>
+              ))}
+            </div>
+          </div>
           <div>
             <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1 tracking-wider">Marca NGR</label>
             <select
@@ -131,57 +169,55 @@ export default function Comparativa() {
               {brands.map(b => <option key={b.key} value={b.key}>{b.label}</option>)}
             </select>
           </div>
-          <div>
-            <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1 tracking-wider">Canal</label>
-            <div className="flex bg-slate-100 rounded-xl p-1">
-              {(['rappi', 'propio'] as const).map(ch => (
-                <button
-                  key={ch}
-                  onClick={() => setChannel(ch)}
-                  className={`px-4 py-1.5 rounded-lg text-sm font-bold transition-all cursor-pointer ${channel === ch ? 'bg-white shadow-sm text-slate-900' : 'text-slate-400 hover:text-slate-600'}`}
-                >
-                  {CHANNEL_LABEL[ch]}
-                </button>
-              ))}
+          {!isCross && (
+            <div>
+              <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1 tracking-wider">Canal</label>
+              <div className="flex bg-slate-100 rounded-xl p-1">
+                {CHANNELS.map(ch => (
+                  <button
+                    key={ch}
+                    onClick={() => setChannel(ch)}
+                    className={`px-3 py-1.5 rounded-lg text-sm font-bold transition-all cursor-pointer ${channel === ch ? 'bg-white shadow-sm text-slate-900' : 'text-slate-400 hover:text-slate-600'}`}
+                  >
+                    {CHANNEL_LABEL[ch]}
+                  </button>
+                ))}
+              </div>
             </div>
+          )}
+          <div>
+            <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1 tracking-wider">Fecha del match</label>
+            <select
+              value={matchDate}
+              onChange={e => setMatchDate(e.target.value)}
+              className="pl-3 pr-8 py-2 bg-slate-50 border-0 rounded-xl text-slate-900 font-bold focus:ring-2 focus:ring-slate-200 cursor-pointer min-w-[11rem]"
+            >
+              <option value="">Actual</option>
+              {availableDates.map(d => (
+                <option key={d} value={d}>{d}</option>
+              ))}
+            </select>
+            {availableDates.length === 0 && (
+              <p className="text-[10px] text-slate-400 mt-1">Sin snapshots aún · se generan con el match diario</p>
+            )}
           </div>
         </div>
         <div className="flex items-center gap-2 self-end lg:self-auto">
-          {data?.generatedAt && (
-            <span className="text-[11px] text-slate-400 font-medium">
-              Último cálculo: {formatPeruDateTime(data.generatedAt)}
+          {isCross && (
+            <span className="text-[11px] font-bold uppercase tracking-wide text-slate-600 bg-slate-100 px-2 py-1 rounded-lg">
+              Ancla · {anchorLabel}
             </span>
           )}
-          {recalculating && (
-            <span className="text-[11px] text-slate-500 font-medium animate-pulse">Cruzando con IA…</span>
+          {isHistorical && (
+            <span className="text-[11px] font-bold uppercase tracking-wide text-amber-700 bg-amber-50 px-2 py-1 rounded-lg">
+              Histórico · {data?.snapshotDate}
+            </span>
           )}
-          <div className="relative" ref={settingsRef}>
-            <button
-              type="button"
-              onClick={() => setSettingsOpen(o => !o)}
-              aria-label="Opciones de matching"
-              aria-expanded={settingsOpen}
-              className="p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400"
-            >
-              <Cog6ToothIcon className={`w-5 h-5 ${recalculating ? 'animate-spin' : ''}`} />
-            </button>
-            {settingsOpen && (
-              <div className="absolute right-0 top-full mt-1 z-20 min-w-[220px] rounded-xl border border-slate-200 bg-white py-1 shadow-sm">
-                <button
-                  type="button"
-                  onClick={recalcular}
-                  disabled={recalculating || !brand}
-                  className="w-full flex items-center gap-2 px-3 py-2.5 text-left text-sm text-slate-700 hover:bg-slate-50 disabled:opacity-50 cursor-pointer"
-                >
-                  <ArrowPathIcon className={`w-4 h-4 shrink-0 ${recalculating ? 'animate-spin' : ''}`} />
-                  {recalculating ? 'Recalculando…' : 'Recalcular matches'}
-                </button>
-                <p className="px-3 pb-2 text-[10px] leading-snug text-slate-400">
-                  Vuelve a cruzar NGR vs competidores con Gemini. Puede tardar y consumir tokens.
-                </p>
-              </div>
-            )}
-          </div>
+          {data?.generatedAt && (
+            <span className="text-[11px] text-slate-400 font-medium">
+              Calculado: {formatPeruDateTime(data.generatedAt)}
+            </span>
+          )}
         </div>
       </div>
 
@@ -211,15 +247,19 @@ export default function Comparativa() {
       ) : !data ? (
         <EmptyState
           brandLabel={currentBrand?.label}
-          channel={channel}
-          onRecalc={recalcular}
-          recalculating={recalculating}
+          channel={activeChannel}
+          isCross={isCross}
         />
       ) : subTab === 'dashboard' ? (
-        <Dashboard data={data} competitors={competitors} brandLabel={currentBrand?.label || data.brand} />
+        <Dashboard
+          data={data}
+          competitors={competitors}
+          brandLabel={isCross ? `${currentBrand?.label || data.brand} · ${anchorLabel}` : (currentBrand?.label || data.brand)}
+          isCross={isCross}
+        />
       ) : (
         <Review data={data} competitors={competitors} onlyPending={onlyPending} setOnlyPending={setOnlyPending}
-                applyOverride={applyOverride} />
+                applyOverride={applyOverride} readOnly={isHistorical} />
       )}
     </div>
   );
@@ -230,29 +270,23 @@ function totalPending(data: Comparison) {
     acc + Object.values(row.matches).filter(c => c.status === 'pending').length, 0);
 }
 
-function EmptyState({ brandLabel, channel, onRecalc, recalculating }: {
+function EmptyState({ brandLabel, channel, isCross }: {
   brandLabel?: string;
   channel: string;
-  onRecalc: () => void;
-  recalculating: boolean;
+  isCross?: boolean;
 }) {
   return (
     <div className="bg-white rounded-2xl border border-dashed border-slate-200 py-20 text-center space-y-3 px-6">
       <div>
-        <p className="text-slate-600 font-bold">Todavía no hay cruce para {brandLabel} en {CHANNEL_LABEL[channel]}</p>
+        <p className="text-slate-600 font-bold">
+          {isCross
+            ? `Todavía no hay cruce entre canales para ${brandLabel}`
+            : `Todavía no hay cruce para ${brandLabel} en ${CHANNEL_LABEL[channel] || channel}`}
+        </p>
         <p className="text-slate-400 text-sm mt-1 max-w-md mx-auto">
-          Generá el matching desde el ícono de engranaje arriba a la derecha, o con{' '}
-          <code className="text-slate-500">node product_matcher.js</code>.
+          El matching se corre solo una vez al día (20:00 Lima). Volvé después del job diario.
         </p>
       </div>
-      <button
-        type="button"
-        onClick={onRecalc}
-        disabled={recalculating}
-        className="text-sm font-semibold text-slate-500 underline-offset-2 hover:text-slate-800 hover:underline disabled:opacity-50 cursor-pointer"
-      >
-        {recalculating ? 'Cruzando con IA…' : 'Recalcular matches'}
-      </button>
     </div>
   );
 }
@@ -298,7 +332,12 @@ function niceCeil(v: number): number {
 
 // Scatter: X = NGR price, Y = variation of NGR vs competitor (%). Above 0 = NGR
 // pricier (rose band); below 0 = NGR cheaper (emerald band). One color per competitor.
-function PriceScatter({ rows, comps, brandLabel }: { rows: Row[]; comps: Competitor[]; brandLabel: string }) {
+function PriceScatter({ rows, comps, brandLabel, vsLabel = 'competidor' }: {
+  rows: Row[];
+  comps: Competitor[];
+  brandLabel: string;
+  vsLabel?: string;
+}) {
   const [tip, setTip] = useState<{ x: number; y: number; lines: string[]; color: string } | null>(null);
 
   const points = useMemo(() => {
@@ -345,7 +384,7 @@ function PriceScatter({ rows, comps, brandLabel }: { rows: Row[]; comps: Competi
       <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
         <div>
           <h2 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Dispersión de precios</h2>
-          <p className="text-[11px] text-slate-400 mt-0.5">cada punto = un producto · Y: {brandLabel} vs competidor (%), eje ±100% (outliers al borde) · X: precio {brandLabel} (S/)</p>
+          <p className="text-[11px] text-slate-400 mt-0.5">cada punto = un producto · Y: {brandLabel} vs {vsLabel} (%), eje ±100% (outliers al borde) · X: precio {brandLabel} (S/)</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
           {comps.map((c, ci) => (
@@ -379,7 +418,7 @@ function PriceScatter({ rows, comps, brandLabel }: { rows: Row[]; comps: Competi
 
         {/* axis titles */}
         <text x={m.left + iw / 2} y={H - 6} textAnchor="middle" className="fill-slate-500" fontSize="11" fontWeight="800">Precio {brandLabel} (S/)</text>
-        <text transform={`rotate(-90 14 ${m.top + ih / 2})`} x={14} y={m.top + ih / 2} textAnchor="middle" className="fill-slate-500" fontSize="11" fontWeight="800">Variación vs competidor</text>
+        <text transform={`rotate(-90 14 ${m.top + ih / 2})`} x={14} y={m.top + ih / 2} textAnchor="middle" className="fill-slate-500" fontSize="11" fontWeight="800">Variación vs {vsLabel}</text>
 
         {/* points */}
         {points.map((pt, i) => (
@@ -414,13 +453,120 @@ function PriceScatter({ rows, comps, brandLabel }: { rows: Row[]; comps: Competi
 
 type SortState = { key: string; dir: 'asc' | 'desc' };
 
-function Dashboard({ data, competitors, brandLabel }: { data: Comparison; competitors: Competitor[]; brandLabel: string }) {
+const UNCATED = '__none__';
+const uncatLabel = (cat: string) => (cat && cat !== UNCATED ? cat : 'Sin categoría');
+
+/** Multi-select category dropdown. Empty selection = all categories. */
+function CategoryMultiSelect({
+  categories,
+  selected,
+  onChange,
+}: {
+  categories: string[];
+  selected: string[];
+  onChange: (next: string[]) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDoc = (e: MouseEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener('mousedown', onDoc);
+    return () => document.removeEventListener('mousedown', onDoc);
+  }, [open]);
+
+  const allSelected = selected.length === 0;
+  const label = allSelected
+    ? 'Todas las categorías'
+    : selected.length === 1
+      ? uncatLabel(selected[0])
+      : `${selected.length} categorías`;
+
+  const toggle = (cat: string) => {
+    if (allSelected) {
+      // Starting from "all" → select only this one
+      onChange([cat]);
+      return;
+    }
+    const set = new Set(selected);
+    if (set.has(cat)) set.delete(cat);
+    else set.add(cat);
+    // Back to empty (= all) if nothing left or everything picked
+    if (set.size === 0 || set.size === categories.length) onChange([]);
+    else onChange([...set].sort());
+  };
+
+  if (categories.length === 0) return null;
+
+  return (
+    <div className="relative" ref={rootRef}>
+      <button
+        type="button"
+        onClick={() => setOpen(o => !o)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-label="Filtrar por categorías"
+        className="min-h-[40px] py-2 pl-3 pr-8 bg-slate-50 border-0 rounded-lg text-sm font-medium text-slate-800 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400 max-w-[220px] truncate text-left relative"
+      >
+        {label}
+        <ChevronDownIcon className="w-4 h-4 text-slate-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+      </button>
+      {open && (
+        <div
+          role="listbox"
+          aria-multiselectable
+          className="absolute right-0 top-full mt-1 z-30 min-w-[240px] max-w-[320px] max-h-64 overflow-y-auto rounded-xl border border-slate-200 bg-white py-1 shadow-sm"
+        >
+          <button
+            type="button"
+            onClick={() => onChange([])}
+            className={`w-full flex items-center gap-2 px-3 py-2 text-left text-sm cursor-pointer hover:bg-slate-50 ${allSelected ? 'font-bold text-slate-900' : 'text-slate-600'}`}
+          >
+            <span className={`w-4 h-4 rounded border flex items-center justify-center shrink-0 ${allSelected ? 'bg-slate-900 border-slate-900 text-white' : 'border-slate-300'}`}>
+              {allSelected && <CheckIcon className="w-3 h-3" />}
+            </span>
+            Todas
+          </button>
+          <div className="my-1 border-t border-slate-100" />
+          {categories.map(cat => {
+            const on = allSelected || selected.includes(cat);
+            return (
+              <button
+                key={cat}
+                type="button"
+                role="option"
+                aria-selected={on && !allSelected}
+                onClick={() => toggle(cat)}
+                className="w-full flex items-center gap-2 px-3 py-2 text-left text-sm text-slate-700 cursor-pointer hover:bg-slate-50"
+              >
+                <span className={`w-4 h-4 rounded border flex items-center justify-center shrink-0 ${on && !allSelected ? 'bg-slate-900 border-slate-900 text-white' : 'border-slate-300'}`}>
+                  {on && !allSelected && <CheckIcon className="w-3 h-3" />}
+                </span>
+                <span className="truncate">{uncatLabel(cat)}</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Dashboard({ data, competitors, brandLabel, isCross = false }: {
+  data: Comparison;
+  competitors: Competitor[];
+  brandLabel: string;
+  isCross?: boolean;
+}) {
   const comps = useMemo(
     () => competitors.filter(c => c.hasData !== false),
     [competitors],
   );
   const [query, setQuery] = useState('');
-  const [category, setCategory] = useState('all');
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [competitorId, setCompetitorId] = useState('all');
   const [onlyMatched, setOnlyMatched] = useState(false);
   const [sort, setSort] = useState<SortState>({ key: 'ngr', dir: 'asc' });
@@ -442,10 +588,18 @@ function Dashboard({ data, competitors, brandLabel }: { data: Comparison; compet
     setTip({ x: e.clientX, y: e.clientY, name, desc: desc || '' });
   const hideTip = () => setTip(null);
 
-  const categories = useMemo(
-    () => [...new Set(data.rows.map(r => r.ngr.category).filter(Boolean))].sort(),
-    [data]
-  );
+  const categories = useMemo(() => {
+    const set = new Set<string>();
+    for (const r of data.rows) {
+      set.add(r.ngr.category?.trim() ? r.ngr.category.trim() : UNCATED);
+    }
+    return [...set].sort((a, b) => uncatLabel(a).localeCompare(uncatLabel(b), 'es'));
+  }, [data]);
+
+  // Drop stale category filters when brand/data changes
+  useEffect(() => {
+    setSelectedCategories(prev => prev.filter(c => categories.includes(c)));
+  }, [categories]);
 
   const valueFor = (row: Row, key: string): string | number | null => {
     if (key === 'ngr') return row.ngr.name.toLowerCase();
@@ -455,34 +609,59 @@ function Dashboard({ data, competitors, brandLabel }: { data: Comparison; compet
     return null;
   };
 
-  const rows = useMemo(() => {
-    const q = query.toLowerCase().trim();
-    const list = data.rows.filter(r =>
-      (!q || r.ngr.name.toLowerCase().includes(q) || (r.ngr.category || '').toLowerCase().includes(q)) &&
-      (category === 'all' || r.ngr.category === category) &&
-      (!onlyMatched || tableComps.some(c => r.matches[c.id]?.best))
-    );
+  const sortRows = (list: Row[]) => {
     const mult = sort.dir === 'asc' ? 1 : -1;
     return [...list].sort((a, b) => {
       const va = valueFor(a, sort.key), vb = valueFor(b, sort.key);
       const na = va == null || (typeof va === 'number' && isNaN(va));
       const nb = vb == null || (typeof vb === 'number' && isNaN(vb));
       if (na && nb) return 0;
-      if (na) return 1;   // empties always last
+      if (na) return 1;
       if (nb) return -1;
       if (typeof va === 'string' && typeof vb === 'string') return va < vb ? -mult : va > vb ? mult : 0;
       return ((va as number) - (vb as number)) * mult;
     });
-  }, [data, query, category, onlyMatched, sort, tableComps]);
+  };
+
+  const filteredRows = useMemo(() => {
+    const q = query.toLowerCase().trim();
+    const catFilter = new Set(selectedCategories);
+    return data.rows.filter(r => {
+      const catKey = r.ngr.category?.trim() ? r.ngr.category.trim() : UNCATED;
+      if (catFilter.size > 0 && !catFilter.has(catKey)) return false;
+      if (q && !r.ngr.name.toLowerCase().includes(q) && !(r.ngr.category || '').toLowerCase().includes(q)) return false;
+      if (onlyMatched && !tableComps.some(c => r.matches[c.id]?.best)) return false;
+      return true;
+    });
+  }, [data, query, selectedCategories, onlyMatched, tableComps]);
+
+  /** Group by category (header once); sort products inside each group. */
+  const categoryGroups = useMemo(() => {
+    const map = new Map<string, Row[]>();
+    for (const r of filteredRows) {
+      const key = r.ngr.category?.trim() ? r.ngr.category.trim() : UNCATED;
+      if (!map.has(key)) map.set(key, []);
+      map.get(key)!.push(r);
+    }
+    const keys = [...map.keys()].sort((a, b) => uncatLabel(a).localeCompare(uncatLabel(b), 'es'));
+    return keys.map(key => ({
+      key,
+      label: uncatLabel(key),
+      rows: sortRows(map.get(key)!),
+    }));
+  }, [filteredRows, sort]);
+
+  const rowCount = filteredRows.length;
+  const colCount = 2 + tableComps.length * 2;
 
   // Per-competitor KPI: MEAN of per-product % (NGR vs competitor), equal-weighted.
   // +avg = NGR pricier on average; −avg = cheaper. (Distinct from the basket index,
-  // which is price-weighted.)
+  // which is price-weighted.) Uses category filter when set.
   const compStats = useMemo(() => {
     const out: Record<string, { avgPct: number | null; n: number; index: number | null }> = {};
     for (const c of comps) {
       let sumPct = 0, n = 0, sumNgr = 0, sumComp = 0;
-      for (const row of data.rows) {
+      for (const row of filteredRows) {
         const cell = row.matches[c.id];
         if (!isPriceReady(cell)) continue;
         const p = cell!.best!.price;
@@ -496,7 +675,7 @@ function Dashboard({ data, competitors, brandLabel }: { data: Comparison; compet
       out[c.id] = { avgPct: n ? sumPct / n : null, n, index: sumComp ? (sumNgr / sumComp) * 100 : null };
     }
     return out;
-  }, [data, comps]);
+  }, [filteredRows, comps]);
 
   const toggleSort = (key: string) =>
     setSort(s => (s.key === key ? { key, dir: s.dir === 'asc' ? 'desc' : 'asc' } : { key, dir: 'asc' }));
@@ -546,7 +725,12 @@ function Dashboard({ data, competitors, brandLabel }: { data: Comparison; compet
       </div>
 
       {/* Scatter chart */}
-      <PriceScatter rows={data.rows} comps={comps} brandLabel={brandLabel} />
+      <PriceScatter
+        rows={filteredRows}
+        comps={comps}
+        brandLabel={brandLabel}
+        vsLabel={isCross ? 'canal' : 'competidor'}
+      />
 
       {/* Comparison table */}
       <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm overflow-hidden">
@@ -554,8 +738,9 @@ function Dashboard({ data, competitors, brandLabel }: { data: Comparison; compet
           <div>
             <h2 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Tabla Comparativa</h2>
             <p className="text-[11px] text-slate-400 mt-0.5">
-              Precios en S/ · variación = {brandLabel} vs competidor · {rows.length} productos
+              Precios en S/ · variación = {brandLabel} vs {isCross ? 'canal' : 'competidor'} · {rowCount} productos
               {tableComps.length === 1 ? ` · vs ${tableComps[0].name}` : ''}
+              {selectedCategories.length > 0 ? ` · ${selectedCategories.length} cat.` : ''}
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
@@ -571,21 +756,18 @@ function Dashboard({ data, competitors, brandLabel }: { data: Comparison; compet
             <select
               value={competitorId}
               onChange={e => setCompetitorId(e.target.value)}
-              aria-label="Filtrar por competidor"
+              aria-label={isCross ? 'Filtrar por canal' : 'Filtrar por competidor'}
               className="py-2 px-3 bg-slate-50 border-0 rounded-lg text-sm font-medium cursor-pointer focus:ring-2 focus:ring-slate-200 max-w-[200px]"
             >
-              <option value="all">Todos los competidores</option>
+              <option value="all">{isCross ? 'Todos los canales' : 'Todos los competidores'}</option>
               {comps.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
             </select>
-            <select
-              value={category}
-              onChange={e => setCategory(e.target.value)}
-              className="py-2 px-3 bg-slate-50 border-0 rounded-lg text-sm font-medium cursor-pointer focus:ring-2 focus:ring-slate-200 max-w-[180px]"
-            >
-              <option value="all">Todas las categorías</option>
-              {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-            </select>
-            <label className="flex items-center gap-1.5 text-xs font-bold text-slate-600 cursor-pointer px-2">
+            <CategoryMultiSelect
+              categories={categories}
+              selected={selectedCategories}
+              onChange={setSelectedCategories}
+            />
+            <label className="flex items-center gap-1.5 text-xs font-bold text-slate-600 cursor-pointer px-2 min-h-[40px]">
               <input type="checkbox" checked={onlyMatched} onChange={e => setOnlyMatched(e.target.checked)} className="rounded accent-slate-900 w-4 h-4" />
               Solo con match
             </label>
@@ -615,44 +797,61 @@ function Dashboard({ data, competitors, brandLabel }: { data: Comparison; compet
               </tr>
             </thead>
             <tbody>
-              {rows.length === 0 ? (
-                <tr><td colSpan={2 + tableComps.length * 2} className="py-12 text-center text-slate-400 italic">Sin resultados para el filtro.</td></tr>
-              ) : rows.map((row, i) => (
-                <tr key={i} className="group">
-                  <td
-                    className="py-2 px-3 border-b border-slate-100 font-semibold text-slate-800 sticky left-0 bg-white group-hover:bg-slate-50 z-10 whitespace-nowrap max-w-[280px] truncate cursor-default"
-                    onMouseEnter={e => showTip(e, row.ngr.name, row.ngr.description || '')}
-                    onMouseLeave={hideTip}
-                  >
-                    {row.ngr.name}
-                  </td>
-                  <td className="py-2 px-3 border-b border-slate-100 text-right font-bold text-slate-900 tabular-nums group-hover:bg-slate-50">
-                    {typeof row.ngr.price === 'number' ? row.ngr.price.toFixed(2) : '—'}
-                  </td>
-                  {tableComps.map(c => {
-                    const cell = row.matches[c.id];
-                    const p = cell?.best?.price;
-                    const v = variationPct(row.ngr.price, typeof p === 'number' ? p : null);
-                    return (
-                      <Fragment key={c.id}>
-                        <td
-                          className="py-2 px-3 border-b border-slate-100 border-l border-slate-100 text-right tabular-nums text-slate-700 group-hover:bg-slate-50 cursor-default"
-                          onMouseEnter={e => cell?.best
-                            ? showTip(e, cell.best.name, cell.best.description || '')
-                            : showTip(e, cell?.status === 'pending' ? 'Pendiente de revisión' : 'Sin equivalente', '')}
-                          onMouseLeave={hideTip}
-                        >
-                          {typeof p === 'number'
-                            ? p.toFixed(2)
-                            : <span className="text-slate-300">{cell?.status === 'pending' ? '·' : '—'}</span>}
-                        </td>
-                        <td className="py-2 px-3 border-b border-slate-100 text-right group-hover:bg-slate-50">
-                          <VariationBadge pct={v} />
-                        </td>
-                      </Fragment>
-                    );
-                  })}
-                </tr>
+              {rowCount === 0 ? (
+                <tr><td colSpan={colCount} className="py-12 text-center text-slate-400 italic">Sin resultados para el filtro.</td></tr>
+              ) : categoryGroups.map(group => (
+                <Fragment key={group.key}>
+                  <tr>
+                    <td
+                      colSpan={colCount}
+                      className="sticky left-0 z-[5] py-2 px-3 bg-slate-100 border-b border-slate-200"
+                    >
+                      <span className="text-[11px] font-black uppercase tracking-wider text-slate-600">
+                        {group.label}
+                      </span>
+                      <span className="ml-2 text-[10px] font-bold text-slate-400 tabular-nums">
+                        {group.rows.length}
+                      </span>
+                    </td>
+                  </tr>
+                  {group.rows.map((row, i) => (
+                    <tr key={`${group.key}-${row.ngr.name}-${i}`} className="group">
+                      <td
+                        className="py-2 px-3 border-b border-slate-100 font-semibold text-slate-800 sticky left-0 bg-white group-hover:bg-slate-50 z-10 whitespace-nowrap max-w-[280px] truncate cursor-default"
+                        onMouseEnter={e => showTip(e, row.ngr.name, row.ngr.description || '')}
+                        onMouseLeave={hideTip}
+                      >
+                        {row.ngr.name}
+                      </td>
+                      <td className="py-2 px-3 border-b border-slate-100 text-right font-bold text-slate-900 tabular-nums group-hover:bg-slate-50">
+                        {typeof row.ngr.price === 'number' ? row.ngr.price.toFixed(2) : '—'}
+                      </td>
+                      {tableComps.map(c => {
+                        const cell = row.matches[c.id];
+                        const p = cell?.best?.price;
+                        const v = variationPct(row.ngr.price, typeof p === 'number' ? p : null);
+                        return (
+                          <Fragment key={c.id}>
+                            <td
+                              className="py-2 px-3 border-b border-slate-100 border-l border-slate-100 text-right tabular-nums text-slate-700 group-hover:bg-slate-50 cursor-default"
+                              onMouseEnter={e => cell?.best
+                                ? showTip(e, cell.best.name, cell.best.description || '')
+                                : showTip(e, cell?.status === 'pending' ? 'Pendiente de revisión' : 'Sin equivalente', '')}
+                              onMouseLeave={hideTip}
+                            >
+                              {typeof p === 'number'
+                                ? p.toFixed(2)
+                                : <span className="text-slate-300">{cell?.status === 'pending' ? '·' : '—'}</span>}
+                            </td>
+                            <td className="py-2 px-3 border-b border-slate-100 text-right group-hover:bg-slate-50">
+                              <VariationBadge pct={v} />
+                            </td>
+                          </Fragment>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </Fragment>
               ))}
             </tbody>
           </table>
@@ -684,12 +883,13 @@ function Stat({ n, label, cls }: { n: number; label: string; cls: string }) {
 // ──────────────────────────────────────────────
 // Review (manual curation) — table of NGR × competitors
 // ──────────────────────────────────────────────
-function Review({ data, competitors, onlyPending, setOnlyPending, applyOverride }: {
+function Review({ data, competitors, onlyPending, setOnlyPending, applyOverride, readOnly = false }: {
   data: Comparison;
   competitors: Competitor[];
   onlyPending: boolean;
   setOnlyPending: (v: boolean) => void;
   applyOverride: (ngrName: string, competitorId: string, action: string, product?: Product) => Promise<void> | void;
+  readOnly?: boolean;
 }) {
   const comps = useMemo(
     () => competitors.filter(c => c.hasData !== false),
@@ -727,8 +927,16 @@ function Review({ data, competitors, onlyPending, setOnlyPending, applyOverride 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="space-y-1">
           <p className="text-sm text-slate-500 font-medium">
-            {rows.length} productos NGR · elegí el match en cada columna · los cambios se guardan
+            {rows.length} productos NGR · {readOnly
+              ? 'vista histórica (solo lectura)'
+              : 'elegí el match en cada columna · los cambios se guardan'}
           </p>
+          {readOnly && (
+            <p className="text-[11px] text-amber-700 font-medium">
+              Snapshot del {data.snapshotDate}: no se edita ni se recalcula.
+            </p>
+          )}
+          {!readOnly && (
           <div className="flex flex-wrap gap-3 text-[11px] text-slate-500">
             <span className="inline-flex items-center gap-1.5">
               <span className="w-3 h-3 rounded-sm bg-amber-100 border border-amber-200" aria-hidden />
@@ -739,6 +947,7 @@ function Review({ data, competitors, onlyPending, setOnlyPending, applyOverride 
               Rojo = sin match
             </span>
           </div>
+          )}
         </div>
         <label className="flex items-center gap-2 text-sm font-bold text-slate-600 cursor-pointer">
           <input
@@ -813,6 +1022,7 @@ function Review({ data, competitors, onlyPending, setOnlyPending, applyOverride 
                             competitor={c}
                             cell={cell}
                             catalog={catalogs[c.id] ?? null}
+                            disabled={readOnly}
                             onChange={(action, product) => applyOverride(row.ngr.name, c.id, action, product)}
                           />
                         </td>
@@ -829,11 +1039,12 @@ function Review({ data, competitors, onlyPending, setOnlyPending, applyOverride 
   );
 }
 
-function MatchSelect({ competitor, cell, catalog, onChange }: {
+function MatchSelect({ competitor, cell, catalog, onChange, disabled = false }: {
   competitor: Competitor;
   cell?: Cell;
   catalog: Product[] | null;
   onChange: (action: string, product?: Product) => void;
+  disabled?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
@@ -881,12 +1092,14 @@ function MatchSelect({ competitor, cell, catalog, onChange }: {
     <div className="relative" ref={rootRef}>
       <button
         type="button"
-        onClick={() => setOpen(o => !o)}
-        disabled={saving}
+        onClick={() => { if (!disabled) setOpen(o => !o); }}
+        disabled={saving || disabled}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={`Match ${competitor.name}`}
-        className={`w-full min-h-[44px] text-left rounded-lg border px-2.5 py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-slate-400 cursor-pointer disabled:opacity-50 active:scale-[0.99] transition-transform ${
+        className={`w-full min-h-[44px] text-left rounded-lg border px-2.5 py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-slate-400 disabled:opacity-50 active:scale-[0.99] transition-transform ${
+          disabled ? 'cursor-default' : 'cursor-pointer'
+        } ${
           !current
             ? 'border-rose-200 bg-rose-50/50 hover:border-rose-300'
             : cell?.status === 'pending'

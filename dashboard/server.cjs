@@ -7,9 +7,10 @@ const { exec } = require('child_process');
 const { Storage } = require('@google-cloud/storage');
 
 const { matchBrand } = require('../product_matcher');
-const { BRANDS, CHANNELS, getChannelConfig } = require('../brand_config');
+const { BRANDS, CHANNELS, CROSS_CHANNEL, getChannelConfig, getCrossChannelConfig } = require('../brand_config');
 const scrapeMeta = require('../scrape_meta');
 const historyStore = require('../history_store');
+const matchSnapshots = require('../match_snapshots');
 const { STORES: PEYA_STORES } = require('../pedidosya_stores');
 
 const app = express();
@@ -48,6 +49,8 @@ async function syncFromGCS() {
         { prefix: 'matches_',   dir: ROOT_DIR },
         { prefix: 'overrides_', dir: ROOT_DIR },
         { prefix: 'scrape_meta', dir: ROOT_DIR },
+        // Dated match snapshots live under data/match_snapshots/…
+        { prefix: 'match_snapshots/', dir: DATA_DIR },
     ];
     for (const { prefix, dir } of prefixes) {
         try {
@@ -55,12 +58,16 @@ async function syncFromGCS() {
             let synced = 0;
             for (const file of files) {
                 if (!file.name.endsWith('.json')) continue;
-                // Guard: never pull nested history objects into the container disk
                 if (file.name.startsWith('history/')) continue;
-                await file.download({ destination: path.join(dir, file.name) });
-                // Drop stale root copies so resynced products in data/ are visible
+                const dest = prefix === 'match_snapshots/'
+                    ? path.join(dir, file.name) // keep nested path
+                    : path.join(dir, path.basename(file.name));
+                if (prefix === 'match_snapshots/') {
+                    fs.mkdirSync(path.dirname(dest), { recursive: true });
+                }
+                await file.download({ destination: dest });
                 if (prefix === 'products_') {
-                    const rootCopy = path.join(ROOT_DIR, file.name);
+                    const rootCopy = path.join(ROOT_DIR, path.basename(file.name));
                     if (fs.existsSync(rootCopy)) {
                         try { fs.unlinkSync(rootCopy); } catch (_) {}
                     }
@@ -424,12 +431,18 @@ function loadOverrides(brand, channel) {
 const REVIEW_THRESHOLD = 80;
 const overrideKey = (ngrName, competitorId) => `${ngrName}||${competitorId}`;
 
-/** Merge AI matches with human overrides and compute deltas + status per cell. */
-function buildComparison(brand, channel) {
-    const fp = matchesFilePath(brand, channel);
-    if (!fp) return null;
-    const raw = JSON.parse(fs.readFileSync(fp, 'utf8'));
-    const overrides = loadOverrides(brand, channel);
+/** Merge AI matches with human overrides and compute deltas + status per cell.
+ *  @param {{ raw?: object, applyOverrides?: boolean, snapshotDate?: string|null }} [opts]
+ */
+function buildComparison(brand, channel, opts = {}) {
+    let raw = opts.raw || null;
+    if (!raw) {
+        const fp = matchesFilePath(brand, channel);
+        if (!fp) return null;
+        raw = JSON.parse(fs.readFileSync(fp, 'utf8'));
+    }
+    const applyOverrides = opts.applyOverrides !== false;
+    const overrides = applyOverrides ? loadOverrides(brand, channel) : {};
 
     const rows = raw.rows.map(row => {
         const cells = {};
@@ -481,10 +494,16 @@ function buildComparison(brand, channel) {
         };
     }
 
+    const snapshotDate = opts.snapshotDate || raw.snapshotDate || null;
     return {
         brand, channel,
+        mode: raw.mode || (channel === CROSS_CHANNEL ? 'cross' : 'competition'),
+        anchorChannel: raw.anchorChannel || null,
+        anchorLabel: raw.anchorLabel || null,
         generatedAt: raw.generatedAt || null,
         model: raw.model || null,
+        snapshotDate,
+        isHistorical: !!(snapshotDate && snapshotDate !== matchSnapshots.todayPeru()),
         competitors: raw.competitors,
         missingCompetitors: raw.missingCompetitors || [],
         reviewThreshold: REVIEW_THRESHOLD,
@@ -521,25 +540,54 @@ app.get('/api/brands', (_req, res) => {
     const out = BRANDS.map(b => ({
         key: b.key,
         label: b.label,
-        channels: CHANNELS.map(ch => {
-            const cfg = b.channels[ch];
-            return {
-                channel: ch,
-                competitors: cfg ? cfg.competitors : [],
-                hasMatches: !!matchesFilePath(b.key, ch),
-            };
-        }),
+        channels: [
+            ...CHANNELS.map(ch => {
+                const cfg = b.channels[ch];
+                return {
+                    channel: ch,
+                    competitors: cfg ? cfg.competitors : [],
+                    hasMatches: !!matchesFilePath(b.key, ch),
+                };
+            }),
+            {
+                channel: CROSS_CHANNEL,
+                competitors: (getCrossChannelConfig(b.key)?.competitors || []),
+                hasMatches: !!matchesFilePath(b.key, CROSS_CHANNEL),
+                mode: 'cross',
+            },
+        ],
     }));
     res.json(out);
 });
 
-// Read merged comparison (AI + overrides) with deltas + KPIs
-app.get('/api/matches', (req, res) => {
-    const { brand, channel } = req.query;
+// Read merged comparison (AI + overrides). Optional ?date=YYYY-MM-DD loads a daily snapshot
+// (immutable past). Omit date → latest matches_<brand>_<channel>.json.
+app.get('/api/matches', async (req, res) => {
+    const { brand, channel, date } = req.query;
     if (!brand || !channel) return res.status(400).json({ error: 'brand y channel son requeridos' });
     try {
+        const dateStr = date ? String(date) : '';
+        if (dateStr && /^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+            const snap = await matchSnapshots.loadSnapshot(String(brand), String(channel), dateStr);
+            if (!snap) {
+                return res.status(404).json({
+                    error: `Sin snapshot de matches para ${brand}/${channel} el ${dateStr}.`,
+                });
+            }
+            const today = matchSnapshots.todayPeru();
+            const data = buildComparison(String(brand), String(channel), {
+                raw: snap,
+                applyOverrides: dateStr === today,
+                snapshotDate: dateStr,
+            });
+            return res.json(data);
+        }
         const data = buildComparison(String(brand), String(channel));
-        if (!data) return res.status(404).json({ error: 'Sin matches. Usá el engranaje → Recalcular matches, o node product_matcher.js.' });
+        if (!data) {
+            return res.status(404).json({
+                error: 'Sin matches. Usá el engranaje → Recalcular matches, o node match_daily_batch.js.',
+            });
+        }
         res.json(data);
     } catch (err) {
         console.error('Error building comparison:', err);
@@ -547,19 +595,43 @@ app.get('/api/matches', (req, res) => {
     }
 });
 
-// Recalculate matches for a brand+channel via Gemini, persist to GCS
+// List calendar dates that have match snapshots for a brand/channel
+app.get('/api/matches/dates', async (req, res) => {
+    const { brand, channel } = req.query;
+    if (!brand || !channel) return res.status(400).json({ error: 'brand y channel son requeridos' });
+    try {
+        const dates = await matchSnapshots.listDates(String(brand), String(channel));
+        res.json({ brand, channel, today: matchSnapshots.todayPeru(), dates });
+    } catch (err) {
+        console.error('Error listing match dates:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Recalculate matches for a brand+channel via Gemini → latest file + today's snapshot only
 app.post('/api/match', async (req, res) => {
     const { brand, channel } = req.body || {};
     if (!brand || !channel) return res.status(400).json({ error: 'brand y channel son requeridos' });
-    if (!getChannelConfig(brand, channel)) return res.status(400).json({ error: 'brand/channel inválido' });
+    const valid = channel === CROSS_CHANNEL
+        ? !!getCrossChannelConfig(brand)
+        : !!getChannelConfig(brand, channel);
+    if (!valid) return res.status(400).json({ error: 'brand/channel inválido' });
     try {
         console.log(`[match] Recalculando ${brand}/${channel}…`);
         const result = await matchBrand(brand, channel);
         const outPath = path.join(ROOT_DIR, `matches_${brand}_${channel}.json`);
         fs.writeFileSync(outPath, JSON.stringify(result, null, 2));
         await uploadToGCS(outPath);
-        const data = buildComparison(brand, channel);
-        res.json({ message: 'Matches recalculados', data });
+        const snap = await matchSnapshots.saveSnapshot(brand, channel, result);
+        const data = buildComparison(brand, channel, {
+            snapshotDate: snap.date,
+            applyOverrides: true,
+        });
+        res.json({
+            message: 'Matches recalculados',
+            snapshot: snap,
+            data,
+        });
     } catch (err) {
         console.error('Error matching:', err);
         res.status(500).json({ error: err.message });
@@ -692,6 +764,18 @@ app.post('/api/internal/resync', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+
+// ──────────────────────────────────────────────
+// v2 (dashboard-v2) en /v2, con su propio fallback SPA. Va antes del fallback
+// de la v1 para que /v2/… no caiga en el index.html de la raíz.
+// ──────────────────────────────────────────────
+const DIST_V2_DIR = path.join(ROOT_DIR, 'dashboard-v2', 'dist');
+if (fs.existsSync(DIST_V2_DIR)) {
+    app.use('/v2', express.static(DIST_V2_DIR));
+    app.get(['/v2', '/v2/{*path}'], (_req, res) => {
+        res.sendFile(path.join(DIST_V2_DIR, 'index.html'));
+    });
+}
 
 // ──────────────────────────────────────────────
 // SPA fallback – serve index.html for all other routes

@@ -1,0 +1,6 @@
+# Lo que el build instala o compila adentro de la imagen: si entrara del
+# contexto local, COPY dashboard/ y COPY dashboard-v2/ pisarían los
+# node_modules de Linux con los de la máquina que construye.
+**/node_modules
+dashboard/dist
+dashboard-v2/dist

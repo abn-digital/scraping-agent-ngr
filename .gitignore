@@ -5,6 +5,7 @@ dashboard/node_modules/
 # Build output
 dashboard/dist/
 dashboard/dist-ssr/
+dashboard-v2/dist/
 
 # Logs
 *.log
