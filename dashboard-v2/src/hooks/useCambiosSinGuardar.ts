@@ -6,6 +6,18 @@ import { useNavigate } from "react-router";
 // confirmación. Se escucha el clic en todo el documento porque useBlocker no
 // existe en el modo declarativo de react-router, y así ningún link se escapa.
 // Un clic con modificador abre otra pestaña: eso no es irse, y pasa derecho.
+//
+// El href de un link ya trae el basename de la app (/v2) y navigate() se lo
+// vuelve a poner: sin sacárselo, "Salir sin guardar" llevaba a /v2/v2/….
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+/** "/v2/marcas/x" → "/marcas/x". Una ruta fuera de la app queda como está. */
+export function sinBasename(pathname: string, base = BASE): string {
+  if (!base) return pathname;
+  if (pathname === base) return "/";
+  return pathname.startsWith(`${base}/`) ? pathname.slice(base.length) : pathname;
+}
+
 export function useCambiosSinGuardar(sucio: boolean) {
   const navigate = useNavigate();
   const [porDejar, setPorDejar] = useState<(() => void) | null>(null);
@@ -23,7 +35,9 @@ export function useCambiosSinGuardar(sucio: boolean) {
       const destino = new URL(a.href);
       if (destino.origin !== window.location.origin) return;
       e.preventDefault();
-      setPorDejar(() => () => void navigate(destino.pathname + destino.search + destino.hash));
+      setPorDejar(
+        () => () => void navigate(sinBasename(destino.pathname) + destino.search + destino.hash),
+      );
     };
 
     window.addEventListener("beforeunload", alCerrar);
