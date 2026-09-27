@@ -61,6 +61,7 @@ export function ErrorEnLinea({
 }: {
   error: unknown;
   onRetry?: () => void;
+  /** Qué no cargó, con su artículo: "la lista", "los escaneos". */
   recurso?: string;
 }) {
   const status = statusOf(error);
@@ -78,7 +79,14 @@ export function ErrorEnLinea({
         )
       }
     >
-      {errorMessage(error, recurso ? `No se pudo cargar ${recurso}.` : "No se pudo cargar.")}
+      {errorMessage(
+        error,
+        !recurso
+          ? "No se pudo cargar."
+          : /^(los|las) /i.test(recurso)
+            ? `No se pudieron cargar ${recurso}.`
+            : `No se pudo cargar ${recurso}.`,
+      )}
     </Notice>
   );
 }

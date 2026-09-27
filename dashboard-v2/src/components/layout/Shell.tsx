@@ -5,6 +5,7 @@ import { Dialog as D } from "radix-ui";
 import { Ellipsis, PanelLeft, X } from "lucide-react";
 import { Mark } from "@/components/ui/Mark";
 import { Tooltip } from "@/components/ui/Tooltip";
+import { useDesbordeVertical } from "@/hooks/useDesborde";
 import { cn } from "@/lib/cn";
 import { NAV, type ItemDeNavegacion } from "@/navegacion";
 import { PRODUCTO } from "@/producto";
@@ -148,6 +149,11 @@ export function Shell({
 
   const rail = expanded ? RAIL_EXPANDED : RAIL_COLLAPSED;
   const quieto = useReducedMotion() ?? false;
+  // Las secciones `alPie` (Ajustes, Superadmin) van abajo, junto a la cuenta,
+  // como en la v1: así las de todos los días no las empujan fuera de la vista.
+  const principales = nav.filter((n) => !n.alPie);
+  const alPie = nav.filter((n) => n.alPie);
+  const { ref: refDeLaLista, abajo: listaCortada } = useDesbordeVertical<HTMLDivElement>();
 
   // Cambiar de pantalla lleva el foco al contenido nuevo: si no, queda en el
   // link del riel y el lector de pantalla no se entera de que algo cambió. La
@@ -187,51 +193,68 @@ export function Shell({
         className="fixed inset-y-0 left-0 z-30 hidden flex-col justify-between bg-paper-raised/80
           py-4 shadow-rail backdrop-blur-xs transition-[width] duration-200 ease-out md:flex"
       >
-        <div
-          className={cn(
-            "scrollbar-none flex min-h-0 flex-col gap-5 overflow-y-auto",
-            expanded ? "items-stretch px-3" : "items-center px-2",
-          )}
-        >
-          <NavLink
-            to="/"
-            aria-label={PRODUCTO.nombre}
+        <div className="relative flex min-h-0 flex-col">
+          <div
+            ref={refDeLaLista}
             className={cn(
-              "flex shrink-0 items-center text-ink",
-              expanded ? "h-11 gap-3 px-3" : "h-9 justify-center",
+              "scrollbar-none flex min-h-0 flex-col gap-5 overflow-y-auto",
+              expanded ? "items-stretch px-3" : "items-center px-2",
             )}
           >
-            <Mark size={expanded ? 34 : 32} />
-            {expanded && (
-              <span
-                title={PRODUCTO.nombre}
-                className="min-w-0 truncate font-display text-[1.35rem] font-semibold leading-none tracking-[-.04em]"
-              >
-                {PRODUCTO.nombre}
-              </span>
-            )}
-          </NavLink>
+            <NavLink
+              to="/"
+              aria-label={PRODUCTO.nombre}
+              className={cn(
+                "flex shrink-0 items-center text-ink",
+                expanded ? "h-11 gap-3 px-3" : "h-9 justify-center",
+              )}
+            >
+              <Mark size={expanded ? 34 : 32} />
+              {expanded && (
+                // Un nombre de dos palabras que no entra en una línea va en dos,
+                // como un logotipo, en vez de cortarse con puntos suspensivos.
+                <span
+                  title={PRODUCTO.nombre}
+                  className="line-clamp-2 min-w-0 font-display text-[1.35rem] font-semibold leading-[.95] tracking-[-.04em]"
+                >
+                  {PRODUCTO.nombre}
+                </span>
+              )}
+            </NavLink>
 
-          {arriba?.(expanded ? "riel" : "compacto", rail)}
+            {arriba?.(expanded ? "riel" : "compacto", rail)}
 
-          <div className={cn("flex flex-col gap-4", expanded ? "items-stretch" : "items-center")}>
-            {porGrupo(nav).map(({ grupo, items }, i) => (
-              <div
-                key={`${grupo ?? "sin-grupo"}-${i}`}
-                className={cn("flex flex-col gap-0.5", expanded ? "items-stretch" : "items-center")}
-              >
-                {grupo &&
-                  (expanded ? (
-                    <p className="px-3 pb-1 text-micro font-medium text-ink-4">{grupo}</p>
-                  ) : (
-                    i > 0 && <span aria-hidden className="mb-2 h-px w-6 bg-rule" />
+            <div className={cn("flex flex-col gap-4", expanded ? "items-stretch" : "items-center")}>
+              {porGrupo(principales).map(({ grupo, items }, i) => (
+                <div
+                  key={`${grupo ?? "sin-grupo"}-${i}`}
+                  className={cn(
+                    "flex flex-col gap-0.5",
+                    expanded ? "items-stretch" : "items-center",
+                  )}
+                >
+                  {grupo &&
+                    (expanded ? (
+                      <p className="px-3 pb-1 text-micro font-medium text-ink-4">{grupo}</p>
+                    ) : (
+                      i > 0 && <span aria-hidden className="mb-2 h-px w-6 bg-rule" />
+                    ))}
+                  {items.map((n) => (
+                    <RailLink key={n.to} {...n} expanded={expanded} />
                   ))}
-                {items.map((n) => (
-                  <RailLink key={n.to} {...n} expanded={expanded} />
-                ))}
-              </div>
-            ))}
+                </div>
+              ))}
+            </div>
           </div>
+          {/* Si hay secciones cortadas abajo, un velo del color del riel lo dice. */}
+          <span
+            aria-hidden
+            className={cn(
+              "pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-linear-to-t from-paper-raised to-transparent",
+              "transition-opacity duration-200",
+              listaCortada ? "opacity-100" : "opacity-0",
+            )}
+          />
         </div>
 
         <div
@@ -240,6 +263,18 @@ export function Shell({
             expanded ? "items-stretch px-3" : "items-center",
           )}
         >
+          {alPie.length > 0 && (
+            <div
+              className={cn(
+                "flex flex-col gap-0.5 pb-1",
+                expanded ? "items-stretch" : "items-center",
+              )}
+            >
+              {alPie.map((n) => (
+                <RailLink key={n.to} {...n} expanded={expanded} />
+              ))}
+            </div>
+          )}
           {abajo?.(expanded ? "riel" : "compacto")}
 
           <Tooltip

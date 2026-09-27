@@ -22,6 +22,8 @@ export interface FilaDeTooltip {
   valor: string;
   /** Rect para barras y áreas, línea para líneas: la clave imita a la marca. */
   forma?: "linea" | "rect";
+  /** Una segunda línea chica debajo del nombre: el desglose del valor. */
+  detalle?: string;
 }
 
 /**
@@ -35,6 +37,7 @@ export function TooltipDeDatos({
   ancho,
   titulo,
   filas,
+  pie,
 }: {
   x: number;
   y: number;
@@ -42,6 +45,8 @@ export function TooltipDeDatos({
   ancho: number;
   titulo: ReactNode;
   filas: FilaDeTooltip[];
+  /** Lo que se puede hacer desde ahí ("Clic para ver los comentarios"). */
+  pie?: ReactNode;
 }) {
   const aLaIzquierda = x > ancho - 200;
   return (
@@ -58,20 +63,28 @@ export function TooltipDeDatos({
       <p className="mb-1 text-micro text-stage-3">{titulo}</p>
       <ul className="space-y-0.5">
         {filas.map((f) => (
-          <li key={f.etiqueta} className="flex items-center gap-2">
-            <span
-              aria-hidden
-              className={cn(
-                "shrink-0",
-                f.forma === "rect" ? "h-2 w-2 rounded-[2px]" : "h-[2px] w-3 rounded-full",
-              )}
-              style={{ background: f.color }}
-            />
-            <span className="font-medium tnum text-stage-ink">{f.valor}</span>
-            <span className="min-w-0 truncate text-stage-3">{f.etiqueta}</span>
+          <li key={f.etiqueta}>
+            <span className="flex items-center gap-2">
+              <span
+                aria-hidden
+                className={cn(
+                  "shrink-0",
+                  f.forma === "rect" ? "h-2 w-2 rounded-[2px]" : "h-[2px] w-3 rounded-full",
+                )}
+                style={{ background: f.color }}
+              />
+              <span className="font-medium tnum text-stage-ink">{f.valor}</span>
+              <span className="min-w-0 truncate text-stage-3">{f.etiqueta}</span>
+            </span>
+            {f.detalle && (
+              <span className="block pl-5 text-micro tnum text-stage-3">{f.detalle}</span>
+            )}
           </li>
         ))}
       </ul>
+      {pie && (
+        <p className="mt-1.5 border-t border-white/10 pt-1.5 text-micro text-stage-3">{pie}</p>
+      )}
     </div>
   );
 }

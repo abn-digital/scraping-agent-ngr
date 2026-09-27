@@ -35,6 +35,10 @@ export function Lineas({
   oscuro = false,
   leyenda,
   alternables = false,
+  unirHuecos = false,
+  onElegir,
+  ayudaDeElegir,
+  detalleDeTooltip,
   className,
 }: {
   /** Lo que dice el eje X en cada posición, ya formateado ("3 sept"). */
@@ -52,6 +56,17 @@ export function Lineas({
   leyenda?: boolean;
   /** Que la leyenda prenda y apague series. */
   alternables?: boolean;
+  /**
+   * Unir los puntos por encima de las fechas sin dato. Para series ralas (un
+   * escaneo cada tanto) donde el hueco no es un cero sino un día sin medir.
+   */
+  unirHuecos?: boolean;
+  /** Clic (o Enter con el gráfico enfocado) sobre una fecha: su índice en `etiquetasX`. */
+  onElegir?: (indice: number) => void;
+  /** Lo que dice el tooltip al pie cuando se puede elegir: "Clic para ver los comentarios". */
+  ayudaDeElegir?: string;
+  /** El desglose de un punto, debajo del nombre en el tooltip. */
+  detalleDeTooltip?: (serie: SerieDeLinea, indice: number) => string | undefined;
   className?: string;
 }) {
   const [ref, ancho] = useAncho<HTMLDivElement>();
@@ -90,7 +105,7 @@ export function Lineas({
     let abierto = false;
     valores.forEach((v, i) => {
       if (v == null) {
-        abierto = false;
+        if (!unirHuecos) abierto = false;
         return;
       }
       d += `${abierto ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`;
@@ -123,6 +138,10 @@ export function Lineas({
         return Math.max(0, Math.min(n - 1, base + (e.key === "ArrowRight" ? 1 : -1)));
       });
     } else if (e.key === "Escape") setIndice(null);
+    else if (e.key === "Enter" && onElegir && indice != null) {
+      e.preventDefault();
+      onElegir(indice);
+    }
   };
 
   const gris = oscuro ? "var(--color-stage-rule)" : "var(--color-rule)";
@@ -141,9 +160,13 @@ export function Lineas({
             tabIndex={0}
             onPointerMove={alMover}
             onPointerLeave={() => setIndice(null)}
+            onClick={onElegir && indice != null ? () => onElegir(indice) : undefined}
             onKeyDown={alTecla}
             onBlur={() => setIndice(null)}
-            className="block touch-pan-y rounded-control focus-visible:outline-offset-4"
+            className={cn(
+              "block touch-pan-y rounded-control focus-visible:outline-offset-4",
+              onElegir && "cursor-pointer",
+            )}
           >
             {ticks.map((t) => (
               <g key={t}>
@@ -261,7 +284,9 @@ export function Lineas({
                 etiqueta: s.etiqueta,
                 valor: v == null ? "—" : formato(v),
                 forma: "linea" as const,
+                detalle: v == null ? undefined : detalleDeTooltip?.(s, indice),
               }))}
+            pie={onElegir ? ayudaDeElegir : undefined}
           />
         )}
       </div>

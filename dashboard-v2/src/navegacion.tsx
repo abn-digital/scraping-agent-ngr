@@ -23,6 +23,8 @@ export interface ItemDeNavegacion {
   tambien?: string;
   grupo?: string;
   enBarra?: boolean;
+  /** Va al pie del riel, junto a la cuenta (Ajustes, administración). */
+  alPie?: boolean;
 }
 
 // Cuatro secciones, en el orden de la pregunta: cómo estoy (Resumen), contra

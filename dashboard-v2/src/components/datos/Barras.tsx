@@ -59,7 +59,7 @@ export function Barras({
 
   return (
     <div className={className}>
-      <ul className="space-y-2.5" aria-hidden>
+      <ul className="space-y-2.5" aria-hidden={onElegir ? undefined : true}>
         {barras.map((b) => {
           const ancho = tope > 0 ? Math.max(0, b.valor / tope) : 0;
           const esDestacada = destacado === b.id;
@@ -69,7 +69,14 @@ export function Barras({
           return (
             <li key={b.id}>
               <Fila
-                {...(onElegir ? { type: "button" as const, onClick: () => onElegir(b.id) } : {})}
+                {...(onElegir
+                  ? {
+                      type: "button" as const,
+                      onClick: () => onElegir(b.id),
+                      "aria-label": `${b.etiqueta}: ${formato(b.valor)}`,
+                      "aria-pressed": esDestacada,
+                    }
+                  : {})}
                 onPointerEnter={() => setEncima(b.id)}
                 onPointerLeave={() => setEncima(null)}
                 className={cn(
