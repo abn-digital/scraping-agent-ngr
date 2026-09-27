@@ -18,13 +18,15 @@ export function Paginador({
   const paginas = Math.ceil(total / porPagina);
   if (paginas <= 1) return null;
 
+  // Con separador de miles, como toda cifra de la app: "1.653", no "1653".
+  const cifra = (v: number) => v.toLocaleString("es-AR");
   const desde = (pagina - 1) * porPagina + 1;
   const hasta = Math.min(pagina * porPagina, total);
 
   return (
     <nav aria-label={etiqueta} className="flex flex-wrap items-center justify-between gap-4">
       <span className="text-meta tnum text-ink-3">
-        {desde}–{hasta} de {total}
+        {cifra(desde)}–{cifra(hasta)} de {cifra(total)}
       </span>
 
       <div className="flex items-center gap-1">

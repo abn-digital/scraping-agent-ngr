@@ -118,7 +118,7 @@ export function NombreEditable({
           setValor(nombre);
           setEditando(true);
         }}
-        aria-label={`Renombrar ${nombre || "sin nombre"}`}
+        aria-label={nombre ? `Renombrar ${nombre}` : "Ponerle un nombre"}
         // relative y z-10 porque la fila entera suele ser un enlace con un
         // ::after que la cubre: sin esto el clic cae en el enlace y navega.
         className="al-pasar relative z-10 grid h-7 w-7 shrink-0 place-items-center rounded-control
