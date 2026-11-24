@@ -414,8 +414,9 @@ function crearAuth({ archivo, secreto, marcas, idsDeMarca, remoto = null, ahora 
         res.setHeader('Set-Cookie', cookieDeSesion(req, '', 0));
     }
 
-    // Lo que no pide cookie. Rutas relativas a /api.
-    const PUBLICAS = new Set(['/auth/login', '/internal/resync']);
+    // Lo que no pide cookie. Rutas relativas a /api. Las internas las llaman
+    // jobs de Cloud Scheduler con su propio secreto (X-Cron-Secret).
+    const PUBLICAS = new Set(['/auth/login', '/internal/resync', '/internal/scrape-sentinel']);
     // Lo único que puede hacer alguien que todavía tiene la clave de un uso.
     const CON_CLAVE_VIEJA = new Set(['/auth/me', '/auth/change-password', '/auth/logout']);
 

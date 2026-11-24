@@ -56,6 +56,7 @@ COPY scrape_pedidosya_session.js ./
 COPY scrape_pedidosya_batch.js ./
 COPY scrape_scheduled_batch.js ./
 COPY scheduled_stores.js ./
+COPY scrape_sentinel.js ./
 COPY pizzahut_scraper.js ./
 COPY burgerking_scraper.js ./
 COPY kfc_scraper.js ./
