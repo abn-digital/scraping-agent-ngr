@@ -99,7 +99,7 @@ async function llamar(app, auth, metodo, ruta, { body, cookie, params } = {}) {
     const res = respuesta();
     // Primero el middleware de sesión, como app.use('/api', …).
     let siguio = false;
-    auth.requiereSesion(req, res, () => { siguio = true; });
+    await auth.requiereSesion(req, res, () => { siguio = true; });
     if (!siguio) return res;
     const clave = Object.keys(app.rutas).find((k) => {
         const [m, patron] = k.split(' ');
@@ -280,4 +280,93 @@ test('las cuentas de @abndigital.com.ar son siempre admin', async () => {
     assert.equal(alta2.body.usuario.rol, 'admin');
     const bajar = await llamar(app, auth, 'PATCH', '/api/auth/users/b', { cookie: c, body: { rol: 'reviewer', marcas: ['bembos'] } });
     assert.equal(bajar.statusCode, 400);
+});
+
+// ── Varias instancias de Cloud Run contra el mismo users.json ─────────
+
+/** Un users.json en "GCS" con generaciones, compartido por varias instancias. */
+function gcsFalso() {
+    const estado = { generacion: 0, contenido: null, escrituras: 0 };
+    return {
+        estado,
+        leer: async () => ({ generacion: estado.generacion, contenido: estado.contenido }),
+        escribir: async (contenido, esperada) => {
+            if (esperada !== estado.generacion) {
+                const err = new Error('precondition failed');
+                err.code = 412;
+                throw err;
+            }
+            estado.generacion += 1;
+            estado.contenido = contenido;
+            estado.escrituras += 1;
+            return estado.generacion;
+        },
+    };
+}
+
+async function instancia(remoto, reloj) {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'auth-'));
+    const auth = crearAuth({ archivo: path.join(dir, 'users.json'), secreto: SECRETO, marcas: MARCAS, idsDeMarca, remoto, ahora: () => reloj.t });
+    await auth.iniciar({ bootstrapEmail: 'admin@ngr.pe', bootstrapPassword: 'clave-inicial-123' });
+    const app = appFalsa();
+    auth.montar(app);
+    return { auth, app };
+}
+
+test('dos instancias: lo que se crea en una se puede usar en la otra', async () => {
+    const remoto = gcsFalso();
+    const reloj = { t: 1_000_000 };
+    const A = await instancia(remoto, reloj);
+    const B = await instancia(remoto, reloj);
+    // Las dos arrancaron con GCS vacío: solo una sembró el admin.
+    assert.equal(JSON.parse(remoto.estado.contenido).usuarios.length, 1);
+
+    A.auth._usuarios()[0].mustChangePassword = false; // en memoria de A, para el test
+    const ca = cookieDe(await llamar(A.app, A.auth, 'POST', '/api/auth/login', { body: { email: 'admin@ngr.pe', password: 'clave-inicial-123' } }));
+    // La cookie de A sirve en B (mismo secreto, misma cuenta).
+    reloj.t += 3000;
+    assert.equal((await llamar(B.app, B.auth, 'GET', '/api/auth/me', { cookie: ca })).body.usuario.email, 'admin@ngr.pe');
+
+    // Alta en A, login en B.
+    const alta = await llamar(A.app, A.auth, 'POST', '/api/auth/users', {
+        cookie: ca, body: { email: 'brian@ngr.pe', rol: 'viewer', marcas: ['bembos'] },
+    });
+    assert.equal(alta.statusCode, 201, JSON.stringify(alta.body));
+    reloj.t += 3000;
+    const enB = await llamar(B.app, B.auth, 'POST', '/api/auth/login', { body: { email: 'brian@ngr.pe', password: alta.body.clave } });
+    assert.equal(enB.statusCode, 200);
+    const cb = cookieDe(enB);
+
+    // Desactivar en A: B se entera a más tardar en el próximo refresco.
+    const id = alta.body.usuario.id;
+    assert.equal((await llamar(A.app, A.auth, 'PATCH', `/api/auth/users/${id}`, { cookie: ca, body: { activo: false } })).statusCode, 200);
+    reloj.t += 31_000;
+    await llamar(B.app, B.auth, 'GET', '/api/auth/me', { cookie: cb }); // dispara el refresco de fondo
+    await new Promise((r) => setImmediate(r));
+    assert.equal((await llamar(B.app, B.auth, 'GET', '/api/auth/me', { cookie: cb })).body.usuario, null);
+});
+
+test('dos altas a la vez en instancias distintas no se pisan', async () => {
+    const remoto = gcsFalso();
+    const reloj = { t: 2_000_000 };
+    const A = await instancia(remoto, reloj);
+    const B = await instancia(remoto, reloj);
+    for (const I of [A, B]) I.auth._usuarios()[0].mustChangePassword = false;
+    const login = async (I) => cookieDe(await llamar(I.app, I.auth, 'POST', '/api/auth/login', { body: { email: 'admin@ngr.pe', password: 'clave-inicial-123' } }));
+    const [ca, cb] = [await login(A), await login(B)];
+    // B sigue con la foto vieja en memoria cuando A escribe: su escritura choca (412) y reintenta sobre lo nuevo.
+    const [r1, r2] = await Promise.all([
+        llamar(A.app, A.auth, 'POST', '/api/auth/users', { cookie: ca, body: { email: 'uno@ngr.pe', rol: 'viewer', marcas: ['bembos'] } }),
+        llamar(B.app, B.auth, 'POST', '/api/auth/users', { cookie: cb, body: { email: 'dos@ngr.pe', rol: 'viewer', marcas: ['popeyes'] } }),
+    ]);
+    assert.equal(r1.statusCode, 201);
+    assert.equal(r2.statusCode, 201);
+    const final = JSON.parse(remoto.estado.contenido).usuarios.map((u) => u.email).sort();
+    assert.deepEqual(final, ['admin@ngr.pe', 'dos@ngr.pe', 'uno@ngr.pe']);
+    // Y el mismo email desde las dos instancias: uno gana, el otro recibe 409.
+    const [x, y] = await Promise.all([
+        llamar(A.app, A.auth, 'POST', '/api/auth/users', { cookie: ca, body: { email: 'tres@ngr.pe', rol: 'viewer', marcas: ['bembos'] } }),
+        llamar(B.app, B.auth, 'POST', '/api/auth/users', { cookie: cb, body: { email: 'tres@ngr.pe', rol: 'viewer', marcas: ['bembos'] } }),
+    ]);
+    assert.deepEqual([x.statusCode, y.statusCode].sort(), [201, 409]);
 });

@@ -109,15 +109,30 @@ const auth = crearAuth({
     idsDeMarca,
     // AUTH_USERS_LOCAL=1: en desarrollo, no tocar el users.json del bucket.
     remoto: process.env.AUTH_USERS_LOCAL === '1' ? null : {
-        async descargar(dest) {
+        async leer() {
             const file = gcs.bucket(GCS_BUCKET).file('users.json');
-            const [existe] = await file.exists();
-            if (!existe) return 'no-existe';
-            await file.download({ destination: dest });
-            return 'ok';
+            let meta;
+            try {
+                [meta] = await file.getMetadata();
+            } catch (err) {
+                if (err.code === 404) return { generacion: 0, contenido: null };
+                throw err;
+            }
+            const generacion = Number(meta.generation);
+            const [buf] = await file.download({ ifGenerationMatch: generacion });
+            return { generacion, contenido: buf.toString('utf8') };
         },
-        async subir(src) {
-            await gcs.bucket(GCS_BUCKET).upload(src, { destination: 'users.json' });
+        async escribir(contenido, generacionEsperada) {
+            const file = gcs.bucket(GCS_BUCKET).file('users.json');
+            // ifGenerationMatch 0 = "que no exista": dos instancias no pueden sembrar a la vez.
+            await file.save(contenido, {
+                contentType: 'application/json',
+                resumable: false,
+                preconditionOpts: { ifGenerationMatch: generacionEsperada },
+            });
+            // save() deja la metadata nueva en file.metadata; si no vino, se pide.
+            const gen = file.metadata?.generation ?? (await file.getMetadata())[0].generation;
+            return Number(gen);
         },
     },
 });

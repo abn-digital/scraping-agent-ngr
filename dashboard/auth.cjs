@@ -2,11 +2,10 @@
 // Cuentas, sesión y permisos.
 //
 // Sin dependencias: scrypt para las claves y HMAC para la cookie, los dos de
-// node:crypto. Los usuarios viven en un JSON (users.json) con copia en GCS;
-// son pocos y hay una sola instancia, así que alcanza con tenerlos en memoria
-// y escribir el archivo entero con un mutex. Si algún día hay más de una
-// instancia, dos altas simultáneas pueden pisarse: el arreglo es escribir con
-// precondición de generación en GCS.
+// node:crypto. Los usuarios viven en users.json en GCS (con copia local). Son
+// pocos: cada instancia los tiene en memoria, los relee de GCS cuando ve una
+// cuenta o sesión que no conoce (y cada 30 s), y escribe con precondición de
+// generación, así varias instancias de Cloud Run no se pisan.
 //
 // Las sesiones no se guardan: la cookie lleva { sub, exp, v } firmado. `v` es
 // la versión de sesión del usuario; cambiar o resetear la clave, o desactivar
@@ -198,42 +197,128 @@ function validarAcceso(rol, marcas, todasLasMarcas, email = '', dominio = DOMINI
 
 // ── El módulo ─────────────────────────────────
 
+/** Un "no" de una escritura: se contesta tal cual, sin guardar nada. */
+class Rechazo extends Error {
+    constructor(status, cuerpo) {
+        super(cuerpo.error);
+        this.status = status;
+        this.cuerpo = cuerpo;
+    }
+}
+
+// Cada cuánto una instancia vuelve a mirar users.json en GCS por las suyas
+// (para enterarse de bajas y cambios de clave hechos en otra instancia), y el
+// mínimo entre dos lecturas forzadas por una cuenta o sesión desconocida.
+const REFRESCO_MS = 30 * 1000;
+const REFRESCO_FORZADO_MS = 2 * 1000;
+const REINTENTOS_DE_ESCRITURA = 4;
+
 /**
  * @param {object} o
  * @param {string} o.archivo            copia local de users.json
  * @param {string} o.secreto            AUTH_SECRET
  * @param {string[]} o.marcas           claves de todas las marcas
  * @param {(key: string) => string[]} o.idsDeMarca
- * @param {{ descargar: (dest: string) => Promise<'ok'|'no-existe'>, subir: (src: string) => Promise<void> } | null} [o.remoto]
+ * @param {{
+ *   leer: () => Promise<{ generacion: number, contenido: string | null }>,
+ *   escribir: (contenido: string, generacionEsperada: number) => Promise<number>,
+ * } | null} [o.remoto]  users.json en GCS. `generacion` 0 = no existe; `escribir`
+ *   falla con `err.code === 412` si la generación ya no es esa.
  * @param {() => number} [o.ahora]
  */
 function crearAuth({ archivo, secreto, marcas, idsDeMarca, remoto = null, ahora = () => Date.now(), dominioAdmin = DOMINIO_ADMIN }) {
     const permisos = crearPermisos(marcas, idsDeMarca);
+    // Cloud Run puede correr varias instancias: cada una tiene esta copia en
+    // memoria. GCS es la verdad. Se relee cuando aparece una cuenta o una
+    // sesión que no se conoce, y cada REFRESCO_MS; se escribe releyendo lo
+    // último y subiendo con precondición de generación, con reintento.
     let usuarios = [];
+    let generacion = null; // la de GCS que tenemos en memoria
     // Si no se pudo leer GCS al arrancar, no se sube nada: pisaría las cuentas reales.
     let remotoConfiable = false;
+    let ultimaLectura = 0;
+    let lecturaEnCurso = null;
     let cola = Promise.resolve();
     const intentos = new Map(); // email → timestamps de fallos
 
+    const parsear = (texto) => {
+        try {
+            const datos = JSON.parse(texto);
+            return Array.isArray(datos?.usuarios) ? datos.usuarios : [];
+        } catch {
+            return [];
+        }
+    };
+
     function cargarLocal() {
         try {
-            const datos = JSON.parse(fs.readFileSync(archivo, 'utf8'));
-            usuarios = Array.isArray(datos?.usuarios) ? datos.usuarios : [];
+            usuarios = parsear(fs.readFileSync(archivo, 'utf8'));
         } catch {
             usuarios = [];
         }
     }
 
-    /** Escribe el archivo y lo sube, de a una escritura por vez. */
-    function guardar() {
-        const foto = JSON.stringify({ usuarios }, null, 2);
+    function escribirLocal(lista) {
+        fs.mkdirSync(path.dirname(archivo), { recursive: true });
+        const tmp = `${archivo}.${process.pid}.tmp`;
+        fs.writeFileSync(tmp, JSON.stringify({ usuarios: lista }, null, 2), { mode: 0o600 });
+        fs.renameSync(tmp, archivo);
+    }
+
+    /** Trae users.json de GCS si cambió. Una lectura por vez. */
+    function sincronizar({ forzada = false } = {}) {
+        if (!remoto || !remotoConfiable) return Promise.resolve();
+        const minimo = forzada ? REFRESCO_FORZADO_MS : REFRESCO_MS;
+        if (ahora() - ultimaLectura < minimo) return lecturaEnCurso || Promise.resolve();
+        if (lecturaEnCurso) return lecturaEnCurso;
+        ultimaLectura = ahora();
+        lecturaEnCurso = (async () => {
+            try {
+                const { generacion: g, contenido } = await remoto.leer();
+                if (g !== generacion) {
+                    usuarios = g ? parsear(contenido) : [];
+                    generacion = g;
+                    escribirLocal(usuarios);
+                }
+            } catch (err) {
+                console.warn(`[auth] No se pudo releer users.json de GCS: ${err.message}`);
+            } finally {
+                lecturaEnCurso = null;
+            }
+        })();
+        return lecturaEnCurso;
+    }
+
+    /**
+     * Aplica un cambio a las cuentas: relee lo último de GCS, corre `cambio`
+     * sobre una copia y la sube solo si nadie escribió en el medio. Si otra
+     * instancia ganó, vuelve a empezar sobre lo nuevo. `cambio` puede tirar un
+     * Rechazo (400, 404, 409) y entonces no se guarda nada.
+     */
+    function mutar(cambio) {
         const tarea = cola.then(async () => {
-            fs.mkdirSync(path.dirname(archivo), { recursive: true });
-            const tmp = `${archivo}.${process.pid}.tmp`;
-            fs.writeFileSync(tmp, foto, { mode: 0o600 });
-            fs.renameSync(tmp, archivo);
-            if (remoto && remotoConfiable) await remoto.subir(archivo);
-            else if (remoto) console.warn('[auth] users.json se guardó solo local: GCS no estaba disponible al arrancar.');
+            for (let intento = 0; intento < REINTENTOS_DE_ESCRITURA; intento++) {
+                if (remoto && remotoConfiable) {
+                    ultimaLectura = 0;
+                    await sincronizar({ forzada: true });
+                }
+                const copia = structuredClone(usuarios);
+                const resultado = cambio(copia);
+                if (remoto && remotoConfiable) {
+                    try {
+                        generacion = await remoto.escribir(JSON.stringify({ usuarios: copia }, null, 2), generacion || 0);
+                    } catch (err) {
+                        if (err && (err.code === 412 || err.code === '412')) continue;
+                        throw err;
+                    }
+                } else if (remoto) {
+                    console.warn('[auth] users.json se guarda solo local: GCS no estaba disponible al arrancar.');
+                }
+                usuarios = copia;
+                escribirLocal(usuarios);
+                return resultado;
+            }
+            throw new Error('users.json cambió demasiadas veces seguidas');
         });
         cola = tarea.catch(() => {});
         return tarea;
@@ -242,28 +327,47 @@ function crearAuth({ archivo, secreto, marcas, idsDeMarca, remoto = null, ahora 
     async function iniciar({ bootstrapEmail, bootstrapPassword } = {}) {
         if (remoto) {
             try {
-                const r = await remoto.descargar(archivo);
+                const { generacion: g, contenido } = await remoto.leer();
+                generacion = g;
                 remotoConfiable = true;
-                console.log(r === 'ok' ? '[auth] users.json bajado de GCS' : '[auth] No hay users.json en GCS todavía');
+                ultimaLectura = ahora();
+                if (g) {
+                    usuarios = parsear(contenido);
+                    escribirLocal(usuarios);
+                    console.log(`[auth] users.json bajado de GCS (${usuarios.length} cuentas)`);
+                } else {
+                    usuarios = [];
+                    console.log('[auth] No hay users.json en GCS todavía');
+                }
             } catch (err) {
                 console.warn(`[auth] No se pudo leer users.json de GCS (${err.message}). Se usa la copia local y no se sube nada.`);
+                cargarLocal();
             }
+        } else {
+            cargarLocal();
         }
-        cargarLocal();
+
         // Una cuenta del dominio admin que quedó con otro rol (creada antes de
         // la regla, o editada a mano) se corrige al arrancar.
-        const corregidas = usuarios.filter((u) => esDelDominioAdmin(u.email, dominioAdmin) && u.rol !== 'admin');
-        for (const u of corregidas) { u.rol = 'admin'; u.marcas = []; }
-        if (corregidas.length) {
-            await guardar();
-            console.log(`[auth] ${corregidas.length} cuenta(s) de @${dominioAdmin} pasaron a admin.`);
+        const esCorregible = (u) => esDelDominioAdmin(u.email, dominioAdmin) && u.rol !== 'admin';
+        if (usuarios.some(esCorregible)) {
+            const n = await mutar((lista) => {
+                const corregir = lista.filter(esCorregible);
+                for (const u of corregir) { u.rol = 'admin'; u.marcas = []; }
+                return corregir.length;
+            });
+            if (n) console.log(`[auth] ${n} cuenta(s) de @${dominioAdmin} pasaron a admin.`);
         }
         if (usuarios.length === 0) {
             const email = normalizarEmail(bootstrapEmail);
             if (email && bootstrapPassword) {
-                usuarios.push(nuevoUsuario({ email, rol: 'admin', marcas: [], nombre: '', clave: String(bootstrapPassword) }));
-                await guardar();
-                console.log(`[auth] Se creó el admin inicial ${email}; tiene que cambiar la clave al entrar.`);
+                const creado = await mutar((lista) => {
+                    // Otra instancia pudo haberlo sembrado mientras arrancábamos.
+                    if (lista.length) return false;
+                    lista.push(nuevoUsuario({ email, rol: 'admin', marcas: [], nombre: '', clave: String(bootstrapPassword) }));
+                    return true;
+                });
+                if (creado) console.log(`[auth] Se creó el admin inicial ${email}; tiene que cambiar la clave al entrar.`);
             } else {
                 console.warn('[auth] No hay cuentas. Definí AUTH_BOOTSTRAP_EMAIL y AUTH_BOOTSTRAP_PASSWORD para crear el primer admin.');
             }
@@ -287,14 +391,18 @@ function crearAuth({ archivo, secreto, marcas, idsDeMarca, remoto = null, ahora 
         };
     }
 
-    /** El usuario de la cookie, si la cookie vale y la cuenta sigue activa. */
-    function usuarioDe(req) {
-        const token = leerCookies(req.headers.cookie)[COOKIE];
-        const datos = leerSesion(token, secreto, ahora());
+    const datosDeLaCookie = (req) => leerSesion(leerCookies(req.headers.cookie)[COOKIE], secreto, ahora());
+
+    function usuarioPorSesion(datos) {
         if (!datos) return null;
         const u = usuarios.find((x) => x.id === datos.sub);
         if (!u || u.activo === false || (u.sesionV || 1) !== datos.v) return null;
         return u;
+    }
+
+    /** El usuario de la cookie, si la cookie vale y la cuenta sigue activa (con lo que hay en memoria). */
+    function usuarioDe(req) {
+        return usuarioPorSesion(datosDeLaCookie(req));
     }
 
     function abrirSesion(req, res, u) {
@@ -312,9 +420,18 @@ function crearAuth({ archivo, secreto, marcas, idsDeMarca, remoto = null, ahora 
     const CON_CLAVE_VIEJA = new Set(['/auth/me', '/auth/change-password', '/auth/logout']);
 
     /** Middleware para app.use('/api', …): 401 sin sesión, 403 si falta cambiar la clave. */
-    function requiereSesion(req, res, next) {
+    async function requiereSesion(req, res, next) {
         if (PUBLICAS.has(req.path)) return next();
-        const u = usuarioDe(req);
+        // De fondo, cada tanto: así una baja hecha en otra instancia llega acá.
+        void sincronizar();
+        const datos = datosDeLaCookie(req);
+        let u = usuarioPorSesion(datos);
+        // Una cookie bien firmada de una cuenta que no conocemos (o con otra
+        // versión de sesión) puede venir de otra instancia: se relee y se mira de nuevo.
+        if (!u && datos) {
+            await sincronizar({ forzada: true });
+            u = usuarioPorSesion(datos);
+        }
         // /me es cómo el front pregunta si hay sesión: "no hay" es una
         // respuesta, no un error (un 401 ensuciaba la consola en cada login).
         if (!u && req.path === '/auth/me') return res.json({ usuario: null });
@@ -342,15 +459,40 @@ function crearAuth({ archivo, secreto, marcas, idsDeMarca, remoto = null, ahora 
         intentos.set(email, lista);
     }
 
+    /** Corre una escritura y contesta: el resultado, el Rechazo tal cual, o un 500. */
+    async function responderMutacion(res, cambio, alSalir, mensaje500, etiqueta) {
+        let resultado;
+        try {
+            resultado = await mutar(cambio);
+        } catch (err) {
+            if (err instanceof Rechazo) return res.status(err.status).json(err.cuerpo);
+            console.error(`[auth] ${etiqueta}:`, err.message);
+            return res.status(500).json({ error: mensaje500 });
+        }
+        return alSalir(resultado);
+    }
+
+    const buscar = (lista, id) => {
+        const u = lista.find((x) => x.id === id);
+        if (!u) throw new Rechazo(404, { error: 'Esa cuenta no existe.' });
+        return u;
+    };
+
     /** Las rutas /api/auth/*. Recibe la app de Express (no requiere express acá). */
     function montar(app) {
-        app.post('/api/auth/login', (req, res) => {
+        app.post('/api/auth/login', async (req, res) => {
             const email = normalizarEmail(req.body?.email);
             const clave = String(req.body?.password ?? '');
             if (!email || !clave) return res.status(400).json({ error: MSG.credenciales });
             if (demasiadosIntentos(email)) return res.status(429).json({ error: MSG.demasiados });
-            const u = usuarios.find((x) => x.email === email);
-            const ok = verificarClave(clave, u ? u.passwordHash : HASH_DE_RELLENO);
+            let u = usuarios.find((x) => x.email === email);
+            let ok = verificarClave(clave, u ? u.passwordHash : HASH_DE_RELLENO);
+            if (!u || !ok || u.activo === false) {
+                // La cuenta (o su clave nueva) pudo haberse creado en otra instancia.
+                await sincronizar({ forzada: true });
+                u = usuarios.find((x) => x.email === email);
+                ok = !!u && verificarClave(clave, u.passwordHash);
+            }
             if (!u || !ok || u.activo === false) {
                 anotarFallo(email);
                 return res.status(401).json({ error: MSG.credenciales });
@@ -368,10 +510,9 @@ function crearAuth({ archivo, secreto, marcas, idsDeMarca, remoto = null, ahora 
         });
 
         app.post('/api/auth/change-password', async (req, res) => {
-            const u = req.usuario;
             const actual = String(req.body?.actual ?? '');
             const nueva = String(req.body?.nueva ?? '');
-            if (!verificarClave(actual, u.passwordHash)) {
+            if (!verificarClave(actual, req.usuario.passwordHash)) {
                 return res.status(400).json({ error: 'La clave actual no es esa.', code: 'BAD_CURRENT' });
             }
             if (nueva.length < CLAVE_MINIMA) {
@@ -380,90 +521,73 @@ function crearAuth({ archivo, secreto, marcas, idsDeMarca, remoto = null, ahora 
             if (nueva === actual) {
                 return res.status(400).json({ error: 'La clave nueva tiene que ser distinta de la actual.', code: 'SAME' });
             }
-            u.passwordHash = hashClave(nueva);
-            u.mustChangePassword = false;
-            u.passwordChangedAt = new Date(ahora()).toISOString();
-            u.sesionV = (u.sesionV || 1) + 1;
-            try {
-                await guardar();
-            } catch (err) {
-                console.error('[auth] change-password:', err.message);
-                return res.status(500).json({ error: 'No se pudo guardar la clave nueva.' });
-            }
-            abrirSesion(req, res, u);
-            res.json({ usuario: publico(u) });
+            const hash = hashClave(nueva);
+            return responderMutacion(res, (lista) => {
+                const u = buscar(lista, req.usuario.id);
+                u.passwordHash = hash;
+                u.mustChangePassword = false;
+                u.passwordChangedAt = new Date(ahora()).toISOString();
+                u.sesionV = (u.sesionV || 1) + 1;
+                return u;
+            }, (u) => {
+                abrirSesion(req, res, u);
+                res.json({ usuario: publico(u) });
+            }, 'No se pudo guardar la clave nueva.', 'change-password');
         });
 
-        app.get('/api/auth/users', soloAdmin, (_req, res) => {
+        app.get('/api/auth/users', soloAdmin, async (_req, res) => {
+            // La lista de un admin tiene que ser la de todas las instancias.
+            await sincronizar({ forzada: true });
             res.json({ usuarios: usuarios.map(publico) });
         });
 
         app.post('/api/auth/users', soloAdmin, async (req, res) => {
             const email = normalizarEmail(req.body?.email);
             if (!emailValido(email)) return res.status(400).json({ error: 'Ese email no es válido.' });
-            if (usuarios.some((x) => x.email === email)) {
-                return res.status(409).json({ error: 'Ya hay una cuenta con ese email.' });
-            }
             const acceso = validarAcceso(req.body?.rol, req.body?.marcas, marcas, email, dominioAdmin);
             if (acceso.error) return res.status(400).json({ error: acceso.error });
             const clave = generarClave();
-            const u = nuevoUsuario({ email, rol: acceso.rol, marcas: acceso.marcas, nombre: req.body?.nombre, clave });
-            usuarios.push(u);
-            try {
-                await guardar();
-            } catch (err) {
-                usuarios = usuarios.filter((x) => x.id !== u.id);
-                console.error('[auth] alta:', err.message);
-                return res.status(500).json({ error: 'No se pudo crear la cuenta.' });
-            }
-            res.status(201).json({ usuario: publico(u), clave });
+            const nuevo = nuevoUsuario({ email, rol: acceso.rol, marcas: acceso.marcas, nombre: req.body?.nombre, clave });
+            return responderMutacion(res, (lista) => {
+                if (lista.some((x) => x.email === email)) throw new Rechazo(409, { error: 'Ya hay una cuenta con ese email.' });
+                lista.push(nuevo);
+                return nuevo;
+            }, (u) => res.status(201).json({ usuario: publico(u), clave }), 'No se pudo crear la cuenta.', 'alta');
         });
 
         app.patch('/api/auth/users/:id', soloAdmin, async (req, res) => {
-            const u = usuarios.find((x) => x.id === req.params.id);
-            if (!u) return res.status(404).json({ error: 'Esa cuenta no existe.' });
             const body = req.body || {};
-            const cambios = {};
-            if ('rol' in body || 'marcas' in body) {
-                const acceso = validarAcceso(body.rol ?? u.rol, body.marcas ?? u.marcas, marcas, u.email, dominioAdmin);
-                if (acceso.error) return res.status(400).json({ error: acceso.error });
-                cambios.rol = acceso.rol;
-                cambios.marcas = acceso.marcas;
-            }
-            if ('activo' in body) cambios.activo = body.activo !== false;
-            if ('nombre' in body) cambios.nombre = String(body.nombre || '').trim().slice(0, 120);
-            if (dejaSinAdmin(usuarios, u.id, cambios)) {
-                return res.status(400).json({ error: 'Tiene que quedar al menos un admin activo.' });
-            }
-            const antes = { ...u };
-            Object.assign(u, cambios);
-            if (cambios.activo === false && antes.activo !== false) u.sesionV = (u.sesionV || 1) + 1;
-            try {
-                await guardar();
-            } catch (err) {
-                Object.assign(u, antes);
-                console.error('[auth] edición:', err.message);
-                return res.status(500).json({ error: 'No se pudo guardar el cambio.' });
-            }
-            res.json({ usuario: publico(u) });
+            return responderMutacion(res, (lista) => {
+                const u = buscar(lista, req.params.id);
+                const cambios = {};
+                if ('rol' in body || 'marcas' in body) {
+                    const acceso = validarAcceso(body.rol ?? u.rol, body.marcas ?? u.marcas, marcas, u.email, dominioAdmin);
+                    if (acceso.error) throw new Rechazo(400, { error: acceso.error });
+                    cambios.rol = acceso.rol;
+                    cambios.marcas = acceso.marcas;
+                }
+                if ('activo' in body) cambios.activo = body.activo !== false;
+                if ('nombre' in body) cambios.nombre = String(body.nombre || '').trim().slice(0, 120);
+                if (dejaSinAdmin(lista, u.id, cambios)) {
+                    throw new Rechazo(400, { error: 'Tiene que quedar al menos un admin activo.' });
+                }
+                const estabaActiva = u.activo !== false;
+                Object.assign(u, cambios);
+                if (cambios.activo === false && estabaActiva) u.sesionV = (u.sesionV || 1) + 1;
+                return u;
+            }, (u) => res.json({ usuario: publico(u) }), 'No se pudo guardar el cambio.', 'edición');
         });
 
         app.post('/api/auth/users/:id/reset', soloAdmin, async (req, res) => {
-            const u = usuarios.find((x) => x.id === req.params.id);
-            if (!u) return res.status(404).json({ error: 'Esa cuenta no existe.' });
-            const antes = { ...u };
             const clave = generarClave();
-            u.passwordHash = hashClave(clave);
-            u.mustChangePassword = true;
-            u.sesionV = (u.sesionV || 1) + 1;
-            try {
-                await guardar();
-            } catch (err) {
-                Object.assign(u, antes);
-                console.error('[auth] reset:', err.message);
-                return res.status(500).json({ error: 'No se pudo resetear la clave.' });
-            }
-            res.json({ usuario: publico(u), clave });
+            const hash = hashClave(clave);
+            return responderMutacion(res, (lista) => {
+                const u = buscar(lista, req.params.id);
+                u.passwordHash = hash;
+                u.mustChangePassword = true;
+                u.sesionV = (u.sesionV || 1) + 1;
+                return u;
+            }, (u) => res.json({ usuario: publico(u), clave }), 'No se pudo resetear la clave.', 'reset');
         });
     }
 
@@ -492,6 +616,7 @@ function secretoDelEntorno(env = process.env) {
 
 module.exports = {
     crearAuth,
+    Rechazo,
     crearPermisos,
     secretoDelEntorno,
     hashClave,
