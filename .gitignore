@@ -49,3 +49,7 @@ pnpm-debug.log*
 # AI matching output & manual overrides (generated at runtime, persisted in GCS)
 /matches_*.json
 /overrides_*.json
+
+# Cuentas (dashboard/auth.cjs): hashes de claves, viven en GCS
+/users.json
+/users.json.*.tmp

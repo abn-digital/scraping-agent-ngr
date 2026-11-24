@@ -103,6 +103,26 @@ docker build -t scraping-agent .
 docker run -p 8080:8080 scraping-agent
 ```
 
+### Cuentas y acceso
+
+Toda la API pide sesión (cookie `ngr_sesion`, ver `dashboard/auth.cjs`). La v1 (`/`) y la v2
+(`/v2/login`) tienen cada una su login, con la misma cookie. El panel de usuarios vive en la v2
+(`/v2/usuarios`); desde la v1 un admin llega por el menú de la cuenta.
+Las cuentas se guardan en `gs://ngr-scraping-data/users.json`.
+
+| Variable | Para qué |
+|---|---|
+| `AUTH_SECRET` | Firma la cookie. Obligatoria en Cloud Run (`openssl rand -hex 32`); sin ella el server no arranca. En local, si falta, se usa una efímera. |
+| `AUTH_BOOTSTRAP_EMAIL`, `AUTH_BOOTSTRAP_PASSWORD` | Si todavía no hay cuentas, se crea ese admin con cambio de clave obligatorio. Después se pueden sacar. |
+| `AUTH_USERS_LOCAL=1` | Solo en desarrollo: usa `users.json` local y no toca el del bucket. |
+
+Roles: **lectura** (ve sus marcas), **revisión** (además confirma cruces y actualiza catálogos de
+sus marcas) y **admin** (todas las marcas, recalcular matches y las cuentas).
+
+```bash
+node --test dashboard/auth.test.cjs   # claves, cookie, ACL, primer ingreso
+```
+
 ---
 
 ## 🔧 Stack Técnico
