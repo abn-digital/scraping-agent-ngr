@@ -95,6 +95,7 @@ RUN cd dashboard && npm install --omit=dev
 
 # Copy Express backend
 COPY dashboard/server.cjs ./dashboard/server.cjs
+COPY dashboard/auth.cjs ./dashboard/auth.cjs
 
 # Copy compiled React app from Stage 1
 COPY --from=builder /app/dashboard/dist ./dashboard/dist

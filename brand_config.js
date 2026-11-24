@@ -243,8 +243,32 @@ function getCrossChannelConfig(brandKey) {
   };
 }
 
+/**
+ * Every store id that belongs to a brand's view: its anchor and competitors
+ * on each channel (the cross-channel anchors are those same anchors). Used by
+ * the server ACL to decide which stores a user restricted to a brand can see.
+ */
+function idsDeMarca(key) {
+  const brand = getBrand(key);
+  if (!brand) return [];
+  const ids = new Set();
+  for (const ch of CHANNELS) {
+    const cfg = brand.channels[ch];
+    if (!cfg) continue;
+    if (cfg.anchorId) ids.add(cfg.anchorId);
+    for (const c of cfg.competitors || []) ids.add(c.id);
+  }
+  const cross = getCrossChannelConfig(key);
+  if (cross) {
+    ids.add(cross.anchorId);
+    for (const c of cross.competitors) ids.add(c.id);
+  }
+  return [...ids];
+}
+
 module.exports = {
   BRANDS,
+  idsDeMarca,
   CHANNELS,
   CROSS_CHANNEL,
   CHANNEL_LABELS,

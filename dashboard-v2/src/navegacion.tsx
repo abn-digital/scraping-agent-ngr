@@ -4,6 +4,7 @@ import {
   InicioIcon,
   RevisionIcon,
   TiendasIcon,
+  UsuariosIcon,
   type IconoDeRielProps,
 } from "@/components/ui/RailIcons";
 
@@ -25,6 +26,8 @@ export interface ItemDeNavegacion {
   enBarra?: boolean;
   /** Va al pie del riel, junto a la cuenta (Ajustes, administración). */
   alPie?: boolean;
+  /** Solo para admin: el Shell recibe NAV ya filtrado por rol (App.tsx). */
+  soloAdmin?: boolean;
 }
 
 // Cuatro secciones, en el orden de la pregunta: cómo estoy (Resumen), contra
@@ -35,4 +38,12 @@ export const NAV: ItemDeNavegacion[] = [
   { to: "/marcas", label: "Comparativa", icon: ComparativaIcon, end: false },
   { to: "/revision", label: "Revisión", icon: RevisionIcon, end: false },
   { to: "/tiendas", label: "Tiendas", icon: TiendasIcon, end: false },
+  {
+    to: "/usuarios",
+    label: "Usuarios",
+    icon: UsuariosIcon,
+    end: false,
+    alPie: true,
+    soloAdmin: true,
+  },
 ];

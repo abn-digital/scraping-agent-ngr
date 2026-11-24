@@ -16,6 +16,7 @@ import { useComparacion, useFechas, useMarcas } from "@/lib/consultas";
 import { fechaDeDia, fechaHoraLima } from "@/lib/lima";
 import { conDatos, pendientes } from "@/lib/precios";
 import { recordarMarca } from "@/lib/recordar";
+import { puedeRevisar, useMisMarcas, useUsuario } from "@/lib/sesion";
 import {
   ANCLAS,
   CANALES,
@@ -42,6 +43,8 @@ export default function MarcaPage({ vista }: { vista: "precios" | "revision" }) 
   const fecha = params.get("fecha") || null;
 
   const marcas = useMarcas();
+  const mias = useMisMarcas();
+  const usuario = useUsuario();
   const info = marcas.data?.find((m) => m.key === marca);
   const comparacion = useComparacion(
     info ? marca : undefined,
@@ -67,21 +70,35 @@ export default function MarcaPage({ vista }: { vista: "precios" | "revision" }) 
         />
       </Contenedor>
     );
-  if (marcas.data && !info)
+  if (marcas.data && !info) {
+    // Una marca que existe pero no es de la cuenta se dice igual que una que
+    // no existe: la lista de las suyas es lo que importa.
+    const primera = mias[0];
+    const nombres = mias.map((m) => m.label);
+    const lista =
+      nombres.length <= 1
+        ? (nombres[0] ?? "")
+        : `${nombres.slice(0, -1).join(", ")} y ${nombres.at(-1)}`;
     return (
       <MensajeCentral
         eyebrow="404"
-        title="Esa marca no está en la comparativa"
+        title="Esa marca no está en tu comparativa"
         actions={
-          <Button variant="primary" asChild>
-            <Link to="/marcas/bembos">Ir a Bembos</Link>
-          </Button>
+          primera && (
+            <Button variant="primary" asChild>
+              <Link to={`/marcas/${primera.key}`}>Ir a {primera.label}</Link>
+            </Button>
+          )
         }
       >
-        Las marcas de NGR que se comparan son Bembos, Popeyes, Papa Johns, Chinawok, Dunkin' y Don
-        Belisario.
+        {nombres.length === 1
+          ? `Tu cuenta ve ${lista}.`
+          : nombres.length > 1
+            ? `Las marcas que ve tu cuenta son ${lista}.`
+            : "Tu cuenta todavía no tiene marcas asignadas."}
       </MensajeCentral>
     );
+  }
 
   const c = comparacion.data;
   const canalInfo = info?.channels.find((x) => x.channel === canal);
@@ -181,7 +198,7 @@ export default function MarcaPage({ vista }: { vista: "precios" | "revision" }) 
                     `/marcas/${m}${vista === "revision" ? "/revision" : ""}${s ? `?${s}` : ""}`,
                   );
                 }}
-                options={(marcas.data ?? MARCAS_NGR).map((m) => ({ value: m.key, label: m.label }))}
+                options={(marcas.data ?? mias).map((m) => ({ value: m.key, label: m.label }))}
                 disabled={!marcas.data}
               />
             </div>
@@ -306,6 +323,7 @@ export default function MarcaPage({ vista }: { vista: "precios" | "revision" }) 
                 marca={info}
                 canal={canal}
                 soloLectura={soloLectura}
+                sinPermiso={!puedeRevisar(usuario)}
               />
             )}
           </div>

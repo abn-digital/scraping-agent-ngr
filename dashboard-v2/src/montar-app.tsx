@@ -5,6 +5,7 @@ import App from "./App";
 import { Base } from "./Base";
 import { ErrorBoundary } from "./components/layout/ErrorBoundary";
 import { queryClient } from "./lib/queryClient";
+import { SesionProvider } from "./lib/sesion";
 
 export function montar(raiz: HTMLElement) {
   createRoot(raiz).render(
@@ -12,7 +13,9 @@ export function montar(raiz: HTMLElement) {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <ErrorBoundary>
-            <App />
+            <SesionProvider>
+              <App />
+            </SesionProvider>
           </ErrorBoundary>
         </BrowserRouter>
       </QueryClientProvider>

@@ -7,15 +7,19 @@ const { exec } = require('child_process');
 const { Storage } = require('@google-cloud/storage');
 
 const { matchBrand } = require('../product_matcher');
-const { BRANDS, CHANNELS, CROSS_CHANNEL, getChannelConfig, getCrossChannelConfig } = require('../brand_config');
+const { BRANDS, CHANNELS, CROSS_CHANNEL, getChannelConfig, getCrossChannelConfig, idsDeMarca } = require('../brand_config');
 const scrapeMeta = require('../scrape_meta');
 const historyStore = require('../history_store');
 const matchSnapshots = require('../match_snapshots');
 const { STORES: PEYA_STORES } = require('../pedidosya_stores');
+const { crearAuth, secretoDelEntorno } = require('./auth.cjs');
 
 const app = express();
 const port = process.env.PORT || 3001;
 
+// Sin `credentials` en CORS a propósito: la cookie de sesión es del mismo
+// origen (en local, a través del proxy de Vite). `*` con credenciales sería
+// abrirle la API a cualquier sitio.
 app.use(cors());
 app.use(express.json());
 
@@ -94,12 +98,45 @@ async function uploadToGCS(localPath) {
     }
 }
 
+// ──────────────────────────────────────────────
+// Cuentas y permisos (dashboard/auth.cjs)
+// ──────────────────────────────────────────────
+const USERS_FILE = path.join(ROOT_DIR, 'users.json');
+const auth = crearAuth({
+    archivo: USERS_FILE,
+    secreto: secretoDelEntorno(),
+    marcas: BRANDS.map(b => b.key),
+    idsDeMarca,
+    // AUTH_USERS_LOCAL=1: en desarrollo, no tocar el users.json del bucket.
+    remoto: process.env.AUTH_USERS_LOCAL === '1' ? null : {
+        async descargar(dest) {
+            const file = gcs.bucket(GCS_BUCKET).file('users.json');
+            const [existe] = await file.exists();
+            if (!existe) return 'no-existe';
+            await file.download({ destination: dest });
+            return 'ok';
+        },
+        async subir(src) {
+            await gcs.bucket(GCS_BUCKET).upload(src, { destination: 'users.json' });
+        },
+    },
+});
+
+// Todo /api pide sesión, salvo el login y el resync del cron (que trae su secreto).
+app.use('/api', auth.requiereSesion);
+auth.montar(app);
+
+const sinPermiso = (res, error) => res.status(403).json({ error });
+
 // GCS sync runs BEFORE the server starts listening.
 // This guarantees every user always sees the latest scraped data.
 
 // ──────────────────────────────────────────────
 // Static frontend (production build)
 // ──────────────────────────────────────────────
+// La v1 no es una puerta de atrás: su index.html no trae datos y, sin sesión,
+// la propia v1 muestra su login (dashboard/src/auth.tsx). Los datos están
+// detrás de /api, que ya pide sesión.
 if (fs.existsSync(DIST_DIR)) {
     app.use(express.static(DIST_DIR));
 }
@@ -251,8 +288,9 @@ app.get('/api/results', (req, res) => {
         const data = [];
 
         for (const [filename, { filePath, mtime }] of files) {
-            const content = JSON.parse(fs.readFileSync(filePath, 'utf8'));
             const storeId = filename.match(/products_(.+)\.json/)?.[1] || 'Unknown';
+            if (!auth.puedeVerTienda(req.usuario, storeId)) continue;
+            const content = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
             let detectedPlatform = 'Rappi';
             if (filename.includes('pedidosya')) detectedPlatform = 'PedidosYa';
@@ -290,6 +328,13 @@ app.post('/api/update', (req, res) => {
     const { url } = req.body;
     if (!url) {
         return res.status(400).json({ error: 'URL is required' });
+    }
+    if (!auth.puedeRevisar(req.usuario)) return sinPermiso(res, auth.MSG.soloLectura);
+    {
+        // Una URL que no se sabe de qué tienda es, solo la puede mandar un admin.
+        const id = resolveStoreIdFromUrl(String(url));
+        const ok = id ? auth.puedeVerTienda(req.usuario, id) : auth.esAdmin(req.usuario);
+        if (!ok) return sinPermiso(res, auth.MSG.sinTienda);
     }
 
     // PedidosYa is batch-only: manual refresh from the dashboard risks PerimeterX blocks.
@@ -516,6 +561,7 @@ function buildComparison(brand, channel, opts = {}) {
 app.get('/api/catalog', (req, res) => {
     const { id } = req.query;
     if (!id) return res.status(400).json({ error: 'id requerido' });
+    if (!auth.puedeVerTienda(req.usuario, id)) return sinPermiso(res, auth.MSG.sinTienda);
     const files = findProductFiles();
     const hit = files.get(`products_${id}.json`);
     if (!hit) return res.status(404).json({ error: `Sin datos para ${id}` });
@@ -536,8 +582,8 @@ app.get('/api/catalog', (req, res) => {
 });
 
 // List brands + channels + whether matches already exist
-app.get('/api/brands', (_req, res) => {
-    const out = BRANDS.map(b => ({
+app.get('/api/brands', (req, res) => {
+    const out = BRANDS.filter(b => auth.puedeVerMarca(req.usuario, b.key)).map(b => ({
         key: b.key,
         label: b.label,
         channels: [
@@ -565,6 +611,7 @@ app.get('/api/brands', (_req, res) => {
 app.get('/api/matches', async (req, res) => {
     const { brand, channel, date } = req.query;
     if (!brand || !channel) return res.status(400).json({ error: 'brand y channel son requeridos' });
+    if (!auth.puedeVerMarca(req.usuario, brand)) return sinPermiso(res, auth.MSG.sinMarca);
     try {
         const dateStr = date ? String(date) : '';
         if (dateStr && /^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
@@ -599,6 +646,7 @@ app.get('/api/matches', async (req, res) => {
 app.get('/api/matches/dates', async (req, res) => {
     const { brand, channel } = req.query;
     if (!brand || !channel) return res.status(400).json({ error: 'brand y channel son requeridos' });
+    if (!auth.puedeVerMarca(req.usuario, brand)) return sinPermiso(res, auth.MSG.sinMarca);
     try {
         const dates = await matchSnapshots.listDates(String(brand), String(channel));
         res.json({ brand, channel, today: matchSnapshots.todayPeru(), dates });
@@ -611,6 +659,7 @@ app.get('/api/matches/dates', async (req, res) => {
 // Recalculate matches for a brand+channel via Gemini → latest file + today's snapshot only
 app.post('/api/match', async (req, res) => {
     const { brand, channel } = req.body || {};
+    if (!auth.esAdmin(req.usuario)) return sinPermiso(res, auth.MSG.soloAdmin);
     if (!brand || !channel) return res.status(400).json({ error: 'brand y channel son requeridos' });
     const valid = channel === CROSS_CHANNEL
         ? !!getCrossChannelConfig(brand)
@@ -644,6 +693,8 @@ app.post('/api/matches/override', async (req, res) => {
     if (!brand || !channel || !ngrName || !competitorId || !action) {
         return res.status(400).json({ error: 'brand, channel, ngrName, competitorId y action son requeridos' });
     }
+    if (!auth.puedeRevisar(req.usuario)) return sinPermiso(res, auth.MSG.soloLectura);
+    if (!auth.puedeVerMarca(req.usuario, brand)) return sinPermiso(res, auth.MSG.sinMarca);
     if (!['confirm', 'reject', 'reassign', 'reset'].includes(action)) {
         return res.status(400).json({ error: 'action inválida' });
     }
@@ -671,6 +722,7 @@ app.post('/api/matches/override', async (req, res) => {
 app.get('/api/download/:file', (req, res) => {
     const fileName = req.params.file; // e.g. products_742.csv
     const storeId = fileName.replace(/^products_/, '').replace(/\.csv$/, '');
+    if (!auth.puedeVerTienda(req.usuario, storeId)) return sinPermiso(res, auth.MSG.sinTienda);
 
     // Always regenerate from the JSON source so the CSV is correctly quoted and
     // UTF-8/BOM encoded. Pre-built .csv files written by scrapers are ignored on
@@ -722,6 +774,7 @@ app.get('/api/history/:storeId', async (req, res) => {
     try {
         const storeId = req.params.storeId;
         if (!storeId) return res.status(400).json({ error: 'storeId required' });
+        if (!auth.puedeVerTienda(req.usuario, storeId)) return sinPermiso(res, auth.MSG.sinTienda);
         const index = await historyStore.getIndex(storeId);
         res.json(index);
     } catch (err) {
@@ -737,6 +790,7 @@ app.get('/api/history/:storeId/run', async (req, res) => {
         if (!storeId || !at) {
             return res.status(400).json({ error: 'storeId and at query param required' });
         }
+        if (!auth.puedeVerTienda(req.usuario, storeId)) return sinPermiso(res, auth.MSG.sinTienda);
         const run = await historyStore.getRun(storeId, String(at));
         if (!run) return res.status(404).json({ error: 'Run not found' });
         res.json(run);
@@ -790,6 +844,10 @@ if (fs.existsSync(DIST_DIR)) {
 (async () => {
     console.log('[GCS] Sincronizando datos antes de arrancar el servidor...');
     await syncFromGCS();
+    await auth.iniciar({
+        bootstrapEmail: process.env.AUTH_BOOTSTRAP_EMAIL,
+        bootstrapPassword: process.env.AUTH_BOOTSTRAP_PASSWORD,
+    });
     console.log('[GCS] Sincronización completa. Arrancando servidor...');
 
     app.listen(port, () => {

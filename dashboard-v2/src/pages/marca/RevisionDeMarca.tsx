@@ -43,13 +43,17 @@ export function RevisionDeMarca({
   comparacion: c,
   marca,
   canal,
-  soloLectura,
+  soloLectura: historico,
+  sinPermiso = false,
 }: {
   comparacion: Comparacion;
   marca: Marca;
   canal: Canal;
   soloLectura: boolean;
+  /** La cuenta es de lectura: ve la revisión pero no decide. */
+  sinPermiso?: boolean;
 }) {
+  const soloLectura = historico || sinPermiso;
   const [params, poner] = useParametros();
   const q = params.get("q") ?? "";
   const soloPendientes = params.get("pendientes") === "1";
@@ -113,11 +117,13 @@ export function RevisionDeMarca({
 
       <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
         <p className="max-w-[70ch] text-base text-ink-2">
-          {soloLectura
+          {historico
             ? "Vista de un cruce guardado: solo lectura."
-            : `Elegí el equivalente de cada producto de ${propio} en cada ${
-                c.mode === "cross" ? "canal" : "competidor"
-              }. Se guarda al elegir.`}
+            : sinPermiso
+              ? "Tu cuenta es de lectura: ves los cruces, pero los confirma alguien con rol de revisión."
+              : `Elegí el equivalente de cada producto de ${propio} en cada ${
+                  c.mode === "cross" ? "canal" : "competidor"
+                }. Se guarda al elegir.`}
         </p>
         <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-meta text-ink-3">
           <Chip tone="warn">A revisar</Chip>
