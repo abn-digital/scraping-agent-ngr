@@ -148,7 +148,17 @@ export default function TiendaPage() {
   const irA = (at: string | undefined) =>
     poner({ corrida: !at || at === ultima ? null : at, producto: null });
 
-  const marca = MARCAS_NGR.find((m) => m.key === conocida?.marca);
+  // Una tienda de la competencia puede cruzarse con varias marcas (KFC, con
+  // todas): las que la cuenta ve, en el orden de siempre.
+  const marcasDeLaTienda = MARCAS_NGR.filter((m) =>
+    mias.some((t) => t.id === id && t.marca === m.key),
+  );
+  const marca = marcasDeLaTienda[0] ?? MARCAS_NGR.find((m) => m.key === conocida?.marca);
+  const nombresDeMarcas = marcasDeLaTienda.map((m) => m.label);
+  const listaDeMarcas =
+    nombresDeMarcas.length <= 1
+      ? (nombresDeMarcas[0] ?? marca?.label ?? "")
+      : `${nombresDeMarcas.slice(0, -1).join(", ")} y ${nombresDeMarcas.at(-1)}`;
   const canal = CANAL_DE_PLATAFORMA[plataforma];
   const puedeActualizar = sePuedeActualizar(id, plataforma);
   const volver = `/tiendas${canal && canal !== "rappi" ? `?canal=${canal}` : ""}`;
@@ -221,7 +231,13 @@ export default function TiendaPage() {
       <PageHeader
         className="pt-5 md:pt-6"
         eyebrow={`${NOMBRE_DE_PLATAFORMA[plataforma] ?? plataforma} · ${
-          conocida?.propia ? "Marca NGR" : marca ? `Competencia de ${marca.label}` : "Tienda"
+          conocida?.propia
+            ? "Marca NGR"
+            : marcasDeLaTienda.length > 1
+              ? `Competencia de ${plural(marcasDeLaTienda.length, "marca")}`
+              : marca
+                ? `Competencia de ${marca.label}`
+                : "Tienda"
         }`}
         title={nombre}
         lede={
@@ -513,15 +529,20 @@ export default function TiendaPage() {
                 <p className="text-base text-ink-2">
                   {conocida?.propia
                     ? `Es la tienda de ${marca.label} contra la que se cruza su competencia en ${NOMBRE_DE_PLATAFORMA[plataforma]}.`
-                    : `Se compara con ${marca.label} en ${NOMBRE_DE_PLATAFORMA[plataforma]}.`}
+                    : `Se compara con ${listaDeMarcas} en ${NOMBRE_DE_PLATAFORMA[plataforma]}.`}
                 </p>
-                <Link
-                  to={`/marcas/${marca.key}${canal === "rappi" ? "" : `?canal=${canal}`}`}
-                  className="mt-3 inline-flex items-center gap-1.5 text-meta text-ink underline decoration-rule-strong underline-offset-4 hover:decoration-ember"
-                >
-                  Ver la comparativa de {marca.label}
-                  <ArrowRight className="h-3.5 w-3.5" strokeWidth={2} aria-hidden />
-                </Link>
+                <div className="mt-3 flex flex-col items-start gap-1.5">
+                  {(marcasDeLaTienda.length ? marcasDeLaTienda : [marca]).map((m) => (
+                    <Link
+                      key={m.key}
+                      to={`/marcas/${m.key}${canal === "rappi" ? "" : `?canal=${canal}`}`}
+                      className="inline-flex items-center gap-1.5 text-meta text-ink underline decoration-rule-strong underline-offset-4 hover:decoration-ember"
+                    >
+                      Ver la comparativa de {m.label}
+                      <ArrowRight className="h-3.5 w-3.5" strokeWidth={2} aria-hidden />
+                    </Link>
+                  ))}
+                </div>
               </Panel>
             )}
           </aside>

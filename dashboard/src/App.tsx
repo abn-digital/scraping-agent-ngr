@@ -189,6 +189,17 @@ const NGR_OWN_GROUPS = [
   },
 ];
 
+// KFC es competencia de todas las marcas (brand_config.js), no solo de
+// Popeyes: se suma al grupo de cada una en Rappi, PedidosYa y sitios propios.
+for (const lista of [NGR_GROUPS, NGR_GROUPS_PEYA]) {
+  const kfc = lista.find(g => g.ngrLocal === 'Popeyes')?.competitors.find(c => c.name === 'KFC');
+  for (const g of lista) if (kfc && !g.competitors.some(c => c.id === kfc.id)) g.competitors.push(kfc);
+}
+{
+  const kfc = NGR_OWN_GROUPS.find(g => g.ngrLocal === 'Popeyes')?.stores.find(s => s.name === 'KFC');
+  for (const g of NGR_OWN_GROUPS) if (kfc && !g.stores.some(s => s.id === kfc.id)) g.stores.push(kfc);
+}
+
 // Flat list for lookups / scraper dispatch (todas las marcas; la cuenta ve un recorte)
 const ALL_COMPETITORS = [
   ...NGR_OWN_RAPPI,

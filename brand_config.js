@@ -183,6 +183,19 @@ const BRANDS = [
 
 const CHANNELS = ['rappi', 'peya', 'propio'];
 
+// KFC es competencia de todas las marcas de NGR, no solo de Popeyes (pedido
+// de NGR, nov 2026): se suma al final de cada canal de las marcas que no lo
+// tienen. Es la misma tienda en todas (mismo catálogo); cambia contra quién
+// se cruza.
+const KFC = { rappi: '6337', peya: 'peya-kfc', propio: 'kfc-pe' };
+for (const brand of BRANDS) {
+  for (const ch of CHANNELS) {
+    const cfg = brand.channels[ch];
+    if (!cfg || cfg.competitors.some(c => c.id === KFC[ch])) continue;
+    cfg.competitors.push({ id: KFC[ch], name: 'KFC' });
+  }
+}
+
 /** Pseudo-channel key for same-brand Rappi / PeYa / Propio comparison. */
 const CROSS_CHANNEL = 'cross';
 

@@ -16,7 +16,7 @@ import { numero } from "@/lib/datos";
 import { antiguedad, diasDesde, fechaHoraLima, fechaLima } from "@/lib/lima";
 import { plural } from "@/lib/plural";
 import { useMisMarcas, useMisTiendas } from "@/lib/sesion";
-import { MARCAS_NGR, PLATAFORMA_DE_CANAL, type TiendaConocida } from "@/lib/tiendas";
+import { MARCAS_NGR, PLATAFORMA_DE_CANAL, unicas, type TiendaConocida } from "@/lib/tiendas";
 import type { Tienda } from "@/lib/tipos";
 
 // Los catálogos de donde salen los precios (v1: pestañas "Agregadores" y
@@ -59,7 +59,9 @@ export default function TiendasPage() {
     }))
     .filter((g) => g.tiendas.length > 0);
 
-  const conDatos = delCanal.map((t) => porId.get(t.id)).filter((t): t is Tienda => !!t);
+  const conDatos = unicas(delCanal)
+    .map((t) => porId.get(t.id))
+    .filter((t): t is Tienda => !!t);
   const productos = conDatos.reduce((s, t) => s + t.products.length, 0);
   const ultima = conDatos
     .map((t) => t.lastUpdated)
@@ -75,7 +77,7 @@ export default function TiendasPage() {
         lede="Los catálogos que se leen de Rappi, PedidosYa y los sitios propios de cada marca y de su competencia."
         meta={
           <>
-            <Metric label="Tiendas" value={delCanal.length} />
+            <Metric label="Tiendas" value={unicas(delCanal).length} />
             <Metric
               label="Productos"
               value={resultados.isLoading ? "…" : resultados.isError ? "—" : numero(productos)}
@@ -100,7 +102,8 @@ export default function TiendasPage() {
             onChange={(v) => poner({ canal: v === "rappi" ? null : v })}
             options={OPCIONES.map((o) => ({
               ...o,
-              count: misTiendas.filter((t) => t.plataforma === PLATAFORMA_DE_CANAL[o.value]).length,
+              count: unicas(misTiendas.filter((t) => t.plataforma === PLATAFORMA_DE_CANAL[o.value]))
+                .length,
             }))}
             className="w-fit"
           />

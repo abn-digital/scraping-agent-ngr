@@ -195,7 +195,9 @@ test('alta, ACL por marca, reset, desactivar y último admin', async () => {
     assert.deepEqual(auth.marcasDe(brian), ['bembos']);
     assert.equal(auth.puedeVerMarca(brian, 'popeyes'), false);
     assert.equal(auth.puedeVerTienda(brian, '742'), true); // McDonald's en Rappi, competidor de Bembos
-    assert.equal(auth.puedeVerTienda(brian, '6337'), false); // KFC
+    assert.equal(auth.puedeVerTienda(brian, '6337'), true); // KFC: competencia de todas las marcas
+    assert.equal(auth.puedeVerTienda(brian, 'kfc-pe'), true);
+    assert.equal(auth.puedeVerTienda(brian, '58629'), false); // Yopo: solo de Popeyes
     assert.equal(auth.puedeVerTienda(brian, 'mcd-izaguirre-iza'), false); // no cuelga de ninguna marca
     assert.equal(auth.puedeVerTienda(admin, 'mcd-izaguirre-iza'), true);
     assert.equal(auth.puedeRevisar(brian), false);
