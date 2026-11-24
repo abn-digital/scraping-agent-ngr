@@ -15,7 +15,8 @@ import { useResultados } from "@/lib/consultas";
 import { numero } from "@/lib/datos";
 import { antiguedad, diasDesde, fechaHoraLima, fechaLima } from "@/lib/lima";
 import { plural } from "@/lib/plural";
-import { MARCAS_NGR, PLATAFORMA_DE_CANAL, TIENDAS, type TiendaConocida } from "@/lib/tiendas";
+import { useMisMarcas, useMisTiendas } from "@/lib/sesion";
+import { MARCAS_NGR, PLATAFORMA_DE_CANAL, type TiendaConocida } from "@/lib/tiendas";
 import type { Tienda } from "@/lib/tipos";
 
 // Los catálogos de donde salen los precios (v1: pestañas "Agregadores" y
@@ -38,20 +39,25 @@ export default function TiendasPage() {
   const canal: CanalDeTienda = crudo === "peya" || crudo === "propio" ? crudo : "rappi";
   const q = params.get("q") ?? "";
   const resultados = useResultados();
+  // Solo las tiendas de las marcas de la cuenta (y su competencia).
+  const misTiendas = useMisTiendas();
+  const misMarcas = useMisMarcas();
   const porId = new Map((resultados.data ?? []).map((t) => [t.id, t]));
 
   const plataforma = PLATAFORMA_DE_CANAL[canal];
-  const delCanal = TIENDAS.filter((t) => t.plataforma === plataforma);
+  const delCanal = misTiendas.filter((t) => t.plataforma === plataforma);
   const aguja = plegar(q.trim());
   const visibles = delCanal.filter((t) => {
     if (!aguja) return true;
     const local = porId.get(t.id)?.local ?? "";
     return plegar(t.nombre).includes(aguja) || plegar(local).includes(aguja);
   });
-  const grupos = MARCAS_NGR.map((m) => ({
-    marca: m,
-    tiendas: visibles.filter((t) => t.marca === m.key),
-  })).filter((g) => g.tiendas.length > 0);
+  const grupos = misMarcas
+    .map((m) => ({
+      marca: m,
+      tiendas: visibles.filter((t) => t.marca === m.key),
+    }))
+    .filter((g) => g.tiendas.length > 0);
 
   const conDatos = delCanal.map((t) => porId.get(t.id)).filter((t): t is Tienda => !!t);
   const productos = conDatos.reduce((s, t) => s + t.products.length, 0);
@@ -94,7 +100,7 @@ export default function TiendasPage() {
             onChange={(v) => poner({ canal: v === "rappi" ? null : v })}
             options={OPCIONES.map((o) => ({
               ...o,
-              count: TIENDAS.filter((t) => t.plataforma === PLATAFORMA_DE_CANAL[o.value]).length,
+              count: misTiendas.filter((t) => t.plataforma === PLATAFORMA_DE_CANAL[o.value]).length,
             }))}
             className="w-fit"
           />

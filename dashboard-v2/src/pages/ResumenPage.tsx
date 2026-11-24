@@ -21,11 +21,11 @@ import { colorDeSerie, numero, variacion } from "@/lib/datos";
 import { antiguedad, diasDesde, fechaHoraLima, fechaLima } from "@/lib/lima";
 import { plural } from "@/lib/plural";
 import { posicionDePromedio, tonoDe, type Modo, soles } from "@/lib/precios";
+import { useMisTiendas } from "@/lib/sesion";
 import {
   CANALES,
   MARCAS_NGR,
   PLATAFORMA_DE_CANAL,
-  TIENDAS,
   esCanal,
   type TiendaConocida,
 } from "@/lib/tiendas";
@@ -420,7 +420,9 @@ function Frescura({
 }) {
   const plataforma = canal === "cross" ? null : PLATAFORMA_DE_CANAL[canal];
   const porId = new Map((tiendas ?? []).map((t) => [t.id, t]));
-  const filas = TIENDAS.filter((t) => !plataforma || t.plataforma === plataforma)
+  const mias = useMisTiendas();
+  const filas = mias
+    .filter((t) => !plataforma || t.plataforma === plataforma)
     .map((t) => ({ conocida: t, tienda: porId.get(t.id) }))
     .sort((a, b) => (a.tienda?.lastUpdated ?? "").localeCompare(b.tienda?.lastUpdated ?? ""));
   const viejas = filas.filter((f) => (diasDesde(f.tienda?.lastUpdated) ?? Infinity) > VIEJO).length;

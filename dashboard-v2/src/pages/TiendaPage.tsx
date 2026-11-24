@@ -38,6 +38,7 @@ import {
   sePuedeActualizar,
   tiendaConocida,
 } from "@/lib/tiendas";
+import { puedeRevisar, useMisTiendas, useUsuario } from "@/lib/sesion";
 import type { Corrida, Producto } from "@/lib/tipos";
 import { leerOrden } from "./marca/PreciosDeMarca";
 import { EvolucionDeProducto } from "./tienda/EvolucionDeProducto";
@@ -59,11 +60,17 @@ export default function TiendaPage() {
   const orden = leerOrden(params.get("orden"));
 
   const resultados = useResultados();
+  const usuario = useUsuario();
+  const mias = useMisTiendas();
   const tienda = resultados.data?.find((t) => t.id === id);
   const conocida = tiendaConocida(id);
+  // Una tienda conocida que no es de las marcas de la cuenta: el server ya no
+  // la manda, pero el id sí está en la lista del cliente. Un admin ve todas.
+  const ajena = usuario.rol !== "admin" && !!conocida && !mias.some((t) => t.id === id);
   const nombre = conocida?.nombre ?? tienda?.name ?? id;
   const plataforma = tienda?.platform ?? conocida?.plataforma ?? "";
-  const historial = useHistorial(id);
+  // Una tienda ajena no se pide: el server contestaría 403.
+  const historial = useHistorial(ajena ? undefined : id);
   const actualizar = useActualizarTienda(id, nombre);
   const actualizando = useActualizando(id);
 
@@ -146,6 +153,22 @@ export default function TiendaPage() {
   const puedeActualizar = sePuedeActualizar(id, plataforma);
   const volver = `/tiendas${canal && canal !== "rappi" ? `?canal=${canal}` : ""}`;
 
+  if (ajena)
+    return (
+      <MensajeCentral
+        eyebrow="Sin acceso"
+        title="Esa tienda no es de tus marcas"
+        actions={
+          <Button variant="primary" asChild>
+            <Link to="/tiendas">Ver tus tiendas</Link>
+          </Button>
+        }
+      >
+        Tu cuenta ve las tiendas de sus marcas y de su competencia. Si necesitás otra, pedíselo a
+        quien administra la herramienta.
+      </MensajeCentral>
+    );
+
   if (resultados.data && !tienda && !conocida)
     return (
       <MensajeCentral
@@ -227,7 +250,7 @@ export default function TiendaPage() {
                 </Button>
               </span>
             </Tooltip>
-            {puedeActualizar ? (
+            {!puedeRevisar(usuario) ? null : puedeActualizar ? (
               botonActualizar
             ) : (
               <Tooltip label="PedidosYa se actualiza solo en el batch controlado: a mano arriesga un bloqueo.">

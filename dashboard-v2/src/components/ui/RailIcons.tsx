@@ -108,3 +108,14 @@ export function TiendasIcon({ className, strokeWidth, activo }: IconoDeRielProps
     </svg>
   );
 }
+
+export function UsuariosIcon({ className, strokeWidth, activo }: IconoDeRielProps) {
+  return (
+    <svg className={className} {...base(strokeWidth)}>
+      <circle cx="9.5" cy="8" r="3.5" {...relleno(activo, "scale(0)", "center")} />
+      <circle cx="9.5" cy="8" r="3.5" />
+      <path d="M3 20.5v-1a5 5 0 0 1 5-5h3a5 5 0 0 1 5 5v1" />
+      <path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18.5 14.6a5 5 0 0 1 2.5 4.4v1.5" />
+    </svg>
+  );
+}
