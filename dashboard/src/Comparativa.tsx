@@ -11,6 +11,7 @@ import {
 } from '@heroicons/react/24/outline';
 import axios from 'axios';
 import { formatPeruDateTime } from './formatDate';
+import { useSesion } from './sesion';
 
 const API_BASE = '/api';
 
@@ -60,6 +61,7 @@ const STATUS_BADGE: Record<Status, { label: string; cls: string }> = {
 };
 
 export default function Comparativa() {
+  const sesion = useSesion();
   const [brands, setBrands] = useState<BrandInfo[]>([]);
   const [brand, setBrand] = useState('');
   const [viewMode, setViewMode] = useState<ViewMode>('competition');
@@ -259,7 +261,7 @@ export default function Comparativa() {
         />
       ) : (
         <Review data={data} competitors={competitors} onlyPending={onlyPending} setOnlyPending={setOnlyPending}
-                applyOverride={applyOverride} readOnly={isHistorical} />
+                applyOverride={applyOverride} readOnly={isHistorical} sinPermiso={!sesion.puedeRevisar} />
       )}
     </div>
   );
@@ -883,14 +885,17 @@ function Stat({ n, label, cls }: { n: number; label: string; cls: string }) {
 // ──────────────────────────────────────────────
 // Review (manual curation) — table of NGR × competitors
 // ──────────────────────────────────────────────
-function Review({ data, competitors, onlyPending, setOnlyPending, applyOverride, readOnly = false }: {
+function Review({ data, competitors, onlyPending, setOnlyPending, applyOverride, readOnly: historical = false, sinPermiso = false }: {
   data: Comparison;
   competitors: Competitor[];
   onlyPending: boolean;
   setOnlyPending: (v: boolean) => void;
   applyOverride: (ngrName: string, competitorId: string, action: string, product?: Product) => Promise<void> | void;
   readOnly?: boolean;
+  /** Cuenta de lectura: ve los matches pero no decide. */
+  sinPermiso?: boolean;
 }) {
+  const readOnly = historical || sinPermiso;
   const comps = useMemo(
     () => competitors.filter(c => c.hasData !== false),
     [competitors],
@@ -927,11 +932,13 @@ function Review({ data, competitors, onlyPending, setOnlyPending, applyOverride,
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="space-y-1">
           <p className="text-sm text-slate-500 font-medium">
-            {rows.length} productos NGR · {readOnly
+            {rows.length} productos NGR · {historical
               ? 'vista histórica (solo lectura)'
+              : sinPermiso
+              ? 'tu cuenta es de lectura: los matches los confirma alguien con rol de revisión'
               : 'elegí el match en cada columna · los cambios se guardan'}
           </p>
-          {readOnly && (
+          {historical && (
             <p className="text-[11px] text-amber-700 font-medium">
               Snapshot del {data.snapshotDate}: no se edita ni se recalcula.
             </p>

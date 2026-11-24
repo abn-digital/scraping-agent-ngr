@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   ArrowPathIcon,
   ArrowDownTrayIcon,
@@ -7,12 +7,17 @@ import {
   MagnifyingGlassIcon,
   ClockIcon,
   BuildingOfficeIcon,
-  GlobeAltIcon
+  GlobeAltIcon,
+  ArrowRightOnRectangleIcon,
+  KeyIcon,
+  UsersIcon,
 } from '@heroicons/react/24/outline';
 import axios from 'axios';
 import logoNgr from './assets/Logo-ngr.png';
 import Comparativa from './Comparativa';
+import Usuarios from './Usuarios';
 import { formatPeruDateTime, peruDateKey, peruTimeLabel } from './formatDate';
+import { NOMBRE_DE_ROL, useSesion } from './sesion';
 
 // In production the frontend is served by the same Express server,
 // so relative paths work. In dev, Vite proxies /api to localhost:3001.
@@ -184,8 +189,8 @@ const NGR_OWN_GROUPS = [
   },
 ];
 
-// Flat list for lookups / scraper dispatch
-const COMPETITORS = [
+// Flat list for lookups / scraper dispatch (todas las marcas; la cuenta ve un recorte)
+const ALL_COMPETITORS = [
   ...NGR_OWN_RAPPI,
   ...NGR_GROUPS.flatMap(g => g.competitors),
   ...NGR_OWN_PEYA,
@@ -219,12 +224,44 @@ interface HistoryRun {
 }
 
 export default function App() {
+  // Solo las marcas de la cuenta y su competencia. El server igual filtra
+  // /api; esto evita mostrar en los selectores tiendas que no van a cargar.
+  const sesion = useSesion();
+  const ownRappi = NGR_OWN_RAPPI.filter(b => sesion.veMarca(b.name));
+  const ownPeya = NGR_OWN_PEYA.filter(b => sesion.veMarca(b.name));
+  const groupsRappi = NGR_GROUPS.filter(g => sesion.veMarca(g.ngrLocal));
+  const groupsPeya = NGR_GROUPS_PEYA.filter(g => sesion.veMarca(g.ngrLocal));
+  const ownGroups = NGR_OWN_GROUPS.filter(g => sesion.veMarca(g.ngrLocal));
+  const COMPETITORS = [
+    ...ownRappi,
+    ...groupsRappi.flatMap(g => g.competitors),
+    ...ownPeya,
+    ...groupsPeya.flatMap(g => g.competitors),
+    ...ownGroups.flatMap(g => g.stores),
+  ];
+  const [cuentaAbierta, setCuentaAbierta] = useState(false);
+  const menuCuenta = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!cuentaAbierta) return;
+    const cerrar = (e: MouseEvent | KeyboardEvent) => {
+      if (e instanceof KeyboardEvent ? e.key === 'Escape' : !menuCuenta.current?.contains(e.target as Node)) {
+        setCuentaAbierta(false);
+      }
+    };
+    document.addEventListener('mousedown', cerrar);
+    document.addEventListener('keydown', cerrar);
+    return () => {
+      document.removeEventListener('mousedown', cerrar);
+      document.removeEventListener('keydown', cerrar);
+    };
+  }, [cuentaAbierta]);
+
   const [data, setData] = useState<CompetitorData[]>([]);
   const [selectedCompId, setSelectedCompId] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const [updating, setUpdating] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeTab, setActiveTab] = useState<'competitors' | 'own' | 'comparativa'>('competitors');
+  const [activeTab, setActiveTab] = useState<'competitors' | 'own' | 'comparativa' | 'usuarios'>('competitors');
   const [aggregator, setAggregator] = useState<'Rappi' | 'PedidosYa'>('Rappi');
 
   // History: calendar day (YYYY-MM-DD Lima) + selected run ISO
@@ -408,7 +445,7 @@ export default function App() {
   };
 
   const handleUpdate = async () => {
-    const comp = COMPETITORS.find(c => c.id === selectedCompId);
+    const comp = ALL_COMPETITORS.find(c => c.id === selectedCompId);
     const url = comp?.url || `https://www.rappi.com.pe/restaurantes/${selectedCompId}`;
     const platform = comp?.platform || currentCompData?.platform || '';
     if (platform === 'PedidosYa' || url.includes('pedidosya.com.pe')) {
@@ -467,8 +504,9 @@ export default function App() {
               <p className="text-slate-500 font-medium">NGR Digital Intelligence Unit</p>
             </div>
           </div>
-          {activeTab !== 'comparativa' && (
-            <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+          {(activeTab === 'competitors' || activeTab === 'own') && (
+            <>
               <button
                 onClick={handleDownload}
                 className="px-4 py-2.5 bg-white text-slate-700 border border-slate-200 rounded-xl hover:bg-slate-50 shadow-sm transition-all flex items-center gap-2 font-semibold"
@@ -476,6 +514,7 @@ export default function App() {
                 <ArrowDownTrayIcon className="w-5 h-5" />
                 Descargar CSV
               </button>
+              {sesion.puedeRevisar && (
               <button
                 onClick={handleUpdate}
                 disabled={updating || !selectedCompId || aggregator === 'PedidosYa' || currentCompData?.platform === 'PedidosYa'}
@@ -489,8 +528,50 @@ export default function App() {
                 <ArrowPathIcon className={`w-5 h-5 ${updating ? 'animate-spin' : ''}`} />
                 {updating ? 'Actualizando...' : 'Actualizar Información'}
               </button>
-            </div>
+              )}
+            </>
           )}
+            <div className="relative" ref={menuCuenta}>
+              <button
+                type="button"
+                onClick={() => setCuentaAbierta(v => !v)}
+                aria-expanded={cuentaAbierta}
+                className="pl-2 pr-4 py-2 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 shadow-sm transition-all flex items-center gap-3 text-left"
+              >
+                <span className="w-8 h-8 rounded-lg bg-slate-900 text-white text-xs font-bold flex items-center justify-center uppercase">
+                  {(sesion.usuario.nombre || sesion.usuario.email).slice(0, 2)}
+                </span>
+                <span className="leading-tight">
+                  <span className="block text-sm font-bold text-slate-900 max-w-[160px] truncate">
+                    {sesion.usuario.nombre || sesion.usuario.email}
+                  </span>
+                  <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                    {NOMBRE_DE_ROL[sesion.usuario.rol]}
+                  </span>
+                </span>
+                <ChevronDownIcon className="w-4 h-4 text-slate-400" />
+              </button>
+              {cuentaAbierta && (
+                <div className="absolute right-0 mt-2 w-60 bg-white rounded-2xl border border-slate-100 shadow-lg p-2 z-30">
+                  <p className="px-3 pt-2 pb-3 text-xs text-slate-500 truncate border-b border-slate-100">{sesion.usuario.email}</p>
+                  {sesion.esAdmin && (
+                    <button type="button" onClick={() => { setActiveTab('usuarios'); setCuentaAbierta(false); }}
+                            className="mt-1 w-full px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 flex items-center gap-2">
+                      <UsersIcon className="w-4 h-4" /> Usuarios
+                    </button>
+                  )}
+                  <button type="button" onClick={sesion.cambiarClave}
+                          className="w-full px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 flex items-center gap-2">
+                    <KeyIcon className="w-4 h-4" /> Cambiar la clave
+                  </button>
+                  <button type="button" onClick={() => void sesion.salir()}
+                          className="w-full px-3 py-2.5 rounded-xl text-sm font-semibold text-red-600 hover:bg-red-50 flex items-center gap-2">
+                    <ArrowRightOnRectangleIcon className="w-4 h-4" /> Cerrar sesión
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
         </header>
 
         {/* Tab Selection */}
@@ -513,9 +594,20 @@ export default function App() {
           >
             Comparativa
           </button>
+          {sesion.esAdmin && (
+            <button
+              onClick={() => setActiveTab('usuarios')}
+              className={`ml-auto px-6 py-3 font-bold text-sm transition-all border-b-2 flex items-center gap-2 ${activeTab === 'usuarios' ? 'border-slate-900 text-slate-900' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
+            >
+              <UsersIcon className="w-4 h-4" />
+              Usuarios
+            </button>
+          )}
         </div>
 
-        {activeTab === 'comparativa' ? (
+        {activeTab === 'usuarios' && sesion.esAdmin ? (
+          <Usuarios />
+        ) : activeTab === 'comparativa' ? (
           <Comparativa />
         ) : (
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
@@ -557,11 +649,11 @@ export default function App() {
                     {activeTab === 'competitors' ? (
                       <>
                         <optgroup label="MARCAS PROPIAS">
-                          {(aggregator === 'Rappi' ? NGR_OWN_RAPPI : NGR_OWN_PEYA).map(brand => (
+                          {(aggregator === 'Rappi' ? ownRappi : ownPeya).map(brand => (
                             <option key={brand.id} value={brand.id}>{brand.name}</option>
                           ))}
                         </optgroup>
-                        {(aggregator === 'Rappi' ? NGR_GROUPS : NGR_GROUPS_PEYA).map(group => (
+                        {(aggregator === 'Rappi' ? groupsRappi : groupsPeya).map(group => (
                           <optgroup key={group.ngrLocal} label={`vs. ${group.ngrLocal.toUpperCase()}`}>
                             {group.competitors.map(comp => (
                               <option key={comp.id} value={comp.id}>{comp.name}</option>
@@ -571,7 +663,7 @@ export default function App() {
                       </>
                     ) : (
                       <>
-                        {NGR_OWN_GROUPS.map(group => (
+                        {ownGroups.map(group => (
                           <optgroup key={group.ngrLocal} label={`${group.ngrLocal.toUpperCase()}`}>
                             {group.stores.map(store => (
                               <option key={store.id} value={store.id}>{store.name}</option>
