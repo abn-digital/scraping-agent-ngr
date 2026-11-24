@@ -370,3 +370,13 @@ test('dos altas a la vez en instancias distintas no se pisan', async () => {
     ]);
     assert.deepEqual([x.statusCode, y.statusCode].sort(), [201, 409]);
 });
+
+test('las rutas internas de los jobs no piden cookie (traen su propio secreto)', async () => {
+    const auth = armar();
+    await auth.iniciar({});
+    for (const ruta of ['/internal/resync', '/internal/scrape-sentinel']) {
+        let siguio = false;
+        await auth.requiereSesion({ path: ruta, headers: {} }, respuesta(), () => { siguio = true; });
+        assert.equal(siguio, true, ruta);
+    }
+});

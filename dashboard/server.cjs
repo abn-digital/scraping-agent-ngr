@@ -44,7 +44,7 @@ const gcs = new Storage();
  * Download all products_*.json from GCS to DATA_DIR.
  * Called once at startup so fresh scrapes survive container restarts.
  */
-async function syncFromGCS() {
+async function syncFromGCS({ snapshots = true, resto = true } = {}) {
     // products_* land in data/ (baseline). matches_*/overrides_* land in ROOT_DIR
     // where the matcher writes and reads them.
     // Intentionally excludes history/ — snapshots are loaded on demand via /api/history.
@@ -57,6 +57,8 @@ async function syncFromGCS() {
         { prefix: 'match_snapshots/', dir: DATA_DIR },
     ];
     for (const { prefix, dir } of prefixes) {
+        const esSnapshot = prefix === 'match_snapshots/';
+        if ((esSnapshot && !snapshots) || (!esSnapshot && !resto)) continue;
         try {
             const [files] = await gcs.bucket(GCS_BUCKET).getFiles({ prefix });
             let synced = 0;
@@ -834,6 +836,27 @@ app.post('/api/internal/resync', async (req, res) => {
     }
 });
 
+// Internal: freshness sentinel → #alarmas-ngr (Cloud Scheduler hourly)
+// Lo llama el job scrape-ngr-sentinel con X-Cron-Secret (no es un usuario).
+app.post('/api/internal/scrape-sentinel', async (req, res) => {
+    const secret = String(process.env.CRON_SECRET || '').trim();
+    const header = String(req.get('X-Cron-Secret') || '').trim();
+    if (!secret || header !== secret) {
+        return res.status(401).json({ error: 'unauthorized' });
+    }
+    try {
+        const scrapeSentinel = require(path.join(SCRAPERS_DIR, 'scrape_sentinel.js'));
+        const forceNotify = Boolean(req.body?.force || req.query?.force);
+        const forceStale = Boolean(req.body?.forceStale || req.query?.forceStale);
+        console.log('[scrape-sentinel] run', { forceNotify, forceStale });
+        const result = await scrapeSentinel.runScrapeSentinel({ forceNotify, forceStale });
+        res.json(result);
+    } catch (err) {
+        console.error('[scrape-sentinel] failed:', err.message);
+        res.status(500).json({ error: err.message });
+    }
+});
+
 // ──────────────────────────────────────────────
 // v2 (dashboard-v2) en /v2, con su propio fallback SPA. Va antes del fallback
 // de la v1 para que /v2/… no caiga en el index.html de la raíz.
@@ -857,8 +880,13 @@ if (fs.existsSync(DIST_DIR)) {
 }
 
 (async () => {
+    // Antes de abrir el puerto, solo lo que la app necesita para mostrar datos
+    // al día (catálogos, matches, overrides, scrape_meta: unos segundos). Los
+    // ~1.500 match_snapshots tardaban más de un minuto y dejaban al primero que
+    // entraba después de un rato esperando: se bajan de fondo, y mientras
+    // tanto match_snapshots.js los lee de GCS cuando se piden.
     console.log('[GCS] Sincronizando datos antes de arrancar el servidor...');
-    await syncFromGCS();
+    await syncFromGCS({ snapshots: false });
     await auth.iniciar({
         bootstrapEmail: process.env.AUTH_BOOTSTRAP_EMAIL,
         bootstrapPassword: process.env.AUTH_BOOTSTRAP_PASSWORD,
@@ -869,5 +897,8 @@ if (fs.existsSync(DIST_DIR)) {
         console.log(`Server running on port ${port}`);
         console.log(`Data dir: ${DATA_DIR}`);
         console.log(`Scrapers dir: ${SCRAPERS_DIR}`);
+        syncFromGCS({ resto: false })
+            .then(() => console.log('[GCS] match_snapshots sincronizados de fondo.'))
+            .catch((err) => console.warn(`[GCS] match_snapshots de fondo: ${err.message}`));
     });
 })();
