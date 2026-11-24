@@ -27,6 +27,7 @@ import {
   MARCAS_NGR,
   PLATAFORMA_DE_CANAL,
   esCanal,
+  unicas,
   type TiendaConocida,
 } from "@/lib/tiendas";
 import type { Canal, Tienda } from "@/lib/tipos";
@@ -421,7 +422,8 @@ function Frescura({
   const plataforma = canal === "cross" ? null : PLATAFORMA_DE_CANAL[canal];
   const porId = new Map((tiendas ?? []).map((t) => [t.id, t]));
   const mias = useMisTiendas();
-  const filas = mias
+  // Una fila por tienda: KFC está en el grupo de cada marca.
+  const filas = unicas(mias)
     .filter((t) => !plataforma || t.plataforma === plataforma)
     .map((t) => ({ conocida: t, tienda: porId.get(t.id) }))
     .sort((a, b) => (a.tienda?.lastUpdated ?? "").localeCompare(b.tienda?.lastUpdated ?? ""));

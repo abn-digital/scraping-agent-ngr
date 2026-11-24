@@ -276,6 +276,23 @@ export const TIENDAS: TiendaConocida[] = [
   ),
 ];
 
+// KFC es competencia de todas las marcas (brand_config.js), no solo de
+// Popeyes: la misma tienda aparece en el grupo de cada marca. Por eso un id
+// puede repetirse en TIENDAS con distinta `marca`; para contar tiendas, `unicas`.
+for (const kfc of TIENDAS.filter((t) => t.marca === "popeyes" && t.nombre === "KFC")) {
+  for (const m of MARCAS_NGR) {
+    if (m.key === "popeyes") continue;
+    if (TIENDAS.some((t) => t.id === kfc.id && t.marca === m.key)) continue;
+    TIENDAS.push({ ...kfc, marca: m.key });
+  }
+}
+
+/** Una por id: KFC está en el grupo de cada marca pero es una sola tienda. */
+export function unicas<T extends { id: string }>(tiendas: T[]): T[] {
+  const vistas = new Set<string>();
+  return tiendas.filter((t) => (vistas.has(t.id) ? false : (vistas.add(t.id), true)));
+}
+
 export function tiendaConocida(id: string): TiendaConocida | undefined {
   return TIENDAS.find((t) => t.id === id);
 }
